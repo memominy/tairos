@@ -410,7 +410,10 @@ function ResultBlock({ result }) {
       {Array.isArray(result.recent) && result.recent.length > 0 && (
         <div className="text-[10px] font-mono text-ops-400">
           son: <span className="text-ops-200">
-            {result.recent.map((n) => n.name).join(', ')}
+            {result.recent
+              .map((n) => (typeof n === 'string' ? n : n?.name ?? ''))
+              .filter(Boolean)
+              .join(', ')}
           </span>
         </div>
       )}

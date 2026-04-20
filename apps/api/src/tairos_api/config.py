@@ -58,6 +58,24 @@ class Settings(BaseSettings):
     # or a single string. Empty/None disables the middleware entirely.
     cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
+    # ── LLM bridge ───────────────────────────────────────────
+    # ``LlmAgent`` POSTs to this URL to reach the Claude Max CLI bridge
+    # (scripts/assistant-server.mjs). Kept as a setting so deploys that
+    # relocate the bridge (different host/port, reverse proxy, future
+    # cloud SDK adapter) don't need code changes — just env.
+    llm_bridge_url: str = "http://localhost:8787"
+    # Optional override of the model the bridge passes to ``claude -p``.
+    # Empty string = let Claude Code pick (current Max default).
+    llm_model: str = ""
+    # Hard cap on the LLM tool-use loop. A misbehaving agent that keeps
+    # emitting tool calls without a terminal answer is bounded by this
+    # — last iteration collapses into a best-effort final step.
+    llm_max_iterations: int = 6
+    # Bridge HTTP timeout in seconds. Claude Code's Max subscription can
+    # take a while on cold start / long prompts; 120s matches the
+    # bridge-side ``CLAUDE_TIMEOUT_MS`` default (90s) with a little slack.
+    llm_timeout_seconds: float = 120.0
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, v: object) -> object:

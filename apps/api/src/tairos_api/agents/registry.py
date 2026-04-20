@@ -66,8 +66,9 @@ def seed(reg: Registry | None = None) -> Registry:
 
     # Local imports avoid a circular dependency: tools/agents import
     # the registry module, but only by name.
-    from .examples.inventory_analyst import InventoryAnalyst
-    from .tools.inventory import CountNodesTool, ListNodesTool
+    from .examples.inventory_analyst     import InventoryAnalyst
+    from .examples.llm_inventory_analyst import LlmInventoryAnalyst
+    from .tools.inventory                import CountNodesTool, ListNodesTool
 
     # Re-seeding a populated registry is a no-op; makes fixture setup
     # in tests easier.
@@ -77,5 +78,7 @@ def seed(reg: Registry | None = None) -> Registry:
         reg.register_tool(CountNodesTool())
     if reg.get_agent(InventoryAnalyst.name) is None:
         reg.register_agent(InventoryAnalyst)
+    if reg.get_agent(LlmInventoryAnalyst.name) is None:
+        reg.register_agent(LlmInventoryAnalyst)
 
     return reg
