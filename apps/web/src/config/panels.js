@@ -42,6 +42,7 @@ import {
   Target, Shield, Radio, Newspaper, Clock,
   ClipboardList, Boxes, Bell, Settings,
   Building2, Swords, AlertTriangle,
+  Bot,
 } from 'lucide-react'
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -97,6 +98,14 @@ export const GLOBAL_PANELS = [
   // AssistantBubble (sağ-alt yüzen widget) üzerinden açılıyor, sidebar
   // slotunu kaplamıyor. Geri getirmek istersek panel tanımı + PanelHost
   // kaydı + ActivityBar ikonu birlikte canlanır.
+  {
+    id:      'agents',
+    icon:    Bot,
+    label:   'Ajanlar',
+    title:   'Ajan konsolu — inventory_analyst + gelecek LLM ajanları',
+    section: 'secondary',
+    scope:   'global',
+  },
   {
     id:          'alerts',
     icon:        Bell,
@@ -181,6 +190,14 @@ export const COUNTRY_PANELS = [
     scope:   'country',
   },
   // assistant → AssistantBubble (yüzen widget) — panel sekmesi yok
+  {
+    id:      'agents',
+    icon:    Bot,
+    label:   'Ajanlar',
+    title:   'Ajan konsolu — ülke odağında da elaltı',
+    section: 'secondary',
+    scope:   'country',
+  },
   {
     id:          'alerts',
     icon:        Bell,
