@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@tairos/shared": "*",
+    "@tanstack/react-query": "^5.59.0",
     "@turf/area": "^7.1.0",
     "@turf/boolean-point-in-polygon": "^7.1.0",
     "@turf/circle": "^7.1.0",

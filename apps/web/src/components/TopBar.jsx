@@ -8,7 +8,8 @@ import { TILE_PROVIDERS } from '../utils/tiles'
 import { exportMapPng, copyShareUrl } from '../utils/export'
 import { soundsEnabled, setSoundsEnabled, onSoundsToggled, playSound } from '../utils/sounds'
 import allFacilities from '../data/facilities.json'
-import FocusBar    from './shell/FocusBar'
+import FocusBar      from './shell/FocusBar'
+import BackendStatus from './shell/BackendStatus'
 
 export default function TopBar({ isComputing }) {
   const tileStyle      = useStore((s) => s.tileStyle)
@@ -139,6 +140,12 @@ export default function TopBar({ isComputing }) {
           <span className="hidden sm:block">hesaplıyor...</span>
         </div>
       )}
+
+      {/* Backend reachability — silent forward-scout for the upcoming
+          inventory migration. Green = API up, red = offline, hidden
+          on first-poll to avoid flicker. Does NOT affect app behaviour
+          today; the frontend still runs entirely off localStorage. */}
+      <BackendStatus />
 
       {/* Tile quick-cycle: click = next tile, hover shows label */}
       <div className="relative">
