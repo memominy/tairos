@@ -15,9 +15,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import __version__
+from .agents.registry import seed as seed_registry
 from .config import Settings, get_settings
 from .db import create_db_and_tables
-from .routers import health, nodes
+from .mcp import server as mcp_server
+from .routers import agents, health, nodes
 
 
 @asynccontextmanager
@@ -33,6 +35,9 @@ async def _lifespan(_: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     if settings.env != "prod":
         create_db_and_tables()
+    # Register shipped agents + tools. Idempotent so ``uvicorn --reload``
+    # doesn't explode when the module is re-imported.
+    seed_registry()
     yield
 
 
@@ -60,6 +65,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app.include_router(health.router)
     app.include_router(nodes.router)
+    app.include_router(agents.router)
+    app.include_router(mcp_server.router)
 
     return app
 
