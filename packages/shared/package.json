@@ -1,0 +1,16 @@
+{
+  "name": "@tairos/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Cross-package primitives: operator codes, country list, region taxonomy, tactical enums. Pure-data + pure-functions only — no React, no Node, no Leaflet. Safe to import from both the web frontend and the FastAPI backend (via pyodide or a mirrored Python module later).",
+  "main": "./src/index.js",
+  "exports": {
+    ".":           "./src/index.js",
+    "./operators": "./src/operators.js",
+    "./regions":   "./src/regions.js"
+  },
+  "scripts": {
+    "lint": "echo \"(no linter configured)\""
+  }
+}

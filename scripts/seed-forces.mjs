@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const dataPath  = path.resolve(__dirname, '..', 'src', 'data', 'conflicts.json')
+const dataPath  = path.resolve(__dirname, '..', 'apps', 'web', 'src', 'data', 'conflicts.json')
 
 const FORCES = {
   'ukraine-russia': {

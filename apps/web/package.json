@@ -1,0 +1,50 @@
+{
+  "name": "@tairos/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tairos Sentinel — web frontend (Vite + React + Leaflet + Zustand).",
+  "keywords": [
+    "uav",
+    "drone",
+    "coverage-planning",
+    "geospatial",
+    "situational-awareness",
+    "leaflet",
+    "tairos"
+  ],
+  "author": "Tairos",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview --host --port 4173",
+    "lint": "echo \"(no linter configured)\""
+  },
+  "dependencies": {
+    "@tairos/shared": "*",
+    "@turf/area": "^7.1.0",
+    "@turf/boolean-point-in-polygon": "^7.1.0",
+    "@turf/circle": "^7.1.0",
+    "@turf/helpers": "^7.1.0",
+    "@turf/union": "^7.1.0",
+    "html2canvas": "^1.4.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.441.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11",
+    "vite": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

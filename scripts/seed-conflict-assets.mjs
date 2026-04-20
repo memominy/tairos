@@ -10,7 +10,7 @@ import path from 'node:path'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const TARGET = path.resolve(__dirname, '..', 'src', 'data', 'conflictAssets.json')
+const TARGET = path.resolve(__dirname, '..', 'apps', 'web', 'src', 'data', 'conflictAssets.json')
 
 /* ── New conflict asset blocks ────────────────────────────────────────
    Coordinates verified against public atlases (approx, 3-4 decimals).

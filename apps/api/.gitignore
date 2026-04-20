@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+
+# SQLite runtime
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+tairos.sqlite*
+
+# Alembic runtime
+.migrations-cache/
+
+# IDE
+.idea/
+.vscode/

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Seed the standing global strategic-sites inventory.
-   Writes src/data/globalSites.json — a conflict-independent layer.
+   Writes apps/web/src/data/globalSites.json — a conflict-independent layer.
    Run from repo root:
      node scripts/seed-global-sites.mjs                                 */
 
@@ -10,7 +10,7 @@ import path from 'node:path'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const TARGET = path.resolve(__dirname, '..', 'src', 'data', 'globalSites.json')
+const TARGET = path.resolve(__dirname, '..', 'apps', 'web', 'src', 'data', 'globalSites.json')
 
 /* Coordinates verified against public atlases (3-4 decimals).
    `role` Turkish, single-line, 60-160 chars.
