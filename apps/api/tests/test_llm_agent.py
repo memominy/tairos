@@ -5,6 +5,16 @@ don't spawn it in tests. Instead, we monkeypatch
 ``LlmAgent._call_llm`` to return a scripted sequence of replies and
 assert the timeline + persistence behave correctly.
 
+Async dispatch
+~~~~~~~~~~~~~~
+LLM agents now return a ``pending`` row from ``POST /runs`` and a
+background task drives them to completion. Tests use the
+``_wait_for_terminal`` helper to poll ``GET /runs/{id}`` until the
+status reaches ``done``/``error``. Each scripted ``_call_llm`` reply
+returns instantly, so the whole loop finishes in a few event-loop
+ticks — the helper's timeout only exists as a sanity guard against
+an accidentally hanging test.
+
 Coverage:
   * Happy path: LLM calls count_nodes, then list_nodes, then final.
   * Unknown tool: timeline carries an error tool_result but keeps
@@ -17,8 +27,11 @@ Coverage:
 """
 from __future__ import annotations
 
+import asyncio
 import json
+import time
 from collections.abc import Iterable
+from typing import Any
 
 import pytest
 from httpx import AsyncClient
@@ -44,6 +57,38 @@ def _script(replies: Iterable[str]):
             raise AssertionError("LLM was called more times than scripted") from exc
 
     return fake_call_llm
+
+
+async def _wait_for_terminal(
+    client: AsyncClient, run_id: str, *, timeout: float = 5.0,
+) -> dict[str, Any]:
+    """Poll ``GET /v1/agents/runs/{run_id}`` until the run hits a
+    terminal status (``done`` / ``error``) or the deadline passes.
+
+    Returns the decoded ``{run, steps}`` body. Tests that want to
+    assert on steps should use this helper rather than trusting the
+    POST response — the async dispatch path returns a pending row
+    with no steps yet.
+    """
+    deadline = time.monotonic() + timeout
+    last_body: dict[str, Any] | None = None
+    while time.monotonic() < deadline:
+        res = await client.get(f"/v1/agents/runs/{run_id}")
+        assert res.status_code == 200, res.text
+        body = res.json()
+        last_body = body
+        status = body["run"]["status"]
+        if status in ("done", "error"):
+            return body
+        # Short yield: lets the background task make progress on the
+        # same event loop. 10ms is a round number that's plenty
+        # fine-grained for scripted-LLM tests.
+        await asyncio.sleep(0.01)
+
+    raise AssertionError(
+        f"Run {run_id!r} did not reach a terminal status within {timeout}s. "
+        f"Last state: {last_body!r}"
+    )
 
 
 async def _create_tr_node(client: AsyncClient, *, name: str) -> None:
@@ -76,15 +121,19 @@ async def test_llm_inventory_analyst_happy_path(
         json={"operator": "TR", "prompt": "Durumu özetle"},
     )
     assert res.status_code == 200, res.text
-    run = res.json()
-    assert run["status"]   == "done"
-    assert run["agent"]    == "llm_inventory_analyst"
-    assert run["operator"] == "TR"
+    initial = res.json()
+    # Async dispatch: POST returns a pending row; the background task
+    # is already scheduled and will move it through running → done.
+    assert initial["status"] in ("pending", "running", "done")
+    assert initial["agent"]    == "llm_inventory_analyst"
+    assert initial["operator"] == "TR"
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run   = body["run"]
+    steps = body["steps"]
+    assert run["status"] == "done"
 
     # Timeline: plan, tool_call×2, tool_result×2, final
-    tl = await client.get(f"/v1/agents/runs/{run['id']}")
-    assert tl.status_code == 200
-    steps = tl.json()["steps"]
     kinds = [s["kind"] for s in steps]
     assert kinds[0]   == "plan"
     assert kinds[-1]  == "final"
@@ -123,12 +172,15 @@ async def test_llm_agent_unknown_tool_surfaces_error_and_recovers(
         json={"operator": "TR"},
     )
     assert res.status_code == 200
-    run = res.json()
+    initial = res.json()
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run   = body["run"]
+    steps = body["steps"]
     assert run["status"] == "done"
 
-    tl = (await client.get(f"/v1/agents/runs/{run['id']}")).json()
     error_step = next(
-        s for s in tl["steps"]
+        s for s in steps
         if s["kind"] == "tool_result" and s["payload"].get("tool") == "ghost_tool"
     )
     assert "Bilinmeyen araç" in error_step["payload"]["error"]
@@ -153,7 +205,10 @@ async def test_llm_agent_tolerates_malformed_reply(
         json={"operator": "TR"},
     )
     assert res.status_code == 200
-    run = res.json()
+    initial = res.json()
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run = body["run"]
     assert run["status"] == "done"
     assert run["result"]["summary"] == "TR temiz."
 
@@ -174,7 +229,10 @@ async def test_llm_agent_bridge_unavailable_yields_final_error(
         json={"operator": "TR"},
     )
     assert res.status_code == 200
-    run = res.json()
+    initial = res.json()
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run = body["run"]
     assert run["status"] == "done"
     assert "bridge offline" in run["result"]["summary"]
     assert run["result"]["error"] == "bridge offline"
@@ -201,7 +259,10 @@ async def test_llm_agent_respects_max_iterations(
         json={"operator": "TR"},
     )
     assert res.status_code == 200
-    run = res.json()
+    initial = res.json()
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run = body["run"]
     assert run["status"] == "done"
     assert run["result"]["error"] == "max_iterations_exceeded"
     assert run["result"]["turns"] == 4
@@ -304,15 +365,55 @@ async def test_llm_agent_tool_input_validation_error_recovers(
         json={"operator": "TR"},
     )
     assert res.status_code == 200
-    run = res.json()
+    initial = res.json()
+
+    body = await _wait_for_terminal(client, initial["id"])
+    run   = body["run"]
+    steps = body["steps"]
     assert run["status"] == "done"
 
-    tl = (await client.get(f"/v1/agents/runs/{run['id']}")).json()
     error_step = next(
-        s for s in tl["steps"]
+        s for s in steps
         if s["kind"] == "tool_result" and s["payload"].get("tool") == "list_nodes"
     )
     assert "error" in error_step["payload"]
     # Sanity: error message from pydantic is plain JSON-safe string
     assert isinstance(error_step["payload"]["error"], str)
     _ = json.dumps(error_step["payload"])  # must be serialisable
+
+
+async def test_llm_agent_returns_pending_row_for_fast_polling(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """POST /runs for an LLM agent must not block on the LLM call.
+
+    We script a reply that only resolves on the fifth scheduler tick
+    so the POST response definitely comes back before the background
+    task has done much — the frontend can render the pending row
+    immediately and start polling.
+    """
+    event = asyncio.Event()
+
+    async def slow(self, *a, **kw):  # noqa: ARG001
+        # Wait until the test signals we're done inspecting the
+        # pending row; only then let the agent produce its final.
+        await event.wait()
+        return '<final>{"summary":"geç kalınmış", "total":0}</final>'
+
+    monkeypatch.setattr(LlmInventoryAnalyst, "_call_llm", slow)
+
+    res = await client.post(
+        "/v1/agents/llm_inventory_analyst/runs",
+        json={"operator": "TR"},
+    )
+    assert res.status_code == 200
+    initial = res.json()
+    # Row is already persisted; status is pending or running
+    # (the background task may have had a tick to flip status).
+    assert initial["status"] in ("pending", "running")
+    assert initial["result"] is None
+
+    # Release the "LLM" and poll to completion.
+    event.set()
+    body = await _wait_for_terminal(client, initial["id"])
+    assert body["run"]["status"] == "done"

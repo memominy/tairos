@@ -59,13 +59,15 @@ export default function AgentsPanel() {
 
   /* ── Run state ───────────────────────────────────────────
    * Run başlatıldığında dönen row'un id'sini saklıyoruz; timeline
-   * endpoint onunla tekrar çekiliyor. AgentRun body'si yeterli olsa
-   * bile steps (AgentStep[]) detayı ayrı endpoint'te. */
+   * endpoint onunla tekrar çekiliyor. Deterministik ajanlar POST
+   * dönüşünde `done` verir; LLM ajanları `pending` döner ve arkada
+   * asenkron task'la ilerler — ``poll: true`` ile runtime'ı otomatik
+   * olarak terminal state'e kadar takip ediyoruz. */
   const [prompt, setPrompt]         = useState('')
   const [runId,  setRunId]          = useState(null)
   const startMutation               = useStartAgentRun()
 
-  const runQ  = useAgentRun(runId, { enabled: Boolean(runId), poll: false })
+  const runQ  = useAgentRun(runId, { enabled: Boolean(runId), poll: true })
   const run   = runQ.data?.run ?? null
   const steps = runQ.data?.steps ?? []
 
@@ -78,10 +80,9 @@ export default function AgentsPanel() {
         prompt:   prompt.trim(),
         context:  {},
       })
+      // Mutation onSuccess cache'i seedledi; useAgentRun orada
+      // devralıp polling'e başlıyor. Manuel refetch gerekmez.
       setRunId(created.id)
-      // İstek terminal state döndürdüğü için timeline'ı hemen yenile —
-      // start_run response'u ``run`` verir, ``steps`` yok.
-      runQ.refetch()
     } catch (err) {
       // Mutation state'i UI'da gösterildiğinden burada ekstra işlem
       // yok; throw'u yutuyoruz ki konsol gürültüsü olmasın.
@@ -221,7 +222,12 @@ export default function AgentsPanel() {
 
         {/* ── Son Çalışma ───────────────────────────────── */}
         {runId && (
-          <Section icon={Terminal} title="Son Çalışma" badge={run?.status || '...'} defaultOpen>
+          <Section
+            icon={Terminal}
+            title="Son Çalışma"
+            badge={RUN_STATUS[run?.status]?.label || run?.status || '...'}
+            defaultOpen
+          >
             <RunTimeline run={run} steps={steps} loading={runQ.isLoading} />
           </Section>
         )}
@@ -359,21 +365,25 @@ function RunTimeline({ run, steps, loading }) {
   )
 }
 
+// Lokalize etiket + görsel ton her durum için: pending/running
+// arasında da net bir fark olsun (biri "sıraya girdi", diğeri
+// "çalışıyor"). Icon + renk birlikte okunur → hızlı tarama.
+const RUN_STATUS = {
+  pending: { icon: Loader2,      tone: 'text-ops-400',     label: 'bekliyor',    spin: false },
+  running: { icon: Loader2,      tone: 'text-accent',      label: 'çalışıyor',   spin: true  },
+  done:    { icon: CheckCircle2, tone: 'text-emerald-400', label: 'tamamlandı',  spin: false },
+  error:   { icon: AlertCircle,  tone: 'text-red-400',     label: 'hata',        spin: false },
+}
+
 function RunHeader({ run }) {
-  const Icon = run.status === 'done'
-    ? CheckCircle2
-    : run.status === 'error'
-      ? AlertCircle
-      : Loader2
-  const tone = run.status === 'done'
-    ? 'text-emerald-400'
-    : run.status === 'error'
-      ? 'text-red-400'
-      : 'text-ops-300'
+  const state = RUN_STATUS[run.status] ?? {
+    icon: Loader2, tone: 'text-ops-400', label: run.status, spin: false,
+  }
+  const Icon = state.icon
   return (
     <div className="flex items-center gap-1.5 text-[11px] font-mono">
-      <Icon size={11} className={`${tone} ${run.status === 'running' ? 'animate-spin' : ''}`} />
-      <span className={tone}>{run.status}</span>
+      <Icon size={11} className={`${state.tone} ${state.spin ? 'animate-spin' : ''}`} />
+      <span className={state.tone}>{state.label}</span>
       <span className="text-ops-600">·</span>
       <span className="text-ops-400">{run.id.slice(0, 12)}…</span>
       {run.started_at && (
