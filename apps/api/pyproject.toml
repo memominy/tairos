@@ -1,0 +1,61 @@
+[project]
+name            = "tairos-api"
+version         = "0.1.0"
+description     = "Tairos Sentinel backend — FastAPI + SQLModel + SQLite (optionally SpatiaLite). Serves inventory, conflicts, saved views, and the agent/MCP bridge."
+requires-python = ">=3.11"
+license         = { text = "UNLICENSED" }
+authors         = [{ name = "Tairos" }]
+readme          = "README.md"
+
+dependencies = [
+  "fastapi>=0.115,<0.120",
+  "uvicorn[standard]>=0.32,<0.35",
+  "sqlmodel>=0.0.22,<0.1",
+  "alembic>=1.13,<2",
+  # pydantic-settings gives us type-safe env-backed config without a
+  # second library — pydantic v2 is already pulled in via sqlmodel, so
+  # this adds no meaningful footprint.
+  "pydantic-settings>=2.5,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "pytest-asyncio>=0.24,<0.30",
+  "httpx>=0.27,<0.29",
+  "ruff>=0.7,<0.9",
+]
+
+[build-system]
+requires      = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ── Ruff ─────────────────────────────────────────────────────
+# Keep the ruleset pragmatic: no sprawling rule lists, just the
+# "reasonable defaults" plus import sorting so our diffs stay tidy.
+[tool.ruff]
+line-length    = 100
+target-version = "py311"
+src            = ["src"]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "W",  # pycodestyle + pyflakes
+  "I",            # isort
+  "B",            # bugbear
+  "UP",           # pyupgrade
+  "SIM",          # simplify
+]
+ignore = [
+  "E501",  # line length — handled by the formatter, warnings just add noise
+]
+
+# ── Pytest ───────────────────────────────────────────────────
+[tool.pytest.ini_options]
+testpaths       = ["tests"]
+asyncio_mode    = "auto"
+python_files    = "test_*.py"
+addopts         = "-ra -q"
