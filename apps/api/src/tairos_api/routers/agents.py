@@ -5,12 +5,16 @@
   POST /v1/agents/{name}/runs            — start a run, return AgentRun
   GET  /v1/agents/runs                   — list recent runs (history)
   GET  /v1/agents/runs/{run_id}          — fetch run + step timeline
+  POST /v1/agents/runs/{run_id}/cancel   — best-effort cancel of an
+                                           in-flight (or stuck) run
 
 ``POST`` dispatches on the registered agent's ``kind``: deterministic
 agents run inline (sub-millisecond); LLM (and any future long-running
 kind) return a ``pending`` row immediately and the client polls the
-``GET`` endpoint for the timeline until status hits ``done``/``error``.
-See ``agents/runtime.py`` for the mechanics.
+``GET`` endpoint for the timeline until status hits
+``done``/``error``/``cancelled``. Cancellation is cooperative: the
+background task's next await raises ``CancelledError`` and the row flips
+to ``status=cancelled``. See ``agents/runtime.py`` for the mechanics.
 """
 from __future__ import annotations
 
@@ -22,7 +26,7 @@ from pydantic import BaseModel, Field
 from sqlmodel import Session, col, func, select
 
 from ..agents.registry import registry
-from ..agents.runtime import execute_run
+from ..agents.runtime import cancel_run, execute_run
 from ..config import get_settings
 from ..db import get_session
 from ..models import AgentRun, AgentStep
@@ -140,7 +144,7 @@ async def start_run(name: str, body: RunRequest) -> AgentRun:
 def list_runs(
     operator: str | None = Query(default=None, min_length=2, max_length=4),
     agent:    str | None = Query(default=None, max_length=64),
-    status:   Literal["pending", "running", "done", "error"] | None = None,
+    status:   Literal["pending", "running", "done", "error", "cancelled"] | None = None,
     limit:    int = Query(default=25, ge=1, le=200),
     offset:   int = Query(default=0, ge=0),
     session:  Session = Depends(get_session),
@@ -184,3 +188,21 @@ def get_run(run_id: str, session: Session = Depends(get_session)) -> RunWithStep
         select(AgentStep).where(AgentStep.run_id == run_id).order_by(AgentStep.index)
     ).all()
     return RunWithSteps(run=run, steps=steps)
+
+
+# ── Cancel a run ─────────────────────────────────────────────
+@router.post("/runs/{run_id}/cancel", response_model=AgentRun)
+def cancel_run_endpoint(run_id: str) -> AgentRun:
+    """Best-effort cancellation of an in-flight (or stuck) run.
+
+    Terminal runs (done / error / cancelled) are returned as-is so
+    the client can treat the endpoint as idempotent. If cancellation
+    is meaningful, the matching background task gets ``.cancel()``d
+    and the DB row flips to ``status=cancelled``. Cooperative: an LLM
+    call mid-``httpx.post`` completes its single network round-trip
+    before the task unwinds.
+    """
+    row = cancel_run(run_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail="Run not found")
+    return row

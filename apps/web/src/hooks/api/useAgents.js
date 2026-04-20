@@ -70,7 +70,10 @@ export function useAgentRun(runId, { enabled = true, poll = false } = {}) {
     refetchInterval: (query) => {
       if (!poll) return false
       const status = query.state.data?.run?.status
-      if (status === 'done' || status === 'error') return false
+      // Terminal states include ``cancelled`` — operator cancelled
+      // mid-run, task unwound, row's final. No point repolling a
+      // row that won't change shape until the next run.
+      if (status === 'done' || status === 'error' || status === 'cancelled') return false
       return 1500
     },
   })
@@ -144,6 +147,33 @@ export function useBridgeHealth({ enabled = true, pollMs = 30_000 } = {}) {
     // Don't thrash during the first reload if the API is slow —
     // a stale health card is fine until the next tick.
     refetchOnWindowFocus: false,
+  })
+}
+
+
+/**
+ * Cancel an in-flight (or stuck) run.
+ *
+ * The endpoint is idempotent — POSTing against a terminal run returns
+ * the row as-is with no side effect, so the UI can fire-and-forget
+ * without local "has this been cancelled?" bookkeeping. On success we
+ * seed the per-run cache with the refreshed row so the timeline flips
+ * to the cancelled state immediately instead of waiting for the next
+ * poll tick.
+ */
+export function useCancelAgentRun() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (runId) =>
+      apiPost(`/v1/agents/runs/${encodeURIComponent(runId)}/cancel`, {}),
+    onSuccess: (run) => {
+      qc.setQueryData(agentKeys.run(run.id), (prev) => ({
+        ...(prev || {}),
+        run,
+        steps: prev?.steps || [],
+      }))
+      qc.invalidateQueries({ queryKey: agentKeys.runsAll })
+    },
   })
 }
 

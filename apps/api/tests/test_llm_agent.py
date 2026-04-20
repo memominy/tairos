@@ -558,3 +558,101 @@ async def test_llm_agent_returns_pending_row_for_fast_polling(
     event.set()
     body = await _wait_for_terminal(client, initial["id"])
     assert body["run"]["status"] == "done"
+
+
+# ── Cancellation ─────────────────────────────────────────────
+async def test_cancel_in_flight_llm_run_flips_to_cancelled(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """POST /cancel during a running LLM turn must land the row in
+    ``status=cancelled`` — not ``error``, not stuck ``running``.
+
+    We park the LLM call on an event so the task is definitely still
+    in ``_call_llm`` when the cancel HTTP hits. The cooperative cancel
+    then fires at the next await (which is the ``event.wait()`` we
+    never signal)."""
+    hang = asyncio.Event()
+
+    async def hang_forever(self, *a, **kw):  # noqa: ARG001
+        # Never set: the test cancels the task instead.
+        await hang.wait()
+        return '<final>{"summary":"unreachable"}</final>'
+
+    monkeypatch.setattr(LlmInventoryAnalyst, "_call_llm", hang_forever)
+
+    res = await client.post(
+        "/v1/agents/llm_inventory_analyst/runs",
+        json={"operator": "TR"},
+    )
+    assert res.status_code == 200
+    initial = res.json()
+
+    # Give the background task a tick to enter hang_forever.
+    await asyncio.sleep(0.05)
+
+    cancel_res = await client.post(f"/v1/agents/runs/{initial['id']}/cancel")
+    assert cancel_res.status_code == 200, cancel_res.text
+
+    body = await _wait_for_terminal(client, initial["id"])
+    assert body["run"]["status"] == "cancelled"
+    assert "cancelled" in (body["run"]["error"] or "").lower()
+
+
+async def test_cancel_terminal_run_is_idempotent(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """Cancelling a run that already reached ``done`` is a no-op: the
+    row stays done and the response mirrors the DB — so a double-click
+    from the UI never regresses the status."""
+    monkeypatch.setattr(
+        LlmInventoryAnalyst, "_call_llm",
+        _script(['<final>{"summary":"hızlı bitti", "total":0}</final>']),
+    )
+
+    res = await client.post(
+        "/v1/agents/llm_inventory_analyst/runs",
+        json={"operator": "TR"},
+    )
+    initial = res.json()
+    body = await _wait_for_terminal(client, initial["id"])
+    assert body["run"]["status"] == "done"
+
+    cancel_res = await client.post(f"/v1/agents/runs/{initial['id']}/cancel")
+    assert cancel_res.status_code == 200
+    row = cancel_res.json()
+    assert row["status"] == "done"  # must NOT regress to cancelled
+    assert row["result"]["summary"] == "hızlı bitti"
+
+
+async def test_cancel_unknown_run_returns_404(client: AsyncClient) -> None:
+    res = await client.post("/v1/agents/runs/run-does-not-exist/cancel")
+    assert res.status_code == 404
+
+
+async def test_cancel_stale_pending_row_without_task_flips_to_cancelled(
+    client: AsyncClient,  # noqa: ARG001 — pulls in the memory-DB fixtures
+) -> None:
+    """A ``pending`` row with no live task (API restarted mid-run, say)
+    should be flipped to ``cancelled`` directly so the UI stops
+    polling — there's nothing to kill, but the row can't be left
+    dangling forever either.
+
+    We ask for ``client`` only to chain in the ``engine``/``session``
+    fixtures — the monkeypatch there rewires ``db.engine`` to the
+    in-memory SQLite so this test doesn't scribble onto
+    ``apps/api/.data``. The HTTP client itself is unused.
+    """
+    from tairos_api.agents.runtime import cancel_run
+    from tairos_api.agents.runtime import _now, _persist_run
+    from tairos_api.models import AgentRun
+
+    pending = AgentRun(
+        id="run-orphan", agent="llm_inventory_analyst", operator="TR",
+        status="pending", created_at=_now(),
+    )
+    _persist_run(pending)
+
+    row = cancel_run("run-orphan")
+    assert row is not None
+    assert row.status == "cancelled"
+    assert row.error and "no active task" in row.error

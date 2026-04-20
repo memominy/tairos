@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Bot, ChevronRight, Play, Wrench, AlertCircle, CheckCircle2,
   Loader2, Terminal, ChevronDown, Sparkles, Cpu, ZapOff, History,
+  Ban, OctagonX,
 } from 'lucide-react'
 import useStore from '../../store/useStore'
 import { Section } from './_shared'
@@ -10,6 +11,7 @@ import {
   useAgentRun,
   useAgentRuns,
   useBridgeHealth,
+  useCancelAgentRun,
   useStartAgentRun,
 } from '../../hooks/api/useAgents'
 
@@ -87,10 +89,16 @@ export default function AgentsPanel() {
   // just hide the control rather than disabling it.
   const [modelOverride, setModelOverride] = useState('')
   const startMutation               = useStartAgentRun()
+  const cancelMutation              = useCancelAgentRun()
 
   const runQ  = useAgentRun(runId, { enabled: Boolean(runId), poll: true })
   const run   = runQ.data?.run ?? null
   const steps = runQ.data?.steps ?? []
+
+  const onCancel = () => {
+    if (!runId || !run || !RUN_IN_PROGRESS.has(run.status)) return
+    cancelMutation.mutate(runId)
+  }
 
   const onRun = async () => {
     if (!activeName || !operator) return
@@ -276,7 +284,14 @@ export default function AgentsPanel() {
             badge={RUN_STATUS[run?.status]?.label || run?.status || '...'}
             defaultOpen
           >
-            <RunTimeline run={run} steps={steps} loading={runQ.isLoading} />
+            <RunTimeline
+              run={run}
+              steps={steps}
+              loading={runQ.isLoading}
+              onCancel={onCancel}
+              cancelPending={cancelMutation.isPending}
+              cancelError={cancelMutation.error}
+            />
           </Section>
         )}
 
@@ -387,7 +402,7 @@ function AgentCard({ agent, active, onSelect }) {
 /* ═══════════════════════════════════════════════════════════════════
  * RunTimeline — step zaman çizelgesi
  * ═══════════════════════════════════════════════════════════════════ */
-function RunTimeline({ run, steps, loading }) {
+function RunTimeline({ run, steps, loading, onCancel, cancelPending, cancelError }) {
   if (loading) {
     return (
       <div className="px-3 py-2">
@@ -403,10 +418,38 @@ function RunTimeline({ run, steps, loading }) {
     )
   }
 
+  const canCancel = RUN_IN_PROGRESS.has(run.status) && typeof onCancel === 'function'
+
   return (
     <div className="px-3 space-y-1.5">
-      {/* Run özeti */}
-      <RunHeader run={run} />
+      {/* Run özeti + iptal butonu aynı satırda — operatör uzun bir run
+          başlattıysa header'dan direkt durdurabilsin. Terminal run'larda
+          buton gizli (disabled değil) — basınca hiçbir şey olmayan buton
+          görünümü konsolu kirletiyor. */}
+      <div className="flex items-center justify-between gap-2">
+        <RunHeader run={run} />
+        {canCancel && (
+          <button
+            onClick={onCancel}
+            disabled={cancelPending}
+            title="Çalışmayı iptal et"
+            className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            {cancelPending ? (
+              <Loader2 size={10} className="animate-spin" />
+            ) : (
+              <Ban size={10} />
+            )}
+            Durdur
+          </button>
+        )}
+      </div>
+
+      {cancelError && (
+        <div className="text-[10px] font-mono text-red-400">
+          iptal başarısız: {cancelError?.detail || cancelError?.message || 'bilinmeyen hata'}
+        </div>
+      )}
 
       {/* Step'ler — her satıra run başlangıcından bu yana geçen süreyi
           bastırıyoruz ki "hangi step ne kadar sürdü?" tek bakışta okunsun.
@@ -446,11 +489,17 @@ function RunTimeline({ run, steps, loading }) {
 // arasında da net bir fark olsun (biri "sıraya girdi", diğeri
 // "çalışıyor"). Icon + renk birlikte okunur → hızlı tarama.
 const RUN_STATUS = {
-  pending: { icon: Loader2,      tone: 'text-ops-400',     label: 'bekliyor',    spin: false },
-  running: { icon: Loader2,      tone: 'text-accent',      label: 'çalışıyor',   spin: true  },
-  done:    { icon: CheckCircle2, tone: 'text-emerald-400', label: 'tamamlandı',  spin: false },
-  error:   { icon: AlertCircle,  tone: 'text-red-400',     label: 'hata',        spin: false },
+  pending:   { icon: Loader2,      tone: 'text-ops-400',     label: 'bekliyor',    spin: false },
+  running:   { icon: Loader2,      tone: 'text-accent',      label: 'çalışıyor',   spin: true  },
+  done:      { icon: CheckCircle2, tone: 'text-emerald-400', label: 'tamamlandı',  spin: false },
+  error:     { icon: AlertCircle,  tone: 'text-red-400',     label: 'hata',        spin: false },
+  cancelled: { icon: OctagonX,     tone: 'text-amber-400',   label: 'iptal',       spin: false },
 }
+
+// States at which Başlat is re-armable / Durdur is meaningful. Centralising
+// the set so UI call-sites agree on "is this run in progress?" — any status
+// not in here is terminal from the operator's POV.
+const RUN_IN_PROGRESS = new Set(['pending', 'running'])
 
 // Per-run model override. The Claude Code CLI (reached via
 // ``scripts/assistant-server.mjs``) accepts the short aliases "haiku" /

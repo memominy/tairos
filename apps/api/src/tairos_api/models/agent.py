@@ -41,7 +41,7 @@ class AgentRun(SQLModel, table=True):
     context: dict[str, Any] = Field(default_factory=dict, sa_column=Column(JSON))
 
     status:     str  = Field(default="pending", index=True, max_length=16)
-    # ^ pending | running | done | error
+    # ^ pending | running | done | error | cancelled
 
     result:     dict[str, Any] | None = Field(default=None, sa_column=Column(JSON))
     error:      str | None = Field(default=None, max_length=500)
