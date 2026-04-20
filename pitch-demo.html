@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAIROS — UAV Intelligence Platform</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #00d4ff;
+    --green: #00ff9d;
+    --dark: #030b14;
+    --card: rgba(0,212,255,0.05);
+    --border: rgba(0,212,255,0.2);
+  }
+
+  body {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ─── CANVAS BACKGROUND ─── */
+  #bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* ─── SLIDES ─── */
+  .deck { position: relative; z-index: 1; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(30px);
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  /* ─── SHARED COMPONENTS ─── */
+  .tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  h1 { font-size: clamp(48px, 7vw, 88px); font-weight: 800; line-height: 1; }
+  h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 700; }
+  h3 { font-size: 22px; font-weight: 600; color: var(--blue); margin-bottom: 10px; }
+  p  { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 700px; text-align: center; }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow {
+    text-shadow: 0 0 40px rgba(0,212,255,0.5);
+  }
+
+  .line-accent {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    border-radius: 2px;
+    margin: 20px auto;
+  }
+
+  /* ─── SLIDE 1: HERO ─── */
+  #s1 { text-align: center; gap: 0; }
+  #s1 h1 { margin-bottom: 8px; }
+  #s1 .sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
+  .drone-svg {
+    width: 200px;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 20px rgba(0,212,255,0.6));
+    animation: drone-float 3s ease-in-out infinite;
+  }
+  @keyframes drone-float {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-15px) rotate(2deg); }
+  }
+
+  .scan-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0,212,255,0.3);
+    animation: scan-expand 2.5s ease-out infinite;
+  }
+  @keyframes scan-expand {
+    0%   { width: 0; height: 0; opacity: 0.8; }
+    100% { width: 400px; height: 400px; opacity: 0; }
+  }
+
+  /* ─── SLIDE 2: PROBLEM ─── */
+  #s2 { text-align: center; }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 900px;
+  }
+  .problem-card {
+    background: rgba(255,60,60,0.07);
+    border: 1px solid rgba(255,60,60,0.2);
+    border-radius: 16px;
+    padding: 28px 20px;
+    transition: transform 0.3s;
+  }
+  .problem-card:hover { transform: translateY(-4px); }
+  .problem-card .icon { font-size: 36px; margin-bottom: 12px; }
+  .problem-card h3 { color: #ff6b6b; font-size: 16px; margin-bottom: 8px; }
+  .problem-card p { font-size: 14px; text-align: left; color: rgba(255,255,255,0.6); max-width: none; }
+
+  /* ─── SLIDE 3: SOLUTION ─── */
+  #s3 { text-align: center; }
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 900px;
+  }
+  .solution-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .solution-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+  }
+  .solution-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,212,255,0.15);
+  }
+  .solution-card .icon { font-size: 36px; margin-bottom: 12px; }
+  .solution-card p { font-size: 14px; text-align: left; max-width: none; color: rgba(255,255,255,0.6); }
+
+  /* ─── SLIDE 4: METRICS ─── */
+  #s4 { text-align: center; }
+  .metrics-row {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .metric-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 40px;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+  }
+  .metric-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(0,212,255,0.1), transparent 70%);
+  }
+  .metric-num {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .metric-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ─── SLIDE 5: RADAR ─── */
+  #s5 { flex-direction: row; gap: 80px; text-align: left; }
+  #s5 p { text-align: left; }
+  .radar-wrap {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
+  }
+  #radar-canvas { border-radius: 50%; }
+
+  .s5-text { max-width: 420px; }
+  .s5-text h2 { margin-bottom: 16px; }
+  .feature-list { margin-top: 24px; list-style: none; }
+  .feature-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .feature-list li::before {
+    content: '▸';
+    color: var(--green);
+    font-size: 12px;
+  }
+
+  /* ─── SLIDE 6: CTA ─── */
+  #s6 { text-align: center; gap: 20px; }
+  .cta-btn {
+    margin-top: 20px;
+    padding: 18px 48px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #030b14;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 40px rgba(0,212,255,0.3);
+  }
+  .cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 60px rgba(0,212,255,0.5);
+  }
+  .contact-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 16px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    background: rgba(3,11,20,0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 10px 20px;
+  }
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: rgba(255,255,255,0.7);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nav-btn:hover { background: var(--blue); color: #000; border-color: var(--blue); }
+  .nav-dots { display: flex; gap: 8px; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background: var(--blue); width: 24px; border-radius: 4px; }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--green));
+    transition: width 0.5s ease;
+    z-index: 100;
+  }
+
+  /* ─── SLIDE NUMBER ─── */
+  .slide-num {
+    position: fixed;
+    top: 24px; right: 36px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.25);
+    z-index: 100;
+  }
+
+  /* ─── LOGO ─── */
+  .logo {
+    position: fixed;
+    top: 24px; left: 36px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    z-index: 100;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── ENTRY ANIMATIONS ─── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.show { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.15s; }
+  .delay-2 { transition-delay: 0.3s; }
+  .delay-3 { transition-delay: 0.45s; }
+  .delay-4 { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="logo">TAIROS</div>
+<div class="progress" id="progress"></div>
+<div class="slide-num" id="slide-num">01 / 06</div>
+
+<div class="deck">
+
+  <!-- SLIDE 1: HERO -->
+  <div class="slide active" id="s1">
+    <div style="position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <div class="scan-ring" style="animation-delay:0s"></div>
+      <div class="scan-ring" style="animation-delay:0.8s"></div>
+      <div class="scan-ring" style="animation-delay:1.6s"></div>
+      <svg class="drone-svg" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body -->
+        <rect x="75" y="48" width="50" height="24" rx="8" fill="#00d4ff" opacity="0.9"/>
+        <rect x="88" y="54" width="24" height="12" rx="4" fill="#030b14"/>
+        <circle cx="100" cy="60" r="4" fill="#00ff9d"/>
+        <!-- Arms -->
+        <line x1="75" y1="52" x2="35" y2="35" stroke="#00d4ff" stroke-width="3" stroke-linecap="round"/>
+        <line x1="75" y1="68" x2="35" y2="85" stroke="#00d4ff" stroke-width="3" stroke-linecap="round"/>
+        <line x1="125" y1="52" x2="165" y2="35" stroke="#00d4ff" stroke-width="3" stroke-linecap="round"/>
+        <line x1="125" y1="68" x2="165" y2="85" stroke="#00d4ff" stroke-width="3" stroke-linecap="round"/>
+        <!-- Rotors -->
+        <ellipse cx="35" cy="32" rx="22" ry="6" fill="#00d4ff" opacity="0.4">
+          <animateTransform attributeName="transform" type="rotate" from="0 35 32" to="360 35 32" dur="0.3s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="35" cy="88" rx="22" ry="6" fill="#00d4ff" opacity="0.4">
+          <animateTransform attributeName="transform" type="rotate" from="360 35 88" to="0 35 88" dur="0.3s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="165" cy="32" rx="22" ry="6" fill="#00d4ff" opacity="0.4">
+          <animateTransform attributeName="transform" type="rotate" from="0 165 32" to="360 165 32" dur="0.3s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="165" cy="88" rx="22" ry="6" fill="#00d4ff" opacity="0.4">
+          <animateTransform attributeName="transform" type="rotate" from="360 165 88" to="0 165 88" dur="0.3s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Camera/sensor beam -->
+        <line x1="100" y1="72" x2="100" y2="110" stroke="#00ff9d" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+        <circle cx="100" cy="113" r="3" fill="#00ff9d" opacity="0.8">
+          <animate attributeName="r" values="3;6;3" dur="1.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="tag reveal show">Next-Generation UAV Intelligence</div>
+    <h1 class="gradient-text reveal show delay-1">TAIROS</h1>
+    <div class="sub reveal show delay-2">Autonomous Surveillance Platform</div>
+    <div class="line-accent reveal show delay-3"></div>
+    <p class="reveal show delay-4">AI-powered UAV fleet management & real-time area surveillance<br>for critical infrastructure protection.</p>
+  </div>
+
+  <!-- SLIDE 2: PROBLEM -->
+  <div class="slide" id="s2">
+    <div class="tag reveal">The Problem</div>
+    <h2 class="reveal delay-1">Current surveillance is <span class="gradient-text">broken</span></h2>
+    <div class="line-accent reveal delay-2"></div>
+    <div class="problem-grid">
+      <div class="problem-card reveal delay-2">
+        <div class="icon">👁️</div>
+        <h3>Blind Spots</h3>
+        <p>Static cameras leave vast areas unmonitored. Critical perimeters remain vulnerable to intrusion.</p>
+      </div>
+      <div class="problem-card reveal delay-3">
+        <div class="icon">⏱️</div>
+        <h3>Slow Response</h3>
+        <p>Manual drone operations require trained pilots. Average incident response takes 8–15 minutes.</p>
+      </div>
+      <div class="problem-card reveal delay-4">
+        <div class="icon">💸</div>
+        <h3>High Cost</h3>
+        <p>Traditional patrol systems cost $500K+/year with low coverage efficiency and no real-time data.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: SOLUTION -->
+  <div class="slide" id="s3">
+    <div class="tag reveal">Our Solution</div>
+    <h2 class="reveal delay-1">Autonomous. Intelligent. <span class="gradient-text">Always On.</span></h2>
+    <div class="line-accent reveal delay-2"></div>
+    <div class="solution-grid">
+      <div class="solution-card reveal delay-2">
+        <div class="icon">🛸</div>
+        <h3>Autonomous Patrol</h3>
+        <p>AI-driven flight paths with zero pilot intervention. Continuous 24/7 coverage across defined zones.</p>
+      </div>
+      <div class="solution-card reveal delay-3">
+        <div class="icon">🧠</div>
+        <h3>Real-Time Analysis</h3>
+        <p>Edge AI detects threats in milliseconds. Anomaly alerts sent before an operator sees the footage.</p>
+      </div>
+      <div class="solution-card reveal delay-4">
+        <div class="icon">🗺️</div>
+        <h3>Coverage Mapping</h3>
+        <p>Live heatmaps showing exact coverage. Gap analysis and automatic rerouting on the fly.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: TRACTION -->
+  <div class="slide" id="s4">
+    <div class="tag reveal">Traction</div>
+    <h2 class="reveal delay-1">Built, tested & <span class="gradient-text">ready to scale</span></h2>
+    <div class="line-accent reveal delay-2"></div>
+    <div class="metrics-row">
+      <div class="metric-box reveal delay-2">
+        <div class="metric-num" data-target="98">0</div>
+        <div class="metric-label">% Uptime</div>
+      </div>
+      <div class="metric-box reveal delay-3">
+        <div class="metric-num" data-target="500" data-suffix="km²">0</div>
+        <div class="metric-label">Coverage Area</div>
+      </div>
+      <div class="metric-box reveal delay-4">
+        <div class="metric-num" data-target="3" data-prefix="<" data-suffix="s">0</div>
+        <div class="metric-label">Alert Latency</div>
+      </div>
+      <div class="metric-box reveal delay-4">
+        <div class="metric-num" data-target="70" data-suffix="%">0</div>
+        <div class="metric-label">Cost Reduction</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: PRODUCT (Radar) -->
+  <div class="slide" id="s5">
+    <div class="radar-wrap reveal">
+      <canvas id="radar-canvas" width="320" height="320"></canvas>
+    </div>
+    <div class="s5-text">
+      <div class="tag reveal delay-1">Live Coverage Platform</div>
+      <h2 class="reveal delay-2">See everything.<br><span class="gradient-text">Miss nothing.</span></h2>
+      <div class="line-accent" style="margin:16px 0; reveal delay-2"></div>
+      <ul class="feature-list reveal delay-3">
+        <li>Real-time multi-drone coordination</li>
+        <li>Dynamic coverage gap detection</li>
+        <li>Incident heatmap & replay</li>
+        <li>API integration with existing CCTV</li>
+        <li>GDPR-compliant data pipeline</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: CTA -->
+  <div class="slide" id="s6">
+    <div class="tag reveal">Join Us</div>
+    <h2 class="reveal delay-1">The future of surveillance<br>is <span class="gradient-text">autonomous.</span></h2>
+    <div class="line-accent reveal delay-2"></div>
+    <p class="reveal delay-3">We're raising a seed round to deploy our first commercial fleet.<br>Be part of building the aerial intelligence layer for critical infrastructure.</p>
+    <button class="cta-btn reveal delay-4">Get in Touch →</button>
+    <div class="contact-row reveal delay-4">
+      <span>tairos.io</span>
+      <span>•</span>
+      <span>hello@tairos.io</span>
+      <span>•</span>
+      <span>Istanbul, TR</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" id="prev">‹</button>
+  <div class="nav-dots" id="dots"></div>
+  <button class="nav-btn" id="next">›</button>
+</div>
+
+<script>
+// ─── PARTICLE BACKGROUND ───
+const bgCanvas = document.getElementById('bg-canvas');
+const bgCtx = bgCanvas.getContext('2d');
+let W, H, particles = [], lines = [];
+
+function resizeBg() {
+  W = bgCanvas.width = window.innerWidth;
+  H = bgCanvas.height = window.innerHeight;
+}
+resizeBg();
+window.addEventListener('resize', resizeBg);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.5;
+    this.alpha = Math.random() * 0.5 + 0.1;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  }
+  draw() {
+    bgCtx.beginPath();
+    bgCtx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+    bgCtx.fillStyle = `rgba(0,212,255,${this.alpha})`;
+    bgCtx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+function drawBg() {
+  bgCtx.clearRect(0, 0, W, H);
+  // Grid lines
+  bgCtx.strokeStyle = 'rgba(0,212,255,0.04)';
+  bgCtx.lineWidth = 1;
+  for (let x = 0; x < W; x += 80) { bgCtx.beginPath(); bgCtx.moveTo(x,0); bgCtx.lineTo(x,H); bgCtx.stroke(); }
+  for (let y = 0; y < H; y += 80) { bgCtx.beginPath(); bgCtx.moveTo(0,y); bgCtx.lineTo(W,y); bgCtx.stroke(); }
+  // Particles + connections
+  particles.forEach(p => { p.update(); p.draw(); });
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i+1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx+dy*dy);
+      if (dist < 100) {
+        bgCtx.beginPath();
+        bgCtx.moveTo(particles[i].x, particles[i].y);
+        bgCtx.lineTo(particles[j].x, particles[j].y);
+        bgCtx.strokeStyle = `rgba(0,212,255,${0.12*(1-dist/100)})`;
+        bgCtx.lineWidth = 0.5;
+        bgCtx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ─── RADAR CANVAS ───
+const radarCanvas = document.getElementById('radar-canvas');
+const rCtx = radarCanvas.getContext('2d');
+let radarAngle = 0;
+const blips = Array.from({length:8}, () => ({
+  r: 40 + Math.random() * 110,
+  a: Math.random() * Math.PI * 2,
+  alpha: 0
+}));
+
+function drawRadar() {
+  const cx = 160, cy = 160, maxR = 148;
+  rCtx.clearRect(0, 0, 320, 320);
+
+  // Background
+  const bg = rCtx.createRadialGradient(cx,cy,0,cx,cy,maxR);
+  bg.addColorStop(0,'rgba(0,30,20,0.9)');
+  bg.addColorStop(1,'rgba(3,11,14,0.9)');
+  rCtx.beginPath(); rCtx.arc(cx,cy,maxR,0,Math.PI*2);
+  rCtx.fillStyle = bg; rCtx.fill();
+
+  // Rings
+  [0.25,0.5,0.75,1].forEach(f => {
+    rCtx.beginPath(); rCtx.arc(cx,cy,maxR*f,0,Math.PI*2);
+    rCtx.strokeStyle='rgba(0,255,157,0.15)'; rCtx.lineWidth=1; rCtx.stroke();
+  });
+
+  // Cross lines
+  rCtx.strokeStyle='rgba(0,255,157,0.1)'; rCtx.lineWidth=1;
+  rCtx.beginPath(); rCtx.moveTo(cx-maxR,cy); rCtx.lineTo(cx+maxR,cy); rCtx.stroke();
+  rCtx.beginPath(); rCtx.moveTo(cx,cy-maxR); rCtx.lineTo(cx,cy+maxR); rCtx.stroke();
+
+  // Sweep gradient
+  const sweep = rCtx.createConicalGradient ? null : null;
+  for (let i = 0; i < 60; i++) {
+    const a = radarAngle - (i / 60) * (Math.PI * 0.8);
+    const alpha = (1 - i/60) * 0.35;
+    rCtx.beginPath();
+    rCtx.moveTo(cx,cy);
+    rCtx.arc(cx,cy,maxR,a,a+0.02);
+    rCtx.closePath();
+    rCtx.fillStyle=`rgba(0,255,157,${alpha})`;
+    rCtx.fill();
+  }
+
+  // Sweep line
+  rCtx.beginPath();
+  rCtx.moveTo(cx,cy);
+  rCtx.lineTo(cx+Math.cos(radarAngle)*maxR, cy+Math.sin(radarAngle)*maxR);
+  rCtx.strokeStyle='rgba(0,255,157,0.9)';
+  rCtx.lineWidth=2;
+  rCtx.stroke();
+
+  // Update & draw blips
+  blips.forEach(b => {
+    const diff = ((radarAngle - b.a) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+    if (diff < 0.15) b.alpha = 1;
+    else b.alpha *= 0.97;
+    if (b.alpha > 0.05) {
+      const bx = cx + Math.cos(b.a)*b.r;
+      const by = cy + Math.sin(b.a)*b.r;
+      rCtx.beginPath(); rCtx.arc(bx,by,4,0,Math.PI*2);
+      rCtx.fillStyle=`rgba(0,255,157,${b.alpha})`;
+      rCtx.fill();
+      rCtx.beginPath(); rCtx.arc(bx,by,8,0,Math.PI*2);
+      rCtx.strokeStyle=`rgba(0,255,157,${b.alpha*0.4})`;
+      rCtx.lineWidth=1; rCtx.stroke();
+    }
+  });
+
+  // Border glow
+  rCtx.beginPath(); rCtx.arc(cx,cy,maxR,0,Math.PI*2);
+  rCtx.strokeStyle='rgba(0,255,157,0.3)'; rCtx.lineWidth=2; rCtx.stroke();
+
+  radarAngle += 0.025;
+  requestAnimationFrame(drawRadar);
+}
+drawRadar();
+
+// ─── SLIDES ───
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let current = 0;
+
+const dotsEl = document.getElementById('dots');
+const progressEl = document.getElementById('progress');
+const slideNumEl = document.getElementById('slide-num');
+
+// Build dots
+slides.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i===0?' active':'');
+  d.addEventListener('click', () => goTo(i));
+  dotsEl.appendChild(d);
+});
+
+function goTo(idx) {
+  if (idx === current) return;
+  slides[current].classList.add('exit');
+  slides[current].classList.remove('active');
+  setTimeout(() => slides[current-1>=0?current:0].classList.remove('exit'), 600);
+  const prev = current;
+  current = idx;
+  slides[current].classList.add('active');
+  setTimeout(() => {
+    slides[prev].classList.remove('exit');
+    animateSlide(slides[current]);
+  }, 100);
+  updateNav();
+}
+
+function updateNav() {
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===current));
+  progressEl.style.width = ((current+1)/totalSlides*100)+'%';
+  slideNumEl.textContent = String(current+1).padStart(2,'0') + ' / ' + String(totalSlides).padStart(2,'0');
+}
+
+document.getElementById('prev').addEventListener('click', () => current>0 && goTo(current-1));
+document.getElementById('next').addEventListener('click', () => current<totalSlides-1 && goTo(current+1));
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') current<totalSlides-1 && goTo(current+1);
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') current>0 && goTo(current-1);
+});
+
+// Counter animation
+function animateCounters(slide) {
+  slide.querySelectorAll('[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    let start = 0;
+    const dur = 1500;
+    const startTime = performance.now();
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed/dur, 1);
+      const ease = 1 - Math.pow(1-progress, 3);
+      const val = Math.round(ease*target);
+      el.textContent = prefix + val + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// Reveal animations
+function animateSlide(slide) {
+  const reveals = slide.querySelectorAll('.reveal');
+  reveals.forEach(el => el.classList.remove('show'));
+  setTimeout(() => {
+    reveals.forEach(el => el.classList.add('show'));
+    animateCounters(slide);
+  }, 100);
+}
+
+updateNav();
+progressEl.style.width = (1/totalSlides*100)+'%';
+</script>
+</body>
+</html>

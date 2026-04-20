@@ -1,0 +1,53 @@
+{
+  "name": "tairos-sentinel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tairos Sentinel — multi-domain command console for tactical planning, persistent situational monitoring, and coordinated defensive + offensive operations over Türkiye.",
+  "keywords": [
+    "uav",
+    "drone",
+    "coverage-planning",
+    "geospatial",
+    "situational-awareness",
+    "leaflet",
+    "tairos"
+  ],
+  "author": "Tairos",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite preview --host --port 4173",
+    "assistant": "node scripts/assistant-server.mjs",
+    "lint": "echo \"(no linter configured)\"",
+    "seed:global-sites": "node scripts/seed-global-sites.mjs",
+    "verify:global-sites": "node -e \"import('node:fs').then(m=>{const d=JSON.parse(m.readFileSync('src/data/globalSites.json','utf8'));const by=k=>d.reduce((a,s)=>(a[s[k]]=(a[s[k]]||0)+1,a),{});console.log('total',d.length);console.log('operator',by('operator'));console.log('region',by('region'));console.log('type',by('type'));const ids=new Set(d.map(s=>s.id));console.log('unique_ids',ids.size);})\""
+  },
+  "dependencies": {
+    "@turf/area": "^7.1.0",
+    "@turf/boolean-point-in-polygon": "^7.1.0",
+    "@turf/circle": "^7.1.0",
+    "@turf/helpers": "^7.1.0",
+    "@turf/union": "^7.1.0",
+    "html2canvas": "^1.4.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.441.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "pdf-parse": "^2.4.5",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.11",
+    "vite": "^5.4.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

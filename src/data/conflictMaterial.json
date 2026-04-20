@@ -1,0 +1,901 @@
+{
+  "ukraine-russia": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 1200, "note": "Leopard 2, Abrams, Challenger 2, T-64/72/80 karma" },
+        { "kind": "afv",       "count": 3800 },
+        { "kind": "artillery", "count": 2400, "note": "NATO 155mm + Sovyet 152mm karışık" },
+        { "kind": "mlrs",      "count": 420,  "note": "HIMARS, MLRS, BM-27" },
+        { "kind": "uav",       "count": 5200, "note": "yoğun FPV + kamikaze drone kullanımı" },
+        { "kind": "aircraft",  "count": 130,  "note": "F-16 entegrasyonu ilerliyor" },
+        { "kind": "helo",      "count": 90 },
+        { "kind": "sam",       "count": 180,  "note": "Patriot, IRIS-T, NASAMS" },
+        { "kind": "naval",     "count": 14,   "note": "ağırlıklı insansız deniz aracı" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 2200, "note": "T-72B3, T-80, T-90M — depo filolarından takviye" },
+        { "kind": "afv",       "count": 6400 },
+        { "kind": "artillery", "count": 4100, "note": "2S19, 2S7, D-20, D-30" },
+        { "kind": "mlrs",      "count": 780,  "note": "BM-21, Tornado-S, Smerch" },
+        { "kind": "uav",       "count": 3600, "note": "Shahed-136/Geran-2, Lancet, Orlan" },
+        { "kind": "aircraft",  "count": 310,  "note": "Su-34, Su-35, Su-25" },
+        { "kind": "helo",      "count": 260,  "note": "Ka-52, Mi-28" },
+        { "kind": "sam",       "count": 340,  "note": "S-300/400, Pantsir, Tor" },
+        { "kind": "naval",     "count": 45,   "note": "Karadeniz filosu aşınmış, Hazar+Baltık takviye" },
+        { "kind": "missile",   "count": 1800, "note": "İskender, Kalibr, Kinzhal — aylık kullanım yüksek" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 180000,  "note": "muharip + sivil, iki taraflı OSINT orta kestirim" },
+      "wounded":      { "value": 520000 },
+      "displaced":    { "value": 8200000, "note": "iç + dış göç — UNHCR verileri" },
+      "infraDamagePct": 48,
+      "econDamageUsd": "$520B+",
+      "civStructures": { "value": 210000, "note": "hasarlı/yıkılmış konut+altyapı birimi" }
+    },
+    "asOf": "2026 Q1",
+    "source": "Oryx / ISW / UNHCR / Kiev School of Economics"
+  },
+
+  "gaza-israel": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 400,  "note": "Merkava Mk4 ağırlıklı" },
+        { "kind": "afv",       "count": 900,  "note": "Namer, Eitan APC" },
+        { "kind": "artillery", "count": 260 },
+        { "kind": "mlrs",      "count": 60 },
+        { "kind": "uav",       "count": 1100, "note": "Hermes 900, Heron, kamikaze mini-UAV" },
+        { "kind": "aircraft",  "count": 170,  "note": "F-35I, F-16I, F-15" },
+        { "kind": "helo",      "count": 90 },
+        { "kind": "sam",       "count": 75,   "note": "Iron Dome bat. + David's Sling + Arrow" },
+        { "kind": "naval",     "count": 22 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "mlrs",      "count": 12000, "note": "el yapımı roket stoğu — büyük kısmı harcandı" },
+        { "kind": "uav",       "count": 200,  "note": "Zevari / Ababil türevi basit drone" },
+        { "kind": "missile",   "count": 450,  "note": "orta menzilli roket — M-302 sınıfı" },
+        { "kind": "afv",       "count": 20,   "note": "ele geçirilmiş zırhlı araç — sembolik" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 48000,   "note": "Gazze SB; büyük çoğunluğu sivil" },
+      "wounded":      { "value": 112000 },
+      "displaced":    { "value": 1900000, "note": "Gazze nüfusunun ~%85'i" },
+      "infraDamagePct": 72,
+      "econDamageUsd": "$55B",
+      "civStructures": { "value": 170000, "note": "konut birimi hasarlı/yıkılmış" }
+    },
+    "asOf": "2026 Q1",
+    "source": "Gazze Sağlık B. / UN OCHA / World Bank tahmini"
+  },
+
+  "lebanon-israel": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 180 },
+        { "kind": "afv",       "count": 320 },
+        { "kind": "artillery", "count": 140 },
+        { "kind": "uav",       "count": 420 },
+        { "kind": "aircraft",  "count": 90 },
+        { "kind": "sam",       "count": 28, "note": "Iron Dome kuzey sektörü" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "mlrs",      "count": 150000, "note": "çeşitli menzilli roket — Kornet/107mm ağırlıklı" },
+        { "kind": "missile",   "count": 2000,   "note": "orta-uzun menzil: Fateh, Fajr-5, Raad" },
+        { "kind": "uav",       "count": 2500,   "note": "Ayyub, Shahed-129, keşif+saldırı" },
+        { "kind": "sam",       "count": 60,     "note": "omuzdan atılan + SA-17/22 transferi söylentisi" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 4200 },
+      "wounded":      { "value": 15000 },
+      "displaced":    { "value": 1200000, "note": "Güney Lübnan + kuzey İsrail hattı" },
+      "infraDamagePct": 22,
+      "econDamageUsd": "$9B",
+      "civStructures": { "value": 38000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "UN ESCWA / Lübnan Sağlık B. / OSINT"
+  },
+
+  "iran-usa": {
+    "sideA": {
+      "equipment": [
+        { "kind": "missile",   "count": 3500, "note": "balistik+seyir: Shahab, Ghadr, Fateh-110, Sejjil" },
+        { "kind": "uav",       "count": 6000, "note": "Shahed-136/131/129 seri üretim" },
+        { "kind": "sam",       "count": 120,  "note": "Bavar-373, S-300, Khordad" },
+        { "kind": "naval",     "count": 70,   "note": "IRGC hızlı bot filosu + denizaltı" },
+        { "kind": "aircraft",  "count": 310,  "note": "ağırlıklı F-4, F-5, MiG-29 eski filo" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "aircraft",  "count": 380, "note": "bölgedeki CENTCOM sabit kanat — F-22, F-35, F-15E" },
+        { "kind": "naval",     "count": 40,  "note": "CENTCOM 5. Filo + müttefik" },
+        { "kind": "sam",       "count": 30,  "note": "THAAD + Patriot bölgesel konuşlanma" },
+        { "kind": "uav",       "count": 280, "note": "MQ-9 Reaper ağırlıklı" },
+        { "kind": "missile",   "count": 900, "note": "Tomahawk + JASSM stoğu" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "doğrudan ABD-İran çatışması sıcak değil — proxy üzerinden kayıp" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 2,
+      "econDamageUsd": "$40B", "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS Military Balance / CENTCOM açık kayıtlar"
+  },
+
+  "iraq-proxy": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 60 },
+        { "kind": "afv",       "count": 140 },
+        { "kind": "uav",       "count": 80 },
+        { "kind": "aircraft",  "count": 40 },
+        { "kind": "helo",      "count": 35 },
+        { "kind": "sam",       "count": 8, "note": "sınırlı — hava savunma gelişmekte" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "mlrs",      "count": 1500, "note": "katyuşa + 107mm roket kit" },
+        { "kind": "uav",       "count": 600,  "note": "Shahed türevi + FPV" },
+        { "kind": "missile",   "count": 250,  "note": "Almaz, Ababil, Qiam türevi" },
+        { "kind": "afv",       "count": 120,  "note": "teknik + ele geçirilmiş zırhlı" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 2800, "note": "hem milis hem ABD/müttefik personel" },
+      "wounded":      { "value": 7000 },
+      "displaced":    { "value": 90000 },
+      "infraDamagePct": 6,
+      "econDamageUsd": "$3B",
+      "civStructures": { "value": 2500 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / Iraq Body Count / OSINT"
+  },
+
+  "syria-civil": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 1500, "note": "T-62/72/55 — yıpranmış, düşük ops. oranı" },
+        { "kind": "afv",       "count": 2200 },
+        { "kind": "artillery", "count": 1400 },
+        { "kind": "mlrs",      "count": 400,  "note": "Elephant/Volcano varil bombası + BM-21" },
+        { "kind": "aircraft",  "count": 140,  "note": "Su-22, MiG-23/29, L-39" },
+        { "kind": "helo",      "count": 120,  "note": "Mi-8/17, Mi-25" },
+        { "kind": "sam",       "count": 130,  "note": "S-200, Pantsir (Rus destekli)" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 250 },
+        { "kind": "afv",       "count": 500,  "note": "teknik + ele geçirilmiş" },
+        { "kind": "artillery", "count": 300 },
+        { "kind": "mlrs",      "count": 160,  "note": "ev yapımı roket + ele geçirilmiş" },
+        { "kind": "uav",       "count": 500,  "note": "ticari + keşif ağırlıklı" },
+        { "kind": "sam",       "count": 40,   "note": "MANPADS" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 610000, "note": "2011 sonrası kümülatif" },
+      "wounded":      { "value": 2100000 },
+      "displaced":    { "value": 13500000, "note": "iç + dış göç toplam" },
+      "infraDamagePct": 65,
+      "econDamageUsd": "$442B",
+      "civStructures": { "value": 540000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "SOHR / UN OCHA / Dünya Bankası"
+  },
+
+  "sudan-civil": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 200 },
+        { "kind": "afv",       "count": 400 },
+        { "kind": "artillery", "count": 250 },
+        { "kind": "aircraft",  "count": 50,  "note": "MiG-29, Su-25, An-12" },
+        { "kind": "helo",      "count": 45 },
+        { "kind": "uav",       "count": 120, "note": "Bayraktar TB2 + İran menşeli" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 800,  "note": "teknik — pickup üzeri DShK/ZSU ağırlıklı" },
+        { "kind": "artillery", "count": 180 },
+        { "kind": "uav",       "count": 250,  "note": "BAE destekli + kaçak ticari" },
+        { "kind": "mlrs",      "count": 80 },
+        { "kind": "sam",       "count": 50,   "note": "MANPADS — ele geçirilmiş SA-7/16" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 150000, "note": "ACLED geniş kestirim" },
+      "wounded":      { "value": 320000 },
+      "displaced":    { "value": 11200000, "note": "dünyanın en büyük aktif göç krizi" },
+      "infraDamagePct": 38,
+      "econDamageUsd": "$48B",
+      "civStructures": { "value": 85000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / IOM / UN OCHA"
+  },
+
+  "yemen": {
+    "sideA": {
+      "equipment": [
+        { "kind": "missile",   "count": 500,  "note": "Burkan, Quds, Tofan — İran temelli" },
+        { "kind": "uav",       "count": 1800, "note": "Samad-3, Qasef-2K, Shahed türevi" },
+        { "kind": "mlrs",      "count": 300 },
+        { "kind": "naval",     "count": 15,   "note": "insansız deniz aracı + hızlı bot" },
+        { "kind": "sam",       "count": 40 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 150 },
+        { "kind": "afv",       "count": 300 },
+        { "kind": "aircraft",  "count": 80,  "note": "koalisyon artığı F-15, Typhoon kullanımı" },
+        { "kind": "helo",      "count": 40 },
+        { "kind": "uav",       "count": 60 },
+        { "kind": "sam",       "count": 20,  "note": "Patriot takviye" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 377000, "note": "UNDP geniş tahmini — kümülatif" },
+      "wounded":      { "value": 235000 },
+      "displaced":    { "value": 4500000 },
+      "infraDamagePct": 52,
+      "econDamageUsd": "$89B",
+      "civStructures": { "value": 210000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "UNDP / ACLED / Yemen Data Project"
+  },
+
+  "myanmar": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 180 },
+        { "kind": "afv",       "count": 500 },
+        { "kind": "artillery", "count": 350 },
+        { "kind": "aircraft",  "count": 120, "note": "MiG-29, Yak-130, JF-17" },
+        { "kind": "helo",      "count": 75,  "note": "Mi-17, Mi-35, ALH" },
+        { "kind": "uav",       "count": 80 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 60,  "note": "ağırlıklı ele geçirilmiş + ev yapımı" },
+        { "kind": "artillery", "count": 90 },
+        { "kind": "uav",       "count": 400, "note": "ticari drone + kamikaze dönüşüm" },
+        { "kind": "sam",       "count": 25,  "note": "MANPADS sınırlı" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 58000 },
+      "wounded":      { "value": 120000 },
+      "displaced":    { "value": 3400000 },
+      "infraDamagePct": 18,
+      "econDamageUsd": "$22B",
+      "civStructures": { "value": 110000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / UN OCHA / Irrawaddy"
+  },
+
+  "dprk-drc-east": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 40 },
+        { "kind": "afv",       "count": 180 },
+        { "kind": "artillery", "count": 120 },
+        { "kind": "helo",      "count": 18 },
+        { "kind": "uav",       "count": 35 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 120, "note": "ele geçirilmiş + teknik" },
+        { "kind": "artillery", "count": 60 },
+        { "kind": "sam",       "count": 15, "note": "MANPADS Ruanda bağlantılı" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 6200, "note": "2024-26 dönemi tırmanış" },
+      "wounded":      { "value": 14000 },
+      "displaced":    { "value": 7100000, "note": "Doğu Kongo kümülatif" },
+      "infraDamagePct": 9,
+      "econDamageUsd": "$4B",
+      "civStructures": { "value": 18000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / UNHCR / UN Group of Experts"
+  },
+
+  "libya": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 70 },
+        { "kind": "afv",       "count": 280 },
+        { "kind": "uav",       "count": 120, "note": "Bayraktar TB2 ağırlıklı" },
+        { "kind": "aircraft",  "count": 18 },
+        { "kind": "helo",      "count": 15 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 120, "note": "T-72 + ele geçirilmiş" },
+        { "kind": "afv",       "count": 350 },
+        { "kind": "uav",       "count": 90, "note": "Wing Loong II + Shahed" },
+        { "kind": "aircraft",  "count": 25, "note": "MiG-21/23 operasyonel şüpheli" },
+        { "kind": "sam",       "count": 20, "note": "Pantsir (BAE menşeli) + MANPADS" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 14000 },
+      "wounded":      { "value": 32000 },
+      "displaced":    { "value": 320000 },
+      "infraDamagePct": 14,
+      "econDamageUsd": "$18B",
+      "civStructures": { "value": 22000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / UN Panel of Experts Libya"
+  },
+
+  "sahel": {
+    "sideA": {
+      "equipment": [
+        { "kind": "afv",       "count": 300 },
+        { "kind": "artillery", "count": 80 },
+        { "kind": "aircraft",  "count": 20 },
+        { "kind": "helo",      "count": 40, "note": "Rus Mi-17 + Bayraktar destek" },
+        { "kind": "uav",       "count": 90, "note": "Bayraktar TB2 + Akıncı — Mali, BF, Nijer" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 250, "note": "teknik — pickup + makineli" },
+        { "kind": "uav",       "count": 50,  "note": "ticari drone + IED dönüşüm" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 32000, "note": "2020 sonrası kümülatif, 3 ülke" },
+      "wounded":      { "value": 58000 },
+      "displaced":    { "value": 3800000 },
+      "infraDamagePct": 11,
+      "econDamageUsd": "$9B",
+      "civStructures": { "value": 14000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / UN OCHA West Africa"
+  },
+
+  "kashmir": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 450,  "note": "T-90, Arjun — hat konuşlanması" },
+        { "kind": "afv",       "count": 900 },
+        { "kind": "artillery", "count": 650,  "note": "K9 Vajra, Dhanush, M777" },
+        { "kind": "mlrs",      "count": 180,  "note": "Pinaka, Smerch" },
+        { "kind": "uav",       "count": 600 },
+        { "kind": "aircraft",  "count": 250,  "note": "Rafale, Su-30MKI, Mirage-2000" },
+        { "kind": "helo",      "count": 180 },
+        { "kind": "sam",       "count": 90,   "note": "S-400 kuzey sektörü" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 380,  "note": "Al-Khalid, T-80UD, T-90" },
+        { "kind": "afv",       "count": 700 },
+        { "kind": "artillery", "count": 520 },
+        { "kind": "mlrs",      "count": 140,  "note": "A-100, Nasr" },
+        { "kind": "uav",       "count": 400,  "note": "Bayraktar TB2 + CH-4" },
+        { "kind": "aircraft",  "count": 200,  "note": "JF-17, F-16, J-10C" },
+        { "kind": "helo",      "count": 130 },
+        { "kind": "sam",       "count": 70,   "note": "HQ-9BE + LY-80" },
+        { "kind": "missile",   "count": 200,  "note": "Shaheen/Ghauri — stratejik caydırıcılık" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 48000,  "note": "1989 sonrası kümülatif — düşük yoğunluk" },
+      "wounded":      { "value": 92000 },
+      "displaced":    { "value": 380000 },
+      "infraDamagePct": 4,
+      "econDamageUsd": "$6B",
+      "civStructures": { "value": 12000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "SIPRI / South Asia Terrorism Portal / OSINT"
+  },
+
+  "taiwan-strait": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 800,  "note": "M60A3, CM-11, yeni M1A2T alımı" },
+        { "kind": "afv",       "count": 1500 },
+        { "kind": "artillery", "count": 1100 },
+        { "kind": "mlrs",      "count": 60,   "note": "HIMARS + yerli Thunderbolt 2000" },
+        { "kind": "uav",       "count": 350 },
+        { "kind": "aircraft",  "count": 380,  "note": "F-16V, Mirage-2000, IDF Ching-Kuo" },
+        { "kind": "helo",      "count": 220,  "note": "AH-64E, UH-60M" },
+        { "kind": "sam",       "count": 110,  "note": "Patriot PAC-3 + TK-3 Sky Bow" },
+        { "kind": "naval",     "count": 112,  "note": "4 denizaltı + Kidd/Lafayette sınıfı" },
+        { "kind": "missile",   "count": 400,  "note": "HF-2E/HF-3 seyir füzesi stoğu" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 6000,  "note": "Type-99A, Type-96 — Doğu TKB hazır" },
+        { "kind": "afv",       "count": 12000 },
+        { "kind": "artillery", "count": 9500 },
+        { "kind": "mlrs",      "count": 1800,  "note": "PHL-03, PCL-191" },
+        { "kind": "uav",       "count": 2400,  "note": "CH-4, CH-5, WZ-10, GJ-2" },
+        { "kind": "aircraft",  "count": 1800,  "note": "J-20, J-16, J-10C, H-6K" },
+        { "kind": "helo",      "count": 900 },
+        { "kind": "sam",       "count": 450,   "note": "HQ-9, HQ-16, HQ-22" },
+        { "kind": "naval",     "count": 350,   "note": "3 uçak gemisi + 12 denizaltı nükleer" },
+        { "kind": "missile",   "count": 3000,  "note": "DF-11/15/16/17/26 — Tayvan karşısı" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "aktif muharebe yok — yüksek gerilim hattı" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0, "note": "muharebe başlarsa felaket senaryosu $10T+" }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / Pentagon China Military Power Report"
+  },
+
+  "caucasus": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 280 },
+        { "kind": "afv",       "count": 580 },
+        { "kind": "artillery", "count": 340 },
+        { "kind": "uav",       "count": 320, "note": "Bayraktar TB2/Akıncı + İsrail Harop" },
+        { "kind": "aircraft",  "count": 60,  "note": "JF-17C alımı devam" },
+        { "kind": "sam",       "count": 40,  "note": "Barak + LORA" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 240 },
+        { "kind": "afv",       "count": 450 },
+        { "kind": "artillery", "count": 260 },
+        { "kind": "uav",       "count": 80 },
+        { "kind": "aircraft",  "count": 15, "note": "Su-30SM + Su-25" },
+        { "kind": "sam",       "count": 30, "note": "eski Rus sistemleri — bakım kısıtı" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 8500, "note": "2020+2023 savaşları + etnik temizlik ölüleri" },
+      "wounded":      { "value": 22000 },
+      "displaced":    { "value": 130000, "note": "2023 Azerbaycan sonrası Ermeni göçü" },
+      "infraDamagePct": 12,
+      "econDamageUsd": "$7B",
+      "civStructures": { "value": 14000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / HRW / Caucasian Knot"
+  },
+
+  "somalia-shabaab": {
+    "sideA": {
+      "equipment": [
+        { "kind": "afv",       "count": 180, "note": "ATMIS + SNA karışık envanter" },
+        { "kind": "artillery", "count": 60 },
+        { "kind": "aircraft",  "count": 12 },
+        { "kind": "helo",      "count": 25 },
+        { "kind": "uav",       "count": 90, "note": "ABD AFRICOM destekli MQ-9" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 80, "note": "teknik + ele geçirilmiş" },
+        { "kind": "uav",       "count": 40, "note": "ticari drone dönüşüm" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 24000, "note": "2010 sonrası kümülatif" },
+      "wounded":      { "value": 48000 },
+      "displaced":    { "value": 3900000 },
+      "infraDamagePct": 14,
+      "econDamageUsd": "$6B",
+      "civStructures": { "value": 22000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / UN Somalia Panel"
+  },
+
+  "serbia-kosovo": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 220 },
+        { "kind": "afv",       "count": 380 },
+        { "kind": "artillery", "count": 200 },
+        { "kind": "uav",       "count": 60,  "note": "Orlan-10E + CH-92A" },
+        { "kind": "aircraft",  "count": 22,  "note": "MiG-29 sınırlı op." },
+        { "kind": "sam",       "count": 12 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 45, "note": "Javelin + hafif zırhlı" },
+        { "kind": "artillery", "count": 20 },
+        { "kind": "uav",       "count": 15, "note": "Puma + Switchblade ABD destekli" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 90,  "note": "2023 sonrası sınırlı vaka" },
+      "wounded":      { "value": 400 },
+      "displaced":    { "value": 2500 },
+      "infraDamagePct": 1,
+      "econDamageUsd": "$0.5B",
+      "civStructures": { "value": 600 }
+    },
+    "asOf": "2026 Q1",
+    "source": "KFOR açık raporları / EULEX"
+  },
+
+  "cyprus-division": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 110, "note": "T-80U — Kıbrıs RM Ulusal Muhafız" },
+        { "kind": "afv",       "count": 240 },
+        { "kind": "artillery", "count": 160 },
+        { "kind": "aircraft",  "count": 8 },
+        { "kind": "helo",      "count": 30 },
+        { "kind": "sam",       "count": 8,  "note": "Tor-M1 — sınırlı" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 340, "note": "TSK Kıbrıs Barış Kuvvetleri" },
+        { "kind": "afv",       "count": 400 },
+        { "kind": "artillery", "count": 180 },
+        { "kind": "aircraft",  "count": 0 },
+        { "kind": "helo",      "count": 18 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "1974 sonrası sıcak çatışma yok" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0, "note": "eski göç var — dondurulmuş" },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / UNFICYP"
+  },
+
+  "korean-dmz": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 2200, "note": "K2 Black Panther + K1A2" },
+        { "kind": "afv",       "count": 3800 },
+        { "kind": "artillery", "count": 5800, "note": "K9 Thunder + K55" },
+        { "kind": "mlrs",      "count": 400,  "note": "K239 Chunmoo + MLRS" },
+        { "kind": "uav",       "count": 300 },
+        { "kind": "aircraft",  "count": 410,  "note": "F-35A, F-15K, KF-21 seri üretim" },
+        { "kind": "helo",      "count": 650,  "note": "AH-64E, Surion" },
+        { "kind": "sam",       "count": 220,  "note": "Cheongung-II, Patriot PAC-3, THAAD" },
+        { "kind": "naval",     "count": 165,  "note": "KSS-III denizaltı + Sejong Aegis" },
+        { "kind": "missile",   "count": 600,  "note": "Hyunmoo-II/III/V" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 4300, "note": "T-62/72 ağırlıklı eski filo + Pokpoong-Ho" },
+        { "kind": "afv",       "count": 6500 },
+        { "kind": "artillery", "count": 12000, "note": "Koksan 170mm + M1978 + MLRS — DMZ hattı" },
+        { "kind": "mlrs",      "count": 5500,  "note": "240mm + 300mm KN-09 dev stok" },
+        { "kind": "uav",       "count": 200 },
+        { "kind": "aircraft",  "count": 550,   "note": "MiG-29, MiG-23, Su-25 — düşük ops." },
+        { "kind": "helo",      "count": 200 },
+        { "kind": "sam",       "count": 180,   "note": "Pongae-5, eski SA-2/5" },
+        { "kind": "naval",     "count": 430,   "note": "büyük kısmı hızlı saldırı + denizaltı" },
+        { "kind": "missile",   "count": 1400,  "note": "Hwasong/KN-serisi — nükleer kapasite" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "ateşkes — sıcak çatışma yok" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0, "note": "olası savaş senaryosu Seul'e ciddi tehdit" }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / KIDA / Pentagon DPRK Military Power"
+  },
+
+  "south-china-sea": {
+    "sideA": {
+      "equipment": [
+        { "kind": "naval",     "count": 350,  "note": "Doğu+Güney Filosu — muharip gemi + Coast Guard" },
+        { "kind": "aircraft",  "count": 400 },
+        { "kind": "uav",       "count": 500 },
+        { "kind": "sam",       "count": 120,  "note": "suni adalarda konuşlu HQ-9" },
+        { "kind": "missile",   "count": 800,  "note": "DF-21D/26 gemi vurucu" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "naval",     "count": 160,  "note": "ABD 7. Filo + müttefik (Japon, Avustralya, Filipinler)" },
+        { "kind": "aircraft",  "count": 380,  "note": "F-35, F/A-18, P-8" },
+        { "kind": "uav",       "count": 220 },
+        { "kind": "sam",       "count": 60 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0 },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "AMTI CSIS / USNI / Pentagon"
+  },
+
+  "transnistria": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 20 },
+        { "kind": "afv",       "count": 120 },
+        { "kind": "artillery", "count": 80 },
+        { "kind": "helo",      "count": 4 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 18 },
+        { "kind": "afv",       "count": 60,  "note": "Rus OGRF garnizonu" },
+        { "kind": "artillery", "count": 40 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "1992 sonrası dondurulmuş" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / OSCE"
+  },
+
+  "gerd-nile": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 400 },
+        { "kind": "afv",       "count": 600 },
+        { "kind": "aircraft",  "count": 85, "note": "Su-30, MiG-23, filo yenileniyor" },
+        { "kind": "sam",       "count": 25, "note": "Pantsir-S1 GERD çevresi" },
+        { "kind": "uav",       "count": 60 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 1100, "note": "M1A1 Abrams + T-90MS yeni alım" },
+        { "kind": "afv",       "count": 1400 },
+        { "kind": "aircraft",  "count": 240,  "note": "Rafale, F-16, MiG-29M" },
+        { "kind": "uav",       "count": 180,  "note": "Wing Loong + Anka" },
+        { "kind": "sam",       "count": 80 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "su gerilimi — sıcak savaş değil" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / International Crisis Group"
+  },
+
+  "western-sahara": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 200 },
+        { "kind": "afv",       "count": 420 },
+        { "kind": "uav",       "count": 110, "note": "Bayraktar TB2 + Harfang + Heron" },
+        { "kind": "aircraft",  "count": 80 },
+        { "kind": "sam",       "count": 25,  "note": "Skyguard + VL-MICA" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 40, "note": "teknik + eski ele geçirilmiş" },
+        { "kind": "artillery", "count": 20 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 400, "note": "2020 ateşkes çöküşü sonrası" },
+      "wounded":      { "value": 900 },
+      "displaced":    { "value": 170000, "note": "Tindouf kampları" },
+      "infraDamagePct": 1,
+      "econDamageUsd": "$0.8B",
+      "civStructures": { "value": 200 }
+    },
+    "asOf": "2026 Q1",
+    "source": "MINURSO / ACLED"
+  },
+
+  "pakistan-ttp": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 60, "note": "kabile bölgesi sınırlı kullanım" },
+        { "kind": "afv",       "count": 380 },
+        { "kind": "artillery", "count": 180 },
+        { "kind": "helo",      "count": 70, "note": "Mi-17, AH-1F Cobra" },
+        { "kind": "uav",       "count": 120, "note": "Burraq + CH-4" },
+        { "kind": "aircraft",  "count": 40 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 60,  "note": "teknik — ele geçirilmiş ABD teçhizatı" },
+        { "kind": "uav",       "count": 30 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 80000, "note": "2004 sonrası kümülatif" },
+      "wounded":      { "value": 140000 },
+      "displaced":    { "value": 1200000 },
+      "infraDamagePct": 6,
+      "econDamageUsd": "$18B",
+      "civStructures": { "value": 24000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "SATP / PIPS / ACLED"
+  },
+
+  "nigeria-lakechad": {
+    "sideA": {
+      "equipment": [
+        { "kind": "afv",       "count": 420,  "note": "MRAP + Otokar Cobra karışık" },
+        { "kind": "artillery", "count": 140 },
+        { "kind": "aircraft",  "count": 45,   "note": "JF-17, A-29, Alpha Jet" },
+        { "kind": "helo",      "count": 60 },
+        { "kind": "uav",       "count": 90,   "note": "Bayraktar TB2 + CH-3A" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 180, "note": "teknik" },
+        { "kind": "uav",       "count": 25 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 40000 },
+      "wounded":      { "value": 75000 },
+      "displaced":    { "value": 2800000, "note": "Göl havzası dört ülke toplam" },
+      "infraDamagePct": 8,
+      "econDamageUsd": "$9B",
+      "civStructures": { "value": 26000 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / IOM DTM / UN OCHA"
+  },
+
+  "mozambique-cabo-delgado": {
+    "sideA": {
+      "equipment": [
+        { "kind": "afv",       "count": 220, "note": "SAMIM + Ruanda kontenjanı karma" },
+        { "kind": "aircraft",  "count": 8 },
+        { "kind": "helo",      "count": 22, "note": "Mi-17 + Gazelle" },
+        { "kind": "uav",       "count": 35 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 30, "note": "ticari pickup + ele geçirilmiş" },
+        { "kind": "uav",       "count": 10 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 5800, "note": "2017 sonrası kümülatif" },
+      "wounded":      { "value": 9500 },
+      "displaced":    { "value": 580000 },
+      "infraDamagePct": 4,
+      "econDamageUsd": "$4B", "civStructures": { "value": 4800 }
+    },
+    "asOf": "2026 Q1",
+    "source": "ACLED / Cabo Ligado / IOM"
+  },
+
+  "venezuela-guyana": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 80, "note": "T-72B1V — Rusya menşeli" },
+        { "kind": "afv",       "count": 240 },
+        { "kind": "artillery", "count": 180 },
+        { "kind": "mlrs",      "count": 30, "note": "Smerch + BM-21" },
+        { "kind": "aircraft",  "count": 50, "note": "Su-30MK2V — bakım düşük" },
+        { "kind": "helo",      "count": 40 },
+        { "kind": "sam",       "count": 20, "note": "S-300VM + Pantsir" },
+        { "kind": "uav",       "count": 30 }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "afv",       "count": 20, "note": "GDF sınırlı envanter" },
+        { "kind": "aircraft",  "count": 8 },
+        { "kind": "helo",      "count": 6 },
+        { "kind": "uav",       "count": 10 }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "gerilim — askeri çatışma başlamadı" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS / CSIS Americas"
+  },
+
+  "aegean-easternmed": {
+    "sideA": {
+      "equipment": [
+        { "kind": "tank",      "count": 2400,  "note": "Altay ilk filo + Leopard 2A4/1A5 + M60TM" },
+        { "kind": "afv",       "count": 4800 },
+        { "kind": "artillery", "count": 1200, "note": "T-155 Fırtına ağırlıklı" },
+        { "kind": "mlrs",      "count": 260,  "note": "TRG-300 + Kasırga + Bora" },
+        { "kind": "aircraft",  "count": 260,  "note": "F-16, modernize edilmiş filo + Kaan geliştirme" },
+        { "kind": "helo",      "count": 480,  "note": "T-129 ATAK + T-70 Gökbey" },
+        { "kind": "uav",       "count": 900,  "note": "Bayraktar TB2/TB3/Akıncı + Anka/Aksungur + Kızılelma" },
+        { "kind": "sam",       "count": 150,  "note": "Hisar-A/O + Siper + S-400" },
+        { "kind": "naval",     "count": 220,  "note": "Anadolu LHD + Milgem + 12 denizaltı" },
+        { "kind": "missile",   "count": 300,  "note": "Atmaca, Tayfun, Çakır — yerli stok" }
+      ]
+    },
+    "sideB": {
+      "equipment": [
+        { "kind": "tank",      "count": 1330, "note": "Leopard 2A6 HEL + Leopard 1A5" },
+        { "kind": "afv",       "count": 2200 },
+        { "kind": "artillery", "count": 580 },
+        { "kind": "mlrs",      "count": 140,  "note": "MLRS + PULS alımı" },
+        { "kind": "aircraft",  "count": 200,  "note": "F-16 Viper + Rafale + F-35 sipariş" },
+        { "kind": "helo",      "count": 280 },
+        { "kind": "uav",       "count": 280,  "note": "Heron + Harop + kendi programı" },
+        { "kind": "sam",       "count": 60,   "note": "Patriot + Tor-M1 + S-300PMU" },
+        { "kind": "naval",     "count": 108,  "note": "4 Papanikolis denizaltı + FDI fırkateyn" },
+        { "kind": "missile",   "count": 90,   "note": "SCALP-EG + Exocet stoğu" }
+      ]
+    },
+    "damage": {
+      "killed":       { "value": 0, "note": "sıcak çatışma yok — gerilim hattı" },
+      "wounded":      { "value": 0 },
+      "displaced":    { "value": 0 },
+      "infraDamagePct": 0,
+      "econDamageUsd": "$0",
+      "civStructures": { "value": 0 }
+    },
+    "asOf": "2026 Q1",
+    "source": "IISS Military Balance 2026 / SSB / HS MoD"
+  }
+}

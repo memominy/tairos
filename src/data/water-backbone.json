@@ -1,0 +1,72 @@
+{
+  "type": "FeatureCollection",
+  "note": "Yaklaşık Türkiye ana su altyapısı — büyük transfer hatları ve sulama kanalları. Gerçek fiziksel güzergah değil; DSİ / belediye kamuya açık kaynaklarından derlenmiş genel topoloji.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Melen - İstanbul içme suyu hattı", "operator": "İSKİ / DSİ", "kind": "pipeline", "info": "Büyük Melen Projesi · ~180 km içme suyu transferi" },
+      "geometry": { "type": "LineString", "coordinates": [[31.16, 40.94], [30.80, 40.95], [30.30, 41.05], [29.80, 41.10], [29.25, 41.12], [28.98, 41.02]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Gerede - İstanbul içme suyu hattı", "operator": "İSKİ / DSİ", "kind": "pipeline", "info": "Gerede Projesi · Bolu üzerinden İstanbul transferi" },
+      "geometry": { "type": "LineString", "coordinates": [[32.20, 40.79], [31.61, 40.74], [30.50, 40.95], [29.50, 41.08], [28.98, 41.02]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ömerli - İstanbul dağıtım", "operator": "İSKİ", "kind": "pipeline", "info": "Ömerli Barajı ana isale hattı" },
+      "geometry": { "type": "LineString", "coordinates": [[29.45, 41.05], [29.15, 41.02], [28.98, 41.02]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Yeşilvadi - Ankara", "operator": "ASKİ / DSİ", "kind": "pipeline", "info": "Kızılırmak - Ankara içme suyu transferi" },
+      "geometry": { "type": "LineString", "coordinates": [[33.85, 40.30], [33.30, 40.10], [32.86, 39.93]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Çamlıdere - Ankara içme suyu", "operator": "ASKİ", "kind": "pipeline", "info": "Çamlıdere Barajı ana isale hattı" },
+      "geometry": { "type": "LineString", "coordinates": [[32.45, 40.50], [32.65, 40.20], [32.86, 39.93]] }
+    },
+
+    {
+      "type": "Feature",
+      "properties": { "name": "Şanlıurfa Tüneli (GAP)", "operator": "DSİ / GAP", "kind": "canal", "info": "Atatürk Barajı → Harran Ovası · 26.4 km çift tünel · dünyanın en büyük sulama tünellerinden" },
+      "geometry": { "type": "LineString", "coordinates": [[38.32, 37.49], [38.50, 37.40], [38.70, 37.30], [38.79, 37.17]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Harran Ovası Ana Sulama Kanalı", "operator": "DSİ / GAP", "kind": "canal", "info": "GAP kapsamında Harran Ovası sulama şebekesi ana kanalı" },
+      "geometry": { "type": "LineString", "coordinates": [[38.79, 37.17], [38.85, 37.00], [38.95, 36.85], [39.05, 36.70]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Mardin-Ceylanpınar Ana Kanalı", "operator": "DSİ / GAP", "kind": "canal", "info": "Mardin-Ceylanpınar Ovası sulama projesi" },
+      "geometry": { "type": "LineString", "coordinates": [[39.05, 36.70], [39.70, 36.85], [40.40, 36.90], [40.73, 36.84]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Mavi Tünel (Konya Ovası Projesi)", "operator": "DSİ / KOP", "kind": "canal", "info": "Göksu Havzası → Konya Ovası · 17 km tünel ile yıllık 414 milyon m³ transfer" },
+      "geometry": { "type": "LineString", "coordinates": [[33.20, 37.10], [33.10, 37.30], [32.90, 37.50], [32.70, 37.70], [32.48, 37.87]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Hirfanlı - Kayseri sulama", "operator": "DSİ", "kind": "canal", "info": "Hirfanlı Barajı aşağı havza sulama şebekesi" },
+      "geometry": { "type": "LineString", "coordinates": [[33.55, 39.15], [34.30, 38.90], [35.00, 38.80], [35.48, 38.73]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Seyhan - Çukurova sulama", "operator": "DSİ", "kind": "canal", "info": "Seyhan Barajı aşağı havza Çukurova sulama şebekesi" },
+      "geometry": { "type": "LineString", "coordinates": [[35.32, 37.10], [35.60, 37.00], [36.00, 36.85], [36.30, 36.70]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Manavgat suyu - İzmir / Akdeniz", "operator": "DSİ", "kind": "pipeline", "info": "Manavgat Çayı içme suyu transfer hattı (planlı)" },
+      "geometry": { "type": "LineString", "coordinates": [[31.44, 36.78], [30.70, 36.88], [29.50, 36.90], [28.27, 36.85], [27.14, 38.41]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Küçük Menderes sulama", "operator": "DSİ", "kind": "canal", "info": "Küçük Menderes havzası ana sulama kanalı" },
+      "geometry": { "type": "LineString", "coordinates": [[27.20, 38.00], [27.50, 38.10], [27.80, 38.15], [28.20, 38.20]] }
+    }
+  ]
+}

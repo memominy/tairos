@@ -1,0 +1,93 @@
+{
+  "type": "FeatureCollection",
+  "note": "Yaklaşık Türkiye deniz ulaşım ağı — ana sevkiyat rotaları, boğaz trafiği, feribot hatları, seyir koridorları. Gerçek AIS rotası değil; kamuya açık deniz ticareti haritalarından derlenmiş genel topoloji.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul Boğazı (Bosphorus)", "kind": "strait", "operator": "Uluslararası deniz yolu", "info": "Dünyanın en yoğun uluslararası deniz yollarından biri · Karadeniz ↔ Marmara geçişi · yıllık ~40.000 gemi" },
+      "geometry": { "type": "LineString", "coordinates": [[29.10, 41.25], [29.06, 41.18], [29.05, 41.12], [29.02, 41.06], [28.98, 41.01], [28.95, 40.95], [28.92, 40.90]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Çanakkale Boğazı (Dardanelles)", "kind": "strait", "operator": "Uluslararası deniz yolu", "info": "Marmara ↔ Ege geçişi · tanker ve konteyner trafiği" },
+      "geometry": { "type": "LineString", "coordinates": [[26.70, 40.45], [26.55, 40.30], [26.40, 40.15], [26.30, 40.05], [26.20, 39.95], [26.15, 39.85]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Karadeniz - Akdeniz Tanker Rotası", "kind": "shipping", "operator": "Uluslararası tanker trafiği", "info": "Rusya/Novorossiysk ↔ Akdeniz · ham petrol ve tahıl" },
+      "geometry": { "type": "LineString", "coordinates": [[33.50, 43.50], [31.50, 42.50], [30.00, 42.00], [29.10, 41.25], [28.92, 40.90], [26.70, 40.45], [26.15, 39.85], [25.50, 38.50], [25.00, 36.50]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Akdeniz Doğu - Batı Koridoru", "kind": "shipping", "operator": "Uluslararası konteyner trafiği", "info": "Süveyş ↔ Cebelitarık · Türkiye'nin güney kıyısından geçer" },
+      "geometry": { "type": "LineString", "coordinates": [[33.00, 34.00], [34.50, 35.00], [35.80, 35.80], [35.20, 36.50], [34.00, 36.00], [32.50, 35.70], [30.70, 35.80], [28.50, 35.70], [27.00, 35.80], [25.00, 35.50]] }
+    },
+
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul - Bursa (İDO)", "kind": "ferry", "operator": "İDO", "info": "Hızlı feribot · Pendik ↔ Yalova / Mudanya" },
+      "geometry": { "type": "LineString", "coordinates": [[29.23, 40.88], [29.00, 40.75], [28.85, 40.50], [29.07, 40.40]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul - Bandırma (İDO)", "kind": "ferry", "operator": "İDO", "info": "Marmara güney kıyısı feribot hattı" },
+      "geometry": { "type": "LineString", "coordinates": [[29.23, 40.88], [28.80, 40.60], [28.35, 40.35], [27.97, 40.35]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Çanakkale - Eceabat", "kind": "ferry", "operator": "GESTAŞ", "info": "Çanakkale Boğazı karşıya geçiş · ~25 dk" },
+      "geometry": { "type": "LineString", "coordinates": [[26.41, 40.15], [26.36, 40.19]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kilitbahir - Çanakkale", "kind": "ferry", "operator": "GESTAŞ", "info": "Boğaz güney geçişi · araçlı feribot" },
+      "geometry": { "type": "LineString", "coordinates": [[26.38, 40.13], [26.41, 40.15]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Gökçeada - Kabatepe", "kind": "ferry", "operator": "GESTAŞ", "info": "Türkiye'nin en büyük adasına geçiş" },
+      "geometry": { "type": "LineString", "coordinates": [[25.90, 40.18], [26.27, 40.19]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Bodrum - Kos (Yunanistan)", "kind": "ferry", "operator": "BODRUM FERRYBOAT", "info": "Uluslararası feribot · On iki Adalar" },
+      "geometry": { "type": "LineString", "coordinates": [[27.43, 37.04], [27.29, 36.89]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Marmaris - Rhodes (Yunanistan)", "kind": "ferry", "operator": "YEŞİL MARMARİS", "info": "Uluslararası katamaran feribot" },
+      "geometry": { "type": "LineString", "coordinates": [[28.28, 36.85], [28.22, 36.45]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İzmir - Foça / Urla", "kind": "ferry", "operator": "İZDENİZ", "info": "İzmir Körfezi iç hat feribotları" },
+      "geometry": { "type": "LineString", "coordinates": [[27.14, 38.44], [26.86, 38.67]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Mersin - KKTC (Magusa)", "kind": "ferry", "operator": "AKGÜNLER", "info": "Türkiye ↔ KKTC deniz yolu · yolcu + araç" },
+      "geometry": { "type": "LineString", "coordinates": [[34.63, 36.80], [33.95, 35.15]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Taşucu - KKTC (Girne)", "kind": "ferry", "operator": "AKGÜNLER", "info": "Türkiye ↔ KKTC deniz yolu · kısa rota" },
+      "geometry": { "type": "LineString", "coordinates": [[33.88, 36.31], [33.32, 35.34]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Trabzon - Soçi (Rusya)", "kind": "ferry", "operator": "Uluslararası feribot", "info": "Karadeniz ötesi yolcu/yük feribotu (mevsimsel)" },
+      "geometry": { "type": "LineString", "coordinates": [[39.72, 41.00], [39.73, 43.58]] }
+    },
+
+    {
+      "type": "Feature",
+      "properties": { "name": "Zonguldak kömür rotası", "kind": "shipping", "operator": "Yerel yük trafiği", "info": "Karadeniz kömür taşımacılığı kıyı rotası" },
+      "geometry": { "type": "LineString", "coordinates": [[28.98, 41.01], [30.50, 41.30], [31.80, 41.45], [33.50, 41.60], [35.00, 41.40], [36.33, 41.29]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Akdeniz kıyı yük rotası", "kind": "shipping", "operator": "Yerel yük trafiği", "info": "Mersin - İskenderun - Antalya liman trafiği" },
+      "geometry": { "type": "LineString", "coordinates": [[30.70, 36.80], [32.50, 36.60], [34.63, 36.80], [36.20, 36.60]] }
+    }
+  ]
+}

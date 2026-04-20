@@ -1,0 +1,382 @@
+{
+  "ukraine-russia": [
+    { "id": "ukr-gkb",        "side": "A", "name": "Ukrayna SK Genelkurmay", "type": "hq",    "echelon": "teatre",   "formation": "ZSU GŞ",            "lat": 50.447, "lng": 30.525, "note": "Kyiv merkez — stratejik komuta" },
+    { "id": "ukr-og-khortytsia","side":"A","name": "OSGV Hortitsya",          "type": "hq",    "echelon": "army",     "formation": "Doğu OSGV",         "parentId": "ukr-gkb", "lat": 48.507, "lng": 37.601, "note": "Kramatorsk — Donetsk cephesi K3" },
+    { "id": "ukr-og-tavria",  "side": "A", "name": "OSGV Tavria",              "type": "hq",    "echelon": "army",     "formation": "Güney OSGV",        "parentId": "ukr-gkb", "lat": 47.825, "lng": 35.170, "note": "Zaporijya güneyi — Melitopol eksenli" },
+    { "id": "ukr-og-odesa",   "side": "A", "name": "OK Güney",                 "type": "hq",    "echelon": "corps",    "formation": "Güney Komutanlığı", "parentId": "ukr-gkb", "lat": 46.482, "lng": 30.723, "note": "Odesa — kıyı + Transdnistr hattı" },
+    { "id": "ukr-og-kharkiv", "side": "A", "name": "OSGV Kharkiv",              "type": "hq",    "echelon": "army",     "formation": "Kuzey OSGV",        "parentId": "ukr-gkb", "lat": 49.994, "lng": 36.230, "note": "Kharkiv — kuzey cephe K3" },
+    { "id": "ukr-47th-mech",  "side": "A", "name": "47. Mekanize Tugay",       "type": "mech",  "echelon": "brigade",  "formation": "OSGV Hortitsya",    "parentId": "ukr-og-khortytsia", "lat": 48.210, "lng": 37.430, "note": "Avdiivka–Pokrovsk ekseninde savunma" },
+    { "id": "ukr-25th-abn",   "side": "A", "name": "25. Sicheslav Hava İndirme", "type": "abn", "echelon": "brigade",  "formation": "DShV",              "parentId": "ukr-og-khortytsia", "lat": 48.470, "lng": 37.850, "note": "Toretsk/Kostiantynivka rezerv" },
+    { "id": "ukr-95th-abn",   "side": "A", "name": "95. Hava İndirme Tugayı",  "type": "abn",   "echelon": "brigade",  "formation": "Hava İndirme",      "parentId": "ukr-og-kharkiv", "lat": 48.960, "lng": 35.260, "note": "Reserve + Kupyansk desteği" },
+    { "id": "ukr-3rd-arm",    "side": "A", "name": "3. Zırhlı Tugay",          "type": "armor", "echelon": "brigade",  "formation": "Kara Kuvvetleri",   "parentId": "ukr-og-kharkiv", "lat": 49.995, "lng": 36.231, "note": "Kharkiv yedek zırhlı vuruş gücü" },
+    { "id": "ukr-93rd-mech",  "side": "A", "name": "93. Mekanize 'Kholodnyi Yar'", "type": "mech", "echelon": "brigade", "formation": "Kara Kuvvetleri", "parentId": "ukr-og-khortytsia", "lat": 48.637, "lng": 37.571, "note": "Bahmut/Toretsk hattı" },
+    { "id": "ukr-128th-mtn",  "side": "A", "name": "128. Dağ Tugayı",           "type": "inf",   "echelon": "brigade",  "formation": "Kara Kuvvetleri",   "parentId": "ukr-og-tavria", "lat": 47.850, "lng": 35.700, "note": "Zaporijya savunma hattı" },
+    { "id": "ukr-sof-kirovo", "side": "A", "name": "8. ÖKK Alay",               "type": "sof",   "echelon": "regiment", "formation": "SSO",               "parentId": "ukr-gkb", "lat": 48.507, "lng": 32.262, "note": "Khmelnytskyi/Kropyvnytskyi konuşlanma" },
+    { "id": "ukr-uav-vasylkiv","side": "A","name": "Bayraktar+FPV Kompleksi",  "type": "uav",   "echelon": "wing",     "formation": "Hava Kuvvetleri",   "parentId": "ukr-gkb", "lat": 50.199, "lng": 30.317, "note": "Vasylkiv bölgesi — İHA üssü" },
+    { "id": "ukr-uav-dnipro", "side": "A", "name": "İleri İHA Grubu",           "type": "uav",   "echelon": "regiment", "formation": "Ukr İHA Kuv.",      "parentId": "ukr-og-khortytsia", "lat": 48.457, "lng": 35.050, "note": "Dnipro — derin vuruş İHA ve karşı-İHA" },
+    { "id": "ukr-air-starokostiantyniv","side":"A","name":"40. Taktik Hava Tugayı","type":"airwing","echelon":"wing","formation":"Hava Kuvvetleri","parentId":"ukr-gkb","lat":49.723,"lng":27.245,"note":"Starokostiantyniv — Storm Shadow/SCALP platformu" },
+    { "id": "ukr-air-f16-mirgorod","side":"A","name":"F-16 Eşik Filosu",        "type": "airwing","echelon": "wing",     "formation": "HvK ZPU",           "parentId": "ukr-gkb", "lat": 49.942, "lng": 33.615, "note": "Mirgorod civarı — F-16 ileri üs (örtülü)" },
+    { "id": "ukr-navy-odesa", "side": "A", "name": "Deniz Kuvvetleri Komutanlığı","type": "naval","echelon": "wing",  "formation": "Deniz Kuvvetleri", "parentId": "ukr-og-odesa", "lat": 46.499, "lng": 30.743, "note": "Odesa — insansız deniz aracı operasyon merkezi" },
+    { "id": "ukr-airdef-kyiv","side": "A", "name": "Patriot/NASAMS Bat. (Kyiv)","type": "airdef","echelon": "battalion","formation": "HKK HvSv",        "parentId": "ukr-gkb", "lat": 50.401, "lng": 30.519, "note": "Kyiv savunma perdesi — Patriot PAC-3 + NASAMS" },
+    { "id": "ukr-airdef-kharkiv","side": "A","name": "IRIS-T SLM Bataryası",    "type": "airdef","echelon": "battalion","formation": "HKK HvSv",        "parentId": "ukr-og-kharkiv", "lat": 49.980, "lng": 36.320, "note": "Kharkiv perdesi — Alman menşeli IRIS-T" },
+    { "id": "ukr-airdef-odesa","side":"A","name": "SAMP/T Mamba Bat. (Odesa)",   "type": "airdef","echelon": "battalion","formation": "HKK HvSv",        "parentId": "ukr-og-odesa", "lat": 46.488, "lng": 30.737, "note": "Güney liman perdesi — İtalyan/Fransız SAMP/T" },
+    { "id": "ukr-airdef-dnipro","side":"A","name":"Patriot Bataryası (Dnipro)", "type": "airdef","echelon": "battalion","formation": "HKK HvSv",        "parentId": "ukr-og-khortytsia", "lat": 48.467, "lng": 35.040, "note": "Dnipro — doğu cephe perdesi" },
+    { "id": "ukr-legion-lviv","side": "A", "name": "Uluslararası Lejyon",       "type": "inf",   "echelon": "regiment", "formation": "AFU Lejyonu",       "parentId": "ukr-gkb", "lat": 49.842, "lng": 24.031, "note": "Lviv eğitim/konsolide üs" },
+
+    { "id": "rus-gkb",        "side": "B", "name": "Rusya SK Genelkurmay",     "type": "hq",    "echelon": "teatre",   "formation": "MoD Arbat",         "lat": 55.758, "lng": 37.586, "note": "Moskova — stratejik komuta" },
+    { "id": "rus-og-sever",   "side": "B", "name": "Kuvvet Grubu 'Sever'",     "type": "hq",    "echelon": "army",     "formation": "Kuzey Grubu",       "parentId": "rus-gkb", "lat": 52.250, "lng": 35.358, "note": "Kursk/Belgorod — Kharkiv ekseni" },
+    { "id": "rus-og-zapad",   "side": "B", "name": "Kuvvet Grubu 'Zapad'",     "type": "hq",    "echelon": "army",     "formation": "Batı Grubu",        "parentId": "rus-gkb", "lat": 49.582, "lng": 38.450, "note": "Svatove/Kreminna ekseni" },
+    { "id": "rus-og-tsentr",  "side": "B", "name": "Kuvvet Grubu 'Tsentr'",    "type": "hq",    "echelon": "army",     "formation": "Merkez Grubu",      "parentId": "rus-gkb", "lat": 48.100, "lng": 37.800, "note": "Avdiivka–Pokrovsk ana hücum" },
+    { "id": "rus-og-yug",     "side": "B", "name": "Kuvvet Grubu 'Yug'",       "type": "hq",    "echelon": "army",     "formation": "Güney Grubu",       "parentId": "rus-gkb", "lat": 48.023, "lng": 37.802, "note": "Donetsk kesimi — yüksek yoğunluk" },
+    { "id": "rus-og-dnepr",   "side": "B", "name": "Kuvvet Grubu 'Dnepr'",     "type": "hq",    "echelon": "army",     "formation": "Dnepr Grubu",       "parentId": "rus-gkb", "lat": 46.671, "lng": 34.583, "note": "Kherson / Sol yaka savunma" },
+    { "id": "rus-1tank",      "side": "B", "name": "1. Muhafız Tank Ordusu",   "type": "armor", "echelon": "corps",    "formation": "Batı AO",           "parentId": "rus-og-sever", "lat": 50.030, "lng": 36.600, "note": "Belgorod konuşlanması — Kharkiv tehdidi" },
+    { "id": "rus-20ga",       "side": "B", "name": "20. Birleşik Silahlı Ordu", "type": "mech", "echelon": "corps",    "formation": "Batı AO",           "parentId": "rus-og-sever", "lat": 51.030, "lng": 35.900, "note": "Sumy ekseni — ikincil itiş gücü" },
+    { "id": "rus-58th",       "side": "B", "name": "58. Birleşik Silahlı Ordu","type": "mech",  "echelon": "corps",    "formation": "Güney AO",          "parentId": "rus-og-yug", "lat": 47.230, "lng": 35.450, "note": "Zaporijya cephesi" },
+    { "id": "rus-8ga",        "side": "B", "name": "8. Muhafız Ordusu",         "type": "mech",  "echelon": "corps",    "formation": "Güney AO",          "parentId": "rus-og-tsentr", "lat": 48.070, "lng": 38.120, "note": "Bahmut-Toretsk sektörü" },
+    { "id": "rus-vdv-pskov",  "side": "B", "name": "76. Muhafız VDV",          "type": "abn",   "echelon": "division", "formation": "VDV",               "parentId": "rus-og-tsentr", "lat": 47.840, "lng": 36.080, "note": "Rotasyonlu — Vuhledar/Velyka Novosilka" },
+    { "id": "rus-vdv-ivanovo","side":"B", "name": "98. Muhafız VDV (Svatove)",  "type": "abn",   "echelon": "division", "formation": "VDV",               "parentId": "rus-og-zapad", "lat": 49.420, "lng": 38.160, "note": "Kremmina ormanı — hava indirme rezervi" },
+    { "id": "rus-pmc-rostov", "side": "B", "name": "Afrika Kolordusu / Redut", "type": "proxy", "echelon": "regiment", "formation": "PMC ağı",           "parentId": "rus-gkb", "lat": 47.222, "lng": 39.720, "note": "Rostov merkez — eski Wagner yerine geçiyor" },
+    { "id": "rus-ldnr-donetsk","side": "B", "name": "1. DPR Kolordusu",         "type": "mech",  "echelon": "corps",    "formation": "LDNR milis",        "parentId": "rus-og-yug", "lat": 48.003, "lng": 37.805, "note": "Donetsk yerel oluşum — RF entegre" },
+    { "id": "rus-ldnr-luhansk","side":"B", "name": "2. LPR Kolordusu",         "type": "mech",  "echelon": "corps",    "formation": "LDNR milis",        "parentId": "rus-og-zapad", "lat": 48.573, "lng": 39.317, "note": "Luhansk yerel oluşum" },
+    { "id": "rus-airwing-morozovsk","side":"B","name":"559. Bombardıman Alayı","type":"airwing","echelon":"wing","formation":"VKS","parentId":"rus-og-yug","lat":48.317,"lng":41.794,"note":"Morozovsk — Su-34 ana üssü" },
+    { "id": "rus-airwing-engels","side":"B","name":"121. Ağır Bombardıman Alayı","type":"airwing","echelon":"wing","formation":"VKS DA","parentId":"rus-gkb","lat":51.478,"lng":46.211,"note":"Engels-2 — Tu-95MS / Tu-160 stratejik" },
+    { "id": "rus-airdef-crimea","side":"B","name":"S-400 Kompleksi (Sivastopol)","type": "airdef","echelon": "battalion","formation": "VKS HvSv",        "parentId": "rus-og-dnepr", "lat": 44.614, "lng": 33.525, "note": "Sivastopol civarı — Karadeniz perdesi" },
+    { "id": "rus-airdef-belgorod","side":"B","name":"S-300V4 + Pantsir Karma",  "type": "airdef","echelon": "battalion","formation": "VKS HvSv",        "parentId": "rus-og-sever", "lat": 50.590, "lng": 36.600, "note": "Belgorod — sınır perdesi" },
+    { "id": "rus-airdef-rostov","side":"B","name":"S-400 Triumf Bataryası",     "type": "airdef","echelon": "battalion","formation": "VKS HvSv",        "parentId": "rus-og-yug", "lat": 47.220, "lng": 39.700, "note": "Rostov bölgesi — güney perdesi" },
+    { "id": "rus-airdef-moscow","side":"B","name":"A-235 + S-500 (Başkent)",    "type": "airdef","echelon": "battalion","formation": "VKS HvSv",        "parentId": "rus-gkb", "lat": 55.980, "lng": 37.400, "note": "Moskova çevresi — A-235 ABM + S-500" },
+    { "id": "rus-navy-novorossiysk","side":"B","name":"Karadeniz Filosu (Yedek)","type":"naval","echelon":"wing","formation":"VMF","parentId":"rus-gkb","lat":44.723,"lng":37.768,"note":"Karadeniz Filosu Sivastopol sonrası ana üs" },
+    { "id": "rus-uav-yeysk",  "side": "B", "name": "Shahed/Geran Üssü",         "type": "uav",   "echelon": "wing",     "formation": "VKS",               "parentId": "rus-og-yug", "lat": 46.700, "lng": 38.270, "note": "Yeysk — uzak menzilli tek kullanımlık İHA" },
+    { "id": "rus-uav-orenburg","side":"B","name":"Geran-2 Fabrika + Üs",        "type": "uav",   "echelon": "wing",     "formation": "VKS",               "parentId": "rus-gkb", "lat": 55.761, "lng": 52.423, "note": "Alabuga — Shahed tandem üretim + eğitim" }
+  ],
+
+  "gaza-israel": [
+    { "id": "il-kirya",       "side": "A", "name": "Kirya / IDF GKB",           "type": "hq",    "echelon": "teatre",   "formation": "IDF Matkal",        "lat": 32.074, "lng": 34.785, "note": "Tel Aviv Kirya — stratejik komuta" },
+    { "id": "il-south-cmd",   "side": "A", "name": "Güney Komutanlığı",         "type": "hq",    "echelon": "army",     "formation": "Pikud Darom",       "parentId": "il-kirya", "lat": 31.245, "lng": 34.810, "note": "Beer Sheva — Gazze + Negev cephesi" },
+    { "id": "il-gaza-div",    "side": "A", "name": "Gazze Tümeni (143)",        "type": "mech",  "echelon": "division", "formation": "Güney Kom.",        "parentId": "il-south-cmd", "lat": 31.390, "lng": 34.340, "note": "Re'im civarı — şerit kuşatma halkası" },
+    { "id": "il-162-div",     "side": "A", "name": "162. Zırhlı Tümen",         "type": "armor", "echelon": "division", "formation": "Güney Kom.",        "parentId": "il-south-cmd", "lat": 31.480, "lng": 34.510, "note": "Netzarim + kuzey Gazze manevra gücü" },
+    { "id": "il-98-div",      "side": "A", "name": "98. Hava İndirme Tümeni",   "type": "abn",   "echelon": "division", "formation": "Güney Kom.",        "parentId": "il-south-cmd", "lat": 31.330, "lng": 34.400, "note": "Han Yunus/Rafah aksı" },
+    { "id": "il-golani",      "side": "A", "name": "Golani Tugayı (1)",         "type": "inf",   "echelon": "brigade",  "formation": "Güney Kom.",        "parentId": "il-98-div", "lat": 31.300, "lng": 34.420, "note": "Han Yunus ekseninde muharebe" },
+    { "id": "il-givati",      "side": "A", "name": "Givati Tugayı (84)",        "type": "inf",   "echelon": "brigade",  "formation": "Güney Kom.",        "parentId": "il-162-div", "lat": 31.500, "lng": 34.480, "note": "Netzarim koridoru + kuzey Gazze" },
+    { "id": "il-401-arm",     "side": "A", "name": "401. Zırhlı Tugay",         "type": "armor", "echelon": "brigade",  "formation": "Güney Kom.",        "parentId": "il-162-div", "lat": 31.550, "lng": 34.450, "note": "Merkava Mk4 — şerit içi vuruş gücü" },
+    { "id": "il-7-arm",       "side": "A", "name": "7. Zırhlı Tugay",           "type": "armor", "echelon": "brigade",  "formation": "Güney Kom.",        "parentId": "il-gaza-div", "lat": 31.440, "lng": 34.390, "note": "Saja'iya/Zeitoun mahalleleri" },
+    { "id": "il-sayeret-matkal","side":"A","name":"Sayeret Matkal",              "type": "sof",   "echelon": "battalion","formation": "IDF ÖKK",           "parentId": "il-kirya", "lat": 32.080, "lng": 34.870, "note": "Derin eylem + rehine operasyonları" },
+    { "id": "il-shaldag",     "side": "A", "name": "Shaldag Birimi",             "type": "sof",   "echelon": "battalion","formation": "IAF ÖKK",           "parentId": "il-kirya", "lat": 32.000, "lng": 34.883, "note": "Hava destek koordinasyonu" },
+    { "id": "il-iron-dome-sderot","side":"A","name":"Iron Dome Bataryası (Sderot)","type":"airdef","echelon":"battalion","formation":"IAF HvSv","parentId":"il-south-cmd","lat":31.525,"lng":34.597,"note":"Kısa menzilli roket savunması" },
+    { "id": "il-davids-sling-ashdod","side":"A","name":"David's Sling Bat. (Aşdod)","type":"airdef","echelon":"battalion","formation":"IAF HvSv","parentId":"il-kirya","lat":31.793,"lng":34.653,"note":"Orta menzilli füze perdesi" },
+    { "id": "il-arrow-palmachim","side":"A","name":"Arrow 3 (Palmachim)",        "type": "airdef","echelon": "battalion","formation": "IAF HvSv",          "parentId": "il-kirya", "lat": 31.898, "lng": 34.685, "note": "Dış atmosfer ABM — İran balistik tehdidi" },
+    { "id": "il-tel-nof",     "side": "A", "name": "Tel Nof Üssü",              "type": "airwing","echelon": "wing",     "formation": "IAF",               "parentId": "il-kirya", "lat": 31.840, "lng": 34.820, "note": "F-15I + F-35I rotasyonu" },
+    { "id": "il-nevatim",     "side": "A", "name": "Nevatim Üssü (F-35I)",      "type": "airwing","echelon": "wing",     "formation": "IAF",               "parentId": "il-kirya", "lat": 31.208, "lng": 34.916, "note": "Adir F-35I ana üs — İran menzili" },
+    { "id": "il-palmachim",   "side": "A", "name": "Palmachim İHA Üssü",        "type": "uav",   "echelon": "wing",     "formation": "IAF 200. Filo",     "parentId": "il-kirya", "lat": 31.898, "lng": 34.690, "note": "Hermes + Heron — Gazze ISR" },
+    { "id": "il-navy-ashdod", "side": "A", "name": "Aşdod Deniz Üssü",           "type": "naval", "echelon": "wing",     "formation": "IDF Denizcilik",    "parentId": "il-south-cmd", "lat": 31.820, "lng": 34.635, "note": "Gazze kıyı ablukası — Dvora + Sa'ar 6" },
+
+    { "id": "hm-gaza-metro",  "side": "B", "name": "Hamas Gazze Tugay Komuta",  "type": "hq",    "echelon": "corps",    "formation": "Kassam Tugayları",  "lat": 31.505, "lng": 34.467, "note": "Gazze şehri — tünel şebekesi altı" },
+    { "id": "hm-khan-younis", "side": "B", "name": "Han Yunus Tugayı",          "type": "irreg", "echelon": "brigade",  "formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.340, "lng": 34.305, "note": "Güney Gazze ana savunma hattı" },
+    { "id": "hm-rafah",       "side": "B", "name": "Rafah Tugayı",              "type": "irreg", "echelon": "brigade",  "formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.290, "lng": 34.243, "note": "Philadelphia koridoru + tünel uçları" },
+    { "id": "hm-central",     "side": "B", "name": "Deir al-Balah Tugayı",      "type": "irreg", "echelon": "brigade",  "formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.418, "lng": 34.352, "note": "Orta şerit — roket fırlatma alanları" },
+    { "id": "hm-city",        "side": "B", "name": "Gazze Şehri Tugayı",        "type": "irreg", "echelon": "brigade",  "formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.525, "lng": 34.460, "note": "Saja'iya + Zeitoun — şehir savunması" },
+    { "id": "hm-rockets",     "side": "B", "name": "Roket Birimi (Kassam)",     "type": "art",   "echelon": "regiment", "formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.432, "lng": 34.392, "note": "Tünel içi mobil fırlatıcı ağı" },
+    { "id": "hm-at-unit",     "side": "B", "name": "Yaser Tanksavar Birimi",    "type": "sof",   "echelon": "battalion","formation": "Kassam",            "parentId": "hm-gaza-metro", "lat": 31.470, "lng": 34.410, "note": "Kornet + yerli Yasin şarjörü hücreleri" },
+    { "id": "pij-rafah",      "side": "B", "name": "PIJ Kudüs Tugayları",       "type": "irreg", "echelon": "regiment", "formation": "İslami Cihad",      "parentId": "hm-gaza-metro", "lat": 31.350, "lng": 34.285, "note": "PIJ — Hamas ile koordine" }
+  ],
+
+  "lebanon-israel": [
+    { "id": "il-north-cmd",   "side": "A", "name": "Kuzey Komutanlığı",         "type": "hq",    "echelon": "army",     "formation": "Pikud Tzafon",      "lat": 32.778, "lng": 35.045, "note": "Safed — Lübnan + Suriye cephesi" },
+    { "id": "il-91-galil",    "side": "A", "name": "91. Galil Tümeni",          "type": "mech",  "echelon": "division", "formation": "Kuzey Kom.",        "parentId": "il-north-cmd", "lat": 33.083, "lng": 35.140, "note": "Kfar Giladi — sınır tümeni" },
+    { "id": "il-36-gaash",    "side": "A", "name": "36. Gaash Tümeni",          "type": "armor", "echelon": "division", "formation": "Kuzey Kom.",        "parentId": "il-north-cmd", "lat": 32.830, "lng": 35.530, "note": "Ramat David desteği — zırhlı rezerv" },
+    { "id": "il-210-div",     "side": "A", "name": "210. Bashan Tümeni",        "type": "inf",   "echelon": "division", "formation": "Kuzey Kom.",        "parentId": "il-north-cmd", "lat": 33.020, "lng": 35.780, "note": "Golan — Suriye yakası" },
+    { "id": "il-ramat-david", "side": "A", "name": "Ramat David Üssü",          "type": "airwing","echelon": "wing",    "formation": "IAF",               "parentId": "il-north-cmd", "lat": 32.666, "lng": 35.179, "note": "F-16C/I — kuzey taktik hava" },
+    { "id": "il-rosh-pina-ad","side":"A", "name": "Iron Dome (Rosh Pina)",     "type": "airdef","echelon": "battalion","formation": "IAF HvSv",         "parentId": "il-north-cmd", "lat": 32.980, "lng": 35.555, "note": "Katyuşa perdesi" },
+    { "id": "il-davids-sling-north","side":"A","name":"David's Sling (Haifa)",  "type": "airdef","echelon": "battalion","formation": "IAF HvSv",         "parentId": "il-north-cmd", "lat": 32.805, "lng": 35.000, "note": "Haifa perdesi — orta menzilli füze" },
+    { "id": "il-patriot-haifa","side":"A", "name": "Patriot PAC-3 Bataryası",   "type": "airdef","echelon": "battalion","formation": "IAF HvSv",         "parentId": "il-north-cmd", "lat": 32.795, "lng": 35.004, "note": "Haifa liman savunması" },
+    { "id": "il-golan-uav",   "side": "A", "name": "Golan İHA Müfrezesi",       "type": "uav",   "echelon": "battalion","formation": "IAF ISR",          "parentId": "il-210-div", "lat": 33.145, "lng": 35.735, "note": "Hermes 900 — sınır ötesi ISR" },
+
+    { "id": "hz-cmd-beirut",  "side": "B", "name": "Hizbullah Cihat Konseyi",   "type": "hq",    "echelon": "teatre",   "formation": "Hizbullah",         "lat": 33.871, "lng": 35.503, "note": "Dahiyeh (Güney Beyrut) — stratejik K3" },
+    { "id": "hz-south-cmd",   "side": "B", "name": "Güney Lübnan Komutanlığı",  "type": "hq",    "echelon": "army",     "formation": "Hizbullah",         "parentId": "hz-cmd-beirut", "lat": 33.400, "lng": 35.370, "note": "Nabatiyeh merkezli cephe K3" },
+    { "id": "hz-radwan",      "side": "B", "name": "Rıdvan Birliği",             "type": "sof",   "echelon": "brigade",  "formation": "Hizbullah",         "parentId": "hz-south-cmd", "lat": 33.365, "lng": 35.488, "note": "Güney Lübnan sınır saldırı gücü" },
+    { "id": "hz-nasr",        "side": "B", "name": "Nasr Tugayı",                "type": "irreg", "echelon": "brigade",  "formation": "Hizbullah",         "parentId": "hz-south-cmd", "lat": 33.398, "lng": 35.495, "note": "Bint Jbeil sektörü" },
+    { "id": "hz-badr",        "side": "B", "name": "Bedir Tugayı",               "type": "irreg", "echelon": "brigade",  "formation": "Hizbullah",         "parentId": "hz-south-cmd", "lat": 33.305, "lng": 35.215, "note": "Batı sektör — Tyre civarı" },
+    { "id": "hz-aziz",        "side": "B", "name": "Aziz Tugayı",                "type": "irreg", "echelon": "brigade",  "formation": "Hizbullah",         "parentId": "hz-south-cmd", "lat": 33.435, "lng": 35.610, "note": "Doğu sektör — Arnoun/Şebaa" },
+    { "id": "hz-rocket-bekaa","side": "B", "name": "Fatih/Raad Füze Birimi",    "type": "art",   "echelon": "regiment", "formation": "Hizbullah",         "parentId": "hz-cmd-beirut", "lat": 34.007, "lng": 36.216, "note": "Bekaa Vadisi — orta menzilli füze stoğu" },
+    { "id": "hz-rocket-janta","side":"B", "name": "Hayber-1 Depoları",            "type": "art",   "echelon": "regiment", "formation": "Hizbullah",         "parentId": "hz-rocket-bekaa", "lat": 34.190, "lng": 36.300, "note": "Janta — uzun menzilli yedek stok" },
+    { "id": "hz-airdef-nabati","side":"B","name": "SA-22 (Pantsir) + MANPADS ağı","type": "airdef","echelon": "battalion","formation": "Hizbullah",         "parentId": "hz-south-cmd", "lat": 33.378, "lng": 35.479, "note": "Dağıtılmış hava savunma — SA-22 Pantsir varyantı" },
+    { "id": "hz-uav-baalbek", "side": "B", "name": "Ayyub/Şahed İHA Üssü",       "type": "uav",   "echelon": "wing",     "formation": "Hizbullah",         "parentId": "hz-cmd-beirut", "lat": 34.006, "lng": 36.208, "note": "Baalbek yakını — İran menşeli filo" }
+  ],
+
+  "syria-civil": [
+    { "id": "sy-gkb",         "side": "A", "name": "SAA Genelkurmay",           "type": "hq",    "echelon": "teatre",   "formation": "SAA",               "lat": 33.516, "lng": 36.292, "note": "Şam — stratejik komuta" },
+    { "id": "sy-4th-div",     "side": "A", "name": "4. Zırhlı Tümen",           "type": "armor", "echelon": "division", "formation": "Cumhuriyet Muh.",  "parentId": "sy-gkb", "lat": 33.555, "lng": 36.300, "note": "Şam güneyi — rejim muhafızı" },
+    { "id": "sy-tigers",      "side": "A", "name": "25. Özel Görev Tümeni",     "type": "sof",   "echelon": "division", "formation": "Tiger Forces",      "parentId": "sy-gkb", "lat": 35.130, "lng": 36.752, "note": "Hama merkezli — taktik vuruş gücü" },
+    { "id": "sy-airdef-mezze","side":"A", "name": "Pantsir/S-200 Bat. (Mezze)",  "type": "airdef","echelon": "battalion","formation": "SyADF",             "parentId": "sy-gkb", "lat": 33.473, "lng": 36.222, "note": "Mezze — Şam hava savunma perdesi" },
+    { "id": "sy-airdef-s300-mhardeh","side":"A","name":"S-300PMU-2 Bat. (Masyaf)","type":"airdef","echelon":"battalion","formation":"SyADF (RU destekli)","parentId":"sy-gkb","lat":35.060,"lng":36.341,"note":"Masyaf/Mhardeh — stratejik uzun menzil" },
+    { "id": "sy-hmeimim",     "side": "A", "name": "Hmeimim (RU destek)",       "type": "airwing","echelon": "wing",     "formation": "RU VKS",            "parentId": "sy-gkb", "lat": 35.401, "lng": 35.948, "note": "Rus hava gücü — Suriye rejim desteği" },
+    { "id": "sy-tartus",      "side": "A", "name": "Tartus Deniz Üssü",         "type": "naval", "echelon": "wing",     "formation": "RU VMF",            "parentId": "sy-gkb", "lat": 34.892, "lng": 35.882, "note": "Akdeniz'deki tek Rus liman üssü" },
+
+    { "id": "sy-hts-idlib",   "side": "B", "name": "HTŞ Askeri Kanat",           "type": "hq",    "echelon": "corps",    "formation": "HTŞ",                "lat": 35.930, "lng": 36.634, "note": "İdlib şehri — muhalefet enklavı K3" },
+    { "id": "sy-hts-ariha",   "side": "B", "name": "HTŞ Ariha Grubu",             "type": "irreg", "echelon": "brigade",  "formation": "HTŞ",                "parentId": "sy-hts-idlib", "lat": 35.813, "lng": 36.607, "note": "Güney İdlib cephesi" },
+    { "id": "sy-sna-afrin",   "side": "B", "name": "SMO Operasyon Merkezi",      "type": "hq",    "echelon": "corps",    "formation": "SMO",                "lat": 36.512, "lng": 36.865, "note": "Afrin civarı — TSK ile koordine" },
+    { "id": "sy-sna-azaz",    "side": "B", "name": "SMO Azez Tümeni",             "type": "mech",  "echelon": "division", "formation": "SMO",                "parentId": "sy-sna-afrin", "lat": 36.587, "lng": 37.041, "note": "Azez — Türkiye hududu" },
+    { "id": "sy-sdf-qamishli","side": "B", "name": "SDG Asayiş Komutanlığı",    "type": "hq",     "echelon": "army",     "formation": "SDF",                "lat": 37.053, "lng": 41.231, "note": "Qamişli — özyönetim merkezi" },
+    { "id": "sy-sdf-ypg",     "side": "B", "name": "YPG Ana Manevra",             "type": "irreg", "echelon": "division", "formation": "SDF",                "parentId": "sy-sdf-qamishli", "lat": 36.710, "lng": 38.010, "note": "Hasakah/Raqqa sektörü" },
+    { "id": "sy-isis-badiya", "side": "B", "name": "IŞİD Artıkları — Badiye",    "type": "irreg", "echelon": "regiment", "formation": "IŞİD hücre",         "lat": 35.300, "lng": 38.600, "note": "Çöl bölgesi — pusu + IED" }
+  ],
+
+  "sudan-civil": [
+    { "id": "sd-saf-gkb",     "side": "A", "name": "SAF Genelkurmay",           "type": "hq",    "echelon": "teatre",   "formation": "SAF",               "lat": 15.603, "lng": 32.530, "note": "Port Sudan'a taşınmış fiili merkez" },
+    { "id": "sd-saf-khartoum","side": "A", "name": "Savaş Komutanlığı",          "type": "hq",    "echelon": "army",     "formation": "SAF 1. Piyade",     "parentId": "sd-saf-gkb", "lat": 15.515, "lng": 32.535, "note": "Hartum kuşatma muharebesi" },
+    { "id": "sd-saf-omdurman","side": "A", "name": "Omdurman Garnizonu",        "type": "mech",  "echelon": "division", "formation": "SAF",               "parentId": "sd-saf-khartoum", "lat": 15.651, "lng": 32.480, "note": "Nehir batısı — SAF kontrolü" },
+    { "id": "sd-saf-port-sudan","side":"A","name": "Kızıldeniz Komutanlığı",    "type": "hq",    "echelon": "corps",    "formation": "SAF",               "parentId": "sd-saf-gkb", "lat": 19.617, "lng": 37.217, "note": "Port Sudan — hükümet geçici başkent" },
+    { "id": "sd-saf-atbara",  "side": "A", "name": "Atbara Tümeni",              "type": "mech",  "echelon": "division", "formation": "SAF",               "parentId": "sd-saf-gkb", "lat": 17.702, "lng": 33.980, "note": "Kuzey-doğu — Nil koridoru" },
+    { "id": "sd-saf-uav",     "side": "A", "name": "Wad-Madani İHA",            "type": "uav",   "echelon": "wing",     "formation": "SAF Hava",          "parentId": "sd-saf-gkb", "lat": 14.398, "lng": 33.520, "note": "TB2 + Mohajer" },
+
+    { "id": "sd-rsf-cmd",     "side": "B", "name": "RSF Komutanlığı",           "type": "hq",    "echelon": "teatre",   "formation": "RSF",               "lat": 15.595, "lng": 32.560, "note": "Hartum — savunma + saldırı karma" },
+    { "id": "sd-rsf-darfur",  "side": "B", "name": "RSF Darfur Sektörü",        "type": "mech",  "echelon": "army",     "formation": "RSF",               "parentId": "sd-rsf-cmd", "lat": 13.457, "lng": 24.895, "note": "El-Geneina + El-Fashir cepheleri" },
+    { "id": "sd-rsf-nyala",   "side": "B", "name": "RSF Nyala Üssü",            "type": "mech",  "echelon": "division", "formation": "RSF",               "parentId": "sd-rsf-darfur", "lat": 12.050, "lng": 24.880, "note": "Güney Darfur ana lojistik üs" },
+    { "id": "sd-rsf-kordofan","side": "B", "name": "RSF Kordofan Grubu",        "type": "irreg", "echelon": "division", "formation": "RSF",               "parentId": "sd-rsf-cmd", "lat": 13.183, "lng": 30.218, "note": "Kadugli/El-Obeid hattı" },
+    { "id": "sd-rsf-sennar",  "side": "B", "name": "RSF Sennar Sürüsü",         "type": "irreg", "echelon": "brigade",  "formation": "RSF",               "parentId": "sd-rsf-cmd", "lat": 13.560, "lng": 33.565, "note": "Sennar — Mavi Nil koridoru" }
+  ],
+
+  "yemen": [
+    { "id": "yem-houthi-sanaa","side":"A","name":"Ansarullah Devrim Konseyi",   "type": "hq",    "echelon": "teatre",   "formation": "Ansarullah",         "lat": 15.353, "lng": 44.207, "note": "Sana merkezli komuta" },
+    { "id": "yem-houthi-saada","side":"A","name":"Saada Askeri Komutanlığı",    "type": "hq",    "echelon": "corps",    "formation": "Ansarullah",         "parentId": "yem-houthi-sanaa", "lat": 16.940, "lng": 43.761, "note": "Dağlık merkez — tarihsel üs" },
+    { "id": "yem-houthi-hodeidah","side":"A","name":"Kızıldeniz Sahili Komutanlığı","type":"naval","echelon":"wing","formation":"Ansarullah","parentId":"yem-houthi-sanaa","lat":14.795,"lng":42.955,"note":"Hodeidah limanı — gemi saldırıları kaynağı" },
+    { "id": "yem-houthi-missile","side":"A","name":"Füze Kuvveti",              "type": "art",   "echelon": "brigade",  "formation": "Ansarullah",         "parentId": "yem-houthi-sanaa", "lat": 15.645, "lng": 44.210, "note": "Mobil Burkan/Quds fırlatıcılar" },
+    { "id": "yem-houthi-uav", "side": "A", "name": "Samad/Kasef İHA Üssü",      "type": "uav",   "echelon": "wing",     "formation": "Ansarullah",         "parentId": "yem-houthi-sanaa", "lat": 15.476, "lng": 44.225, "note": "Sana civarı — İran dizaynlı filo" },
+    { "id": "yem-houthi-airdef","side":"A","name":"358 SAM + Barak Taklidi",    "type": "airdef","echelon": "battalion","formation": "Ansarullah",         "parentId": "yem-houthi-sanaa", "lat": 15.400, "lng": 44.100, "note": "358 + Sayyad — İran menşeli hava savunma" },
+
+    { "id": "yem-gov-aden",   "side": "B", "name": "Aden Hükümet Komutanlığı",  "type": "hq",    "echelon": "teatre",   "formation": "YGK",                "lat": 12.790, "lng": 45.030, "note": "Uluslararası tanınan hükümet" },
+    { "id": "yem-stc-aden",   "side": "B", "name": "Güney Geçiş Konseyi (STC)", "type": "hq",    "echelon": "corps",    "formation": "STC",                "parentId": "yem-gov-aden", "lat": 12.800, "lng": 45.050, "note": "BAE destekli — Aden merkezli" },
+    { "id": "yem-sa-marib",   "side": "B", "name": "Marib Cephesi (SAF)",       "type": "mech",  "echelon": "division", "formation": "YGK",                "parentId": "yem-gov-aden", "lat": 15.463, "lng": 45.335, "note": "Hudut kritik enerji sahası savunması" }
+  ],
+
+  "taiwan-strait": [
+    { "id": "tw-mnd",         "side": "A", "name": "MND Heng Shan Yeraltı K3",  "type": "hq",    "echelon": "teatre",   "formation": "ROC MND",            "lat": 25.042, "lng": 121.524, "note": "Taipei — bunker komuta merkezi" },
+    { "id": "tw-ncc",         "side": "A", "name": "Kuzey Bölge Komutanlığı",   "type": "hq",    "echelon": "army",     "formation": "ROC Kara",           "parentId": "tw-mnd", "lat": 25.037, "lng": 121.548, "note": "Taipei civarı — başkent savunması" },
+    { "id": "tw-scc",         "side": "A", "name": "Güney Bölge Komutanlığı",   "type": "hq",    "echelon": "army",     "formation": "ROC Kara",           "parentId": "tw-mnd", "lat": 22.630, "lng": 120.302, "note": "Kaohsiung — güney savunma sorumluluğu" },
+    { "id": "tw-penghu",      "side": "A", "name": "Penghu Savunma Komutanlığı","type": "hq",    "echelon": "corps",    "formation": "ROC",                "parentId": "tw-mnd", "lat": 23.571, "lng": 119.587, "note": "Boğaz adaları — öncü hat" },
+    { "id": "tw-kinmen",      "side": "A", "name": "Kinmen Savunma Komutanlığı","type": "inf",   "echelon": "division", "formation": "ROC",                "parentId": "tw-mnd", "lat": 24.446, "lng": 118.320, "note": "Anakaradan 10 km — simgesel önem" },
+    { "id": "tw-matsu",       "side": "A", "name": "Matsu Savunma Komutanlığı", "type": "inf",   "echelon": "division", "formation": "ROC",                "parentId": "tw-mnd", "lat": 26.160, "lng": 119.950, "note": "Kuzey ada grubu — kablo altyapısı" },
+    { "id": "tw-air-chiashan","side": "A", "name": "Chiashan Yeraltı Üssü",     "type": "airwing","echelon": "wing",     "formation": "ROCAF",              "parentId": "tw-mnd", "lat": 23.980, "lng": 121.614, "note": "Hualien — dağ içi hangarlar" },
+    { "id": "tw-air-taitung", "side": "A", "name": "Taitung Üssü (F-16V)",      "type": "airwing","echelon": "wing",     "formation": "ROCAF",              "parentId": "tw-mnd", "lat": 22.755, "lng": 121.102, "note": "Doğu kıyı — F-16V rotasyonu" },
+    { "id": "tw-airdef-taipei","side":"A","name":"Patriot PAC-3 Perdesi",       "type": "airdef","echelon": "battalion","formation": "ROC HvSv",           "parentId": "tw-ncc", "lat": 25.090, "lng": 121.570, "note": "Taipei havalimanı perdesi" },
+    { "id": "tw-airdef-kaohsiung","side":"A","name":"Tien Kung III (Sky Bow) Bat.","type":"airdef","echelon":"battalion","formation":"ROC HvSv","parentId":"tw-scc","lat":22.650,"lng":120.290,"note":"Kaohsiung — yerli uzun menzilli SAM" },
+    { "id": "tw-navy-suao",   "side": "A", "name": "Suao Deniz Üssü",           "type": "naval", "echelon": "wing",     "formation": "ROCN",               "parentId": "tw-mnd", "lat": 24.592, "lng": 121.864, "note": "Doğu kıyısı — Kidd muhribi grubu" },
+    { "id": "tw-navy-zuoying","side":"A", "name": "Zuoying Deniz Üssü",         "type": "naval", "echelon": "wing",     "formation": "ROCN",               "parentId": "tw-scc", "lat": 22.680, "lng": 120.270, "note": "Kaohsiung — ana donanma üssü + denizaltı" },
+    { "id": "tw-uav-taoyuan", "side": "A", "name": "Teng Yun (Bulut Ejder) İHA","type": "uav",   "echelon": "wing",     "formation": "ROCAF",              "parentId": "tw-mnd", "lat": 25.080, "lng": 121.240, "note": "MALE ISR İHA — yerli üretim" },
+
+    { "id": "cn-etc",         "side": "B", "name": "Doğu Tiyatro Komutanlığı",  "type": "hq",    "echelon": "teatre",   "formation": "PLA ETC",            "lat": 28.218, "lng": 112.983, "note": "Nanjing — Tayvan operasyonel K3" },
+    { "id": "cn-71ga",        "side": "B", "name": "71. Grup Ordusu",           "type": "armor", "echelon": "army",     "formation": "PLA ETC",            "parentId": "cn-etc", "lat": 32.058, "lng": 118.793, "note": "Nanjing — çıkarma unsurları" },
+    { "id": "cn-72ga",        "side": "B", "name": "72. Grup Ordusu",           "type": "mech",  "echelon": "army",     "formation": "PLA ETC",            "parentId": "cn-etc", "lat": 30.264, "lng": 120.170, "note": "Huzhou — ikinci dalga" },
+    { "id": "cn-73ga",        "side": "B", "name": "73. Grup Ordusu (ÇOT)",     "type": "abn",   "echelon": "army",     "formation": "PLA ETC",            "parentId": "cn-etc", "lat": 25.917, "lng": 119.306, "note": "Xiamen civarı — çıkarma öncü" },
+    { "id": "cn-pla-rocket",  "side": "B", "name": "PLARF 61. Üs (DF-17/26)",   "type": "art",   "echelon": "corps",    "formation": "PLARF",              "parentId": "cn-etc", "lat": 28.680, "lng": 115.860, "note": "Hyper-glide + gemi vurucu füzeler" },
+    { "id": "cn-pla-rocket-df21","side":"B","name":"PLARF 52. Üs (DF-21D)",      "type": "art",   "echelon": "corps",    "formation": "PLARF",              "parentId": "cn-etc", "lat": 27.330, "lng": 117.930, "note": "Anti-ship balistik — uçak gemisi avcısı" },
+    { "id": "cn-air-longtian","side": "B", "name": "Longtian Üssü",             "type": "airwing","echelon": "wing",     "formation": "PLAAF",              "parentId": "cn-etc", "lat": 25.655, "lng": 119.572, "note": "J-11 + J-16 — Tayvan karşısı" },
+    { "id": "cn-air-chizhou", "side": "B", "name": "Chizhou Üssü (J-20)",       "type": "airwing","echelon": "wing",     "formation": "PLAAF",              "parentId": "cn-etc", "lat": 30.652, "lng": 117.480, "note": "J-20 Mighty Dragon — stealth filo" },
+    { "id": "cn-navy-ningde", "side": "B", "name": "Doğu Filosu — Ningde",      "type": "naval", "echelon": "wing",     "formation": "PLAN",               "parentId": "cn-etc", "lat": 26.661, "lng": 119.548, "note": "Çıkarma gemileri konsantrasyonu" },
+    { "id": "cn-navy-xiamen", "side": "B", "name": "Xiamen Amfibi Filosu",      "type": "naval", "echelon": "wing",     "formation": "PLAN",               "parentId": "cn-etc", "lat": 24.490, "lng": 118.090, "note": "Type 075 LHD + Type 071 LPD" },
+    { "id": "cn-airdef-fujian","side":"B","name":"HQ-9B Kompleksi",              "type": "airdef","echelon": "battalion","formation": "PLAAF",              "parentId": "cn-etc", "lat": 26.080, "lng": 119.300, "note": "Fujian kıyı perdesi" },
+    { "id": "cn-airdef-shanghai","side":"B","name":"HQ-19 ABM (Shanghai)",       "type": "airdef","echelon": "battalion","formation": "PLAAF",              "parentId": "cn-etc", "lat": 31.230, "lng": 121.470, "note": "Shanghai — uzak menzilli ABM" },
+    { "id": "cn-sof-fujian",  "side": "B", "name": "Siyah Pars ÖKK Tugayı",     "type": "sof",   "echelon": "brigade",  "formation": "PLA ETC",            "parentId": "cn-etc", "lat": 25.050, "lng": 119.100, "note": "Fujian — amfibi özel kuvvet" }
+  ],
+
+  "korean-dmz": [
+    { "id": "rok-jcs",        "side": "A", "name": "Birleşik Genelkurmay",       "type": "hq",    "echelon": "teatre",   "formation": "GKB",                "lat": 37.564, "lng": 126.978, "note": "Seul — stratejik komuta" },
+    { "id": "rok-gcc",        "side": "A", "name": "Kara Kuvvetleri Ops. Kom.",  "type": "hq",    "echelon": "army",     "formation": "ROKA GOC",           "parentId": "rok-jcs", "lat": 37.310, "lng": 127.016, "note": "Yongin — Seul savunması" },
+    { "id": "rok-capital",    "side": "A", "name": "Başkent Mekanize Tümen",     "type": "mech",  "echelon": "division", "formation": "ROKA",               "parentId": "rok-gcc", "lat": 37.420, "lng": 127.320, "note": "Seul doğu — 1. dalga savunma" },
+    { "id": "rok-capital-art","side":"A", "name": "Topçu Grubu (K9)",            "type": "art",   "echelon": "brigade",  "formation": "ROKA",               "parentId": "rok-gcc", "lat": 37.820, "lng": 126.890, "note": "Gimpo/Paju hattı — karşı batarya" },
+    { "id": "rok-ghost",      "side": "A", "name": "707. ÖKK Tugayı",            "type": "sof",   "echelon": "brigade",  "formation": "ROKA ÖKK",           "parentId": "rok-jcs", "lat": 36.770, "lng": 127.100, "note": "Decapitation — ileri saldırı timi" },
+    { "id": "rok-air-osan",   "side": "A", "name": "Osan Hava Üssü",             "type": "airwing","echelon": "wing",     "formation": "ROKAF + USFK",       "parentId": "rok-jcs", "lat": 37.090, "lng": 127.031, "note": "F-35A + F-16 ortak üs" },
+    { "id": "rok-air-cheongju","side":"A","name":"Cheongju Üssü (F-35A)",         "type": "airwing","echelon": "wing",     "formation": "ROKAF",              "parentId": "rok-jcs", "lat": 36.717, "lng": 127.495, "note": "F-35A ana üs" },
+    { "id": "rok-navy-jinhae","side": "A", "name": "Jinhae Donanma Üssü",        "type": "naval", "echelon": "wing",     "formation": "ROKN",               "parentId": "rok-jcs", "lat": 35.137, "lng": 128.681, "note": "Sejong Aegis + KSS-III denizaltı" },
+    { "id": "rok-airdef-seoul","side":"A","name":"THAAD + Patriot PAC-3",         "type": "airdef","echelon": "battalion","formation": "ROK HvSv",           "parentId": "rok-jcs", "lat": 35.970, "lng": 128.210, "note": "Seongju THAAD + Seul Patriot perdesi" },
+    { "id": "rok-airdef-cheonggung","side":"A","name":"Cheongung-II (KM-SAM)",    "type": "airdef","echelon": "battalion","formation": "ROK HvSv",           "parentId": "rok-jcs", "lat": 37.450, "lng": 127.010, "note": "Yerli orta menzilli SAM — başkent perdesi" },
+
+    { "id": "kp-gsoa",        "side": "B", "name": "Devlet İşleri Komisyonu",    "type": "hq",    "echelon": "teatre",   "formation": "KPA Genelkurmay",    "lat": 39.019, "lng": 125.738, "note": "Pyongyang — stratejik komuta" },
+    { "id": "kp-1corps",      "side": "B", "name": "1. Kolordu (DMZ)",           "type": "inf",   "echelon": "corps",    "formation": "KPA",                "parentId": "kp-gsoa", "lat": 38.950, "lng": 127.475, "note": "Kaesong kesimi" },
+    { "id": "kp-2corps",      "side": "B", "name": "2. Kolordu (DMZ)",           "type": "mech",  "echelon": "corps",    "formation": "KPA",                "parentId": "kp-gsoa", "lat": 38.890, "lng": 126.520, "note": "Batı DMZ kesimi" },
+    { "id": "kp-5corps",      "side": "B", "name": "5. Kolordu (DMZ)",           "type": "mech",  "echelon": "corps",    "formation": "KPA",                "parentId": "kp-gsoa", "lat": 38.650, "lng": 127.900, "note": "Doğu DMZ — dağlık kesim" },
+    { "id": "kp-art-koksan",  "side": "B", "name": "Koksan 170mm Alayı",         "type": "art",   "echelon": "regiment", "formation": "KPA",                "parentId": "kp-1corps", "lat": 38.590, "lng": 126.720, "note": "Seul menzilinde devasa topçu" },
+    { "id": "kp-missile-rocket","side":"B","name":"Stratejik Roket Kuvveti",    "type": "art",   "echelon": "army",     "formation": "KPA SRF",            "parentId": "kp-gsoa", "lat": 39.632, "lng": 127.542, "note": "Hwasong/KN-serisi — Pyongyang kuzeyi" },
+    { "id": "kp-sof-11corps", "side": "B", "name": "11. Kolordu (Fırtına)",       "type": "sof",   "echelon": "corps",    "formation": "KPA ÖKK",            "parentId": "kp-gsoa", "lat": 39.350, "lng": 126.800, "note": "Dünya'nın en büyük ÖKK formasyonu" },
+    { "id": "kp-air-sunchon", "side": "B", "name": "Sunchon Hava Üssü",          "type": "airwing","echelon": "wing",     "formation": "KPAAF",              "parentId": "kp-gsoa", "lat": 39.420, "lng": 125.890, "note": "MiG-29 — ana muharip filo" },
+    { "id": "kp-airdef-pyongyang","side":"B","name":"Pyongasan (KN-06) Bat.",     "type": "airdef","echelon": "battalion","formation": "KPA HvSv",           "parentId": "kp-gsoa", "lat": 39.050, "lng": 125.750, "note": "KN-06 — S-300 muadili yerli SAM" }
+  ],
+
+  "kashmir": [
+    { "id": "in-northern-cmd","side": "A", "name": "Kuzey Komutanlığı",         "type": "hq",    "echelon": "teatre",   "formation": "Hindistan Ordusu",   "lat": 32.731, "lng": 74.857, "note": "Udhampur — LoC ana komuta" },
+    { "id": "in-15corps",     "side": "A", "name": "15. Kolordu (Chinar)",       "type": "inf",   "echelon": "corps",    "formation": "Hindistan Ordusu",   "parentId": "in-northern-cmd", "lat": 34.083, "lng": 74.797, "note": "Srinagar — Keşmir vadisi" },
+    { "id": "in-14corps",     "side": "A", "name": "14. Kolordu (Fire & Fury)",  "type": "mech",  "echelon": "corps",    "formation": "Hindistan Ordusu",   "parentId": "in-northern-cmd", "lat": 34.145, "lng": 77.577, "note": "Leh — Ladakh + Aksai Chin" },
+    { "id": "in-16corps",     "side": "A", "name": "16. Kolordu (Beyaz Gergedan)","type": "inf",   "echelon": "corps",    "formation": "Hindistan Ordusu",   "parentId": "in-northern-cmd", "lat": 33.149, "lng": 74.890, "note": "Nagrota — Jammu sektörü" },
+    { "id": "in-sam-srinagar","side":"A", "name": "S-400 Bataryası",             "type": "airdef","echelon": "battalion","formation": "IAF HvSv",           "parentId": "in-northern-cmd", "lat": 34.006, "lng": 74.820, "note": "Srinagar — kuzey sektör perdesi" },
+    { "id": "in-sam-adampur", "side": "A", "name": "S-400 (Adampur)",             "type": "airdef","echelon": "battalion","formation": "IAF HvSv",           "parentId": "in-northern-cmd", "lat": 31.433, "lng": 75.758, "note": "Pencap — Pakistan iç hava sahası örtüsü" },
+    { "id": "in-air-srinagar","side":"A", "name": "Srinagar Üssü (MiG-29/Rafale)","type":"airwing","echelon":"wing","formation":"IAF","parentId":"in-northern-cmd","lat":33.987,"lng":74.774,"note":"Yüksek irtifa muharip filo" },
+    { "id": "in-sof-meghdoot","side": "A", "name": "Para ÖKK Tugayı (Meghdoot)",  "type": "sof",   "echelon": "brigade",  "formation": "Para SF",            "parentId": "in-northern-cmd", "lat": 34.600, "lng": 77.550, "note": "Siachen + Ladakh operasyonları" },
+
+    { "id": "pk-10corps",     "side": "B", "name": "10. Kolordu (Başkent)",      "type": "inf",   "echelon": "corps",    "formation": "Pakistan Ordusu",    "lat": 33.601, "lng": 73.048, "note": "Rawalpindi — LoC ana" },
+    { "id": "pk-strike-mangla","side": "B", "name": "Mangla Vuruş Grubu",         "type": "armor", "echelon": "corps",    "formation": "Pakistan Ordusu",    "parentId": "pk-10corps", "lat": 33.115, "lng": 73.645, "note": "Zırhlı rezerv — derin hücum" },
+    { "id": "pk-sbn-gilgit",  "side": "B", "name": "Kuzey Alanlar Tümeni",       "type": "inf",   "echelon": "division", "formation": "Pakistan Ordusu",    "parentId": "pk-10corps", "lat": 35.920, "lng": 74.310, "note": "Gilgit-Baltistan sektörü" },
+    { "id": "pk-12corps-murree","side":"B","name":"12. Kolordu (Murree)",        "type": "mech",  "echelon": "corps",    "formation": "Pakistan Ordusu",    "parentId": "pk-10corps", "lat": 33.909, "lng": 73.390, "note": "Arka rezerv — 2. dalga LoC" },
+    { "id": "pk-airdef-hq9",  "side": "B", "name": "HQ-9BE Kompleksi",           "type": "airdef","echelon": "battalion","formation": "PAF HvSv",           "parentId": "pk-10corps", "lat": 33.560, "lng": 73.070, "note": "Rawalpindi — S-400 muadili" },
+    { "id": "pk-airdef-lahore","side":"B","name":"HQ-16 Bataryası (Lahore)",     "type": "airdef","echelon": "battalion","formation": "PAF HvSv",           "parentId": "pk-10corps", "lat": 31.520, "lng": 74.358, "note": "Lahore — doğu sınır perdesi" },
+    { "id": "pk-air-kamra",   "side": "B", "name": "Kamra Üssü (JF-17 Blk3)",    "type": "airwing","echelon": "wing",     "formation": "PAF",                "parentId": "pk-10corps", "lat": 33.858, "lng": 72.400, "note": "Yerli savaş uçağı ana üssü" }
+  ],
+
+  "aegean-easternmed": [
+    { "id": "tr-ega",         "side": "A", "name": "1. Ordu / Ege Ordusu",       "type": "hq",    "echelon": "teatre",   "formation": "TSK",                "lat": 38.417, "lng": 27.141, "note": "İzmir — Ege sahası ana komuta" },
+    { "id": "tr-2ordu",       "side": "A", "name": "2. Ordu Komutanlığı",        "type": "hq",    "echelon": "army",     "formation": "TSK",                "parentId": "tr-ega", "lat": 37.910, "lng": 38.780, "note": "Malatya — güneydoğu + Doğu Akdeniz" },
+    { "id": "tr-5thMk-gelibolu","side":"A","name":"5. Mekanize Tugay (Çorlu)",    "type": "mech",  "echelon": "brigade",  "formation": "TSK 1. Ordu",        "parentId": "tr-ega", "lat": 40.405, "lng": 26.677, "note": "Gelibolu — Çanakkale boğazı" },
+    { "id": "tr-5thMk-canakkale","side":"A","name":"Çanakkale Deniz Komutanlığı","type":"naval","echelon":"wing","formation":"Deniz Kuv.","parentId":"tr-ega","lat":40.146,"lng":26.409,"note":"Boğaz kontrolü — denizaltı demirleme" },
+    { "id": "tr-sof-izmir",   "side": "A", "name": "Bordo Bereli (ÖKK)",         "type": "sof",   "echelon": "brigade",  "formation": "TSK ÖKK",            "parentId": "tr-ega", "lat": 38.429, "lng": 27.127, "note": "Bornova — ileri konuşlanma noktası" },
+    { "id": "tr-air-balıkesir","side":"A", "name": "9. Ana Jet Üssü (Balıkesir)","type":"airwing","echelon":"wing","formation":"HvKK","parentId":"tr-ega","lat":39.619,"lng":27.926,"note":"F-16 filosu — Ege muharip hava" },
+    { "id": "tr-air-eskisehir","side":"A","name":"1. Ana Jet Üssü (Eskişehir)",   "type": "airwing","echelon": "wing",     "formation": "HvKK",               "parentId": "tr-ega", "lat": 39.785, "lng": 30.580, "note": "F-16 + Kaan platform üssü" },
+    { "id": "tr-uav-aksaz",   "side": "A", "name": "Aksaz Deniz Üssü",           "type": "naval", "echelon": "wing",     "formation": "Deniz Kuv.",         "parentId": "tr-ega", "lat": 36.840, "lng": 28.250, "note": "Muğla — Doğu Akdeniz deniz gücü" },
+    { "id": "tr-uav-dalaman", "side": "A", "name": "TB3/Akıncı Deniz İHA",        "type": "uav",   "echelon": "wing",     "formation": "Deniz Kuv. İHA",     "parentId": "tr-ega", "lat": 36.720, "lng": 28.775, "note": "TCG Anadolu operasyon grubu" },
+    { "id": "tr-sam-cesme",   "side": "A", "name": "Hisar-A/O Bataryası",        "type": "airdef","echelon": "battalion","formation": "HvKK HvSv",          "parentId": "tr-ega", "lat": 38.325, "lng": 26.310, "note": "Çeşme — Sakız karşısı perde" },
+    { "id": "tr-sam-izmir-siper","side":"A","name":"SİPER Block-1 Bataryası",     "type": "airdef","echelon": "battalion","formation": "HvKK HvSv",          "parentId": "tr-ega", "lat": 38.480, "lng": 27.150, "note": "İzmir — ilk operasyonel SİPER" },
+    { "id": "tr-naval-mersin","side":"A","name":"Akdeniz Ada Komutanlığı",        "type": "naval", "echelon": "wing",     "formation": "Deniz Kuv.",         "parentId": "tr-2ordu", "lat": 36.810, "lng": 34.630, "note": "Mersin — Kıbrıs hattı + Doğu Akd." },
+
+    { "id": "gr-hafgs",       "side": "B", "name": "HAFGS Genelkurmay",          "type": "hq",    "echelon": "teatre",   "formation": "Yunan SK",           "lat": 37.992, "lng": 23.781, "note": "Atina — stratejik komuta" },
+    { "id": "gr-c-corps",     "side": "B", "name": "C' Kolordu (Batı Trakya)",   "type": "inf",   "echelon": "corps",    "formation": "Yunan Ordusu",       "parentId": "gr-hafgs", "lat": 41.135, "lng": 25.872, "note": "Komotini — Türkiye hududu" },
+    { "id": "gr-d-corps",     "side": "B", "name": "D' Kolordu (Ege Adaları)",   "type": "inf",   "echelon": "corps",    "formation": "Yunan Ordusu",       "parentId": "gr-hafgs", "lat": 40.842, "lng": 25.877, "note": "Ksanti bağlı — ada garnizonları" },
+    { "id": "gr-96-adte-mytilene","side":"B","name":"96. Yüksek Savunma Birliği","type":"inf","echelon":"division","formation":"Yunan Ordusu","parentId":"gr-d-corps","lat":39.112,"lng":26.555,"note":"Midilli garnizonu" },
+    { "id": "gr-79-adte-rodos","side":"B","name":"95. ADTE Rodos",                "type": "mech",  "echelon": "brigade",  "formation": "Yunan Ordusu",       "parentId": "gr-d-corps", "lat": 36.447, "lng": 28.228, "note": "Rodos adası — 12 Ada komutanlığı" },
+    { "id": "gr-80-adte-kos", "side": "B", "name": "80. ADTE Kos",                "type": "inf",   "echelon": "brigade",  "formation": "Yunan Ordusu",       "parentId": "gr-d-corps", "lat": 36.893, "lng": 27.289, "note": "İstanköy — Bodrum karşısı" },
+    { "id": "gr-air-andravida","side":"B","name": "117. Ana Muharebe Kanadı",    "type": "airwing","echelon": "wing",     "formation": "HAF",                "parentId": "gr-hafgs", "lat": 37.920, "lng": 21.293, "note": "Andravida — F-4 + Rafale filosu" },
+    { "id": "gr-air-tanagra", "side": "B", "name": "114. Kanat (Rafale)",         "type": "airwing","echelon": "wing",     "formation": "HAF",                "parentId": "gr-hafgs", "lat": 38.339, "lng": 23.566, "note": "Tanagra — Rafale ana üs" },
+    { "id": "gr-navy-salamis","side": "B", "name": "Salamis Deniz Üssü",         "type": "naval", "echelon": "wing",     "formation": "Yunan Deniz Kuv.",   "parentId": "gr-hafgs", "lat": 37.962, "lng": 23.497, "note": "Ana üs — FDI + Papanikolis denizaltılar" },
+    { "id": "gr-patriot-crete","side":"B","name": "Patriot PAC-3 Bataryası",     "type": "airdef","echelon": "battalion","formation": "HAF HvSv",           "parentId": "gr-hafgs", "lat": 35.523, "lng": 24.148, "note": "Souda — Girit ana hava savunma" },
+    { "id": "gr-s300-crete",  "side": "B", "name": "S-300PMU1 Bataryası",         "type": "airdef","echelon": "battalion","formation": "HAF HvSv",           "parentId": "gr-hafgs", "lat": 35.485, "lng": 24.106, "note": "Girit — eski Kıbrıs S-300'ü" },
+    { "id": "gr-tor-skyros",  "side": "B", "name": "TOR-M1 Bataryası (Skyros)",  "type": "airdef","echelon": "battalion","formation": "HAF HvSv",           "parentId": "gr-hafgs", "lat": 38.900, "lng": 24.585, "note": "Skyros — kısa menzilli ada perdesi" }
+  ],
+
+  "caucasus": [
+    { "id": "az-gkb",         "side": "A", "name": "Azerbaycan SK GKB",          "type": "hq",    "echelon": "teatre",   "formation": "AzSK",               "lat": 40.409, "lng": 49.867, "note": "Bakü — stratejik komuta" },
+    { "id": "az-karabakh",    "side": "A", "name": "Karabağ Ordu Grubu",         "type": "mech",  "echelon": "army",     "formation": "AzSK",               "parentId": "az-gkb", "lat": 39.816, "lng": 46.752, "note": "Şuşa/Hankendi — yeni yerleşik kontrol" },
+    { "id": "az-uav-horadiz", "side": "A", "name": "TB2/Akıncı Üssü",            "type": "uav",   "echelon": "wing",     "formation": "AzSK",               "parentId": "az-gkb", "lat": 39.453, "lng": 47.893, "note": "Horadiz — Aras boyu İHA üssü" },
+    { "id": "az-sof-lachin",  "side": "A", "name": "ÖKK Lachin Koridoru",        "type": "sof",   "echelon": "brigade",  "formation": "AzSK",               "parentId": "az-gkb", "lat": 39.634, "lng": 46.547, "note": "Lachin — stratejik koridor kontrolü" },
+    { "id": "az-airdef-baku", "side": "A", "name": "Barak-8 Bataryası",           "type": "airdef","echelon": "battalion","formation": "AzSK HvSv",          "parentId": "az-gkb", "lat": 40.430, "lng": 49.880, "note": "Bakü — İsrail menşeli orta menzil" },
+
+    { "id": "am-gkb",         "side": "B", "name": "Ermenistan SK GKB",          "type": "hq",    "echelon": "teatre",   "formation": "EmSK",               "lat": 40.181, "lng": 44.514, "note": "Erivan — stratejik komuta" },
+    { "id": "am-syunik",      "side": "B", "name": "Syunik Savunma Grubu",       "type": "inf",   "echelon": "division", "formation": "EmSK",               "parentId": "am-gkb", "lat": 39.505, "lng": 46.405, "note": "Kafan — Azerbaycan ile ince sınır" },
+    { "id": "am-airdef-iskander","side":"B","name":"S-300 + TOR Karma",          "type": "airdef","echelon": "battalion","formation": "EmSK HvSv",          "parentId": "am-gkb", "lat": 40.100, "lng": 44.460, "note": "Erivan çevresi — eski Rus menşeli" },
+    { "id": "am-gyumri-ru",   "side": "B", "name": "102. Rus Askeri Üssü",       "type": "mech",  "echelon": "division", "formation": "RU Güney AO",        "parentId": "am-gkb", "lat": 40.786, "lng": 43.848, "note": "Gyumri — Rus garnizonu (azalıyor)" }
+  ],
+
+  "sahel": [
+    { "id": "mli-bamako",     "side": "A", "name": "Mali SK Genelkurmay",        "type": "hq",    "echelon": "teatre",   "formation": "FAMa",               "lat": 12.639, "lng": -8.002, "note": "Bamako — askeri cunta karargâh" },
+    { "id": "mli-gao",        "side": "A", "name": "Gao Askeri Bölgesi",         "type": "mech",  "echelon": "division", "formation": "FAMa",               "parentId": "mli-bamako", "lat": 16.266, "lng": -0.045, "note": "Kuzey operasyon üssü" },
+    { "id": "mli-wagner",     "side": "A", "name": "Afrika Kolordusu",           "type": "proxy", "echelon": "brigade",  "formation": "Rus PMC",            "parentId": "mli-bamako", "lat": 15.340, "lng": -4.298, "note": "Tombouctou/Segou — Mali hükümet desteği" },
+    { "id": "mli-uav-bamako", "side": "A", "name": "Akıncı/Bayraktar Filo",      "type": "uav",   "echelon": "wing",     "formation": "FAMa",               "parentId": "mli-bamako", "lat": 12.540, "lng": -7.950, "note": "Senou Havalimanı — Türk İHA filosu" },
+    { "id": "bf-ouagadougou", "side": "A", "name": "Burkina Faso SK",            "type": "hq",    "echelon": "teatre",   "formation": "FABF",               "lat": 12.372, "lng": -1.520, "note": "Ouagadougou — cunta komuta" },
+    { "id": "ne-niamey",      "side": "A", "name": "Nijer SK",                   "type": "hq",    "echelon": "teatre",   "formation": "FAN",                "lat": 13.525, "lng": 2.110, "note": "Niamey — CNSP askeri konsey" },
+
+    { "id": "sh-jnim",        "side": "B", "name": "JNIM Emirliği",               "type": "irreg", "echelon": "corps",    "formation": "JNIM (AQIM)",        "lat": 15.600, "lng": -1.900, "note": "Sahra kemeri — dağıtık hücre ağı" },
+    { "id": "sh-isgs",        "side": "B", "name": "IŞİD Büyük Sahra",             "type": "irreg", "echelon": "brigade",  "formation": "IŞİD-GS",            "lat": 15.350, "lng": 0.900, "note": "Mali-Nijer 3 sınır bölgesi" },
+    { "id": "sh-jnim-macina", "side": "B", "name": "JNIM Macina Hücresi",         "type": "irreg", "echelon": "regiment", "formation": "JNIM",               "parentId": "sh-jnim", "lat": 14.490, "lng": -4.200, "note": "Mopti/İç Niger Deltası" }
+  ],
+
+  "myanmar": [
+    { "id": "mm-sac",         "side": "A", "name": "SAC Komutanlığı (Naypyidaw)","type": "hq",    "echelon": "teatre",   "formation": "Tatmadaw",           "lat": 19.745, "lng": 96.115, "note": "Askeri konsey başkenti" },
+    { "id": "mm-bureau1",     "side": "A", "name": "1. Büro (Shan Ops.)",        "type": "mech",  "echelon": "corps",    "formation": "Tatmadaw",           "parentId": "mm-sac", "lat": 20.788, "lng": 97.050, "note": "Shan Devleti — Op 1027 cephesi" },
+    { "id": "mm-bureau2",     "side": "A", "name": "2. Büro (Sagaing Ops.)",     "type": "mech",  "echelon": "corps",    "formation": "Tatmadaw",           "parentId": "mm-sac", "lat": 21.980, "lng": 95.750, "note": "Sagaing — PDF karşı harekat" },
+    { "id": "mm-air-meiktila","side": "A", "name": "Meiktila Hava Üssü",          "type": "airwing","echelon": "wing",     "formation": "Myanmar HvK",        "parentId": "mm-sac", "lat": 20.886, "lng": 95.891, "note": "JF-17 + Yak-130 rotasyonu" },
+    { "id": "mm-airdef-ypk",  "side": "A", "name": "Pantsir-S1 Bat.",             "type": "airdef","echelon": "battalion","formation": "Tatmadaw HvSv",      "parentId": "mm-sac", "lat": 19.780, "lng": 96.090, "note": "Naypyidaw — Rus menşeli nokta savunma" },
+
+    { "id": "mm-3ba-laukkai", "side": "B", "name": "Üç Kardeşlik İttifakı",      "type": "hq",    "echelon": "army",     "formation": "MNDAA+TNLA+AA",      "lat": 23.680, "lng": 98.780, "note": "Laukkai çevresi — Operation 1027 merkez" },
+    { "id": "mm-kia-laiza",   "side": "B", "name": "KIA Genel Karargâh (Laiza)",  "type": "hq",    "echelon": "corps",    "formation": "KIA",                "lat": 26.145, "lng": 98.130, "note": "Kaçin devleti — Çin sınırı" },
+    { "id": "mm-pdf",         "side": "B", "name": "Halk Savunma Kuvveti (PDF)",  "type": "irreg", "echelon": "division", "formation": "NUG PDF",            "lat": 22.000, "lng": 95.900, "note": "Sagaing — yaygın hücre ağı" },
+    { "id": "mm-aa-rakhine",  "side": "B", "name": "Arakan Ordusu (AA)",          "type": "mech",  "echelon": "division", "formation": "3BA-AA",              "parentId": "mm-3ba-laukkai", "lat": 20.850, "lng": 92.900, "note": "Rakhine — batı cephesi" }
+  ],
+
+  "south-china-sea": [
+    { "id": "cn-sctc",        "side": "A", "name": "Güney Tiyatro Komutanlığı",  "type": "hq",    "echelon": "teatre",   "formation": "PLA STC",            "lat": 23.147, "lng": 113.324, "note": "Guangzhou — GÇD operasyonel K3" },
+    { "id": "cn-south-fleet", "side": "A", "name": "Güney Filosu K3",            "type": "naval", "echelon": "army",     "formation": "PLAN",               "parentId": "cn-sctc", "lat": 21.270, "lng": 110.210, "note": "Zhanjiang — uçak gemisi + denizaltı üssü" },
+    { "id": "cn-hainan-jin",  "side": "A", "name": "Yulin Denizaltı Üssü",       "type": "naval", "echelon": "wing",     "formation": "PLAN",               "parentId": "cn-sctc", "lat": 18.208, "lng": 109.566, "note": "Hainan — stratejik nükleer denizaltı" },
+    { "id": "cn-spratly-fiery","side":"A","name":"Fiery Cross Reef (HQ-9)",        "type": "airdef","echelon": "battalion","formation": "PLA",                "parentId": "cn-sctc", "lat": 9.548, "lng": 112.892, "note": "Suni ada — HQ-9 + uzun pist" },
+    { "id": "cn-spratly-mischief","side":"A","name":"Mischief Reef (HQ-9B)",      "type": "airdef","echelon": "battalion","formation": "PLA",                "parentId": "cn-sctc", "lat": 9.890, "lng": 115.530, "note": "Suni ada — HQ-9B + YJ-12B anti-ship" },
+    { "id": "cn-spratly-subi","side":"A", "name": "Subi Reef Garnizonu",         "type": "inf",   "echelon": "battalion","formation": "PLA",                "parentId": "cn-sctc", "lat": 10.917, "lng": 114.084, "note": "Suni ada — radar + ÖKK" },
+    { "id": "cn-paracel-woody","side":"A","name":"Woody Adası Garnizonu",          "type": "airwing","echelon": "wing",     "formation": "PLAAF/PLAN",         "parentId": "cn-sctc", "lat": 16.835, "lng": 112.336, "note": "Paracel — J-11 rotasyonu" },
+    { "id": "cn-ccg-sansha",  "side": "A", "name": "Çin Sahil Güvenlik Sansha",   "type": "naval", "echelon": "wing",     "formation": "CCG",                "parentId": "cn-sctc", "lat": 16.810, "lng": 112.342, "note": "Beyaz-gri filo — gri bölge operasyonları" },
+
+    { "id": "us-7fleet",      "side": "B", "name": "7. Filo Karargâhı",          "type": "hq",    "echelon": "teatre",   "formation": "USN INDOPACOM",      "lat": 35.297, "lng": 139.670, "note": "Yokosuka — GÇD ötesi operasyon" },
+    { "id": "us-clark-rotate","side": "B", "name": "Clark Dönüşümlü Konuşlanma","type": "airwing","echelon": "wing",     "formation": "USAF PACAF",         "parentId": "us-7fleet", "lat": 15.186, "lng": 120.560, "note": "Filipinler EDCA dönüşlü" },
+    { "id": "us-basa",        "side": "B", "name": "Basa EDCA Üssü",             "type": "airwing","echelon": "wing",     "formation": "USAF PACAF",         "parentId": "us-7fleet", "lat": 14.985, "lng": 120.493, "note": "Filipinler — yeni EDCA" },
+    { "id": "us-aegis-japan", "side": "B", "name": "USS John Finn (Aegis DDG)",  "type": "naval", "echelon": "wing",     "formation": "USN CTF-70",         "parentId": "us-7fleet", "lat": 24.500, "lng": 123.000, "note": "Senkaku yakını — Aegis BMD görevi (SM-3)" },
+    { "id": "ph-palawan",     "side": "B", "name": "Batı Palawan Komutanlığı",   "type": "hq",    "echelon": "corps",    "formation": "AFP WesCom",         "lat": 9.739, "lng": 118.740, "note": "Spratly deniz hattı savunma" },
+    { "id": "ph-navy-subic",  "side": "B", "name": "Subic Donanma Ops.",          "type": "naval", "echelon": "wing",     "formation": "PH Navy",            "parentId": "ph-palawan", "lat": 14.793, "lng": 120.280, "note": "Subic — BrahMos gemi + sahil füzeleri" },
+    { "id": "jp-naha-9",      "side": "B", "name": "JASDF Naha 9. Kanat",        "type": "airwing","echelon": "wing",     "formation": "JASDF",              "parentId": "us-7fleet", "lat": 26.196, "lng": 127.646, "note": "Okinawa — F-15J birinci tepki" },
+    { "id": "jp-patriot-miyako","side":"B","name":"Patriot PAC-3 (Miyakojima)",   "type": "airdef","echelon": "battalion","formation": "JASDF HvSv",         "parentId": "us-7fleet", "lat": 24.800, "lng": 125.281, "note": "Nansei takımadaları — güney perde" }
+  ],
+
+  "iran-usa": [
+    { "id": "ir-atesh",       "side": "A", "name": "İran SK Genel Karargâh",    "type": "hq",    "echelon": "teatre",   "formation": "Artesh GŞ",          "lat": 35.707, "lng": 51.406, "note": "Tahran — stratejik komuta" },
+    { "id": "ir-irgc-qom",    "side": "A", "name": "IRGC Kuds Gücü",             "type": "sof",   "echelon": "army",     "formation": "IRGC",               "parentId": "ir-atesh", "lat": 34.640, "lng": 50.876, "note": "Kum — bölgesel vekâlet ağının beyni" },
+    { "id": "ir-missile-kermanshah","side":"A","name":"İran Füze Komutanlığı",  "type": "art",   "echelon": "army",     "formation": "IRGC ASF",           "parentId": "ir-atesh", "lat": 34.323, "lng": 47.065, "note": "Kermanşah — Shahab/Ghadr siloları" },
+    { "id": "ir-missile-tabriz","side":"A","name":"Emad/Kheibar Depo",           "type": "art",   "echelon": "brigade",  "formation": "IRGC ASF",           "parentId": "ir-missile-kermanshah", "lat": 38.080, "lng": 46.290, "note": "Kuzey depolar — Akdeniz menzili" },
+    { "id": "ir-airdef-bavar","side": "A", "name": "Bavar-373 Kompleksi",        "type": "airdef","echelon": "battalion","formation": "IRIADF",             "parentId": "ir-atesh", "lat": 35.520, "lng": 51.090, "note": "Tahran perdesi" },
+    { "id": "ir-airdef-s300", "side": "A", "name": "S-300PMU-2 (Fordow)",        "type": "airdef","echelon": "battalion","formation": "IRIADF",             "parentId": "ir-atesh", "lat": 34.884, "lng": 50.993, "note": "Fordow nükleer tesis perdesi" },
+    { "id": "ir-airdef-khordad","side":"A","name":"15. Hordad Bataryası",        "type": "airdef","echelon": "battalion","formation": "IRIADF",             "parentId": "ir-atesh", "lat": 32.670, "lng": 51.650, "note": "İsfahan — yerli orta menzil SAM" },
+    { "id": "ir-navy-bandar", "side": "A", "name": "Bender Abbas Ana Üs",        "type": "naval", "echelon": "wing",     "formation": "IRIN + IRGCN",       "parentId": "ir-atesh", "lat": 27.180, "lng": 56.277, "note": "Hürmüz Boğazı — ana filo" },
+    { "id": "ir-uav-kashan",  "side": "A", "name": "Kashan İHA Üssü",             "type": "uav",   "echelon": "wing",     "formation": "IRGC Hava",          "parentId": "ir-atesh", "lat": 33.895, "lng": 51.577, "note": "Shahed-136 + Mohajer-6 üretim/konuşlanma" },
+
+    { "id": "us-centcom-doha","side": "B", "name": "CENTCOM İleri K3 (Al Udeid)","type": "hq",    "echelon": "teatre",   "formation": "USCENTCOM",          "lat": 25.117, "lng": 51.315, "note": "Al Udeid Katar — bölgesel ABD komuta" },
+    { "id": "us-5fleet",      "side": "B", "name": "5. Filo Karargâhı",          "type": "naval", "echelon": "army",     "formation": "USN NAVCENT",        "parentId": "us-centcom-doha", "lat": 26.208, "lng": 50.660, "note": "Manama Bahreyn — Körfez deniz gücü" },
+    { "id": "us-ain-al-asad", "side": "B", "name": "Ain al-Asad Üssü",            "type": "airwing","echelon": "wing",     "formation": "USAF",               "parentId": "us-centcom-doha", "lat": 33.793, "lng": 42.441, "note": "Irak — İran roket hedefi tarihi" },
+    { "id": "us-thaad-uae",   "side": "B", "name": "THAAD Kompleksi (BAE)",      "type": "airdef","echelon": "battalion","formation": "US Army ADA",        "parentId": "us-centcom-doha", "lat": 24.245, "lng": 55.620, "note": "Al Dhafra civarı — hipersonik perde" },
+    { "id": "us-patriot-kuwait","side":"B","name":"Patriot PAC-3 (Kuveyt)",      "type": "airdef","echelon": "battalion","formation": "US Army ADA",        "parentId": "us-centcom-doha", "lat": 29.225, "lng": 47.915, "note": "Ali Al Salem — Kuveyt savunma" },
+    { "id": "us-aegis-redsea","side":"B","name":"USS Carney (Aegis)",             "type": "naval", "echelon": "wing",     "formation": "USN CTF-153",        "parentId": "us-centcom-doha", "lat": 14.400, "lng": 42.800, "note": "Kızıldeniz — Husi füze/İHA vuruşu (SM-6)" },
+    { "id": "us-sof-tanf",    "side": "B", "name": "Al-Tanf Garnizonu",           "type": "sof",   "echelon": "battalion","formation": "SOCCENT",            "parentId": "us-centcom-doha", "lat": 33.490, "lng": 38.625, "note": "Suriye-Irak-Ürdün 3 nokta — ÖKK üssü" }
+  ],
+
+  "libya": [
+    { "id": "ly-gna-tripoli", "side": "A", "name": "GNU Savunma Bakanlığı",      "type": "hq",    "echelon": "teatre",   "formation": "GNU (Trablus)",      "lat": 32.887, "lng": 13.191, "note": "UN tanınan hükümet — batı Libya" },
+    { "id": "ly-mitiga",      "side": "A", "name": "Mitiga Hava Üssü",            "type": "airwing","echelon": "wing",     "formation": "GNU/LNA karma",      "parentId": "ly-gna-tripoli", "lat": 32.894, "lng": 13.276, "note": "Trablus — TB2 operasyon üssü" },
+    { "id": "ly-misrata",     "side": "A", "name": "Misrata Ortak Ops. Odası",    "type": "mech",  "echelon": "corps",    "formation": "GNU",                "parentId": "ly-gna-tripoli", "lat": 32.375, "lng": 15.094, "note": "Batı Libya savaşçı bloğu" },
+    { "id": "ly-zintan",      "side": "A", "name": "Zintan Askeri Konseyi",       "type": "irreg", "echelon": "brigade",  "formation": "GNU karma",          "parentId": "ly-gna-tripoli", "lat": 31.930, "lng": 12.255, "note": "Batı dağlar — bağımsız aşiret kuvvet" },
+
+    { "id": "ly-lna-benghazi","side": "B", "name": "LNA Komutanlığı",             "type": "hq",    "echelon": "teatre",   "formation": "LNA (Haftar)",       "lat": 32.113, "lng": 20.068, "note": "Bingazi — doğu otoritesi" },
+    { "id": "ly-lna-tobruk",  "side": "B", "name": "Tobruk Harekat Bölgesi",      "type": "mech",  "echelon": "corps",    "formation": "LNA",                "parentId": "ly-lna-benghazi", "lat": 32.080, "lng": 23.962, "note": "Mısır hududu ile lojistik" },
+    { "id": "ly-lna-sirte",   "side": "B", "name": "Sirte Savunma Grubu",         "type": "armor", "echelon": "division", "formation": "LNA",                "parentId": "ly-lna-benghazi", "lat": 31.205, "lng": 16.588, "note": "Orta Libya — fay hattı" },
+    { "id": "ly-lna-alkhadim","side":"B", "name": "Al-Khadim Hava Üssü",          "type": "airwing","echelon": "wing",     "formation": "LNA (RU destek)",    "parentId": "ly-lna-benghazi", "lat": 32.295, "lng": 21.410, "note": "Rus MiG-29 + Su-24 rotasyonu" }
+  ],
+
+  "dprk-drc-east": [
+    { "id": "cd-fardc",       "side": "A", "name": "FARDC Doğu Komutanlığı",     "type": "hq",    "echelon": "army",     "formation": "FARDC",              "lat": -1.675, "lng": 29.228, "note": "Goma — Kivus sorumlu karargâh" },
+    { "id": "cd-monusco",     "side": "A", "name": "MONUSCO Kuvvet KRG",          "type": "hq",    "echelon": "corps",    "formation": "UN",                 "parentId": "cd-fardc", "lat": -1.681, "lng": 29.220, "note": "Goma — BM barış gücü (geri çekilmekte)" },
+    { "id": "cd-sadc",        "side": "A", "name": "SAMIDRC Sektörü",             "type": "mech",  "echelon": "division", "formation": "SADC",               "parentId": "cd-fardc", "lat": -1.850, "lng": 29.450, "note": "Güney Afrika liderliğinde çok uluslu" },
+    { "id": "cd-fardc-sokola","side":"A", "name": "Sokola-1 Ops. Komutanlığı",    "type": "mech",  "echelon": "division", "formation": "FARDC",              "parentId": "cd-fardc", "lat": -0.590, "lng": 29.500, "note": "Beni-Butembo ekseni — ADF karşı" },
+
+    { "id": "cd-m23",         "side": "B", "name": "M23 Askeri Kanat",             "type": "irreg", "echelon": "brigade",  "formation": "M23",                "lat": -0.590, "lng": 29.665, "note": "Kibumba/Rutshuru — Ruanda destekli" },
+    { "id": "cd-adf",         "side": "B", "name": "ADF / IŞİD-CA",                "type": "irreg", "echelon": "brigade",  "formation": "ADF",                "lat": 0.580, "lng": 29.880, "note": "Beni civarı — orman hücreleri" }
+  ],
+
+  "somalia-shabaab": [
+    { "id": "so-sna",         "side": "A", "name": "SNA Genelkurmay",             "type": "hq",    "echelon": "teatre",   "formation": "SNA",                "lat": 2.040, "lng": 45.340, "note": "Mogadişu — stratejik komuta" },
+    { "id": "so-atmis",       "side": "A", "name": "ATMIS Kuvvet Karargâhı",      "type": "hq",    "echelon": "corps",    "formation": "AU ATMIS",           "parentId": "so-sna", "lat": 2.035, "lng": 45.320, "note": "AU geçiş misyonu — aşamalı devir" },
+    { "id": "so-danab",       "side": "A", "name": "Danab Tugayı",                "type": "sof",   "echelon": "brigade",  "formation": "SNA",                "parentId": "so-sna", "lat": 2.180, "lng": 45.200, "note": "ABD eğitimli — vuruş gücü" },
+    { "id": "so-uav-baledogle","side":"A","name":"Baledogle İHA Üssü",            "type": "uav",   "echelon": "wing",     "formation": "AFRICOM + SNA",      "parentId": "so-sna", "lat": 2.845, "lng": 45.032, "note": "MQ-9 + Wing Loong karma" },
+
+    { "id": "so-shabaab-jubba","side":"B","name":"Şebaab Cubba Emirliği",         "type": "irreg", "echelon": "army",     "formation": "Eş-Şebaab",          "lat": -0.353, "lng": 42.538, "note": "Kismayo-Jilib kuşağı" },
+    { "id": "so-shabaab-jilib","side":"B","name":"Şebaab Yargı Merkezi",          "type": "hq",    "echelon": "corps",    "formation": "Eş-Şebaab",          "lat": 0.492, "lng": 42.778, "note": "Jilib — fiili başkent" },
+    { "id": "so-shabaab-shabelle","side":"B","name":"Aşağı Shabelle Sektörü",     "type": "irreg", "echelon": "brigade",  "formation": "Eş-Şebaab",          "parentId": "so-shabaab-jilib", "lat": 1.500, "lng": 44.650, "note": "Merkez — Mogadişu kuşatma kolları" }
+  ],
+
+  "nigeria-lakechad": [
+    { "id": "ng-afs",         "side": "A", "name": "Nijerya Ortak Göl Çad",       "type": "hq",    "echelon": "army",     "formation": "NAF + JTF MNJTF",    "lat": 11.847, "lng": 13.156, "note": "Maiduguri — kuzeydoğu harekat" },
+    { "id": "ng-7div",        "side": "A", "name": "7. Tümen",                    "type": "mech",  "echelon": "division", "formation": "Nijerya Ord.",       "parentId": "ng-afs", "lat": 11.850, "lng": 13.155, "note": "Maiduguri — Borno cephesi" },
+    { "id": "ng-uav-maiduguri","side":"A","name":"TB2 İHA Üssü",                   "type": "uav",   "echelon": "wing",     "formation": "NAF",                "parentId": "ng-afs", "lat": 11.858, "lng": 13.082, "note": "Maiduguri — Boko vurma" },
+    { "id": "ng-sbs-yenagoa", "side": "A", "name": "Özel Sınır Tümeni",            "type": "sof",   "echelon": "brigade",  "formation": "Nijerya Ord.",       "parentId": "ng-afs", "lat": 13.180, "lng": 13.560, "note": "Göl Çad sınır — ada-dan-ada baskın" },
+
+    { "id": "ng-boko",        "side": "B", "name": "Boko Haram — Şekau kolu",    "type": "irreg", "echelon": "brigade",  "formation": "Boko Haram",         "lat": 11.560, "lng": 13.950, "note": "Sambisa ormanı" },
+    { "id": "ng-iswa",        "side": "B", "name": "IŞİD Batı Afrika (ISWAP)",    "type": "irreg", "echelon": "brigade",  "formation": "IŞİD-BA",            "lat": 13.120, "lng": 13.590, "note": "Göl Çad adaları — daha örgütlü" }
+  ],
+
+  "venezuela-guyana": [
+    { "id": "ve-ceofanb",     "side": "A", "name": "CEOFANB Komutanlığı",         "type": "hq",    "echelon": "teatre",   "formation": "FANB",               "lat": 10.485, "lng": -66.862, "note": "Caracas — stratejik komuta" },
+    { "id": "ve-esequibo-fo", "side": "A", "name": "Zona Esequiba İleri K3",      "type": "mech",  "echelon": "corps",    "formation": "FANB",               "parentId": "ve-ceofanb", "lat": 6.000, "lng": -61.500, "note": "Tumeremo/Anacoco — hudut yığınak" },
+    { "id": "ve-airbase-el-libertador","side":"A","name":"El Libertador Üssü",    "type": "airwing","echelon": "wing",     "formation": "AMB",                "parentId": "ve-ceofanb", "lat": 10.178, "lng": -67.533, "note": "Su-30MK2V filosu" },
+    { "id": "ve-airdef-caracas","side":"A","name":"S-300VM Antey-2500",           "type": "airdef","echelon": "battalion","formation": "FANB HvSv",          "parentId": "ve-ceofanb", "lat": 10.520, "lng": -66.900, "note": "Caracas — Rus menşeli uzun menzil" },
+
+    { "id": "gy-gdf",         "side": "B", "name": "GDF Genelkurmay",             "type": "hq",    "echelon": "teatre",   "formation": "GDF",                "lat": 6.804, "lng": -58.175, "note": "Georgetown — küçük ordu" },
+    { "id": "gy-us-sou",      "side": "B", "name": "ABD SOUTHCOM Ortaklık",       "type": "proxy", "echelon": "regiment", "formation": "US SOUTHCOM",        "parentId": "gy-gdf", "lat": 6.500, "lng": -58.250, "note": "ABD destekli rotasyon" }
+  ]
+}

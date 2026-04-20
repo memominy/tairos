@@ -1,0 +1,51 @@
+# ─ Dependencies ─
+node_modules/
+.pnp
+.pnp.js
+
+# ─ Build output ─
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+
+# ─ Vite / dev caches ─
+.vite/
+.cache/
+.parcel-cache/
+
+# ─ Environment ─
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# ─ Logs ─
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─ Editor / OS ─
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─ Claude / tooling ─
+.claude/
+.claude-code/
+
+# ─ Scratch / artefacts ─
+*.local
+*.bak
+coverage/

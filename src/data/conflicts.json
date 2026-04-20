@@ -1,0 +1,5291 @@
+[
+  {
+    "id": "ukraine-russia",
+    "name": "Ukrayna – Rusya Savaşı",
+    "shortName": "Ukrayna",
+    "region": "Doğu Avrupa",
+    "status": "active",
+    "startedYear": 2022,
+    "severity": 5,
+    "bubble": {
+      "lat": 48.4,
+      "lng": 37.2
+    },
+    "parties": [
+      "Ukrayna Silahlı Kuvvetleri",
+      "Rusya Federasyonu Silahlı Kuvvetleri"
+    ],
+    "summary": "Şubat 2022'de başlayan tam ölçekli işgal. Donbas ve güney cephesi boyunca yaklaşık 1000 km aktif temas hattı; kaydedilmiş modern savaşların en yoğun drone savaşlarından biri.",
+    "stats": {
+      "Aktif cephe": "≈1000 km",
+      "Yerinden edilenler": "≈8 milyon",
+      "Kontrol dışı alan": "≈110.000 km²"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "iris",
+        "nova"
+      ],
+      "headline": "Uzun cephe + yoğun düşman drone aktivitesi = sürekli ISR ihtiyacı.",
+      "useCases": [
+        "Mobil radar ağı ile Shahed/Lancet tipi loitering mühimmatın erken tespiti",
+        "Iris ile taktik keşif ve cephe hattı boyunca motorlu birlik hareketlerinin izlenmesi",
+        "Nova ile derinlik istihbaratı: lojistik noktaları, komuta merkezleri, hava savunma mevzileri",
+        "Cephe gerisi kritik altyapı (enerji, demiryolu) 7/24 gözetlemi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Ukrayna",
+      "sideB": "Rusya",
+      "line": [
+        [
+          50.02,
+          36.95
+        ],
+        [
+          49.72,
+          37.62
+        ],
+        [
+          49.42,
+          38.1
+        ],
+        [
+          49.05,
+          38.24
+        ],
+        [
+          48.59,
+          37.99
+        ],
+        [
+          48.14,
+          37.75
+        ],
+        [
+          48,
+          37.8
+        ],
+        [
+          47.78,
+          37.26
+        ],
+        [
+          47.65,
+          36.88
+        ],
+        [
+          47.57,
+          35.78
+        ],
+        [
+          47.48,
+          36.26
+        ],
+        [
+          47.1,
+          35.2
+        ],
+        [
+          46.85,
+          34.6
+        ],
+        [
+          46.63,
+          32.6
+        ],
+        [
+          46.3,
+          33.2
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Ukrayna kontrolündeki bölge",
+        "controlledBy": "Ukrayna",
+        "polygon": [
+          [
+            51.95,
+            23.5
+          ],
+          [
+            52.2,
+            29.5
+          ],
+          [
+            51.95,
+            34
+          ],
+          [
+            51,
+            35.5
+          ],
+          [
+            50.3,
+            36.4
+          ],
+          [
+            49.5,
+            37.1
+          ],
+          [
+            48.6,
+            37.8
+          ],
+          [
+            47.8,
+            37.2
+          ],
+          [
+            47.3,
+            35
+          ],
+          [
+            46.7,
+            32.5
+          ],
+          [
+            46.2,
+            30.2
+          ],
+          [
+            45.5,
+            29.5
+          ],
+          [
+            45.4,
+            28.3
+          ],
+          [
+            46.2,
+            24.8
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Rusya denetimindeki bölge (yaklaşık)",
+        "controlledBy": "Rusya",
+        "polygon": [
+          [
+            50.5,
+            38.3
+          ],
+          [
+            50.2,
+            39.9
+          ],
+          [
+            48.8,
+            40.2
+          ],
+          [
+            47.6,
+            39.3
+          ],
+          [
+            46.2,
+            36.7
+          ],
+          [
+            44.4,
+            36.2
+          ],
+          [
+            44.4,
+            33.4
+          ],
+          [
+            46,
+            33.5
+          ],
+          [
+            47,
+            35.3
+          ],
+          [
+            47.6,
+            36
+          ],
+          [
+            48.6,
+            38
+          ],
+          [
+            49.5,
+            39
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Aktif Çatışma Koridoru",
+      "polygon": [
+        [
+          50.4,
+          36.5
+        ],
+        [
+          50.1,
+          38.7
+        ],
+        [
+          48.8,
+          38.8
+        ],
+        [
+          48,
+          38.1
+        ],
+        [
+          47.6,
+          37.4
+        ],
+        [
+          47.2,
+          36.3
+        ],
+        [
+          46.8,
+          35.2
+        ],
+        [
+          46.1,
+          33.6
+        ],
+        [
+          46.3,
+          32.5
+        ],
+        [
+          46.6,
+          33
+        ],
+        [
+          47.2,
+          35.3
+        ],
+        [
+          47.8,
+          36.9
+        ],
+        [
+          48.4,
+          37.7
+        ],
+        [
+          49.2,
+          38.1
+        ],
+        [
+          49.9,
+          37.6
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Bakhmut",
+        "lat": 48.6,
+        "lng": 37.99
+      },
+      {
+        "name": "Avdiivka",
+        "lat": 48.14,
+        "lng": 37.75
+      },
+      {
+        "name": "Robotyne",
+        "lat": 47.44,
+        "lng": 35.82
+      },
+      {
+        "name": "Kherson",
+        "lat": 46.63,
+        "lng": 32.6
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Ukrayna SK + Terr. Savunma",
+        "estimate": "≈900.000",
+        "breakdown": [
+          {
+            "kind": "aktif",
+            "value": "≈600k"
+          },
+          {
+            "kind": "terr. sav.",
+            "value": "≈250k"
+          },
+          {
+            "kind": "yabancı lejyon",
+            "value": "≈20k"
+          }
+        ],
+        "note": "genel seferberlik altında"
+      },
+      "sideB": {
+        "label": "Rusya SK + paralı güçler",
+        "estimate": "≈700.000 teatrede",
+        "breakdown": [
+          {
+            "kind": "teatrede",
+            "value": "≈470k"
+          },
+          {
+            "kind": "LDNR / milis",
+            "value": "≈40k"
+          },
+          {
+            "kind": "PMC (Wagner+)",
+            "value": "≈15k"
+          }
+        ],
+        "note": "rotasyonla beslenen cephe"
+      },
+      "asOf": "2024 Q4",
+      "source": "IISS / ISW kamu raporları"
+    }
+  },
+  {
+    "id": "gaza-israel",
+    "name": "Gazze – İsrail Çatışması",
+    "shortName": "Gazze",
+    "region": "Doğu Akdeniz",
+    "status": "active",
+    "startedYear": 2023,
+    "severity": 5,
+    "bubble": {
+      "lat": 31.45,
+      "lng": 34.35
+    },
+    "parties": [
+      "İsrail Savunma Kuvvetleri",
+      "Hamas",
+      "İslami Cihad",
+      "Filistin silahlı grupları"
+    ],
+    "summary": "Ekim 2023 sonrası tırmanan yüksek yoğunluklu kentsel çatışma. Gazze Şeridi boyunca yoğun havadan ateş desteği ve kara operasyonu; bölgesel tırmanma riski yüksek. Hamas ve İslami Cihad büyük ölçüde İran fonlaması ve lojistik desteği üzerinden ayakta duruyor.",
+    "stats": {
+      "Operasyon alanı": "365 km² (Gazze)",
+      "Nüfus yoğunluğu": "≈6.500/km²",
+      "Çatışma türü": "Kentsel + tünel"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "nova"
+      ],
+      "headline": "Kentsel savaş + tünel ağları = yüksek çözünürlüklü, sürekli havadan gözetleme.",
+      "useCases": [
+        "Iris ile dar sokak ve çatı seviyesi keşif",
+        "Nova ile sınır hattı boyunca kalıcı devriye ve sızma tespiti",
+        "Lojistik koridor (Refah-Keremşalom) trafik analizi",
+        "Sivil tahliye koridorlarının gerçek-zamanlı doğrulanması"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "B",
+        "name": "Gazze Şeridi",
+        "controlledBy": "Hamas",
+        "polygon": [
+          [
+            31.6,
+            34.48
+          ],
+          [
+            31.58,
+            34.57
+          ],
+          [
+            31.28,
+            34.37
+          ],
+          [
+            31.22,
+            34.23
+          ],
+          [
+            31.3,
+            34.22
+          ],
+          [
+            31.55,
+            34.45
+          ]
+        ]
+      },
+      {
+        "side": "A",
+        "name": "İsrail kontrol kuşağı",
+        "controlledBy": "İsrail",
+        "polygon": [
+          [
+            31.75,
+            34.25
+          ],
+          [
+            31.75,
+            34.85
+          ],
+          [
+            31.2,
+            34.85
+          ],
+          [
+            31.15,
+            34.45
+          ],
+          [
+            31.25,
+            34.2
+          ],
+          [
+            31.55,
+            34.15
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Kentsel Operasyon Sahası",
+      "polygon": [
+        [
+          31.6,
+          34.48
+        ],
+        [
+          31.58,
+          34.57
+        ],
+        [
+          31.28,
+          34.37
+        ],
+        [
+          31.22,
+          34.23
+        ],
+        [
+          31.3,
+          34.22
+        ],
+        [
+          31.55,
+          34.45
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Gazze Şehri",
+        "lat": 31.5,
+        "lng": 34.47
+      },
+      {
+        "name": "Refah",
+        "lat": 31.28,
+        "lng": 34.24
+      },
+      {
+        "name": "Han Yunus",
+        "lat": 31.35,
+        "lng": 34.31
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "IDF (Gazze operasyon grubu)",
+        "estimate": "≈70.000",
+        "breakdown": [
+          {
+            "kind": "kara tümeni",
+            "value": "4-5"
+          },
+          {
+            "kind": "yedek",
+            "value": "≈300k aktif"
+          }
+        ],
+        "note": "Güney Komutanlığı + rotasyonlu tümenler"
+      },
+      "sideB": {
+        "label": "Hamas + PIJ (silahlı kanat)",
+        "estimate": "≈25.000",
+        "breakdown": [
+          {
+            "kind": "Kassam tugayı",
+            "value": "≈20k"
+          },
+          {
+            "kind": "Kudüs tugayı (PIJ)",
+            "value": "≈5k"
+          }
+        ],
+        "note": "tünel-tabanlı hücre yapısı"
+      },
+      "asOf": "2024",
+      "source": "IDF brifingleri + ISW"
+    }
+  },
+  {
+    "id": "lebanon-israel",
+    "name": "Lübnan – İsrail / Hizbullah Cephesi",
+    "shortName": "Lübnan",
+    "region": "Levant",
+    "status": "active",
+    "startedYear": 2023,
+    "severity": 4,
+    "bubble": {
+      "lat": 33.3,
+      "lng": 35.5
+    },
+    "parties": [
+      "İsrail Savunma Kuvvetleri",
+      "Hizbullah",
+      "Lübnan Silahlı Kuvvetleri (pasif)"
+    ],
+    "summary": "Mavi Hat boyunca karşılıklı füze ve İHA atışlarıyla süregelen tırmanma. Hizbullah, İran Devrim Muhafızları'nın doğrudan fonlaması ve silah aktarımıyla ayakta duran en büyük devlet-dışı silahlı yapı; Bekaa Vadisi ana mühimmat depolama alanı.",
+    "stats": {
+      "Mavi Hat": "≈120 km",
+      "İHA/füze atışı": "Günlük",
+      "İran bağı": "IRGC lojistik"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "iris"
+      ],
+      "headline": "Kısa menzilli füze + İHA saldırıları = sabit radar kordonu + hızlı reaksiyon keşif.",
+      "useCases": [
+        "Mavi Hat boyunca kalıcı radar kapsamı",
+        "Bekaa Vadisi depolama tesislerinin uzak menzilli tespiti",
+        "Füze rampası ve tüneller için çatı seviyesi ISR",
+        "Lojistik koridorun (Suriye → Lübnan) izlenmesi"
+      ]
+    },
+    "frontline": {
+      "sideA": "İsrail",
+      "sideB": "Hizbullah",
+      "line": [
+        [
+          33.09,
+          35.1
+        ],
+        [
+          33.1,
+          35.3
+        ],
+        [
+          33.14,
+          35.55
+        ],
+        [
+          33.23,
+          35.7
+        ],
+        [
+          33.29,
+          35.82
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Kuzey İsrail",
+        "controlledBy": "İsrail",
+        "polygon": [
+          [
+            33.08,
+            35.1
+          ],
+          [
+            33.08,
+            35.9
+          ],
+          [
+            32.8,
+            35.9
+          ],
+          [
+            32.7,
+            35.05
+          ],
+          [
+            32.95,
+            35.05
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Güney Lübnan – Hizbullah etki bölgesi",
+        "controlledBy": "Hizbullah",
+        "polygon": [
+          [
+            33.55,
+            35.1
+          ],
+          [
+            33.6,
+            35.55
+          ],
+          [
+            33.4,
+            35.95
+          ],
+          [
+            33.15,
+            35.95
+          ],
+          [
+            33.12,
+            35.25
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Mavi Hat Temas Kuşağı",
+      "polygon": [
+        [
+          33.05,
+          35.1
+        ],
+        [
+          33.1,
+          35.85
+        ],
+        [
+          33.35,
+          35.95
+        ],
+        [
+          33.4,
+          35.2
+        ],
+        [
+          33.25,
+          35.05
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Beyrut",
+        "lat": 33.89,
+        "lng": 35.51
+      },
+      {
+        "name": "Sur",
+        "lat": 33.27,
+        "lng": 35.21
+      },
+      {
+        "name": "Bekaa Vadisi",
+        "lat": 33.85,
+        "lng": 36
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "IDF Kuzey Komutanlığı",
+        "estimate": "≈50.000",
+        "breakdown": [
+          {
+            "kind": "aktif tümen",
+            "value": "2-3"
+          },
+          {
+            "kind": "yedek çağrılı",
+            "value": "≈60k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Hizbullah",
+        "estimate": "≈40.000-50.000",
+        "breakdown": [
+          {
+            "kind": "Radvan (özel)",
+            "value": "≈2.5k"
+          },
+          {
+            "kind": "aktif milis",
+            "value": "≈25k"
+          },
+          {
+            "kind": "yedek",
+            "value": "≈20k"
+          }
+        ],
+        "note": "İran destekli / füze arsenali"
+      },
+      "asOf": "2024",
+      "source": "IISS + Alma Research"
+    }
+  },
+  {
+    "id": "iran-usa",
+    "name": "İran – ABD / Körfez Gerilimi",
+    "shortName": "İran–ABD",
+    "region": "Basra Körfezi",
+    "status": "active",
+    "startedYear": 2024,
+    "severity": 4,
+    "bubble": {
+      "lat": 27.5,
+      "lng": 52.5
+    },
+    "parties": [
+      "İran İslam Cumhuriyeti (IRGC)",
+      "ABD Beşinci Filo",
+      "Bölgesel İran vekilleri"
+    ],
+    "summary": "Hürmüz Boğazı ve Körfez sularında kinetik olayların yoğunlaştığı doğrudan çatışma. ABD'nin İran vekil yapılarına yönelik hava saldırıları, İran'ın Körfez'deki ABD üslerine ve gemilerine karşılık veren operasyonları; nükleer tesis gerilimleriyle iç içe geçmiş çok katmanlı savaş.",
+    "stats": {
+      "Hürmüz genişliği": "≈54 km (en dar)",
+      "ABD üssü": "≈10 (bölgede)",
+      "Olay tipi": "Füze + İHA + gemi"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "nova"
+      ],
+      "headline": "Deniz geçit + füze/İHA yoğun tiyatro = deniz-odaklı radar + uzun menzilli gözetim.",
+      "useCases": [
+        "Hürmüz Boğazı üzerinde çok bantlı radar ağı",
+        "Tanker konvoyu eskort ISR",
+        "İran kıyısında füze rampası ve hızlı saldırı botu tespiti",
+        "Körfez hava sahasında İHA aktivitesinin sürekli izlenmesi"
+      ]
+    },
+    "frontline": {
+      "sideA": "İran",
+      "sideB": "ABD / Koalisyon",
+      "line": [
+        [
+          26.6,
+          56.3
+        ],
+        [
+          26.4,
+          55.2
+        ],
+        [
+          26.3,
+          54
+        ],
+        [
+          26.8,
+          53
+        ],
+        [
+          27.4,
+          52.2
+        ],
+        [
+          28.1,
+          51.3
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "İran kıyı şeridi",
+        "controlledBy": "İran",
+        "polygon": [
+          [
+            30.2,
+            50.2
+          ],
+          [
+            29.8,
+            52.6
+          ],
+          [
+            28.4,
+            54.6
+          ],
+          [
+            27,
+            56.6
+          ],
+          [
+            25.8,
+            57.8
+          ],
+          [
+            26,
+            56.4
+          ],
+          [
+            27.4,
+            55.2
+          ],
+          [
+            28.8,
+            52.8
+          ],
+          [
+            29.8,
+            50.2
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "ABD / Körfez koalisyonu üs hattı",
+        "controlledBy": "ABD / Koalisyon",
+        "polygon": [
+          [
+            29.5,
+            48.2
+          ],
+          [
+            28.5,
+            50.4
+          ],
+          [
+            26.8,
+            51.8
+          ],
+          [
+            25.2,
+            54
+          ],
+          [
+            24,
+            54.8
+          ],
+          [
+            23.4,
+            52.4
+          ],
+          [
+            24.2,
+            50
+          ],
+          [
+            25.8,
+            48.8
+          ],
+          [
+            27.8,
+            47.6
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Hürmüz Çatışma Kuşağı",
+      "polygon": [
+        [
+          26.9,
+          56.8
+        ],
+        [
+          26.1,
+          56.6
+        ],
+        [
+          25.8,
+          55.8
+        ],
+        [
+          26.1,
+          54.4
+        ],
+        [
+          26.8,
+          54
+        ],
+        [
+          27.3,
+          54.6
+        ],
+        [
+          27.2,
+          55.9
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Hürmüz Boğazı",
+        "lat": 26.57,
+        "lng": 56.25
+      },
+      {
+        "name": "Bandar Abbas",
+        "lat": 27.18,
+        "lng": 56.27
+      },
+      {
+        "name": "Natanz",
+        "lat": 33.72,
+        "lng": 51.73
+      },
+      {
+        "name": "Al Udeid (Katar)",
+        "lat": 25.12,
+        "lng": 51.32
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "CENTCOM bölgesel unsurlar",
+        "estimate": "≈40.000",
+        "breakdown": [
+          {
+            "kind": "körfez üsleri",
+            "value": "≈30k"
+          },
+          {
+            "kind": "deniz (5. Filo)",
+            "value": "≈7k"
+          },
+          {
+            "kind": "müttefik (UK/FR)",
+            "value": "≈3k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "İran SK + IRGC + vekiller",
+        "estimate": "≈1.000.000+",
+        "breakdown": [
+          {
+            "kind": "Artesh",
+            "value": "≈420k"
+          },
+          {
+            "kind": "IRGC",
+            "value": "≈190k"
+          },
+          {
+            "kind": "Besic yedek",
+            "value": "≈600k seferber"
+          }
+        ],
+        "note": "düşük yoğunluklu vekâlet çatışması"
+      },
+      "asOf": "2024",
+      "source": "IISS Military Balance"
+    }
+  },
+  {
+    "id": "iraq-proxy",
+    "name": "Irak – İran Vekil Ağı Gerilimi",
+    "shortName": "Irak",
+    "region": "Mezopotamya",
+    "status": "tension",
+    "startedYear": 2019,
+    "severity": 3,
+    "bubble": {
+      "lat": 33.3,
+      "lng": 44.4
+    },
+    "parties": [
+      "Irak Güvenlik Kuvvetleri",
+      "Haşdi Şabi (PMF) fraksiyonları",
+      "ABD Koalisyon kuvvetleri"
+    ],
+    "summary": "İran Devrim Muhafızları'nın lojistik bağlantısındaki Haşdi Şabi fraksiyonları (Ketaib Hizbullah, Asaib Ahl al-Haq) ile ABD üsleri arasında periyodik İHA ve roket atışları. Savaş ilan edilmemiş fakat süreğen düşük yoğunluklu çatışma.",
+    "stats": {
+      "Olay tipi": "İHA + roket",
+      "Hedef": "Ayn el-Esed, Erbil, Bağdat",
+      "İran bağı": "IRGC Kudüs Gücü"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "iris"
+      ],
+      "headline": "Kısa menzilli İHA tehdidi + dağınık üs yapısı = her üsse bağımsız radar kabuğu.",
+      "useCases": [
+        "Üs perimetresi için sabit radar kordonu",
+        "İHA fırlatma noktalarının uzak menzilli tespiti",
+        "Kritik konvoy güzergahları için eskort keşif",
+        "PMF eğitim kamplarının izlenmesi"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "Irak Hükümeti / KBY + Koalisyon üs hattı",
+        "controlledBy": "Irak Hükümeti / Koalisyon",
+        "polygon": [
+          [
+            36.8,
+            42.3
+          ],
+          [
+            36.7,
+            45.2
+          ],
+          [
+            35.6,
+            45.8
+          ],
+          [
+            34.6,
+            44.7
+          ],
+          [
+            34.2,
+            42.8
+          ],
+          [
+            35.6,
+            41.6
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "PMF / IRGC vekil etki alanı",
+        "controlledBy": "Haşdi Şabi (İran bağlantılı)",
+        "polygon": [
+          [
+            34.2,
+            43.2
+          ],
+          [
+            34,
+            45.1
+          ],
+          [
+            32.8,
+            45.5
+          ],
+          [
+            31.8,
+            45.2
+          ],
+          [
+            32,
+            43.8
+          ],
+          [
+            33,
+            43
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Koalisyon Üs Tehdit Arkı",
+      "polygon": [
+        [
+          36.3,
+          43.9
+        ],
+        [
+          35.8,
+          44.3
+        ],
+        [
+          34,
+          42.6
+        ],
+        [
+          33.5,
+          43
+        ],
+        [
+          33.9,
+          44.6
+        ],
+        [
+          34.7,
+          44.8
+        ],
+        [
+          35.6,
+          44.3
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Bağdat",
+        "lat": 33.31,
+        "lng": 44.37
+      },
+      {
+        "name": "Ayn el-Esed",
+        "lat": 33.8,
+        "lng": 42.44
+      },
+      {
+        "name": "Erbil",
+        "lat": 36.19,
+        "lng": 44.01
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "ABD/koalisyon + Irak Güv. Kuv.",
+        "estimate": "≈200.000",
+        "breakdown": [
+          {
+            "kind": "Irak ordusu",
+            "value": "≈180k"
+          },
+          {
+            "kind": "ABD + koalisyon",
+            "value": "≈2.5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Haşdi Şabi / İran vekilleri",
+        "estimate": "≈150.000",
+        "breakdown": [
+          {
+            "kind": "PMF aktif",
+            "value": "≈100k"
+          },
+          {
+            "kind": "radikal gruplar",
+            "value": "≈20k"
+          }
+        ],
+        "note": "Keta'ib Hizballah, Asa'ib Ahl al-Haq vd."
+      },
+      "asOf": "2024",
+      "source": "ISW + BBC Monitoring"
+    }
+  },
+  {
+    "id": "syria-civil",
+    "name": "Suriye İç Savaşı",
+    "shortName": "Suriye",
+    "region": "Levant",
+    "status": "ongoing",
+    "startedYear": 2011,
+    "severity": 4,
+    "bubble": {
+      "lat": 35.6,
+      "lng": 38.2
+    },
+    "parties": [
+      "SMO / SDG / Esad sonrası yapılar",
+      "Çeşitli silahlı gruplar",
+      "Türk Silahlı Kuvvetleri (sınır bölgesi)"
+    ],
+    "summary": "Düşük yoğunluklu ancak süreğen çatışma; Türkiye'nin güney sınırı boyunca sızma, terör ve İHA tehditleri platform için doğrudan operasyonel önem taşır.",
+    "stats": {
+      "Türkiye sınırı": "≈911 km",
+      "Kontrolsüz bölgeler": "Kuzeydoğu + bazı cepler",
+      "Tehdit türü": "Sızma + KİHA"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "iris"
+      ],
+      "headline": "Uzun sınır hattı + asimetrik tehditler = yoğun sabit radar + hafif keşif karması.",
+      "useCases": [
+        "Sabit radar zinciriyle sınır boyunca gece/gündüz sızma tespiti",
+        "Iris ile hızlı reaksiyon keşif görevleri",
+        "TSK güvenli bölgelerinde hava kapağı ve ikmal hattı güvenliği",
+        "Kontrolsüz bölgelerdeki silahlı grup hareketlerinin takibi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Türkiye / SMO",
+      "sideB": "SDG / Kontrolsüz",
+      "line": [
+        [
+          36.95,
+          36.7
+        ],
+        [
+          36.85,
+          37.4
+        ],
+        [
+          36.82,
+          38
+        ],
+        [
+          36.98,
+          39.05
+        ],
+        [
+          37.1,
+          40.1
+        ],
+        [
+          37.1,
+          41.2
+        ],
+        [
+          37.2,
+          42.1
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Türkiye / SMO güvenli bölge",
+        "controlledBy": "Türkiye / SMO",
+        "polygon": [
+          [
+            36.9,
+            36.5
+          ],
+          [
+            36.95,
+            38.8
+          ],
+          [
+            37.1,
+            41.3
+          ],
+          [
+            37.2,
+            42.1
+          ],
+          [
+            37.15,
+            41.8
+          ],
+          [
+            36.75,
+            40
+          ],
+          [
+            36.55,
+            38.4
+          ],
+          [
+            36.5,
+            36.6
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "SDG / kontrolsüz kuzeydoğu",
+        "controlledBy": "SDG",
+        "polygon": [
+          [
+            36.8,
+            41.6
+          ],
+          [
+            36.95,
+            42.3
+          ],
+          [
+            35,
+            42.1
+          ],
+          [
+            34.6,
+            40.8
+          ],
+          [
+            35.8,
+            40.2
+          ],
+          [
+            36.7,
+            41
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "TSK Sınır Operasyon Hattı",
+      "polygon": [
+        [
+          37,
+          36.6
+        ],
+        [
+          37.15,
+          38.8
+        ],
+        [
+          37.3,
+          41.2
+        ],
+        [
+          37.3,
+          42.1
+        ],
+        [
+          36.85,
+          42
+        ],
+        [
+          36.75,
+          40
+        ],
+        [
+          36.7,
+          38.2
+        ],
+        [
+          36.8,
+          36.7
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Halep",
+        "lat": 36.2,
+        "lng": 37.16
+      },
+      {
+        "name": "İdlib",
+        "lat": 35.93,
+        "lng": 36.63
+      },
+      {
+        "name": "Rakka",
+        "lat": 35.95,
+        "lng": 38.99
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Rejim + müttefikler",
+        "estimate": "≈170.000",
+        "breakdown": [
+          {
+            "kind": "SAA",
+            "value": "≈130k"
+          },
+          {
+            "kind": "NDF milisleri",
+            "value": "≈30k"
+          },
+          {
+            "kind": "İran/Rusya danışman",
+            "value": "≈8k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Muhalefet + SDG + HTŞ",
+        "estimate": "≈120.000",
+        "breakdown": [
+          {
+            "kind": "SMO (TR destekli)",
+            "value": "≈50k"
+          },
+          {
+            "kind": "HTŞ (İdlib)",
+            "value": "≈30k"
+          },
+          {
+            "kind": "SDG / YPG",
+            "value": "≈60k"
+          }
+        ],
+        "note": "parçalı cephe — birbirleriyle de çatışıyor"
+      },
+      "asOf": "2024",
+      "source": "ISW + Carter Center"
+    }
+  },
+  {
+    "id": "sudan-civil",
+    "name": "Sudan İç Savaşı (SAF – RSF)",
+    "shortName": "Sudan",
+    "region": "Kuzeydoğu Afrika",
+    "status": "active",
+    "startedYear": 2023,
+    "severity": 5,
+    "bubble": {
+      "lat": 14.5,
+      "lng": 29.5
+    },
+    "parties": [
+      "Sudan Silahlı Kuvvetleri (SAF)",
+      "Hızlı Destek Kuvvetleri (RSF)"
+    ],
+    "summary": "Nisan 2023'te başlayan iç savaş. Hartum kent savaşı ve Darfur'da geniş etki alanlı çatışmalar; dünyanın en büyük iç yerinden edilme krizlerinden biri.",
+    "stats": {
+      "Yerinden edilenler": "≈10 milyon",
+      "Ana sahne": "Hartum + Darfur + Kordofan",
+      "Alan": "≈1.8 milyon km² (ülke)"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris"
+      ],
+      "headline": "Geniş alan + düşük altyapı = yüksek menzilli, az bakım gerektiren İHA.",
+      "useCases": [
+        "Nova ile Darfur-Hartum koridoru boyunca konvoy takibi",
+        "Mülteci hareketi ve insani yardım rotalarının izlenmesi",
+        "Kritik havaalanları (Hartum, Port Sudan) çevre güvenliği",
+        "RSF konuşlanma bölgelerinin uzak menzilli tespiti"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "SAF kontrolündeki doğu koridoru",
+        "controlledBy": "SAF",
+        "polygon": [
+          [
+            22,
+            24.5
+          ],
+          [
+            22,
+            36.5
+          ],
+          [
+            18,
+            38
+          ],
+          [
+            15,
+            37.5
+          ],
+          [
+            12,
+            34.5
+          ],
+          [
+            11,
+            32
+          ],
+          [
+            13,
+            29.5
+          ],
+          [
+            16,
+            27.5
+          ],
+          [
+            19,
+            24.5
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "RSF etki alanı (Darfur + Kordofan)",
+        "controlledBy": "RSF",
+        "polygon": [
+          [
+            16,
+            22.5
+          ],
+          [
+            15.8,
+            26
+          ],
+          [
+            14,
+            27
+          ],
+          [
+            12,
+            26.5
+          ],
+          [
+            11,
+            24.5
+          ],
+          [
+            12.5,
+            22
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Hartum Kent Savaşı",
+      "polygon": [
+        [
+          15.8,
+          32.2
+        ],
+        [
+          15.8,
+          32.9
+        ],
+        [
+          15.2,
+          32.9
+        ],
+        [
+          15.2,
+          32.2
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Hartum",
+        "lat": 15.5,
+        "lng": 32.56
+      },
+      {
+        "name": "El Faşir",
+        "lat": 13.63,
+        "lng": 25.35
+      },
+      {
+        "name": "Nyala",
+        "lat": 12.05,
+        "lng": 24.88
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "SAF (Sudan Silahlı Kuv.)",
+        "estimate": "≈200.000"
+      },
+      "sideB": {
+        "label": "RSF (Hızlı Destek Kuv.)",
+        "estimate": "≈100.000",
+        "note": "Darfur çekirdeği + paralı kaynaklar"
+      },
+      "asOf": "2024",
+      "source": "IISS + Sudan War Monitor"
+    }
+  },
+  {
+    "id": "yemen",
+    "name": "Yemen Savaşı / Husi Deniz Kampanyası",
+    "shortName": "Yemen",
+    "region": "Arabistan Yarımadası",
+    "status": "active",
+    "startedYear": 2014,
+    "severity": 4,
+    "bubble": {
+      "lat": 15.4,
+      "lng": 44.5
+    },
+    "parties": [
+      "Yemen Hükümeti",
+      "Husi Hareketi (Ensarullah)",
+      "Arap Koalisyonu"
+    ],
+    "summary": "Kara cephesinde kırılgan ateşkes süreğen; ancak İran fonlamasıyla güçlenen Husi Hareketi, Kızıldeniz'de Bab el-Mendeb Boğazı'ndan geçen ticari gemilere İHA ve balistik füze saldırıları düzenliyor. Deniz trafiği ve bölgesel enerji güvenliği doğrudan etkileniyor.",
+    "stats": {
+      "Deniz tehdidi": "Bab el-Mendeb boğazı",
+      "Savaş sahası": "Tüm ülke",
+      "Gemi saldırıları": "2023–2025: 100+",
+      "İran bağı": "IRGC silah transferi"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "nova"
+      ],
+      "headline": "Deniz geçiş noktası + uzun menzilli tehdit = deniz-odaklı radar + uzun menzilli gözetim.",
+      "useCases": [
+        "Bab el-Mendeb üzerinde sabit radar kordonu",
+        "Nova ile tanker ve ticari gemi koruyucu eskort gözetimi",
+        "Kıyı boyunca füze rampası tespiti",
+        "Aden Körfezi'nde çok bantlı ISR görevleri"
+      ]
+    },
+    "frontline": {
+      "sideA": "Yemen Hükümeti / Koalisyon",
+      "sideB": "Husiler (İran destekli)",
+      "line": [
+        [
+          17.8,
+          42.9
+        ],
+        [
+          16.5,
+          43.4
+        ],
+        [
+          15.5,
+          44.1
+        ],
+        [
+          14.5,
+          44.8
+        ],
+        [
+          13.8,
+          45.5
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Yemen Hükümeti / Koalisyon güney-doğu kontrolü",
+        "controlledBy": "Yemen Hükümeti / Koalisyon",
+        "polygon": [
+          [
+            18.5,
+            53
+          ],
+          [
+            17,
+            53.5
+          ],
+          [
+            14,
+            54
+          ],
+          [
+            12.5,
+            50
+          ],
+          [
+            12.5,
+            47
+          ],
+          [
+            13.8,
+            45.5
+          ],
+          [
+            14.8,
+            45.3
+          ],
+          [
+            16,
+            47.5
+          ],
+          [
+            17.5,
+            50.5
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Husi kontrol bölgesi (kuzey-batı)",
+        "controlledBy": "Husi Hareketi",
+        "polygon": [
+          [
+            17.5,
+            42.8
+          ],
+          [
+            17,
+            44.5
+          ],
+          [
+            15.8,
+            45.3
+          ],
+          [
+            14.2,
+            44.6
+          ],
+          [
+            13.8,
+            43.2
+          ],
+          [
+            15,
+            42.7
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Bab el-Mendeb Deniz Çatışma Kuşağı",
+      "polygon": [
+        [
+          13.5,
+          43
+        ],
+        [
+          13.8,
+          43.9
+        ],
+        [
+          12.8,
+          44.2
+        ],
+        [
+          11.8,
+          43.8
+        ],
+        [
+          11.9,
+          43
+        ],
+        [
+          12.5,
+          42.4
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Sana",
+        "lat": 15.37,
+        "lng": 44.19
+      },
+      {
+        "name": "Hudeyde",
+        "lat": 14.79,
+        "lng": 42.95
+      },
+      {
+        "name": "Aden",
+        "lat": 12.79,
+        "lng": 45.03
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Yemen Hükümeti + koalisyon",
+        "estimate": "≈150.000",
+        "breakdown": [
+          {
+            "kind": "hükümet gücü",
+            "value": "≈70k"
+          },
+          {
+            "kind": "S. Geçiş Kons.",
+            "value": "≈50k"
+          },
+          {
+            "kind": "Suudi destek",
+            "value": "hava+lojistik"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Husi Hareketi (Ensarullah)",
+        "estimate": "≈200.000",
+        "breakdown": [
+          {
+            "kind": "aktif savaşçı",
+            "value": "≈100k"
+          },
+          {
+            "kind": "milis rezervi",
+            "value": "≈100k"
+          }
+        ],
+        "note": "Kızıldeniz füze/İHA kapasitesi"
+      },
+      "asOf": "2024",
+      "source": "ACLED + UN panel"
+    }
+  },
+  {
+    "id": "myanmar",
+    "name": "Myanmar İç Savaşı",
+    "shortName": "Myanmar",
+    "region": "Güneydoğu Asya",
+    "status": "active",
+    "startedYear": 2021,
+    "severity": 4,
+    "bubble": {
+      "lat": 21.5,
+      "lng": 96
+    },
+    "parties": [
+      "Askeri cunta (Tatmadaw)",
+      "Halk Savunma Kuvvetleri (PDF)",
+      "Etnik silahlı örgütler"
+    ],
+    "summary": "2021 darbesinden bu yana yayılan çok cepheli iç savaş. Cunta hava üstünlüğüne karşı direniş grupları giderek daha fazla İHA kullanıyor.",
+    "stats": {
+      "Aktif cephe": "Ülke geneli",
+      "Kontrol dışı alan": "Nüfusun %40'ından fazlası",
+      "Çatışma türü": "Asimetrik + karma"
+    },
+    "tairos": {
+      "priority": [
+        "iris"
+      ],
+      "headline": "Orman + dağlık arazi = düşük yükseklikte yüksek manevra keşif.",
+      "useCases": [
+        "Iris ile sırt-vadi operasyonlarında konum bildirimi",
+        "İnsani koridor güvenliği",
+        "Sınır ötesi mülteci hareketi analizi"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "Tatmadaw (cunta) kontrolü — merkez koridoru",
+        "controlledBy": "Tatmadaw",
+        "polygon": [
+          [
+            22.2,
+            95
+          ],
+          [
+            21,
+            96.4
+          ],
+          [
+            19,
+            96.8
+          ],
+          [
+            17,
+            96.5
+          ],
+          [
+            16.5,
+            97
+          ],
+          [
+            19,
+            95.6
+          ],
+          [
+            21,
+            94.8
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Direniş / etnik örgütler — periferi",
+        "controlledBy": "PDF / Etnik örgütler",
+        "polygon": [
+          [
+            26,
+            97
+          ],
+          [
+            24.5,
+            98.5
+          ],
+          [
+            22,
+            98.5
+          ],
+          [
+            20,
+            98.2
+          ],
+          [
+            17.5,
+            98.3
+          ],
+          [
+            18.5,
+            97.2
+          ],
+          [
+            21,
+            97.3
+          ],
+          [
+            24,
+            97.1
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Sagaing",
+        "lat": 22.09,
+        "lng": 95.11
+      },
+      {
+        "name": "Karen State",
+        "lat": 17.3,
+        "lng": 97.7
+      },
+      {
+        "name": "Rakhine",
+        "lat": 20.22,
+        "lng": 93.1
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Tatmadaw (cunta)",
+        "estimate": "≈150.000"
+      },
+      "sideB": {
+        "label": "PDF + Etnik Direniş Örg.",
+        "estimate": "≈100.000+",
+        "breakdown": [
+          {
+            "kind": "PDF",
+            "value": "≈65k"
+          },
+          {
+            "kind": "KIA / AA / TNLA vd.",
+            "value": "≈40k"
+          }
+        ],
+        "note": "1027 Operasyonu sonrası artan koordinasyon"
+      },
+      "asOf": "2024",
+      "source": "ISP Myanmar + Reuters"
+    }
+  },
+  {
+    "id": "dprk-drc-east",
+    "name": "DRC Doğu – M23 Krizi",
+    "shortName": "DRC Doğu",
+    "region": "Orta Afrika",
+    "status": "active",
+    "startedYear": 2022,
+    "severity": 4,
+    "bubble": {
+      "lat": -1.5,
+      "lng": 29
+    },
+    "parties": [
+      "DRC ordusu (FARDC)",
+      "M23",
+      "Ruanda (iddialar)"
+    ],
+    "summary": "Kuzey Kivu ve Güney Kivu'da tırmanan isyan. Goma'nın düşmesi ile büyük insani kriz; komşu ülke gerilimleri yüksek.",
+    "stats": {
+      "Yerinden edilen": "≈7 milyon",
+      "Etki alanı": "Kivu gölü çevresi",
+      "Gerilim hattı": "DRC – Ruanda sınırı"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris"
+      ],
+      "headline": "Göl + dağlık arazi + sınır gerilimi = uzun süreli, platform bağımsız ISR.",
+      "useCases": [
+        "Kivu gölü üzerinde deniz-hava karma gözetim",
+        "Dağlık mevzi tespiti",
+        "BM misyonları için gerçek zamanlı durumsal farkındalık"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "B",
+        "name": "M23 etki alanı (Kivu)",
+        "controlledBy": "M23",
+        "polygon": [
+          [
+            -1,
+            28.9
+          ],
+          [
+            -1.4,
+            29.4
+          ],
+          [
+            -2,
+            29.3
+          ],
+          [
+            -2.2,
+            28.8
+          ],
+          [
+            -1.6,
+            28.6
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Goma",
+        "lat": -1.68,
+        "lng": 29.22
+      },
+      {
+        "name": "Bukavu",
+        "lat": -2.5,
+        "lng": 28.84
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "FARDC + MONUSCO + SAMIDRC",
+        "estimate": "≈130.000",
+        "breakdown": [
+          {
+            "kind": "FARDC",
+            "value": "≈120k"
+          },
+          {
+            "kind": "SAMIDRC (SADC)",
+            "value": "≈5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "M23 + Ruanda destekli",
+        "estimate": "≈10.000-15.000",
+        "note": "BM panelleri: Ruanda birliği de muharebede"
+      },
+      "asOf": "2024",
+      "source": "BM DRC Uzman Paneli"
+    }
+  },
+  {
+    "id": "libya",
+    "name": "Libya İstikrarsızlığı",
+    "shortName": "Libya",
+    "region": "Kuzey Afrika",
+    "status": "ongoing",
+    "startedYear": 2011,
+    "severity": 3,
+    "bubble": {
+      "lat": 28,
+      "lng": 17
+    },
+    "parties": [
+      "UMH (Trablus)",
+      "LUO (Bingazi)",
+      "Çeşitli milisler"
+    ],
+    "summary": "Bölünmüş siyasi yapı altında kırılgan ateşkes. Türkiye'nin siyasi-askeri ortaklığı bulunan bir tiyatro; İHA kullanımı savaşı şekillendirdi.",
+    "stats": {
+      "Ülke alanı": "≈1.76 milyon km²",
+      "Gerilim hattı": "Sirte – Cufra",
+      "Yabancı aktör": "Çok sayıda"
+    },
+    "tairos": {
+      "priority": [
+        "nova"
+      ],
+      "headline": "Çöl + büyük mesafeler = uzun menzil, yüksek irtifa platform ihtiyacı.",
+      "useCases": [
+        "Nova ile 500+ km çöl devriyesi",
+        "Petrol tesisleri ve terminalleri çevre güvenliği",
+        "Sahra ötesi göç rotası analizi"
+      ]
+    },
+    "frontline": {
+      "sideA": "UMH (Trablus)",
+      "sideB": "LUO (Bingazi)",
+      "line": [
+        [
+          31.2,
+          16.5
+        ],
+        [
+          30,
+          17.6
+        ],
+        [
+          28.8,
+          19.2
+        ],
+        [
+          27.5,
+          21
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "UMH / Trablus (batı)",
+        "controlledBy": "UMH (Trablus)",
+        "polygon": [
+          [
+            33.2,
+            10.8
+          ],
+          [
+            32,
+            10.4
+          ],
+          [
+            29.8,
+            11.5
+          ],
+          [
+            28,
+            13.5
+          ],
+          [
+            28,
+            16
+          ],
+          [
+            30.5,
+            15.5
+          ],
+          [
+            32.3,
+            14
+          ],
+          [
+            33,
+            12.5
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "LUO / Bingazi (doğu)",
+        "controlledBy": "LUO (Bingazi)",
+        "polygon": [
+          [
+            33,
+            21
+          ],
+          [
+            32.2,
+            23.5
+          ],
+          [
+            30.5,
+            25
+          ],
+          [
+            28,
+            24.5
+          ],
+          [
+            26.8,
+            22
+          ],
+          [
+            27.5,
+            20
+          ],
+          [
+            29.8,
+            19.5
+          ],
+          [
+            31.8,
+            19.8
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Sirte – Cufra Gerilim Hattı",
+      "polygon": [
+        [
+          32.5,
+          16
+        ],
+        [
+          31.2,
+          17.2
+        ],
+        [
+          29.8,
+          19
+        ],
+        [
+          28.2,
+          21.2
+        ],
+        [
+          27.5,
+          20
+        ],
+        [
+          29,
+          18
+        ],
+        [
+          30.8,
+          16.5
+        ],
+        [
+          32,
+          15.8
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Sirte",
+        "lat": 31.21,
+        "lng": 16.59
+      },
+      {
+        "name": "Bingazi",
+        "lat": 32.12,
+        "lng": 20.07
+      },
+      {
+        "name": "Trablus",
+        "lat": 32.88,
+        "lng": 13.19
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "GNU / Trablus (batı)",
+        "estimate": "≈40.000",
+        "note": "TR + Katar destekli milisler"
+      },
+      "sideB": {
+        "label": "LAAF (Hafter / doğu)",
+        "estimate": "≈25.000",
+        "note": "Rus Afrika Kolordusu (eski Wagner) desteği"
+      },
+      "asOf": "2024",
+      "source": "UNSMIL + IISS"
+    }
+  },
+  {
+    "id": "sahel",
+    "name": "Sahel Güvenlik Krizi",
+    "shortName": "Sahel",
+    "region": "Batı Afrika",
+    "status": "active",
+    "startedYear": 2012,
+    "severity": 4,
+    "bubble": {
+      "lat": 14.5,
+      "lng": 0.5
+    },
+    "parties": [
+      "Mali / Burkina Faso / Nijer askeri yönetimleri",
+      "JNIM / IS-Sahel"
+    ],
+    "summary": "Mali, Burkina Faso ve Nijer'i kapsayan sınır-aşan cihatçı ayaklanma. Fransız güçlerinin çekilmesi sonrası bölgesel savunma kapasitesi yeniden kurgulanıyor.",
+    "stats": {
+      "Etki alanı": "3 ülke, ≈3 milyon km²",
+      "Terör olayları": "Yıllık 2000+",
+      "Dönüşüm": "Savunma yapılandırmasında"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris"
+      ],
+      "headline": "Büyük mesafeler + seyrek altyapı = uzun menzilli, bağımsız platform.",
+      "useCases": [
+        "Üç sınır bölgesi (Liptako-Gourma) devamlı gözetim",
+        "Konvoy koruma keşif",
+        "Dış üs terk edilen bölgelerin izlenmesi"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "B",
+        "name": "JNIM / IS-Sahel etki alanı (Liptako-Gourma)",
+        "controlledBy": "JNIM / IS-Sahel",
+        "polygon": [
+          [
+            15.3,
+            -1
+          ],
+          [
+            15,
+            2
+          ],
+          [
+            13.6,
+            2
+          ],
+          [
+            13.4,
+            0.5
+          ],
+          [
+            13.5,
+            -1.2
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Üç Sınır Çatışma Noktası",
+      "polygon": [
+        [
+          15,
+          -0.6
+        ],
+        [
+          14.8,
+          1.6
+        ],
+        [
+          13.8,
+          1.6
+        ],
+        [
+          13.7,
+          0.2
+        ],
+        [
+          13.9,
+          -0.8
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Gao",
+        "lat": 16.27,
+        "lng": -0.04
+      },
+      {
+        "name": "Dori",
+        "lat": 14.03,
+        "lng": -0.03
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Cunta yönetimleri + Rus AK",
+        "estimate": "≈80.000",
+        "breakdown": [
+          {
+            "kind": "Mali FAMa",
+            "value": "≈30k"
+          },
+          {
+            "kind": "Burkina",
+            "value": "≈25k"
+          },
+          {
+            "kind": "Nijer",
+            "value": "≈20k"
+          },
+          {
+            "kind": "Afrika Kolordusu",
+            "value": "≈1.5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "JNIM + ISGS (cihatçı)",
+        "estimate": "≈6.000-10.000",
+        "note": "JNIM: el-Kaide bağlantılı · ISGS: IŞİD"
+      },
+      "asOf": "2024",
+      "source": "ACLED + ISS Africa"
+    }
+  },
+  {
+    "id": "kashmir",
+    "name": "Keşmir Kontrol Hattı (LoC)",
+    "shortName": "Keşmir",
+    "region": "Güney Asya",
+    "status": "tension",
+    "startedYear": 1947,
+    "severity": 3,
+    "bubble": {
+      "lat": 34.2,
+      "lng": 74.5
+    },
+    "parties": [
+      "Hindistan Silahlı Kuvvetleri",
+      "Pakistan Silahlı Kuvvetleri"
+    ],
+    "summary": "Nükleer eşikteki iki güç arasında onlarca yıldır çözülmemiş gerginlik hattı. Dağlık arazi, yüksek irtifa çatışma riski ve periyodik tırmanmalar.",
+    "stats": {
+      "LoC uzunluğu": "≈740 km",
+      "İrtifa": "2000–6000 m",
+      "Nükleer güç": "İki taraf da"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "nova"
+      ],
+      "headline": "Yüksek irtifa + dağlık arazi = yüksek irtifa performansı kritik.",
+      "useCases": [
+        "Yüksek irtifa keşif görevleri",
+        "Mevzi tespiti ve erken uyarı",
+        "Sınır karakol destek"
+      ]
+    },
+    "frontline": {
+      "sideA": "Hindistan",
+      "sideB": "Pakistan",
+      "line": [
+        [
+          33,
+          74.1
+        ],
+        [
+          33.6,
+          73.9
+        ],
+        [
+          34.3,
+          74.3
+        ],
+        [
+          34.85,
+          75.1
+        ],
+        [
+          35.1,
+          76
+        ],
+        [
+          35.3,
+          77
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Hindistan kontrolündeki Keşmir",
+        "controlledBy": "Hindistan",
+        "polygon": [
+          [
+            35.4,
+            77.8
+          ],
+          [
+            34.8,
+            77.8
+          ],
+          [
+            33.8,
+            76.8
+          ],
+          [
+            33,
+            75.5
+          ],
+          [
+            33.2,
+            74.3
+          ],
+          [
+            34,
+            74.8
+          ],
+          [
+            34.9,
+            75.5
+          ],
+          [
+            35.2,
+            77
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Pakistan kontrolündeki Azad Keşmir",
+        "controlledBy": "Pakistan",
+        "polygon": [
+          [
+            35.3,
+            75.2
+          ],
+          [
+            34.8,
+            73.5
+          ],
+          [
+            33.8,
+            73
+          ],
+          [
+            33,
+            73.8
+          ],
+          [
+            33.4,
+            74.1
+          ],
+          [
+            34.2,
+            74.5
+          ],
+          [
+            34.9,
+            75
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Srinagar",
+        "lat": 34.08,
+        "lng": 74.8
+      },
+      {
+        "name": "Muzaffarabad",
+        "lat": 34.37,
+        "lng": 73.47
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Hindistan (IA + RR + CRPF)",
+        "estimate": "≈500.000",
+        "breakdown": [
+          {
+            "kind": "Ordu + Rashtriya Rifles",
+            "value": "≈300k"
+          },
+          {
+            "kind": "CRPF + paramiliter",
+            "value": "≈200k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Pakistan (PA) + militanlar",
+        "estimate": "≈250.000",
+        "breakdown": [
+          {
+            "kind": "X Kor + Kuzey",
+            "value": "≈200k"
+          },
+          {
+            "kind": "Militan örgütler",
+            "value": "≈5-10k"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "IISS + MoD brifingleri"
+    }
+  },
+  {
+    "id": "taiwan-strait",
+    "name": "Tayvan Boğazı Gerilimi",
+    "shortName": "Tayvan Boğazı",
+    "region": "Doğu Asya",
+    "status": "tension",
+    "startedYear": 1949,
+    "severity": 3,
+    "bubble": {
+      "lat": 24.5,
+      "lng": 120.5
+    },
+    "parties": [
+      "Çin Halk Cumhuriyeti",
+      "Tayvan (ROC)"
+    ],
+    "summary": "Artan Çin hava ve deniz tatbikatları nedeniyle büyüyen potansiyel çatışma tiyatrosu. Küresel yarı-iletken tedarik zinciri için sistemik risk.",
+    "stats": {
+      "Boğaz genişliği": "≈130–180 km",
+      "Hava ihlali/yıl": "2000+ (artış trendi)",
+      "Strateji": "Kuşatma tatbikatları"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "nova"
+      ],
+      "headline": "Deniz eşiği + uçak/gemi yoğun tiyatro = çok bantlı radar + uzun menzil.",
+      "useCases": [
+        "Deniz üstü uzun menzilli devriye",
+        "Kıyı radar ağı ile gemi sınıflandırma",
+        "Ada çevresi kritik altyapı izlemi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Tayvan (ROC)",
+      "sideB": "Çin (ÇHC)",
+      "line": [
+        [
+          25.5,
+          121.5
+        ],
+        [
+          24.5,
+          120.5
+        ],
+        [
+          22.8,
+          120.1
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Tayvan (ROC) adası",
+        "controlledBy": "Tayvan (ROC)",
+        "polygon": [
+          [
+            25.3,
+            121.2
+          ],
+          [
+            25.3,
+            122
+          ],
+          [
+            24,
+            121.6
+          ],
+          [
+            22,
+            121
+          ],
+          [
+            21.9,
+            120.2
+          ],
+          [
+            23.5,
+            120.1
+          ],
+          [
+            25,
+            121
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "ÇHC Fujian kıyı konuşlanması",
+        "controlledBy": "Çin (ÇHC)",
+        "polygon": [
+          [
+            26.6,
+            117.8
+          ],
+          [
+            26.5,
+            120.3
+          ],
+          [
+            24,
+            119
+          ],
+          [
+            22.8,
+            117.4
+          ],
+          [
+            24.2,
+            116.5
+          ],
+          [
+            26,
+            116.8
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Tayvan Boğazı Deniz / Hava Kuşağı",
+      "polygon": [
+        [
+          26,
+          120.2
+        ],
+        [
+          25.5,
+          121.6
+        ],
+        [
+          22.5,
+          120.8
+        ],
+        [
+          22,
+          119.8
+        ],
+        [
+          23.8,
+          119
+        ],
+        [
+          25.5,
+          119.2
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Taipei",
+        "lat": 25.03,
+        "lng": 121.57
+      },
+      {
+        "name": "Kaohsiung",
+        "lat": 22.63,
+        "lng": 120.3
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Tayvan (ROC)",
+        "estimate": "≈170.000 aktif",
+        "breakdown": [
+          {
+            "kind": "aktif",
+            "value": "≈170k"
+          },
+          {
+            "kind": "yedek",
+            "value": "≈1.65M"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "ÇHC — PLA Doğu Tiyatro K.",
+        "estimate": "≈400.000 (tiyatroda)",
+        "breakdown": [
+          {
+            "kind": "tümen/deniz/hava",
+            "value": "≈400k"
+          },
+          {
+            "kind": "PLA toplam",
+            "value": "≈2M"
+          }
+        ],
+        "note": "çıkarma için kritik eşik: amfibi kapasite"
+      },
+      "asOf": "2024",
+      "source": "US DoD China Report"
+    }
+  },
+  {
+    "id": "caucasus",
+    "name": "Güney Kafkasya – Ermenistan / Azerbaycan Sınırı",
+    "shortName": "G. Kafkasya",
+    "region": "Kafkasya",
+    "status": "tension",
+    "startedYear": 1988,
+    "severity": 2,
+    "bubble": {
+      "lat": 39.5,
+      "lng": 46
+    },
+    "parties": [
+      "Ermenistan",
+      "Azerbaycan"
+    ],
+    "summary": "Karabağ 2023 operasyonu sonrası sınır delimitasyonu süreci. Türkiye'nin stratejik ortağı Azerbaycan için operasyonel ISR talebi yüksek.",
+    "stats": {
+      "Sınır": "≈1007 km (demarkasyon sürüyor)",
+      "Durum": "Kırılgan düzenleme",
+      "Stratejik önem": "Zengezur koridoru"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "radar"
+      ],
+      "headline": "Dağlık sınır + enerji koridoru = yüksek çözünürlüklü keşif.",
+      "useCases": [
+        "Sınır devriye desteği",
+        "Enerji altyapısı (BTC) çevre güvenliği",
+        "Zengezur koridoru olası güzergah izlemi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Ermenistan",
+      "sideB": "Azerbaycan",
+      "line": [
+        [
+          41.2,
+          45.2
+        ],
+        [
+          40.5,
+          45.6
+        ],
+        [
+          39.8,
+          46.1
+        ],
+        [
+          39.2,
+          46.4
+        ],
+        [
+          38.9,
+          46.55
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Ermenistan",
+        "controlledBy": "Ermenistan",
+        "polygon": [
+          [
+            41.2,
+            43.6
+          ],
+          [
+            41.1,
+            45.1
+          ],
+          [
+            40,
+            45.6
+          ],
+          [
+            39,
+            45.4
+          ],
+          [
+            38.9,
+            46.4
+          ],
+          [
+            39.2,
+            46.5
+          ],
+          [
+            39.8,
+            45.9
+          ],
+          [
+            40.5,
+            45.1
+          ],
+          [
+            41.1,
+            44
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Azerbaycan",
+        "controlledBy": "Azerbaycan",
+        "polygon": [
+          [
+            41.4,
+            46.5
+          ],
+          [
+            41.6,
+            49
+          ],
+          [
+            40,
+            50.2
+          ],
+          [
+            38.5,
+            49
+          ],
+          [
+            38.7,
+            46.8
+          ],
+          [
+            39.4,
+            46.6
+          ],
+          [
+            40,
+            46.8
+          ],
+          [
+            41,
+            46.4
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Sınır Demarkasyon Kuşağı",
+      "polygon": [
+        [
+          41.3,
+          45
+        ],
+        [
+          40.6,
+          45.8
+        ],
+        [
+          39.8,
+          46.3
+        ],
+        [
+          39,
+          46.6
+        ],
+        [
+          38.95,
+          46.4
+        ],
+        [
+          39.6,
+          45.9
+        ],
+        [
+          40.5,
+          45.5
+        ],
+        [
+          41.2,
+          44.9
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Hankendi (Stepanakert)",
+        "lat": 39.81,
+        "lng": 46.75
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Azerbaycan SK",
+        "estimate": "≈125.000"
+      },
+      "sideB": {
+        "label": "Ermenistan SK",
+        "estimate": "≈45.000",
+        "note": "2020+2023 sonrası ciddi kayıp/yer değişimi"
+      },
+      "asOf": "2024",
+      "source": "IISS Military Balance"
+    }
+  },
+  {
+    "id": "somalia-shabaab",
+    "name": "Somali – Eş-Şebab Operasyonları",
+    "shortName": "Somali",
+    "region": "Afrika Boynuzu",
+    "status": "ongoing",
+    "startedYear": 2006,
+    "severity": 4,
+    "bubble": {
+      "lat": 5.2,
+      "lng": 45.8
+    },
+    "parties": [
+      "Somali Federal Hükümeti (FGS)",
+      "Türkiye (TURKSOM eğitim & UAV desteği)",
+      "ATMIS (eski AMISOM)",
+      "ABD AFRICOM",
+      "Eş-Şebab (el-Kaide bağlantılı)"
+    ],
+    "summary": "Türkiye, Mogadişu'nun TURKSOM Görev Kuvvet Komutanlığı üssünden Somali Ulusal Ordusu'nu eğitiyor; Bayraktar TB2'ler Eş-Şebab hedeflerine karşı aktif olarak kullanılıyor. Eş-Şebab güney ve orta Somali kırsalında hâkimiyetini sürdürüyor; kıyı kentleri FGS kontrolünde.",
+    "stats": {
+      "Eğitilen asker": "≈16.000 (SNA + GORGOR)",
+      "Türk üssü": "TURKSOM, Mogadişu",
+      "Eş-Şebab etki alanı": "≈%25 kırsal"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "nova",
+        "radar"
+      ],
+      "headline": "TURKSOM çevresi + kıyı şeridi = doğrudan Tairos operasyon sahası.",
+      "useCases": [
+        "TURKSOM üs çevre güvenliği ve 7/24 yakın gözetim",
+        "Bayraktar TB2 sortileri için ön-ISR ve hedef doğrulama",
+        "Mogadişu limanı ve uluslararası havalimanı çevresi",
+        "Sahil şeridi kaçakçılık hatlarının ve AS kıyı kamplarının izlenmesi",
+        "Kırsal Eş-Şebab hareket koridorlarının haritalanması"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "FGS + müttefikler kontrolündeki alan",
+        "controlledBy": "FGS / Türkiye destekli SNA",
+        "polygon": [
+          [
+            2,
+            45.2
+          ],
+          [
+            2.9,
+            46.3
+          ],
+          [
+            4.3,
+            46.5
+          ],
+          [
+            5.3,
+            46.2
+          ],
+          [
+            6.5,
+            46.8
+          ],
+          [
+            7.8,
+            46.8
+          ],
+          [
+            9.5,
+            48
+          ],
+          [
+            10.8,
+            49.3
+          ],
+          [
+            11.8,
+            50.8
+          ],
+          [
+            9.3,
+            50.2
+          ],
+          [
+            6.5,
+            49.1
+          ],
+          [
+            4.1,
+            47.2
+          ],
+          [
+            2.2,
+            45.8
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Eş-Şebab etki alanı",
+        "controlledBy": "Eş-Şebab",
+        "polygon": [
+          [
+            -1,
+            41.8
+          ],
+          [
+            0.2,
+            42.4
+          ],
+          [
+            1.6,
+            43.3
+          ],
+          [
+            2.6,
+            44.4
+          ],
+          [
+            3.8,
+            45.1
+          ],
+          [
+            4.2,
+            44.4
+          ],
+          [
+            4,
+            43.2
+          ],
+          [
+            3,
+            42.2
+          ],
+          [
+            1.6,
+            41.3
+          ],
+          [
+            -0.2,
+            41.2
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Orta-Güney Somali Operasyon Sahası",
+      "polygon": [
+        [
+          -1.2,
+          42
+        ],
+        [
+          0.6,
+          42.8
+        ],
+        [
+          2.4,
+          43.6
+        ],
+        [
+          4.2,
+          44.3
+        ],
+        [
+          5.4,
+          45.6
+        ],
+        [
+          4.8,
+          46.2
+        ],
+        [
+          3.4,
+          45.9
+        ],
+        [
+          1.8,
+          45
+        ],
+        [
+          0.4,
+          43.9
+        ],
+        [
+          -0.8,
+          42.8
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Mogadişu",
+        "lat": 2.04,
+        "lng": 45.34
+      },
+      {
+        "name": "Baidoa",
+        "lat": 3.12,
+        "lng": 43.65
+      },
+      {
+        "name": "Kismayo",
+        "lat": -0.36,
+        "lng": 42.55
+      },
+      {
+        "name": "Jilib",
+        "lat": 0.49,
+        "lng": 42.78
+      },
+      {
+        "name": "Dhuusamareeb",
+        "lat": 5.53,
+        "lng": 46.38
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "SNA + ATMIS/AUSSOM + TR",
+        "estimate": "≈50.000",
+        "breakdown": [
+          {
+            "kind": "Somali ordusu (SNA)",
+            "value": "≈30k"
+          },
+          {
+            "kind": "ATMIS (AB)",
+            "value": "≈17k"
+          },
+          {
+            "kind": "TURKSOM mezunu",
+            "value": "≈5k"
+          }
+        ],
+        "note": "TURKSOM kampında Gorgor/Haramcad tugayları yetişiyor"
+      },
+      "sideB": {
+        "label": "el-Şebab + IŞİD-Somali",
+        "estimate": "≈7.000-12.000",
+        "breakdown": [
+          {
+            "kind": "el-Şebab",
+            "value": "≈7-12k"
+          },
+          {
+            "kind": "IŞİD-Somali",
+            "value": "≈300"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "UN Panel of Experts + AFRICOM"
+    }
+  },
+  {
+    "id": "serbia-kosovo",
+    "name": "Sırbistan – Kosova Gerilimi",
+    "shortName": "Kosova",
+    "region": "Batı Balkanlar",
+    "status": "tension",
+    "startedYear": 2022,
+    "severity": 2,
+    "bubble": {
+      "lat": 42.9,
+      "lng": 20.9
+    },
+    "parties": [
+      "Kosova Cumhuriyeti",
+      "Sırbistan Cumhuriyeti",
+      "NATO KFOR"
+    ],
+    "summary": "Kuzey Kosova'da (Mitroviça ve çevresi) Sırp nüfusunun ağırlıkta olduğu belediyelerde periyodik silahlı olaylar, barikatlar ve KFOR müdahaleleri. Tam savaş eşiğinin altında süregelen kırılgan bir kriz.",
+    "stats": {
+      "Gerilim odağı": "Mitroviça / Kuzey 4 belediye",
+      "NATO mevcudiyeti": "≈4.500 KFOR askeri",
+      "Son olay": "2023 Banjska saldırısı"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "radar"
+      ],
+      "headline": "Düşük yoğunluklu sıcak nokta + NATO operasyon ortamı.",
+      "useCases": [
+        "Sınır geçiş noktalarının çevresel izlenmesi",
+        "Barikat/blokaj noktalarında hızlı saha durumu",
+        "KFOR konvoy güzergâhları için ön-ISR"
+      ]
+    },
+    "frontline": {
+      "sideA": "Kosova",
+      "sideB": "Sırbistan",
+      "line": [
+        [
+          43.25,
+          20.7
+        ],
+        [
+          43.05,
+          20.9
+        ],
+        [
+          42.95,
+          21.1
+        ],
+        [
+          42.8,
+          21.3
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Kosova (Priştine kontrolü)",
+        "controlledBy": "Kosova",
+        "polygon": [
+          [
+            43.2,
+            20
+          ],
+          [
+            43.25,
+            21.1
+          ],
+          [
+            42.9,
+            21.7
+          ],
+          [
+            42.2,
+            21.7
+          ],
+          [
+            41.9,
+            20.6
+          ],
+          [
+            42.4,
+            20.05
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Sırbistan",
+        "controlledBy": "Sırbistan",
+        "polygon": [
+          [
+            43.9,
+            19.8
+          ],
+          [
+            44.3,
+            21.6
+          ],
+          [
+            43.6,
+            22.4
+          ],
+          [
+            43.3,
+            22.2
+          ],
+          [
+            43.25,
+            20.8
+          ],
+          [
+            43.5,
+            19.8
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Kuzey Kosova Temas Kuşağı",
+      "polygon": [
+        [
+          43.3,
+          20.5
+        ],
+        [
+          43.1,
+          21.3
+        ],
+        [
+          42.85,
+          21.35
+        ],
+        [
+          42.8,
+          20.9
+        ],
+        [
+          43,
+          20.5
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Mitroviça",
+        "lat": 42.89,
+        "lng": 20.87
+      },
+      {
+        "name": "Zubin Potok",
+        "lat": 42.92,
+        "lng": 20.68
+      },
+      {
+        "name": "Banjska",
+        "lat": 42.95,
+        "lng": 20.8
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Kosova KGK + KFOR",
+        "estimate": "≈12.000",
+        "breakdown": [
+          {
+            "kind": "KGK (Kosova)",
+            "value": "≈5k"
+          },
+          {
+            "kind": "KFOR (NATO)",
+            "value": "≈4.6k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Sırbistan SK",
+        "estimate": "≈25.000",
+        "note": "sınır birlikleri + hızlı reaksiyon"
+      },
+      "asOf": "2024",
+      "source": "NATO KFOR + IISS"
+    }
+  },
+  {
+    "id": "cyprus-division",
+    "name": "Kıbrıs Bölünmüşlüğü",
+    "shortName": "Kıbrıs",
+    "region": "Doğu Akdeniz",
+    "status": "frozen",
+    "startedYear": 1974,
+    "severity": 1,
+    "bubble": {
+      "lat": 35.17,
+      "lng": 33.36
+    },
+    "parties": [
+      "Kuzey Kıbrıs Türk Cumhuriyeti (KKTC)",
+      "Kıbrıs Cumhuriyeti",
+      "Türkiye",
+      "BM Barış Gücü (UNFICYP)"
+    ],
+    "summary": "1974 sonrası kalıcılaşan bölünmüşlük. Yeşil Hat boyunca BM tampon bölgesi; gerilim düşük fakat yapısal. Doğu Akdeniz hidrokarbon gerilimleriyle dolaylı bağlantılı.",
+    "stats": {
+      "Yeşil Hat": "≈180 km",
+      "BM Tampon": "Nicosia dahil",
+      "Türk birliği": "KTBK"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "radar"
+      ],
+      "headline": "Donmuş hat + MEB gerilimleri = düşük tempolu sürekli gözetim.",
+      "useCases": [
+        "Yeşil Hat boyunca çevresel izlenim",
+        "Kıyı şeridi ve Türk hava sahası sınırları gözetimi"
+      ]
+    },
+    "frontline": {
+      "sideA": "KKTC / Türkiye",
+      "sideB": "Kıbrıs Cumhuriyeti",
+      "line": [
+        [
+          35.17,
+          32.5
+        ],
+        [
+          35.18,
+          33.1
+        ],
+        [
+          35.17,
+          33.36
+        ],
+        [
+          35.1,
+          33.7
+        ],
+        [
+          35.05,
+          34
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "KKTC",
+        "controlledBy": "KKTC / Türkiye",
+        "polygon": [
+          [
+            35.7,
+            32.3
+          ],
+          [
+            35.68,
+            34.6
+          ],
+          [
+            35.2,
+            34.1
+          ],
+          [
+            35.17,
+            33.1
+          ],
+          [
+            35.2,
+            32.4
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Kıbrıs Cumhuriyeti",
+        "controlledBy": "Kıbrıs Cumhuriyeti",
+        "polygon": [
+          [
+            35.15,
+            32.3
+          ],
+          [
+            35.12,
+            33.7
+          ],
+          [
+            34.9,
+            34.1
+          ],
+          [
+            34.6,
+            33.5
+          ],
+          [
+            34.6,
+            32.6
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Lefkoşa",
+        "lat": 35.17,
+        "lng": 33.36
+      },
+      {
+        "name": "Magosa",
+        "lat": 35.12,
+        "lng": 33.94
+      },
+      {
+        "name": "Girne",
+        "lat": 35.33,
+        "lng": 33.32
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Kıbrıs Ulusal Muh. + Yunan birl.",
+        "estimate": "≈15.000",
+        "breakdown": [
+          {
+            "kind": "GKRY Ulusal Muhafız",
+            "value": "≈12k"
+          },
+          {
+            "kind": "ELDYK (Yunan)",
+            "value": "≈1k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "TSK Kıbrıs Kolordusu + KTBK",
+        "estimate": "≈40.000",
+        "breakdown": [
+          {
+            "kind": "TSK (KTK)",
+            "value": "≈35k"
+          },
+          {
+            "kind": "KKTC Güv. Kuv.",
+            "value": "≈3k"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "IISS + Kıbrıs MoD"
+    }
+  },
+  {
+    "id": "korean-dmz",
+    "name": "Kore Yarımadası – DMZ",
+    "shortName": "Kore",
+    "region": "Kuzeydoğu Asya",
+    "status": "tension",
+    "startedYear": 1953,
+    "severity": 3,
+    "bubble": {
+      "lat": 38,
+      "lng": 127.5
+    },
+    "parties": [
+      "Kuzey Kore (KDHC)",
+      "Güney Kore (ROK)",
+      "ABD (USFK)"
+    ],
+    "summary": "1953 ateşkesinden beri teknik olarak savaş sürüyor. DMZ dünyanın en yoğun askerileştirilmiş sınır hatlarından biri; Kuzey'in balistik/nükleer programı gerilimi sürekli yeniliyor.",
+    "stats": {
+      "DMZ uzunluğu": "≈250 km",
+      "Kuzey topçusu (Seul menzilinde)": "≈8.000 namlu",
+      "USFK": "≈28.500 asker"
+    },
+    "tairos": {
+      "priority": [
+        "radar",
+        "iris",
+        "nova"
+      ],
+      "headline": "Yüksek yoğunluklu konvansiyonel sınır + füze risk profili.",
+      "useCases": [
+        "DMZ çevre hattı 7/24 UAV gözetimi",
+        "Balistik fırlatma rampası tespiti için uzun menzilli radar",
+        "Derinlik istihbaratı: endüstriyel tesisler ve lojistik"
+      ]
+    },
+    "frontline": {
+      "sideA": "Güney Kore",
+      "sideB": "Kuzey Kore",
+      "line": [
+        [
+          37.95,
+          126.68
+        ],
+        [
+          37.97,
+          126.9
+        ],
+        [
+          38,
+          127.3
+        ],
+        [
+          38.3,
+          127.9
+        ],
+        [
+          38.6,
+          128.4
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Güney Kore",
+        "controlledBy": "Güney Kore",
+        "polygon": [
+          [
+            37.9,
+            126.3
+          ],
+          [
+            37.95,
+            128.5
+          ],
+          [
+            35.5,
+            129.3
+          ],
+          [
+            34.5,
+            127.8
+          ],
+          [
+            34.6,
+            126.5
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Kuzey Kore",
+        "controlledBy": "Kuzey Kore",
+        "polygon": [
+          [
+            38.1,
+            124.7
+          ],
+          [
+            38.7,
+            128.5
+          ],
+          [
+            42,
+            130.6
+          ],
+          [
+            42.8,
+            128
+          ],
+          [
+            41,
+            125
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "DMZ Askerileştirilmiş Kuşak",
+      "polygon": [
+        [
+          37.92,
+          126.6
+        ],
+        [
+          37.96,
+          127.2
+        ],
+        [
+          38.2,
+          127.8
+        ],
+        [
+          38.55,
+          128.4
+        ],
+        [
+          38.42,
+          128.5
+        ],
+        [
+          38.1,
+          127.9
+        ],
+        [
+          37.9,
+          127.2
+        ],
+        [
+          37.88,
+          126.7
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Panmunjom",
+        "lat": 37.96,
+        "lng": 126.68
+      },
+      {
+        "name": "Yeonpyeong",
+        "lat": 37.67,
+        "lng": 125.7
+      },
+      {
+        "name": "Yongbyon (nükleer)",
+        "lat": 39.8,
+        "lng": 125.75
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Güney Kore + USFK",
+        "estimate": "≈580.000",
+        "breakdown": [
+          {
+            "kind": "ROKA",
+            "value": "≈555k"
+          },
+          {
+            "kind": "USFK",
+            "value": "≈28.5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Kuzey Kore (KPA)",
+        "estimate": "≈1.280.000",
+        "note": "dünyanın 4. en büyük ordusu · topçu yoğunluklu"
+      },
+      "asOf": "2024",
+      "source": "ROK MND + IISS"
+    }
+  },
+  {
+    "id": "south-china-sea",
+    "name": "Güney Çin Denizi Gerilimleri",
+    "shortName": "G. Çin Denizi",
+    "region": "Güneydoğu Asya",
+    "status": "tension",
+    "startedYear": 2012,
+    "severity": 3,
+    "bubble": {
+      "lat": 14,
+      "lng": 116
+    },
+    "parties": [
+      "Çin Halk Cumhuriyeti",
+      "Filipinler",
+      "Vietnam",
+      "Malezya",
+      "Brunei",
+      "ABD (7. Filo)"
+    ],
+    "summary": "Çin'in 'dokuz kesik çizgi' iddiası üzerine şekillenen çok taraflı deniz çatışması. Spratly ve Paracel takımadaları etrafında sahil güvenlik gemi çarpışmaları, lazerle taciz ve su topu olayları rutinleşti.",
+    "stats": {
+      "Militarize ada": "≈7 yapay ada",
+      "Yıllık ticari geçiş": "≈%30 dünya deniz ticareti",
+      "Balıkçı filosu": "Binlerce (Çin milisleri dahil)"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "radar"
+      ],
+      "headline": "Geniş deniz sahası + gri-bölge taktiği = uzun menzilli ISR odağı.",
+      "useCases": [
+        "Balıkçı milisi ve sahil güvenlik gemi yoğunluklarının izlenmesi",
+        "Yapay ada inşaatı ve aktivite değişimi takibi",
+        "Seyir hattı güvenliği için deniz devriye desteği"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "B",
+        "name": "Çin iddia alanı (9-çizgi)",
+        "controlledBy": "Çin",
+        "polygon": [
+          [
+            21,
+            113
+          ],
+          [
+            21,
+            120.5
+          ],
+          [
+            15,
+            119
+          ],
+          [
+            8,
+            116.5
+          ],
+          [
+            4.5,
+            111.5
+          ],
+          [
+            10,
+            109
+          ],
+          [
+            18,
+            109
+          ]
+        ]
+      },
+      {
+        "side": "A",
+        "name": "Filipinler MEB",
+        "controlledBy": "Filipinler",
+        "polygon": [
+          [
+            20.5,
+            119.8
+          ],
+          [
+            19.5,
+            123
+          ],
+          [
+            13,
+            125
+          ],
+          [
+            8,
+            125.5
+          ],
+          [
+            5.5,
+            121
+          ],
+          [
+            9.5,
+            117.5
+          ],
+          [
+            16,
+            117.5
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Spratly – Paracel Çatışma Kuşağı",
+      "polygon": [
+        [
+          18,
+          111
+        ],
+        [
+          17.5,
+          118
+        ],
+        [
+          10,
+          118
+        ],
+        [
+          6.5,
+          114
+        ],
+        [
+          10.5,
+          110
+        ],
+        [
+          15,
+          109.5
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Second Thomas Shoal",
+        "lat": 9.74,
+        "lng": 115.86
+      },
+      {
+        "name": "Scarborough Shoal",
+        "lat": 15.15,
+        "lng": 117.77
+      },
+      {
+        "name": "Fiery Cross Reef",
+        "lat": 9.55,
+        "lng": 112.89
+      },
+      {
+        "name": "Woody Island",
+        "lat": 16.83,
+        "lng": 112.34
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Filipinler + ABD müttefikleri",
+        "estimate": "≈150.000",
+        "breakdown": [
+          {
+            "kind": "AFP (Filipinler)",
+            "value": "≈145k"
+          },
+          {
+            "kind": "ABD rotasyon",
+            "value": "≈5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "ÇHC — Güney Tiyatro K. + CCG",
+        "estimate": "≈300.000+",
+        "breakdown": [
+          {
+            "kind": "PLA Güney T.",
+            "value": "≈250k"
+          },
+          {
+            "kind": "Sahil Güv. (CCG)",
+            "value": "≈40k"
+          },
+          {
+            "kind": "PAFMM milis",
+            "value": "belirsiz"
+          }
+        ],
+        "note": "gri bölge: balıkçı milis gemileri"
+      },
+      "asOf": "2024",
+      "source": "CSIS AMTI + DoD"
+    }
+  },
+  {
+    "id": "transnistria",
+    "name": "Moldova – Transdinyester",
+    "shortName": "Transdinyester",
+    "region": "Doğu Avrupa",
+    "status": "frozen",
+    "startedYear": 1992,
+    "severity": 2,
+    "bubble": {
+      "lat": 47.2,
+      "lng": 29.5
+    },
+    "parties": [
+      "Moldova",
+      "Transdinyester (PMR)",
+      "Rusya (OGRV)"
+    ],
+    "summary": "Dinyester Nehri'nin doğusundaki ayrılıkçı bölgede Rus askeri varlığı (OGRV) 30+ yıldır konuşlu. Ukrayna savaşı ile birlikte Rus birliğinin yeniden ikmal hattı kırıldı; gerilim yükseldi.",
+    "stats": {
+      "Rus birliği": "≈1.500 asker",
+      "Cephanelik": "Cobasna (dünyanın en büyüklerinden)",
+      "Durum": "Dondurulmuş ihtilaf"
+    },
+    "tairos": {
+      "priority": [
+        "iris"
+      ],
+      "headline": "Dondurulmuş cephe + büyük cephanelik = yakın gözetim değerinde.",
+      "useCases": [
+        "Cobasna cephaneliği çevresel gözetimi",
+        "Dinyester hattı sınır izleme"
+      ]
+    },
+    "frontline": {
+      "sideA": "Moldova",
+      "sideB": "Transdinyester / Rusya",
+      "line": [
+        [
+          48.35,
+          27.5
+        ],
+        [
+          47.8,
+          28.6
+        ],
+        [
+          47.2,
+          29.1
+        ],
+        [
+          46.6,
+          29.6
+        ],
+        [
+          46.2,
+          30
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Moldova",
+        "controlledBy": "Moldova",
+        "polygon": [
+          [
+            48.4,
+            26.6
+          ],
+          [
+            48.25,
+            28.2
+          ],
+          [
+            47.2,
+            28.8
+          ],
+          [
+            46.2,
+            28.5
+          ],
+          [
+            45.8,
+            27
+          ],
+          [
+            47,
+            26.7
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Transdinyester",
+        "controlledBy": "PMR / Rusya",
+        "polygon": [
+          [
+            48.4,
+            27.8
+          ],
+          [
+            48.1,
+            29.6
+          ],
+          [
+            46.8,
+            30.2
+          ],
+          [
+            46.3,
+            30
+          ],
+          [
+            46.7,
+            28.7
+          ],
+          [
+            47.8,
+            28.3
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Tiraspol",
+        "lat": 46.84,
+        "lng": 29.64
+      },
+      {
+        "name": "Cobasna",
+        "lat": 48.07,
+        "lng": 28.93
+      },
+      {
+        "name": "Bender",
+        "lat": 46.83,
+        "lng": 29.48
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Moldova SK",
+        "estimate": "≈6.000"
+      },
+      "sideB": {
+        "label": "Transdinyester + Rus OGRF",
+        "estimate": "≈8.000",
+        "breakdown": [
+          {
+            "kind": "Transd. milisi",
+            "value": "≈6.5k"
+          },
+          {
+            "kind": "Rus OGRF",
+            "value": "≈1.5k"
+          }
+        ],
+        "note": "Cobasna mühimmat deposu bekçisi"
+      },
+      "asOf": "2024",
+      "source": "IISS + Moldovan MoD"
+    }
+  },
+  {
+    "id": "gerd-nile",
+    "name": "Nil Havzası – GERD Gerilimi",
+    "shortName": "GERD",
+    "region": "Doğu Afrika",
+    "status": "tension",
+    "startedYear": 2011,
+    "severity": 2,
+    "bubble": {
+      "lat": 15,
+      "lng": 35.5
+    },
+    "parties": [
+      "Etiyopya",
+      "Mısır",
+      "Sudan"
+    ],
+    "summary": "Etiyopya'nın Büyük Rönesans Barajı (GERD) dolum süreci, Mısır ve Sudan'ın su güvenliği tehdit algısını derinleştirdi. Askeri retorik ve istihbarat çekişmesi periyodik olarak yükseliyor.",
+    "stats": {
+      "Baraj kapasitesi": "74 milyar m³",
+      "Mısır tarımı bağımlılığı": "Nil'e %95",
+      "Dolum": "2020–2023 tamamlandı"
+    },
+    "tairos": {
+      "priority": [
+        "nova"
+      ],
+      "headline": "Uzun menzilli stratejik gözetim değeri olan hidropolitik kriz.",
+      "useCases": [
+        "GERD çevresi inşaat/su seviyesi izleme",
+        "Nil havzası sınır hattı stratejik keşif"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "Mısır",
+        "controlledBy": "Mısır",
+        "polygon": [
+          [
+            31.5,
+            25
+          ],
+          [
+            31.5,
+            35
+          ],
+          [
+            22,
+            37
+          ],
+          [
+            22,
+            25
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Etiyopya",
+        "controlledBy": "Etiyopya",
+        "polygon": [
+          [
+            14.5,
+            33
+          ],
+          [
+            14,
+            42
+          ],
+          [
+            4,
+            45
+          ],
+          [
+            3.5,
+            36
+          ],
+          [
+            9,
+            33
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "GERD Barajı",
+        "lat": 11.22,
+        "lng": 35.09
+      },
+      {
+        "name": "Assuan Barajı",
+        "lat": 23.97,
+        "lng": 32.88
+      },
+      {
+        "name": "Hartum",
+        "lat": 15.5,
+        "lng": 32.56
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Mısır SK",
+        "estimate": "≈440.000"
+      },
+      "sideB": {
+        "label": "Etiyopya SK (ENDF)",
+        "estimate": "≈160.000",
+        "note": "Tigray sonrası yeniden yapılandırma"
+      },
+      "asOf": "2024",
+      "source": "IISS Military Balance"
+    }
+  },
+  {
+    "id": "western-sahara",
+    "name": "Batı Sahra – Polisario",
+    "shortName": "Batı Sahra",
+    "region": "Kuzey Afrika",
+    "status": "frozen",
+    "startedYear": 1975,
+    "severity": 2,
+    "bubble": {
+      "lat": 25,
+      "lng": -13
+    },
+    "parties": [
+      "Fas Krallığı",
+      "Polisario Cephesi",
+      "Cezayir (destek)"
+    ],
+    "summary": "Fas kontrolündeki bölge ile Polisario denetimindeki iç çöl arasındaki kum duvarı (Berm) boyunca 2020'de bozulan ateşkesin ardından düşük yoğunluklu çatışma sürüyor.",
+    "stats": {
+      "Kum Duvarı": "≈2.700 km",
+      "MINURSO": "BM misyonu",
+      "Fas denetimi": "≈%80"
+    },
+    "tairos": {
+      "priority": [
+        "nova"
+      ],
+      "headline": "Uzun çöl hattı + düşük yoğunluklu taciz = uzun menzilli ISR için idealine yakın.",
+      "useCases": [
+        "Berm boyunca hareket tespiti",
+        "Çöl içindeki konvoy güzergâhları gözetimi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Fas",
+      "sideB": "Polisario",
+      "line": [
+        [
+          27.6,
+          -11.5
+        ],
+        [
+          26.8,
+          -11
+        ],
+        [
+          25.5,
+          -10.8
+        ],
+        [
+          23.8,
+          -10.8
+        ],
+        [
+          22.3,
+          -12.5
+        ],
+        [
+          21.1,
+          -13
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Fas kontrolü",
+        "controlledBy": "Fas",
+        "polygon": [
+          [
+            27.7,
+            -13.2
+          ],
+          [
+            27.5,
+            -11.5
+          ],
+          [
+            22,
+            -12.5
+          ],
+          [
+            20.8,
+            -17
+          ],
+          [
+            27,
+            -17.1
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Polisario (SADR)",
+        "controlledBy": "Polisario",
+        "polygon": [
+          [
+            27.6,
+            -10.4
+          ],
+          [
+            26.8,
+            -8.7
+          ],
+          [
+            22.4,
+            -8.7
+          ],
+          [
+            21,
+            -12.5
+          ],
+          [
+            23.5,
+            -10.8
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Guerguerat",
+        "lat": 21.35,
+        "lng": -16.97
+      },
+      {
+        "name": "Bir Lahlou",
+        "lat": 26.34,
+        "lng": -9.68
+      },
+      {
+        "name": "Tifariti",
+        "lat": 26.08,
+        "lng": -10.58
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Fas Kraliyet SK",
+        "estimate": "≈200.000",
+        "note": "Berm (kum duvarı) boyunca yoğun konuş"
+      },
+      "sideB": {
+        "label": "Polisario (SADR)",
+        "estimate": "≈5.000-6.000",
+        "note": "Cezayir Tindouf'tan desteklenen gerilla"
+      },
+      "asOf": "2024",
+      "source": "MINURSO + IISS"
+    }
+  },
+  {
+    "id": "pakistan-ttp",
+    "name": "Pakistan – TTP Sınır Çatışması",
+    "shortName": "Pakistan-TTP",
+    "region": "Güney Asya",
+    "status": "ongoing",
+    "startedYear": 2007,
+    "severity": 3,
+    "bubble": {
+      "lat": 33.5,
+      "lng": 70.5
+    },
+    "parties": [
+      "Pakistan Silahlı Kuvvetleri",
+      "Tehrik-i-Taliban Pakistan (TTP)",
+      "Afganistan Taliban rejimi (dolaylı)"
+    ],
+    "summary": "TTP'nin Afganistan üzerinden sızan saldırıları 2022 sonrası yeniden tırmandı. Hayber-Pahtunhva ve Belucistan'da düzenli operasyonlar; sınır ötesi Pakistan hava saldırıları 2024'ten itibaren arttı.",
+    "stats": {
+      "KP & Belucistan": "ana etkinlik sahası",
+      "Duran Hattı": "≈2.670 km",
+      "Yıllık saldırı": "yüzlerce"
+    },
+    "tairos": {
+      "priority": [
+        "iris",
+        "nova"
+      ],
+      "headline": "Dağlık sınır + sızma koridoru = Iris sınıfı UAV'lar için uygun iş yükü.",
+      "useCases": [
+        "Sınır boyunca sızma koridoru izleme",
+        "KP kırsalında konvoy koruma ISR'ı",
+        "Sınır ötesi hedef teşhisi ön-aşaması"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "Pakistan Devleti",
+        "controlledBy": "Pakistan Devleti",
+        "polygon": [
+          [
+            36.8,
+            69
+          ],
+          [
+            36.3,
+            75.5
+          ],
+          [
+            29,
+            75.5
+          ],
+          [
+            24.5,
+            67.5
+          ],
+          [
+            25,
+            62
+          ],
+          [
+            29,
+            61.8
+          ],
+          [
+            32.8,
+            65.5
+          ],
+          [
+            35.8,
+            69
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "TTP etki cepleri (KP & FATA)",
+        "controlledBy": "TTP",
+        "polygon": [
+          [
+            35.5,
+            70.8
+          ],
+          [
+            34.6,
+            72.3
+          ],
+          [
+            33.3,
+            72.1
+          ],
+          [
+            32.2,
+            71.2
+          ],
+          [
+            32.8,
+            69.8
+          ],
+          [
+            34.5,
+            69.6
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Duran Hattı Sızma Kuşağı",
+      "polygon": [
+        [
+          36.6,
+          70.2
+        ],
+        [
+          35.7,
+          72
+        ],
+        [
+          34,
+          72
+        ],
+        [
+          32.4,
+          70.8
+        ],
+        [
+          31,
+          69.2
+        ],
+        [
+          31.6,
+          67.8
+        ],
+        [
+          33.8,
+          68.4
+        ],
+        [
+          35.6,
+          69.6
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Peşaver",
+        "lat": 34.01,
+        "lng": 71.58
+      },
+      {
+        "name": "Miranşah",
+        "lat": 33,
+        "lng": 70.06
+      },
+      {
+        "name": "Kweta",
+        "lat": 30.18,
+        "lng": 66.98
+      },
+      {
+        "name": "Torkham Geçişi",
+        "lat": 34.13,
+        "lng": 71.09
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Pakistan SK + Frontier Corps",
+        "estimate": "≈200.000",
+        "breakdown": [
+          {
+            "kind": "PA birlikleri",
+            "value": "≈150k"
+          },
+          {
+            "kind": "Frontier Corps",
+            "value": "≈50k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "TTP + bağlı örgütler",
+        "estimate": "≈6.000-8.000",
+        "note": "Afganistan sınır boyu hücre yapısı"
+      },
+      "asOf": "2024",
+      "source": "Pakistan MoI + UN 1267 raporları"
+    }
+  },
+  {
+    "id": "nigeria-lakechad",
+    "name": "Lake Chad Havzası – Boko Haram / ISWAP",
+    "shortName": "Lake Chad",
+    "region": "Batı Afrika",
+    "status": "ongoing",
+    "startedYear": 2009,
+    "severity": 3,
+    "bubble": {
+      "lat": 12.8,
+      "lng": 13.8
+    },
+    "parties": [
+      "Nijerya Silahlı Kuvvetleri",
+      "Çok Uluslu Müşterek Görev Kuvveti (MNJTF)",
+      "Boko Haram",
+      "ISWAP (İslam Devleti Batı Afrika)"
+    ],
+    "summary": "Lake Chad havzasında Nijerya-Nijer-Çad-Kamerun ortak operasyonları sürüyor. ISWAP göl adalarındaki mevzilerini güçlendirdi; Boko Haram kırsal saldırılarını sürdürüyor.",
+    "stats": {
+      "Yerinden edilenler": "≈3 milyon",
+      "MNJTF": "4 ülke ortak kuvveti",
+      "Etki sahası": "Borno, Yobe, Adamawa"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris"
+      ],
+      "headline": "Geniş savan + göl adaları = uzun menzilli ISR ve yakın keşif birlikte.",
+      "useCases": [
+        "Göl adalarında silahlı grup haritalaması",
+        "Konvoy koruma için ön-ISR",
+        "Sınır hattı kaçış yolu izleme"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "MNJTF kontrol bölgesi",
+        "controlledBy": "Nijerya / MNJTF",
+        "polygon": [
+          [
+            13.9,
+            10.5
+          ],
+          [
+            14.2,
+            14.8
+          ],
+          [
+            11.8,
+            14.5
+          ],
+          [
+            10.5,
+            12.8
+          ],
+          [
+            11.5,
+            10.6
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "ISWAP / Boko Haram etki sahası",
+        "controlledBy": "ISWAP / Boko Haram",
+        "polygon": [
+          [
+            13.7,
+            13.2
+          ],
+          [
+            13.5,
+            14.4
+          ],
+          [
+            12.3,
+            14.3
+          ],
+          [
+            11.7,
+            13.3
+          ],
+          [
+            12.6,
+            12.8
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Lake Chad Çatışma Havzası",
+      "polygon": [
+        [
+          14.2,
+          12.8
+        ],
+        [
+          14,
+          14.4
+        ],
+        [
+          12,
+          14.3
+        ],
+        [
+          10.8,
+          13.4
+        ],
+        [
+          11.5,
+          11.8
+        ],
+        [
+          13.2,
+          11.9
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Maiduguri",
+        "lat": 11.85,
+        "lng": 13.16
+      },
+      {
+        "name": "Diffa",
+        "lat": 13.32,
+        "lng": 12.61
+      },
+      {
+        "name": "Baga",
+        "lat": 13.09,
+        "lng": 13.79
+      },
+      {
+        "name": "Monguno",
+        "lat": 12.67,
+        "lng": 13.61
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "MNJTF (NG/NE/TD/CM/BJ)",
+        "estimate": "≈10.000",
+        "breakdown": [
+          {
+            "kind": "Nijerya dilimi",
+            "value": "≈3.5k"
+          },
+          {
+            "kind": "Çad dilimi",
+            "value": "≈3k"
+          },
+          {
+            "kind": "diğer üyeler",
+            "value": "≈3.5k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Boko Haram + ISWAP",
+        "estimate": "≈8.000-12.000",
+        "breakdown": [
+          {
+            "kind": "ISWAP",
+            "value": "≈5-6k"
+          },
+          {
+            "kind": "JAS (BH)",
+            "value": "≈3-4k"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "MNJTF + ICG raporları"
+    }
+  },
+  {
+    "id": "mozambique-cabo-delgado",
+    "name": "Mozambik – Cabo Delgado İsyanı",
+    "shortName": "Cabo Delgado",
+    "region": "Güney Afrika",
+    "status": "ongoing",
+    "startedYear": 2017,
+    "severity": 3,
+    "bubble": {
+      "lat": -12.8,
+      "lng": 40.2
+    },
+    "parties": [
+      "Mozambik Silahlı Kuvvetleri (FADM)",
+      "Ruanda Savunma Kuvvetleri",
+      "SAMIM (SADC)",
+      "ISIS-Mozambik (Ansar al-Sunna)"
+    ],
+    "summary": "TotalEnergies LNG projesi çevresindeki bölgede 2021 Ruanda konuşlanması sonrası kısmi sükûnet sağlandı; ancak ormanlık iç bölgelerde grup aktivitesi süregeliyor.",
+    "stats": {
+      "Yerinden edilenler": "≈800.000",
+      "LNG projesi": "Palma (askıda)",
+      "Ruanda birliği": "≈2.500 asker"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris"
+      ],
+      "headline": "Enerji projesi güvenliği + orman harekâtı = katmanlı ISR talebi.",
+      "useCases": [
+        "LNG yerleşkesi çevre güvenliği",
+        "Orman örtüsü altında grup hareket takibi",
+        "Kıyı kaçakçılık hatlarının izlenmesi"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "FADM / Ruanda kontrolü",
+        "controlledBy": "FADM / Ruanda",
+        "polygon": [
+          [
+            -10.8,
+            39.4
+          ],
+          [
+            -10.7,
+            40.8
+          ],
+          [
+            -11.9,
+            41
+          ],
+          [
+            -13.2,
+            40.6
+          ],
+          [
+            -13.6,
+            39.8
+          ],
+          [
+            -12.2,
+            39.2
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "ISIS-Mozambik etki sahası",
+        "controlledBy": "ISIS-M",
+        "polygon": [
+          [
+            -11.4,
+            39.8
+          ],
+          [
+            -11.5,
+            40.3
+          ],
+          [
+            -12.2,
+            40.3
+          ],
+          [
+            -12.6,
+            39.9
+          ],
+          [
+            -12.2,
+            39.6
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Cabo Delgado Çatışma Sahası",
+      "polygon": [
+        [
+          -10.7,
+          39.5
+        ],
+        [
+          -10.6,
+          40.8
+        ],
+        [
+          -12.8,
+          40.8
+        ],
+        [
+          -13.5,
+          39.8
+        ],
+        [
+          -12.5,
+          39.3
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Palma",
+        "lat": -10.77,
+        "lng": 40.47
+      },
+      {
+        "name": "Mocimboa da Praia",
+        "lat": -11.35,
+        "lng": 40.35
+      },
+      {
+        "name": "Macomia",
+        "lat": -12.25,
+        "lng": 40.13
+      },
+      {
+        "name": "Pemba",
+        "lat": -12.97,
+        "lng": 40.52
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "FADM + SAMIM + Ruanda RDF",
+        "estimate": "≈8.000",
+        "breakdown": [
+          {
+            "kind": "Mozambik FADM",
+            "value": "≈3k"
+          },
+          {
+            "kind": "Ruanda RDF",
+            "value": "≈2.5k"
+          },
+          {
+            "kind": "SAMIM (SADC)",
+            "value": "≈1.5k (çekilme)"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "IŞİD-Mozambik (Ashabah)",
+        "estimate": "≈1.500-2.500",
+        "note": "IŞİD Orta Afrika Vilayeti bayrağı altında"
+      },
+      "asOf": "2024",
+      "source": "ACLED + Cabo Ligado"
+    }
+  },
+  {
+    "id": "venezuela-guyana",
+    "name": "Venezuela – Guyana Essequibo",
+    "shortName": "Essequibo",
+    "region": "Güney Amerika",
+    "status": "tension",
+    "startedYear": 1899,
+    "severity": 2,
+    "bubble": {
+      "lat": 6,
+      "lng": -60
+    },
+    "parties": [
+      "Venezuela",
+      "Guyana",
+      "Brezilya (gözlemci)"
+    ],
+    "summary": "Guyana'nın Essequibo bölgesindeki dev petrol keşifleri Venezuela'nın tarihsel toprak iddiasını yeniden canlandırdı. 2023 referandumu sonrası sınır hattına askeri konuşlanma arttı.",
+    "stats": {
+      "Tartışmalı alan": "≈160.000 km²",
+      "Petrol rezervi": "11+ milyar varil (Stabroek)",
+      "Nüfus": "≈125.000"
+    },
+    "tairos": {
+      "priority": [
+        "nova"
+      ],
+      "headline": "Uzak tropikal sınır + enerji rezervleri = stratejik uzun menzilli gözetim.",
+      "useCases": [
+        "Stabroek bloku çevre deniz alanı izleme",
+        "Tartışmalı sınır hattı boyunca konuşlanma takibi"
+      ]
+    },
+    "frontline": {
+      "sideA": "Guyana",
+      "sideB": "Venezuela iddiası",
+      "line": [
+        [
+          8.2,
+          -60.7
+        ],
+        [
+          7.2,
+          -60.7
+        ],
+        [
+          5.5,
+          -60
+        ],
+        [
+          3.8,
+          -60.2
+        ],
+        [
+          1.5,
+          -58.8
+        ]
+      ]
+    },
+    "contested": [
+      {
+        "side": "A",
+        "name": "Essequibo (Guyana fiili)",
+        "controlledBy": "Guyana",
+        "polygon": [
+          [
+            8.5,
+            -60.6
+          ],
+          [
+            8.4,
+            -58.4
+          ],
+          [
+            1.2,
+            -56.5
+          ],
+          [
+            1.2,
+            -59.5
+          ],
+          [
+            6,
+            -60.2
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "Venezuela iddia sahası",
+        "controlledBy": "Venezuela (iddia)",
+        "polygon": [
+          [
+            8.6,
+            -62.5
+          ],
+          [
+            8.5,
+            -60.6
+          ],
+          [
+            1.2,
+            -59.5
+          ],
+          [
+            0.7,
+            -62
+          ]
+        ]
+      }
+    ],
+    "theatre": null,
+    "hotspots": [
+      {
+        "name": "Stabroek Bloku (deniz)",
+        "lat": 7.8,
+        "lng": -56.8
+      },
+      {
+        "name": "Lethem",
+        "lat": 3.37,
+        "lng": -59.8
+      },
+      {
+        "name": "Anacoco",
+        "lat": 6.35,
+        "lng": -61.12
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Guyana GDF + UK/ABD desteği",
+        "estimate": "≈5.000",
+        "note": "UK Kraliyet Donanması ziyaret + ABD tatbikatları"
+      },
+      "sideB": {
+        "label": "Venezuela FANB",
+        "estimate": "≈125.000",
+        "breakdown": [
+          {
+            "kind": "FANB aktif",
+            "value": "≈125k"
+          },
+          {
+            "kind": "milis",
+            "value": "≈220k kayıtlı"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "IISS + SOUTHCOM"
+    }
+  },
+  {
+    "id": "aegean-easternmed",
+    "name": "Ege – Doğu Akdeniz Gerilimi",
+    "shortName": "Ege / D. Akdeniz",
+    "region": "Doğu Akdeniz",
+    "status": "tension",
+    "startedYear": 1974,
+    "severity": 2,
+    "bubble": {
+      "lat": 35.8,
+      "lng": 28
+    },
+    "parties": [
+      "Türkiye",
+      "Yunanistan",
+      "Kıbrıs Cumhuriyeti",
+      "Mısır"
+    ],
+    "summary": "Ege hava sahası/karasuları ve Doğu Akdeniz MEB demarkasyonu üzerinden süregelen yapısal gerilim. Hidrokarbon arama gemileri çevresindeki dönemsel deniz çekişmeleri öne çıkıyor.",
+    "stats": {
+      "Ege adaları": "~3.000+ ada/adacık",
+      "MEB tartışması": "Meis / Girit çevresi",
+      "Gergin dönemler": "2020 Oruç Reis, 2022 uçuş ihlalleri"
+    },
+    "tairos": {
+      "priority": [
+        "nova",
+        "iris",
+        "radar"
+      ],
+      "headline": "Deniz hava sahası + sismik gemi güvenliği = doğrudan Tairos doktrini.",
+      "useCases": [
+        "Sismik/sondaj gemileri çevresi deniz güvenliği",
+        "Ege adaları yakın hava sahası izleme",
+        "Doğu Akdeniz geniş alan deniz devriyesi"
+      ]
+    },
+    "frontline": null,
+    "contested": [
+      {
+        "side": "A",
+        "name": "TR deniz yetki alanı iddiası",
+        "controlledBy": "Türkiye",
+        "polygon": [
+          [
+            36.8,
+            27
+          ],
+          [
+            36.6,
+            32
+          ],
+          [
+            34.6,
+            32
+          ],
+          [
+            33.6,
+            28.5
+          ],
+          [
+            34.4,
+            26.5
+          ]
+        ]
+      },
+      {
+        "side": "B",
+        "name": "GR/GC iddia alanı",
+        "controlledBy": "Yunanistan / Kıbrıs",
+        "polygon": [
+          [
+            36.8,
+            25
+          ],
+          [
+            36.6,
+            27
+          ],
+          [
+            34.4,
+            26.5
+          ],
+          [
+            33,
+            24.5
+          ],
+          [
+            34.8,
+            22.8
+          ],
+          [
+            36.6,
+            23.2
+          ]
+        ]
+      }
+    ],
+    "theatre": {
+      "label": "Doğu Akdeniz MEB Temas Sahası",
+      "polygon": [
+        [
+          36.8,
+          25
+        ],
+        [
+          36.7,
+          32
+        ],
+        [
+          34,
+          32
+        ],
+        [
+          32.8,
+          28
+        ],
+        [
+          33.5,
+          24.5
+        ],
+        [
+          35.5,
+          23.2
+        ]
+      ]
+    },
+    "hotspots": [
+      {
+        "name": "Meis (Kastellorizo)",
+        "lat": 36.15,
+        "lng": 29.59
+      },
+      {
+        "name": "Girit",
+        "lat": 35.25,
+        "lng": 24.8
+      },
+      {
+        "name": "Rodos",
+        "lat": 36.43,
+        "lng": 28.22
+      }
+    ],
+    "forces": {
+      "sideA": {
+        "label": "Türkiye SK",
+        "estimate": "≈355.000 aktif",
+        "breakdown": [
+          {
+            "kind": "Ege Ordusu",
+            "value": "4. Kor + deniz/hava"
+          },
+          {
+            "kind": "yedek",
+            "value": "≈380k"
+          }
+        ]
+      },
+      "sideB": {
+        "label": "Yunanistan + GKRY + müttefik mev.",
+        "estimate": "≈130.000",
+        "breakdown": [
+          {
+            "kind": "Yunan SK",
+            "value": "≈110k"
+          },
+          {
+            "kind": "GKRY UM",
+            "value": "≈12k"
+          }
+        ]
+      },
+      "asOf": "2024",
+      "source": "IISS Military Balance"
+    }
+  }
+]

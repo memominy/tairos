@@ -1,0 +1,524 @@
+{
+  "ukraine-russia": [
+    {
+      "date": "2026-04-18",
+      "severity": "critical",
+      "headline": "Harkov hattına eş zamanlı Shahed dalgası",
+      "summary": "Gece boyunca 84 kamikaze drone tespit edildi; Ukrayna hava savunması 61'ini düşürdü. Enerji Bakanlığı altı trafo merkezinde ağır hasar bildiriyor.",
+      "tags": ["drone", "enerji altyapısı", "gece saldırısı"],
+      "source": "OSINT · sosyal medya + resmi açıklama"
+    },
+    {
+      "date": "2026-04-14",
+      "severity": "major",
+      "headline": "AB 155 mm paketi Polonya üzerinden ulaştı",
+      "summary": "Çek öncülüğündeki girişim kapsamındaki 180 bin obüs merminin ilk parti teslimatı tamamlandı. Cephe gerisi depolama noktaları hareketleniyor.",
+      "tags": ["lojistik", "topçu", "AB"]
+    },
+    {
+      "date": "2026-04-10",
+      "severity": "routine",
+      "headline": "Donbas cephesi büyük ölçüde statik",
+      "summary": "Chasiv Yar ve Avdiivka ekseninde düşük yoğunluklu piyade temasları sürüyor; kayda değer bir toprak değişikliği raporlanmadı.",
+      "tags": ["cephe", "Donbas"]
+    },
+    {
+      "date": "2026-04-05",
+      "severity": "diplomatic",
+      "headline": "Cenevre'de ateşkes çerçevesi müzakeresi",
+      "summary": "BM öncülüğünde başlayan teknik seviyede temaslar, enerji altyapısı için karşılıklı saldırı yasağı kapsamını görüşüyor. Sonuç bildirisi beklenmiyor.",
+      "tags": ["müzakere", "BM"]
+    }
+  ],
+  "gaza-israel": [
+    {
+      "date": "2026-04-17",
+      "severity": "critical",
+      "headline": "Refah güneyinde yeni kara harekâtı fazı",
+      "summary": "IDF iki tugay düzeyinde güneye doğru genişleme başlattı. Sivil boşaltma koridoru için Mısır ile 48 saatlik pencere duyuruldu.",
+      "tags": ["kara harekâtı", "sivil koridor"],
+      "source": "IDF sözcüsü + uydu imgeleri"
+    },
+    {
+      "date": "2026-04-12",
+      "severity": "major",
+      "headline": "İnsani yardım koridoru yeniden açıldı",
+      "summary": "Kerem Şalom sınır kapısından günlük 280 TIR'a çıkış hedefi konuldu. BM ajansları lojistik altyapının hâlâ yetersiz olduğunu belirtiyor.",
+      "tags": ["insani yardım"]
+    },
+    {
+      "date": "2026-04-08",
+      "severity": "diplomatic",
+      "headline": "Katar arabuluculuğunda rehine görüşmeleri",
+      "summary": "Üçüncü aşama rehine-mahkûm takas formülü için Doha'da doğrudan temaslar sürüyor. Hamas siyasi bürosu 3 günlük bir teknik durakla cevap bekliyor.",
+      "tags": ["müzakere", "rehine", "Katar"]
+    }
+  ],
+  "lebanon-israel": [
+    {
+      "date": "2026-04-15",
+      "severity": "major",
+      "headline": "Litani kuzeyinde UNIFIL devriyesi engellendi",
+      "summary": "Hizbullah'a yakın silahlı grupların Sektör 2 devriyesini kısa süreliğine durdurduğu bildirildi. UNIFIL sert bir protesto notası yayımladı.",
+      "tags": ["UNIFIL", "Litani"]
+    },
+    {
+      "date": "2026-04-09",
+      "severity": "routine",
+      "headline": "İsrail hava sahası girişiminde drone düşürüldü",
+      "summary": "Batı Celile üzerinde tespit edilen keşif amaçlı İHA, Demir Kubbe tarafından etkisiz hale getirildi. Hasar bildirimi yok.",
+      "tags": ["drone", "hava savunma"]
+    },
+    {
+      "date": "2026-04-02",
+      "severity": "diplomatic",
+      "headline": "ABD özel temsilcisi mekik diplomasisinde",
+      "summary": "Amos Hochstein Beyrut – Kudüs arasında üç tur yaparak sınır çizgisi (Mavi Hat) teknik doğrulamasını görüşüyor.",
+      "tags": ["müzakere", "ABD", "Mavi Hat"]
+    }
+  ],
+  "iran-usa": [
+    {
+      "date": "2026-04-18",
+      "severity": "critical",
+      "headline": "Hürmüz Boğazı'nda deniz olayı",
+      "summary": "Panama bayraklı ticari tanker yakınında IRGC hızlı botları manevra yaparken ABD destroyeri USS Bulkeley ihbar ateşi açtı. Taraflar karşılıklı açıklama yapıyor.",
+      "tags": ["deniz", "Hürmüz", "IRGC"],
+      "source": "NAVCENT bildiri + ticari AIS verisi"
+    },
+    {
+      "date": "2026-04-11",
+      "severity": "major",
+      "headline": "Yeni orta menzilli balistik test NOTAM'ı",
+      "summary": "Semnan platformundan 1700 km ötedeki bir hedefe yönelik yeni nesil bir katı yakıtlı füze testi yayımlanan hava sahası uyarılarıyla doğrulanıyor.",
+      "tags": ["füze testi", "NOTAM"]
+    },
+    {
+      "date": "2026-04-03",
+      "severity": "diplomatic",
+      "headline": "Maskat'ta nükleer kanal teması",
+      "summary": "Umman arabuluculuğunda teknik heyetler, zenginleştirme tavanı konusunda sınırlı bir geçici anlaşma olasılığını görüşüyor.",
+      "tags": ["müzakere", "nükleer", "Umman"]
+    }
+  ],
+  "iraq-proxy": [
+    {
+      "date": "2026-04-13",
+      "severity": "major",
+      "headline": "Ayn el-Esed'e roket saldırısı",
+      "summary": "Kata'ib Hizbullah kendi adına üstlenmezken, Şii direniş koalisyonu saldırıyı sahiplendi. C-RAM sistemi üç rotayı etkisiz hale getirdi.",
+      "tags": ["roket", "üs saldırısı"]
+    },
+    {
+      "date": "2026-04-06",
+      "severity": "routine",
+      "headline": "Erbil'de ABD Görev Gücü rotasyonu",
+      "summary": "CJTF-OIR birlikleri rutin altı aylık rotasyon kapsamında kısmi çıkış ve takviye süreci başlattı. Peşmerge koordinasyonu sürüyor.",
+      "tags": ["rotasyon", "CJTF-OIR"]
+    }
+  ],
+  "syria-civil": [
+    {
+      "date": "2026-04-16",
+      "severity": "major",
+      "headline": "HTS kuzey İdlib hattında konsolidasyon",
+      "summary": "Rejim güçlerinin çekilmesinin ardından HTS komuta birimleri yeni karakolları devraldı; yol kontrol noktaları iki katına çıktı.",
+      "tags": ["İdlib", "HTS"]
+    },
+    {
+      "date": "2026-04-10",
+      "severity": "routine",
+      "headline": "Kamışlı yakınında SDG devriyesi duraksadı",
+      "summary": "Türkiye'nin drone operasyonlarının ardından SDG kuzey sektöründe devriye düzenini azalttı. Koalisyon insansız keşif görevleri sürüyor.",
+      "tags": ["SDG", "drone", "kuzey Suriye"]
+    },
+    {
+      "date": "2026-04-02",
+      "severity": "diplomatic",
+      "headline": "Astana formatı yeniden toplanıyor",
+      "summary": "Rusya, Türkiye ve İran heyetleri mülteci geri dönüşü ve yeniden yapılanma fonları için teknik alt komisyonu aktive etti.",
+      "tags": ["Astana", "müzakere"]
+    }
+  ],
+  "sudan-civil": [
+    {
+      "date": "2026-04-14",
+      "severity": "critical",
+      "headline": "RSF Al-Fashir çevresinde ilerliyor",
+      "summary": "Darfur ordu komutanlığı, kentin batı ve güney girişlerinde yoğun çatışma bildirdi. BM etnik hedefleme riski konusunda uyardı.",
+      "tags": ["RSF", "Darfur", "sivil risk"],
+      "source": "OSINT · BM raporu"
+    },
+    {
+      "date": "2026-04-07",
+      "severity": "major",
+      "headline": "Hartum'da Sayyam trafo merkezi vuruldu",
+      "summary": "Karşılıklı hava-drone ataklarında şehir elektrik şebekesinin %40'ı devre dışı kaldı. Su dağıtımı kritik eşikte.",
+      "tags": ["altyapı", "Hartum"]
+    },
+    {
+      "date": "2026-04-01",
+      "severity": "diplomatic",
+      "headline": "Cidde müzakereleri yeniden başlıyor",
+      "summary": "Suudi Arabistan – ABD ortak ev sahipliğinde insani ateşkes için üçüncü tur temaslar planlandı; RSF heyetinin katılımı henüz teyit edilmedi.",
+      "tags": ["Cidde", "müzakere"]
+    }
+  ],
+  "yemen": [
+    {
+      "date": "2026-04-17",
+      "severity": "critical",
+      "headline": "Kızıldeniz'de tanker saldırısı",
+      "summary": "Marshall Adaları bayraklı kimyasal tanker, kombine drone + ASCM saldırısıyla vuruldu; yangın kontrol altına alındı, mürettebat tahliye edildi.",
+      "tags": ["Kızıldeniz", "ticari gemi", "ASCM"]
+    },
+    {
+      "date": "2026-04-11",
+      "severity": "major",
+      "headline": "Husi 'hipersonik' iddiası",
+      "summary": "Yayımlanan kalıntı fotoğrafları standart katı yakıtlı füze geometrisini işaret etse de propaganda etkisi kayda değer. Koalisyon analiz sürdürüyor.",
+      "tags": ["Husi", "propaganda", "füze"]
+    },
+    {
+      "date": "2026-04-04",
+      "severity": "routine",
+      "headline": "Marib cephesinde düşük yoğunluk",
+      "summary": "Ön hatta kayda değer değişiklik yok; Husi lojistik hareketliliği kuzey koridorunda artıyor.",
+      "tags": ["Marib", "lojistik"]
+    }
+  ],
+  "myanmar": [
+    {
+      "date": "2026-04-12",
+      "severity": "major",
+      "headline": "Üç Kardeşlik İttifakı Lashio'yu aldı",
+      "summary": "MNDAA öncülüğünde yapılan operasyonda kentin polis genel müdürlüğü ve askeri tugay merkezi ele geçirildi. Cunta hava saldırılarıyla yanıt veriyor.",
+      "tags": ["MNDAA", "Shan eyaleti"]
+    },
+    {
+      "date": "2026-04-05",
+      "severity": "routine",
+      "headline": "Chin köylerine hava saldırısı",
+      "summary": "Cunta Yak-130 eğitim-taarruz uçaklarını Tiddim yakınında iki hedefe yöneltti; sivil kayıp raporları geliyor.",
+      "tags": ["hava saldırısı", "Chin eyaleti"]
+    },
+    {
+      "date": "2026-03-29",
+      "severity": "diplomatic",
+      "headline": "ASEAN 5PC özel temsilcisi reddedildi",
+      "summary": "Cunta yine şartlı erişim sundu, ASEAN heyeti görüşmeyi askıya aldı. Bölgesel baskı artıyor.",
+      "tags": ["ASEAN", "müzakere"]
+    }
+  ],
+  "dprk-drc-east": [
+    {
+      "date": "2026-04-15",
+      "severity": "critical",
+      "headline": "M23 Goma'nın kuzey bantlarını zorluyor",
+      "summary": "Sake – Kibumba koridoru boyunca ağır çatışma; MONUSCO mevzileri çekilme baskısıyla karşı karşıya.",
+      "tags": ["M23", "Goma", "MONUSCO"]
+    },
+    {
+      "date": "2026-04-06",
+      "severity": "major",
+      "headline": "SADC gücü ek takviye tartışıyor",
+      "summary": "Güney Afrika parlamentosu, SAMIDRC misyonu için ek 2 bin askerin yetkilendirilmesini görüşüyor. Ruanda cephesi gerginleşti.",
+      "tags": ["SADC", "SAMIDRC"]
+    }
+  ],
+  "libya": [
+    {
+      "date": "2026-04-09",
+      "severity": "major",
+      "headline": "Trablus milis sürtüşmesi",
+      "summary": "GNU'ya bağlı silahlı grupların güney mahallelerdeki gerginliği Mitiga kontrol noktasına sıçradı. Kayıplar sınırlı.",
+      "tags": ["Trablus", "milis"]
+    },
+    {
+      "date": "2026-04-01",
+      "severity": "diplomatic",
+      "headline": "BM temsilcisi seçim yol haritası önerdi",
+      "summary": "Birleşik yüksek komite için altı ay içinde teknik seçim çerçevesi önerildi; HNEC sekreteryası hazırlıkları başlattı.",
+      "tags": ["BM", "seçim"]
+    }
+  ],
+  "sahel": [
+    {
+      "date": "2026-04-13",
+      "severity": "major",
+      "headline": "AES ortak kuvveti Menaka'ya konuşlandı",
+      "summary": "Mali – Burkina Faso – Nijer cuntalarının ortak gücünden ilk birlik rotasyonu Menaka bölgesine yerleşti. Wagner sonrası yapılanma sürüyor.",
+      "tags": ["AES", "Menaka"]
+    },
+    {
+      "date": "2026-04-06",
+      "severity": "routine",
+      "headline": "JNIM pazar baskını",
+      "summary": "Tillaberi bölgesinde haftalık pazar baskınında altı güvenlik görevlisi hayatını kaybetti; sivil kayıp doğrulanmadı.",
+      "tags": ["JNIM", "Tillaberi"]
+    }
+  ],
+  "kashmir": [
+    {
+      "date": "2026-04-11",
+      "severity": "major",
+      "headline": "LoC boyunca sınır ihlal iddiası",
+      "summary": "Hindistan Kupwara sektöründe sızma girişimini bildirirken Pakistan karşı açıklama yaptı. Tansiyon artıyor ama ateş açma sınırlı.",
+      "tags": ["LoC", "sızma"]
+    },
+    {
+      "date": "2026-03-30",
+      "severity": "routine",
+      "headline": "Sri­nagar turizm sezonu açılışı",
+      "summary": "Güvenlik önlemleri artırılmış şekilde sezon açıldı. Vadide geniş kapsamlı operasyon raporu yok.",
+      "tags": ["Srinagar"]
+    }
+  ],
+  "taiwan-strait": [
+    {
+      "date": "2026-04-17",
+      "severity": "major",
+      "headline": "PLAN taşıyıcı grubu Tayvan çevresinde",
+      "summary": "Shandong taşıyıcı grubu doğu Tayvan açıklarında tatbikat düzeninde. Tayvan hava kuvvetleri F-16V ile karşı devriye başlattı.",
+      "tags": ["PLAN", "taşıyıcı", "tatbikat"]
+    },
+    {
+      "date": "2026-04-08",
+      "severity": "routine",
+      "headline": "Orta hat ihlalleri artıyor",
+      "summary": "Son haftada 42 uçak orta hattı ihlal etti; ortalamanın üzerinde ancak tarihi zirvenin altında.",
+      "tags": ["orta hat", "ADIZ"]
+    },
+    {
+      "date": "2026-03-28",
+      "severity": "diplomatic",
+      "headline": "ABD silah satış paketi onayı",
+      "summary": "Dış İşleri Bakanlığı 1.1 milyar dolarlık paketi onayladı; Patriot yedek parçaları ve HIMARS cephanesi öncelikli.",
+      "tags": ["ABD", "silah satışı"]
+    }
+  ],
+  "caucasus": [
+    {
+      "date": "2026-04-10",
+      "severity": "routine",
+      "headline": "Zengezur koridoru teknik heyeti",
+      "summary": "Bakü – Erivan arasında uzman seviyede güzergâh ve gümrük yetkisi görüşmeleri başladı; siyasi kilit devam ediyor.",
+      "tags": ["Zengezur", "müzakere"]
+    },
+    {
+      "date": "2026-03-26",
+      "severity": "diplomatic",
+      "headline": "AB izleme misyonu yenilendi",
+      "summary": "EUMA görev süresi iki yıl daha uzatıldı; gözlemci sayısı 50'ye çıktı.",
+      "tags": ["EUMA", "AB"]
+    }
+  ],
+  "somalia-shabaab": [
+    {
+      "date": "2026-04-14",
+      "severity": "major",
+      "headline": "Eş-Şebab vergi ağı operasyonu",
+      "summary": "ATMIS destekli SNA, Aşağı Şabelle'de ayakta kalan vergi tahsil noktalarına eş zamanlı baskın düzenledi; 11 operatif yakalandı.",
+      "tags": ["Eş-Şebab", "ATMIS"]
+    },
+    {
+      "date": "2026-04-04",
+      "severity": "routine",
+      "headline": "Mogadişu lojistik konvoyu vuruldu",
+      "summary": "IED saldırısında iki personel yaralandı; konvoy rotası yeniden değerlendiriliyor.",
+      "tags": ["IED", "Mogadişu"]
+    }
+  ],
+  "serbia-kosovo": [
+    {
+      "date": "2026-04-08",
+      "severity": "routine",
+      "headline": "Kuzey Mitrovica'da protestolar",
+      "summary": "Yerel yönetim düzenlemelerine karşı 2 bin kişilik gösteri; KFOR yedek bölüğü devriye artırdı.",
+      "tags": ["Mitrovica", "KFOR"]
+    },
+    {
+      "date": "2026-03-30",
+      "severity": "diplomatic",
+      "headline": "Brüksel diyaloğu devam ediyor",
+      "summary": "AB arabuluculuğunda plaka ve belediye meselesi görüşülüyor; taraflar birbirini takvim ihlaliyle suçluyor.",
+      "tags": ["AB", "Brüksel diyaloğu"]
+    }
+  ],
+  "cyprus-division": [
+    {
+      "date": "2026-04-02",
+      "severity": "diplomatic",
+      "headline": "BM Genel Sekreter özel temsilcisi",
+      "summary": "Holguín'in yeni tur temaslarında çözüm zemini aramaya devam ediyor; taraflar mevcut pozisyonlarını koruyor.",
+      "tags": ["BM", "müzakere"]
+    },
+    {
+      "date": "2026-03-18",
+      "severity": "routine",
+      "headline": "UNFICYP tampon bölge olayı",
+      "summary": "Lefkoşa'nın doğu sektöründe küçük ihlal raporu; taraflar birbirini yeşil hat ihlaliyle suçluyor.",
+      "tags": ["UNFICYP", "Yeşil Hat"]
+    }
+  ],
+  "korean-dmz": [
+    {
+      "date": "2026-04-13",
+      "severity": "major",
+      "headline": "KHDC yeni kısa menzilli füze atışı",
+      "summary": "Tongchang-ri'den iki SRBM atışı Kore Doğu Denizi'ne düştü; Japonya kıyı radarları takibi doğruladı.",
+      "tags": ["DPRK", "SRBM"]
+    },
+    {
+      "date": "2026-04-01",
+      "severity": "routine",
+      "headline": "DMZ'de sınırlı sınır turu",
+      "summary": "UNC – KPA temas noktasında kısa süreli bayrak gerginliği; çözüm rutin saha toplantısıyla geldi.",
+      "tags": ["DMZ", "UNC"]
+    }
+  ],
+  "south-china-sea": [
+    {
+      "date": "2026-04-15",
+      "severity": "major",
+      "headline": "Ayungin Sığlığı'nda su topu olayı",
+      "summary": "Çin Sahil Güvenlik gemisi, Filipinler tedarik botuna karşı su topu kullandı; Filipinler sert bir nota verdi.",
+      "tags": ["Ayungin", "CCG"]
+    },
+    {
+      "date": "2026-04-02",
+      "severity": "diplomatic",
+      "headline": "ASEAN – Çin davranış kuralları metni",
+      "summary": "Görüşmelerin 3. taslağı üye devletlere dağıtıldı; yaptırım mekanizması hâlâ ihtilaflı.",
+      "tags": ["ASEAN", "COC"]
+    }
+  ],
+  "transnistria": [
+    {
+      "date": "2026-04-05",
+      "severity": "routine",
+      "headline": "Tiraspol gaz arzı krizi",
+      "summary": "Kışlık gaz sevkiyatındaki kesinti sonrası bölge sanayi üretimi %30 düştü; Kişinev koridorları teklif etti.",
+      "tags": ["gaz", "Tiraspol"]
+    },
+    {
+      "date": "2026-03-24",
+      "severity": "diplomatic",
+      "headline": "OSCE 5+2 görüşmesi ertelendi",
+      "summary": "Moskova tarafının katılım belirsizliği nedeniyle tur ertelendi; Kişinev AB entegrasyon takvimini hızlandırıyor.",
+      "tags": ["OSCE", "5+2"]
+    }
+  ],
+  "gerd-nile": [
+    {
+      "date": "2026-04-09",
+      "severity": "major",
+      "headline": "Etiyopya dördüncü dolum fazını açıkladı",
+      "summary": "GERD'in dördüncü dolum aşaması başladı; Mısır – Sudan ortak açıklama ile teknik itiraz sundu.",
+      "tags": ["GERD", "dolum"]
+    },
+    {
+      "date": "2026-03-22",
+      "severity": "diplomatic",
+      "headline": "AfB süreci yeniden işliyor",
+      "summary": "Afrika Birliği arabuluculuğunda su paylaşımı teknik komitesi yeniden toplandı; zaman çizelgesi belirsiz.",
+      "tags": ["Afrika Birliği", "müzakere"]
+    }
+  ],
+  "western-sahara": [
+    {
+      "date": "2026-04-03",
+      "severity": "routine",
+      "headline": "MINURSO görev süresi uzatıldı",
+      "summary": "BM Güvenlik Konseyi 12 aylık uzatmayı onayladı; Polisario 'ateşkes askıda' tutumunu tekrarladı.",
+      "tags": ["MINURSO", "BM"]
+    },
+    {
+      "date": "2026-03-19",
+      "severity": "diplomatic",
+      "headline": "İspanya – Fas ilişkileri ivmeleniyor",
+      "summary": "Madrid otonomi planına desteğini tekrarladı; bölgesel yatırım anlaşmaları arttı.",
+      "tags": ["İspanya", "Fas"]
+    }
+  ],
+  "pakistan-ttp": [
+    {
+      "date": "2026-04-12",
+      "severity": "major",
+      "headline": "Kuzey Veziristan'da TTP kampına saldırı",
+      "summary": "Pakistan Hava Kuvvetleri hudut ötesi hedeflere karşı koordine bir hava operasyonu icra etti. Afganistan protesto notası verdi.",
+      "tags": ["TTP", "hava operasyonu"]
+    },
+    {
+      "date": "2026-03-27",
+      "severity": "routine",
+      "headline": "Pişin sınır geçişi geçici kapandı",
+      "summary": "Silahlı çatışma raporlarının ardından Şaman – Çaman geçişi 48 saat kapatıldı; ticari kafileler birikti.",
+      "tags": ["sınır", "Çaman"]
+    }
+  ],
+  "nigeria-lakechad": [
+    {
+      "date": "2026-04-10",
+      "severity": "major",
+      "headline": "ISWAP Borno askeri konvoyunu pusuya düşürdü",
+      "summary": "Damboa yakınlarındaki saldırıda 12 asker hayatını kaybetti; MNJTF bölgesel destek rotaları yeniden değerlendiriyor.",
+      "tags": ["ISWAP", "Borno"]
+    },
+    {
+      "date": "2026-03-25",
+      "severity": "routine",
+      "headline": "Çad havzası su krizi derinleşiyor",
+      "summary": "BM Habitat sulak alan küçülmesinin çatışma yoğunluğunu artırdığını raporladı; tarıma bağlı topluluklar risk altında.",
+      "tags": ["iklim", "Çad havzası"]
+    }
+  ],
+  "mozambique-cabo-delgado": [
+    {
+      "date": "2026-04-08",
+      "severity": "major",
+      "headline": "Macomia'da isyancı saldırısı",
+      "summary": "ISIS-M grubu ilçe merkezinde eş zamanlı iki saldırı düzenledi; FADM takviye kuvvetleri geri çekilişi sağladı.",
+      "tags": ["ISIS-M", "Macomia"]
+    },
+    {
+      "date": "2026-03-30",
+      "severity": "routine",
+      "headline": "TotalEnergies LNG tekrar devrede",
+      "summary": "Afungi sahasındaki güvenlik şartları iyileştirildikten sonra mühendislik ekipleri sahaya dönüyor; üretim zaman çizelgesi revize edildi.",
+      "tags": ["LNG", "Afungi"]
+    }
+  ],
+  "venezuela-guyana": [
+    {
+      "date": "2026-04-06",
+      "severity": "major",
+      "headline": "Essequibo'da Venezuela deniz tatbikatı",
+      "summary": "FAN zırhlı botları Guyana münhasır ekonomik bölgesi yakınlarında manevra yaptı. Georgetown BM'ye resmi başvuruda bulundu.",
+      "tags": ["Essequibo", "FAN"]
+    },
+    {
+      "date": "2026-03-23",
+      "severity": "diplomatic",
+      "headline": "CARICOM zirvesi gerginliği ele aldı",
+      "summary": "Karayip bloğu Guyana'nın toprak bütünlüğüne desteğini tekrarladı; arabuluculuk için ortak çalışma grubu kuruldu.",
+      "tags": ["CARICOM"]
+    }
+  ],
+  "aegean-easternmed": [
+    {
+      "date": "2026-04-14",
+      "severity": "routine",
+      "headline": "Doğu Akdeniz hidrokarbon arama turu",
+      "summary": "Kıbrıs 11. blok ihalesi açıldı; uluslararası enerji firmaları teklif sürecine girdi. Türkiye alternatif blok haritasını açıkladı.",
+      "tags": ["hidrokarbon", "Kıbrıs"]
+    },
+    {
+      "date": "2026-03-29",
+      "severity": "diplomatic",
+      "headline": "Türk – Yunan istikşafi temasları",
+      "summary": "66. istikşafi görüşme İstanbul'da tamamlandı; güven artırıcı önlem paketinin ikinci fazı teknik ekipler tarafından inceleniyor.",
+      "tags": ["istikşafi", "güven artırıcı"]
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAIROS — Eyes Above. Always.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+:root{
+  --blue:#0A84FF;
+  --blue2:rgba(10,132,255,0.15);
+  --dim:rgba(255,255,255,0.5);
+  --dimmer:rgba(255,255,255,0.25);
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+  --spring:cubic-bezier(0.16,1,0.3,1);
+}
+html,body{width:100vw;height:100vh;overflow:hidden;background:#000;color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif}
+
+/* ── PARTICLE BG ── */
+#bg{position:fixed;inset:0;z-index:0;opacity:0.5}
+
+/* ── LOGO + SLIDE NUM ── */
+.logo{position:fixed;top:32px;left:44px;font-size:13px;font-weight:700;letter-spacing:5px;
+  text-transform:uppercase;color:rgba(255,255,255,0.2);z-index:50}
+.num{position:fixed;top:32px;right:44px;font-size:12px;letter-spacing:3px;
+  color:rgba(255,255,255,0.2);z-index:50;font-variant-numeric:tabular-nums}
+
+/* ── PROGRESS ── */
+.bar{position:fixed;bottom:0;left:0;height:1px;background:var(--blue);
+  transition:width 0.8s var(--ease);z-index:50;opacity:0.6}
+
+/* ── NAV DOTS ── */
+.dots{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:50;align-items:center}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.2);
+  cursor:pointer;transition:all 0.4s var(--ease)}
+.dot.on{background:#fff;width:18px;border-radius:3px}
+
+/* ── SLIDE ENGINE ── */
+.deck{position:relative;z-index:1;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:80px;
+  opacity:0;pointer-events:none;
+  transform:scale(1.06) translateY(10px);
+  transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.slide.in{opacity:1;pointer-events:all;transform:scale(1) translateY(0)}
+.slide.out{opacity:0;transform:scale(0.94) translateY(-10px);
+  transition:opacity 0.6s var(--ease),transform 0.6s var(--ease)}
+
+/* ── REVEAL SYSTEM ── */
+.r{opacity:0;transform:translateY(22px);
+  transition:opacity 0.75s var(--spring),transform 0.75s var(--spring)}
+.r.v{opacity:1;transform:none}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.18s}.d3{transition-delay:0.28s}
+.d4{transition-delay:0.38s}.d5{transition-delay:0.48s}.d6{transition-delay:0.58s}
+.d7{transition-delay:0.68s}
+
+/* ── SHARED TYPE ── */
+.eye{font-size:11px;font-weight:600;letter-spacing:5px;text-transform:uppercase;
+  color:var(--blue);margin-bottom:20px}
+.h1{font-size:clamp(60px,10vw,110px);font-weight:700;letter-spacing:-3px;line-height:.95;text-align:center}
+.h2{font-size:clamp(36px,5.5vw,68px);font-weight:700;letter-spacing:-2px;line-height:1.05;text-align:center}
+.p{font-size:clamp(15px,1.6vw,19px);color:var(--dim);line-height:1.7;text-align:center;max-width:600px;margin-top:18px}
+.accent{color:var(--blue)}
+
+/* ───────────── SLIDE 1 ─ HERO ───────────── */
+#s1{gap:0}
+.drone-wrap{position:relative;width:160px;height:110px;margin-bottom:36px;
+  filter:drop-shadow(0 0 40px rgba(10,132,255,0.5));
+  animation:hov 4s ease-in-out infinite}
+@keyframes hov{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
+.pulse{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(10,132,255,0.25);
+  animation:px 3.5s ease-out infinite}
+@keyframes px{0%{width:0;height:0;opacity:.7}100%{width:480px;height:480px;opacity:0}}
+.tag-line{font-size:clamp(15px,1.8vw,20px);letter-spacing:2px;color:var(--dim);margin-top:14px}
+
+/* ───────────── SLIDE 2 ─ PROBLEM STAT ───────────── */
+#s2{text-align:center}
+.mega{font-size:clamp(90px,20vw,200px);font-weight:800;letter-spacing:-8px;line-height:.85;
+  color:#fff;display:inline-flex;align-items:flex-start;gap:4px}
+.mega-sup{font-size:.35em;font-weight:700;letter-spacing:-2px;margin-top:.1em;color:rgba(255,255,255,0.5)}
+.stat-sub{font-size:clamp(17px,2.5vw,28px);letter-spacing:-0.5px;color:var(--dim);margin-top:16px}
+.stat-tiny{font-size:12px;letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.2);margin-top:14px}
+
+/* ───────────── SLIDE 3 ─ INSIGHT ───────────── */
+#s3{text-align:center;gap:12px}
+.ql{font-size:clamp(26px,4vw,54px);font-weight:700;letter-spacing:-1.5px;
+  line-height:1.15;text-align:center;max-width:860px}
+
+/* ───────────── SLIDE 4 ─ REVEAL ───────────── */
+#s4{text-align:center}
+.intro{font-size:13px;font-weight:600;letter-spacing:6px;text-transform:uppercase;
+  color:var(--blue);margin-bottom:10px}
+.brand{font-size:clamp(72px,16vw,170px);font-weight:800;letter-spacing:-6px;
+  background:linear-gradient(160deg,#fff 30%,rgba(255,255,255,0.55));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:.9}
+
+/* ───────────── SLIDE 5 ─ PILLARS ───────────── */
+#s5{text-align:center}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-top:44px;max-width:940px;width:100%}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:18px;padding:36px 26px;text-align:left;
+  transition:background .3s,border .3s,transform .3s;
+  position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(10,132,255,0.5),transparent)}
+.card:hover{background:rgba(255,255,255,0.055);border-color:rgba(10,132,255,0.2);transform:translateY(-5px)}
+.card-ico{font-size:28px;margin-bottom:18px}
+.card-t{font-size:17px;font-weight:600;letter-spacing:-.3px;margin-bottom:9px}
+.card-d{font-size:13px;color:var(--dim);line-height:1.65}
+.card-line{width:24px;height:2px;background:var(--blue);border-radius:1px;margin-bottom:14px}
+
+/* ───────────── SLIDE 6 ─ HOW IT WORKS ───────────── */
+#s6{text-align:center}
+.steps{display:flex;gap:0;margin-top:52px;max-width:860px;width:100%}
+.step{flex:1;padding:0 28px;position:relative;text-align:center}
+.step+.step::before{content:'';position:absolute;left:0;top:26px;
+  width:1px;height:36px;background:rgba(255,255,255,0.07)}
+.sn{width:52px;height:52px;border-radius:50%;border:1px solid rgba(10,132,255,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;color:var(--blue);margin:0 auto 18px;
+  background:rgba(10,132,255,0.06)}
+.st{font-size:17px;font-weight:600;letter-spacing:-.3px;margin-bottom:10px}
+.sd{font-size:13px;color:var(--dim);line-height:1.65}
+
+/* ───────────── SLIDE 7 ─ RADAR ───────────── */
+#s7{flex-direction:row;gap:72px;align-items:center}
+.radar-box{flex-shrink:0}
+.rtext{max-width:380px}
+.rtext .h2{text-align:left}
+.rtext .p{text-align:left;margin-top:14px}
+.flist{margin-top:28px;list-style:none}
+.flist li{padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.05);
+  font-size:15px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:11px}
+.fd{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* ───────────── SLIDE 8 ─ METRICS ───────────── */
+#s8{text-align:center}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,0.05);border-radius:20px;overflow:hidden;
+  margin-top:52px;max-width:940px;width:100%}
+.mbox{background:#000;padding:40px 28px;text-align:center}
+.mv{font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-2px}
+.mu{font-size:.48em;letter-spacing:-.5px;color:var(--blue)}
+.ml{font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:3px;margin-top:7px}
+
+/* ───────────── SLIDE 9 ─ MARKET ───────────── */
+#s9{text-align:center}
+.circles{display:flex;align-items:flex-end;justify-content:center;gap:28px;margin-top:52px}
+.ci{text-align:center}
+.cr{border-radius:50%;background:rgba(10,132,255,0.06);border:1px solid rgba(10,132,255,0.2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 14px;
+  transition:background .3s,border .3s}
+.cr:hover{background:rgba(10,132,255,0.1);border-color:rgba(10,132,255,0.35)}
+.cv{font-size:26px;font-weight:700;letter-spacing:-1px}
+.cl{font-size:10px;color:var(--dim);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
+.cn{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:3px;text-transform:uppercase}
+
+/* ───────────── SLIDE 10 ─ CTA ───────────── */
+#s10{text-align:center;gap:20px}
+.cta{padding:15px 42px;background:var(--blue);border:none;border-radius:50px;
+  font-size:16px;font-weight:600;color:#fff;cursor:pointer;font-family:inherit;
+  letter-spacing:-.1px;margin-top:8px;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 12px 40px rgba(10,132,255,0.25)}
+.cta:hover{opacity:.85;transform:scale(1.03)}
+.contact{font-size:14px;color:rgba(255,255,255,0.25);letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div class="logo">Tairos</div>
+<div class="num" id="num">01 / 10</div>
+<div class="bar" id="bar"></div>
+
+<div class="deck">
+
+<!-- ── 1: HERO ── -->
+<div class="slide in" id="s1">
+  <div class="drone-wrap r">
+    <div class="pulse" style="animation-delay:0s"></div>
+    <div class="pulse" style="animation-delay:1.1s"></div>
+    <div class="pulse" style="animation-delay:2.2s"></div>
+    <svg viewBox="0 0 200 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+      <rect x="80" y="43" width="40" height="24" rx="9" fill="#fff" opacity=".95"/>
+      <rect x="91" y="50" width="18" height="10" rx="4" fill="#000"/>
+      <circle cx="100" cy="55" r="3" fill="#0A84FF"/>
+      <line x1="80" y1="47" x2="30" y2="24" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="80" y1="67" x2="30" y2="90" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="120" y1="47" x2="170" y2="24" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="120" y1="67" x2="170" y2="90" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="30" cy="22" rx="22" ry="5" fill="#0A84FF" opacity=".45">
+        <animateTransform attributeName="transform" type="rotate" from="0 30 22" to="360 30 22" dur=".22s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="30" cy="92" rx="22" ry="5" fill="#0A84FF" opacity=".45">
+        <animateTransform attributeName="transform" type="rotate" from="360 30 92" to="0 30 92" dur=".22s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="170" cy="22" rx="22" ry="5" fill="#0A84FF" opacity=".45">
+        <animateTransform attributeName="transform" type="rotate" from="0 170 22" to="360 170 22" dur=".22s" repeatCount="indefinite"/>
+      </ellipse>
+      <ellipse cx="170" cy="92" rx="22" ry="5" fill="#0A84FF" opacity=".45">
+        <animateTransform attributeName="transform" type="rotate" from="360 170 92" to="0 170 92" dur=".22s" repeatCount="indefinite"/>
+      </ellipse>
+      <line x1="100" y1="67" x2="100" y2="105" stroke="#0A84FF" stroke-width="1" stroke-dasharray="3 3" opacity=".4"/>
+      <circle cx="100" cy="108" r="2.5" fill="#0A84FF">
+        <animate attributeName="r" values="2.5;5;2.5" dur="1.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+  <h1 class="h1 r d1">TAIROS</h1>
+  <p class="tag-line r d2">Eyes Above. Always.</p>
+</div>
+
+<!-- ── 2: PROBLEM STAT ── -->
+<div class="slide" id="s2">
+  <div class="eye r">The Problem</div>
+  <div class="mega r d1"><span data-to="94">0</span><span class="mega-sup">%</span></div>
+  <div class="stat-sub r d2">of critical zones go unmonitored</div>
+  <div class="stat-tiny r d3">Static cameras &nbsp;·&nbsp; Slow response &nbsp;·&nbsp; No aerial visibility</div>
+</div>
+
+<!-- ── 3: INSIGHT ── -->
+<div class="slide" id="s3">
+  <p class="ql r">Threats are <span class="accent">dynamic.</span></p>
+  <p class="ql r d1">Surveillance shouldn't<br>be <span class="accent">static.</span></p>
+  <p class="p r d3">Every unmonitored minute is a window of vulnerability.<br>We built the platform that closes it — permanently.</p>
+</div>
+
+<!-- ── 4: SOLUTION REVEAL ── -->
+<div class="slide" id="s4">
+  <div class="intro r">Introducing</div>
+  <div class="brand r d1">TAIROS</div>
+  <p class="p r d2">The first fully autonomous UAV surveillance platform<br>for critical infrastructure. No pilots. No blind spots. No delays.</p>
+</div>
+
+<!-- ── 5: PILLARS ── -->
+<div class="slide" id="s5">
+  <div class="eye r">The Platform</div>
+  <h2 class="h2 r d1">Three layers. One platform.</h2>
+  <div class="grid3">
+    <div class="card r d2">
+      <div class="card-line"></div>
+      <div class="card-ico">🛸</div>
+      <div class="card-t">Autonomous Patrol</div>
+      <div class="card-d">Zero-pilot operation. AI-optimised flight paths that adapt in real time to coverage gaps and threat signals.</div>
+    </div>
+    <div class="card r d3">
+      <div class="card-line"></div>
+      <div class="card-ico">🧠</div>
+      <div class="card-t">Edge Intelligence</div>
+      <div class="card-d">On-board AI detects anomalies in milliseconds. Alerts dispatched before a human operator sees the feed.</div>
+    </div>
+    <div class="card r d4">
+      <div class="card-line"></div>
+      <div class="card-ico">🗺️</div>
+      <div class="card-t">Live Coverage Map</div>
+      <div class="card-d">Real-time visualisation of exact coverage zones, detection events, and fleet status — in one unified view.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 6: HOW IT WORKS ── -->
+<div class="slide" id="s6">
+  <div class="eye r">How It Works</div>
+  <h2 class="h2 r d1">From deploy to insight<br>in minutes.</h2>
+  <div class="steps">
+    <div class="step r d2">
+      <div class="sn">01</div>
+      <div class="st">Define Zones</div>
+      <div class="sd">Draw your perimeter. Set priority areas, no-fly boundaries, and patrol schedules in seconds.</div>
+    </div>
+    <div class="step r d3">
+      <div class="sn">02</div>
+      <div class="st">Deploy Fleet</div>
+      <div class="sd">TAIROS calculates optimal routes. Drones launch autonomously, maximising coverage with zero overlap.</div>
+    </div>
+    <div class="step r d4">
+      <div class="sn">03</div>
+      <div class="st">Live Intelligence</div>
+      <div class="sd">Threats detected instantly. Your team receives actionable alerts with location, timestamp, and visual evidence.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 7: RADAR ── -->
+<div class="slide" id="s7">
+  <div class="radar-box r">
+    <canvas id="rc" width="330" height="330"></canvas>
+  </div>
+  <div class="rtext">
+    <div class="eye r d1">Live Coverage Platform</div>
+    <h2 class="h2 r d2" style="text-align:left;font-size:clamp(30px,4.5vw,54px)">See everything.<br>Miss nothing.</h2>
+    <p class="p r d3" style="text-align:left">Real-time aerial intelligence over your entire operational zone. Every movement tracked. Every gap eliminated.</p>
+    <ul class="flist r d4">
+      <li><span class="fd"></span>Multi-drone real-time coordination</li>
+      <li><span class="fd"></span>Dynamic coverage gap detection</li>
+      <li><span class="fd"></span>Incident replay & forensic export</li>
+      <li><span class="fd"></span>Existing CCTV integration via API</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── 8: TRACTION ── -->
+<div class="slide" id="s8">
+  <div class="eye r">Traction</div>
+  <h2 class="h2 r d1">Built. Tested.<br>Battle-ready.</h2>
+  <div class="mgrid">
+    <div class="mbox r d2">
+      <div class="mv"><span data-to="98">0</span><span class="mu">%</span></div>
+      <div class="ml">Uptime</div>
+    </div>
+    <div class="mbox r d3">
+      <div class="mv"><span data-to="500">0</span><span class="mu">km²</span></div>
+      <div class="ml">Coverage Area</div>
+    </div>
+    <div class="mbox r d4">
+      <div class="mv">&lt;<span data-to="3">0</span><span class="mu">s</span></div>
+      <div class="ml">Alert Latency</div>
+    </div>
+    <div class="mbox r d5">
+      <div class="mv"><span data-to="70">0</span><span class="mu">%</span></div>
+      <div class="ml">Cost Reduction</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 9: MARKET ── -->
+<div class="slide" id="s9">
+  <div class="eye r">Market Opportunity</div>
+  <h2 class="h2 r d1">A $12B market waiting<br>for intelligence.</h2>
+  <div class="circles">
+    <div class="ci r d2">
+      <div class="cr" style="width:210px;height:210px"><div class="cv">$12B</div><div class="cl">TAM</div></div>
+      <div class="cn">Total Market</div>
+    </div>
+    <div class="ci r d3">
+      <div class="cr" style="width:150px;height:150px"><div class="cv" style="font-size:20px">$3.2B</div><div class="cl">SAM</div></div>
+      <div class="cn">Serviceable</div>
+    </div>
+    <div class="ci r d4">
+      <div class="cr" style="width:96px;height:96px;background:rgba(10,132,255,.12);border-color:rgba(10,132,255,.35)">
+        <div class="cv" style="font-size:15px">$320M</div><div class="cl">SOM</div>
+      </div>
+      <div class="cn">Our Target</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 10: CTA ── -->
+<div class="slide" id="s10">
+  <div class="eye r">Seed Round · $1.5M</div>
+  <h2 class="h2 r d1">Join the mission.</h2>
+  <p class="p r d2">We're deploying the first commercial TAIROS fleet and signing our first enterprise contracts. The skies are open — be part of it.</p>
+  <button class="cta r d3">Get in Touch →</button>
+  <p class="contact r d4">tairos.io &nbsp;·&nbsp; hello@tairos.io &nbsp;·&nbsp; Istanbul, TR</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="dots" id="dots"></div>
+
+<script>
+/* ── PARTICLE BG ── */
+const bg=document.getElementById('bg');
+const bx=bg.getContext('2d');
+let W,H;
+const resize=()=>{W=bg.width=innerWidth;H=bg.height=innerHeight};
+resize();addEventListener('resize',resize);
+const pts=Array.from({length:70},()=>({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,
+  r:Math.random()*.9+.3
+}));
+(function frame(){
+  bx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.x=(p.x+p.vx+W)%W; p.y=(p.y+p.vy+H)%H;
+    bx.beginPath();bx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    bx.fillStyle='rgba(255,255,255,.3)';bx.fill();
+  });
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+    if(d<110){bx.beginPath();bx.moveTo(pts[i].x,pts[i].y);bx.lineTo(pts[j].x,pts[j].y);
+      bx.strokeStyle=`rgba(10,132,255,${.06*(1-d/110)})`;bx.lineWidth=.5;bx.stroke()}
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ── RADAR ── */
+const rc=document.getElementById('rc');
+const rx=rc.getContext('2d');
+let ra=0;
+const blips=Array.from({length:7},()=>({r:45+Math.random()*105,a:Math.random()*Math.PI*2,al:0}));
+(function frame(){
+  const cx=165,cy=165,max=152;
+  rx.clearRect(0,0,330,330);
+  rx.beginPath();rx.arc(cx,cy,max,0,Math.PI*2);
+  rx.fillStyle='rgba(10,132,255,0.03)';rx.fill();
+  [.33,.66,1].forEach(f=>{
+    rx.beginPath();rx.arc(cx,cy,max*f,0,Math.PI*2);
+    rx.strokeStyle='rgba(255,255,255,.05)';rx.lineWidth=1;rx.stroke();
+  });
+  [[cx-max,cy,cx+max,cy],[cx,cy-max,cx,cy+max]].forEach(([x1,y1,x2,y2])=>{
+    rx.beginPath();rx.moveTo(x1,y1);rx.lineTo(x2,y2);
+    rx.strokeStyle='rgba(255,255,255,.04)';rx.lineWidth=1;rx.stroke();
+  });
+  for(let i=0;i<55;i++){
+    const a=ra-(i/55)*.85;
+    rx.beginPath();rx.moveTo(cx,cy);rx.arc(cx,cy,max,a,a+.025);rx.closePath();
+    rx.fillStyle=`rgba(10,132,255,${(1-i/55)*.2})`;rx.fill();
+  }
+  rx.beginPath();rx.moveTo(cx,cy);
+  rx.lineTo(cx+Math.cos(ra)*max,cy+Math.sin(ra)*max);
+  rx.strokeStyle='rgba(10,132,255,.75)';rx.lineWidth=1.5;rx.stroke();
+  blips.forEach(b=>{
+    const d=((ra-b.a)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+    if(d<.1)b.al=1;else b.al*=.978;
+    if(b.al>.03){
+      const bx2=cx+Math.cos(b.a)*b.r,by=cy+Math.sin(b.a)*b.r;
+      rx.beginPath();rx.arc(bx2,by,3,0,Math.PI*2);
+      rx.fillStyle=`rgba(10,132,255,${b.al})`;rx.fill();
+      rx.beginPath();rx.arc(bx2,by,6,0,Math.PI*2);
+      rx.strokeStyle=`rgba(10,132,255,${b.al*.3})`;rx.lineWidth=1;rx.stroke();
+    }
+  });
+  rx.beginPath();rx.arc(cx,cy,max,0,Math.PI*2);
+  rx.strokeStyle='rgba(255,255,255,.08)';rx.lineWidth=1;rx.stroke();
+  ra+=.021;requestAnimationFrame(frame);
+})();
+
+/* ── SLIDE ENGINE ── */
+const slides=[...document.querySelectorAll('.slide')];
+const N=slides.length;
+let cur=0;
+const dotsEl=document.getElementById('dots');
+const barEl=document.getElementById('bar');
+const numEl=document.getElementById('num');
+
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>go(i);
+  dotsEl.appendChild(d);
+});
+
+function go(i){
+  if(i===cur||i<0||i>=N)return;
+  slides[cur].classList.add('out');
+  slides[cur].classList.remove('in');
+  const prev=cur;cur=i;
+  slides[cur].classList.add('in');
+  setTimeout(()=>slides[prev].classList.remove('out'),700);
+  sync();reveal(slides[cur]);
+}
+
+function sync(){
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  barEl.style.width=((cur+1)/N*100)+'%';
+  numEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+}
+
+function reveal(slide){
+  const els=slide.querySelectorAll('.r');
+  els.forEach(e=>e.classList.remove('v'));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    els.forEach(e=>e.classList.add('v'));
+    slide.querySelectorAll('[data-to]').forEach(el=>{
+      const target=+el.dataset.to;
+      const t0=performance.now();
+      const dur=1100;
+      (function tick(now){
+        const p=Math.min((now-t0)/dur,1);
+        const e=1-Math.pow(1-p,3);
+        el.textContent=Math.round(e*target);
+        if(p<1)requestAnimationFrame(tick);
+      })(t0);
+    });
+  }));
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const d=tx-e.changedTouches[0].clientX;
+  if(Math.abs(d)>50)d>0?go(cur+1):go(cur-1);
+},{passive:true});
+
+sync();reveal(slides[0]);
+barEl.style.width=(1/N*100)+'%';
+</script>
+</body>
+</html>

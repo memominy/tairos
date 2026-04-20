@@ -1,0 +1,107 @@
+{
+  "type": "FeatureCollection",
+  "note": "Yaklaşık Türkiye ana fiber omurgası — il merkezleri arasında temsili çizgiler. Gerçek fiziksel güzergah değil; operatör bilgileri kamuya açık kaynaklara dayalı genel bilgidir.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul - Ankara", "operator": "Türk Telekom / TURGİ", "capacity": "Tier-1", "kind": "backbone", "info": "Ülkenin ana doğu-batı fiber omurgası · iki büyük nüfus merkezi arasında çoklu paralel hatlar (Tbps ölçek)" },
+      "geometry": { "type": "LineString", "coordinates": [[28.98, 41.01], [29.92, 40.84], [31.16, 40.84], [31.61, 40.74], [32.30, 40.20], [32.86, 39.93]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul - Edirne (AB çıkışı)", "operator": "Türk Telekom / Turkcell Superonline", "capacity": "Tier-1", "kind": "backbone", "info": "Avrupa'ya ana karasal fiber çıkışı · Bulgaristan üzerinden pan-Avrupa omurgasına bağlanır" },
+      "geometry": { "type": "LineString", "coordinates": [[28.98, 41.01], [28.16, 41.29], [27.22, 41.56], [26.57, 41.68]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul - İzmir (Marmara)", "operator": "Türk Telekom / Vodafone", "capacity": "Tier-1", "kind": "backbone", "info": "Marmara güney omurgası · İstanbul'un iki büyük ticari metropolle redundant bağlantısı" },
+      "geometry": { "type": "LineString", "coordinates": [[28.98, 41.01], [29.07, 40.18], [28.40, 40.00], [27.88, 39.65], [27.14, 38.41]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ankara - İzmir", "operator": "Türk Telekom / TURGİ", "capacity": "Tier-1", "kind": "backbone", "info": "Orta Anadolu - Ege birincil omurgası · başkent ile Ege ticaret merkezi arasında yüksek kapasite" },
+      "geometry": { "type": "LineString", "coordinates": [[32.86, 39.93], [30.54, 38.76], [29.40, 38.68], [27.14, 38.41]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ankara - Adana", "operator": "Türk Telekom", "capacity": "Tier-1", "kind": "backbone", "info": "Güney koridoru başlangıcı · Adana üzerinden Ortadoğu trafiğine çıkış" },
+      "geometry": { "type": "LineString", "coordinates": [[32.86, 39.93], [34.03, 38.64], [34.68, 37.97], [35.32, 37.00]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Adana - Gaziantep - Diyarbakır", "operator": "Türk Telekom", "capacity": "Tier-1", "kind": "backbone", "info": "Güneydoğu ana fiber omurgası · sınır geçişleri (Irak/Suriye) için uluslararası transit" },
+      "geometry": { "type": "LineString", "coordinates": [[35.32, 37.00], [36.24, 37.06], [37.38, 37.07], [38.79, 37.17], [39.50, 37.60], [40.24, 37.91]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Diyarbakır - Van", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "Doğu bölgesel omurga · Van üzerinden İran sınır geçişi" },
+      "geometry": { "type": "LineString", "coordinates": [[40.24, 37.91], [41.50, 38.20], [42.70, 38.40], [43.41, 38.49]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ankara - Samsun", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "Karadeniz giriş omurgası · Samsun liman şehri ve denizaltı kablosu bağlantısı" },
+      "geometry": { "type": "LineString", "coordinates": [[32.86, 39.93], [33.62, 40.60], [33.78, 41.00], [35.00, 41.20], [36.33, 41.29]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Samsun - Trabzon - Rize", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "Karadeniz kıyı omurgası · doğu Karadeniz illerinin yüksek kapasite bağlantısı" },
+      "geometry": { "type": "LineString", "coordinates": [[36.33, 41.29], [37.50, 41.00], [39.72, 41.00], [40.52, 41.02]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Trabzon - Erzurum - Van", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "Doğu bölgesel redundant omurga · dağlık güzergahta Karadeniz-Doğu Anadolu köprüsü" },
+      "geometry": { "type": "LineString", "coordinates": [[39.72, 41.00], [40.50, 40.50], [41.27, 39.91], [42.40, 39.20], [43.41, 38.49]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İzmir - Antalya", "operator": "Türk Telekom / Vodafone", "capacity": "Tier-2", "kind": "backbone", "info": "Ege-Akdeniz turizm koridoru · yaz aylarında yüksek trafik yoğunluğu" },
+      "geometry": { "type": "LineString", "coordinates": [[27.14, 38.41], [27.84, 37.85], [28.27, 36.85], [29.50, 36.85], [30.71, 36.89]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Antalya - Mersin - Adana", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "Akdeniz kıyı omurgası · Mersin limanı ve MedNautilus denizaltı kablosu ile birleşir" },
+      "geometry": { "type": "LineString", "coordinates": [[30.71, 36.89], [32.50, 36.55], [34.63, 36.81], [35.32, 37.00]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Konya - Antalya", "operator": "Türk Telekom", "capacity": "Tier-3", "kind": "backbone", "info": "İç Anadolu-Akdeniz bölgesel besleme hattı · daha düşük kapasite, orta nüfus illeri" },
+      "geometry": { "type": "LineString", "coordinates": [[32.48, 37.87], [30.57, 37.77], [30.71, 36.89]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ankara - Konya", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "İç Anadolu omurgası · Konya organize sanayi ve data merkezleri için ana bağlantı" },
+      "geometry": { "type": "LineString", "coordinates": [[32.86, 39.93], [32.60, 38.90], [32.48, 37.87]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Bursa - Eskişehir - Ankara", "operator": "Türk Telekom", "capacity": "Tier-2", "kind": "backbone", "info": "İç Marmara besleme omurgası · Bursa sanayi bölgesi ile başkent bağlantısı" },
+      "geometry": { "type": "LineString", "coordinates": [[29.07, 40.18], [30.52, 39.78], [32.86, 39.93]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kayseri - Sivas - Erzurum", "operator": "Türk Telekom", "capacity": "Tier-3", "kind": "backbone", "info": "Orta-Doğu Anadolu bölgesel besleme · dağlık güzergah, görece düşük trafik" },
+      "geometry": { "type": "LineString", "coordinates": [[35.48, 38.73], [37.02, 39.75], [39.50, 39.90], [41.27, 39.91]] }
+    },
+
+    {
+      "type": "Feature",
+      "properties": { "name": "SEA-ME-WE / MedNautilus (Marmaris)", "operator": "Uluslararası konsorsiyum", "capacity": "Tier-0", "kind": "submarine", "info": "Güneydoğu Asya-Ortadoğu-Batı Avrupa denizaltı kablo sistemi · Marmaris iniş noktası · kıtalar arası transit" },
+      "geometry": { "type": "LineString", "coordinates": [[28.27, 36.85], [28.10, 36.50], [27.80, 35.90], [27.30, 35.00]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "MedNautilus / ALBus (Mersin)", "operator": "Uluslararası konsorsiyum", "capacity": "Tier-0", "kind": "submarine", "info": "Akdeniz denizaltı kablosu · Mersin iniş noktası · Kıbrıs, İsrail, Mısır bağlantıları" },
+      "geometry": { "type": "LineString", "coordinates": [[34.63, 36.81], [34.50, 36.20], [34.00, 35.30], [33.40, 34.80]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "KAFOS (Karadeniz - İstanbul)", "operator": "Uluslararası konsorsiyum", "capacity": "Tier-0", "kind": "submarine", "info": "Karadeniz fiber optik sistemi · İstanbul iniş noktası · Rusya ve Ukrayna bağlantısı" },
+      "geometry": { "type": "LineString", "coordinates": [[29.08, 41.20], [29.50, 41.80], [30.50, 42.80], [31.50, 43.80]] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "KAFOS (Karadeniz - Samsun)", "operator": "Uluslararası konsorsiyum", "capacity": "Tier-0", "kind": "submarine", "info": "Karadeniz fiber optik sistemi · Samsun iniş noktası · redundant uluslararası çıkış" },
+      "geometry": { "type": "LineString", "coordinates": [[36.33, 41.35], [36.80, 42.20], [37.50, 43.30]] }
+    }
+  ]
+}
