@@ -422,6 +422,107 @@ async def test_llm_agent_forwards_ui_context_into_initial_prompt(
     assert "urgency"          in first_user["content"]
 
 
+def test_resolve_model_prefers_ctx_override() -> None:
+    """Per-run override from the UI wins over every class/deploy default."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(
+        operator="TR", run_id="t", prompt="", extra={"model": "haiku"},
+    )
+    assert _resolve_model(ctx, "sonnet", "opus") == "haiku"
+
+
+def test_resolve_model_strips_whitespace() -> None:
+    """A dropdown value of ``"  sonnet  "`` — stripped, not rejected."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(
+        operator="TR", run_id="t", prompt="", extra={"model": "  sonnet  "},
+    )
+    assert _resolve_model(ctx, "", "") == "sonnet"
+
+
+def test_resolve_model_falls_through_blank_override_to_agent_default() -> None:
+    """Picking "Varsayılan" in the UI ships ``"model": ""`` — it must
+    defer to the agent's own pin instead of clobbering it."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(operator="TR", run_id="t", prompt="", extra={"model": ""})
+    assert _resolve_model(ctx, "opus", "haiku") == "opus"
+
+
+def test_resolve_model_ignores_non_string_override() -> None:
+    """Defensive: context is decoded JSON, a malformed payload sending
+    ``"model": 3`` must not crash the run."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(operator="TR", run_id="t", prompt="", extra={"model": 3})
+    assert _resolve_model(ctx, "sonnet", "") == "sonnet"
+
+
+def test_resolve_model_falls_through_missing_override() -> None:
+    """No ``model`` key at all → agent default wins."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(operator="TR", run_id="t", prompt="", extra={"focus": "TR"})
+    assert _resolve_model(ctx, "sonnet", "haiku") == "sonnet"
+
+
+def test_resolve_model_settings_default_when_nothing_else() -> None:
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(operator="TR", run_id="t", prompt="", extra={})
+    assert _resolve_model(ctx, "", "opus") == "opus"
+
+
+def test_resolve_model_empty_everywhere_returns_empty() -> None:
+    """Nothing set → bridge picks its own default (empty string sentinel)."""
+    from tairos_api.agents.base import AgentContext
+    from tairos_api.agents.llm import _resolve_model
+
+    ctx = AgentContext(operator="TR", run_id="t", prompt="", extra={})
+    assert _resolve_model(ctx, "", "") == ""
+
+
+async def test_llm_agent_passes_per_run_model_to_call_llm(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """End-to-end: POST /runs with ``context.model = "haiku"`` must pass
+    ``model="haiku"`` to ``_call_llm`` and the plan step must show it so
+    the operator can confirm in the UI which model served the run."""
+    captured: dict[str, Any] = {}
+
+    async def capture_model(self, http, bridge, system, messages, model):  # noqa: ARG001
+        captured["model"] = model
+        return '<final>{"summary":"ok", "total":0}</final>'
+
+    monkeypatch.setattr(LlmInventoryAnalyst, "_call_llm", capture_model)
+
+    res = await client.post(
+        "/v1/agents/llm_inventory_analyst/runs",
+        json={
+            "operator": "TR",
+            "context":  {"model": "haiku"},
+        },
+    )
+    assert res.status_code == 200
+    initial = res.json()
+    body = await _wait_for_terminal(client, initial["id"])
+    assert body["run"]["status"] == "done"
+    assert captured["model"] == "haiku"
+
+    # Plan step must echo the chosen model back so the UI can display
+    # "haiku" in the step body instead of "(bridge default)".
+    plan_step = next(s for s in body["steps"] if s["kind"] == "plan")
+    assert plan_step["payload"]["model"] == "haiku"
+
+
 async def test_llm_agent_returns_pending_row_for_fast_polling(
     monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
 ) -> None:

@@ -144,6 +144,26 @@ def _parse_llm_reply(text: str) -> tuple[str, dict[str, Any] | None, str]:
     return ("malformed", None, text)
 
 
+def _resolve_model(ctx: AgentContext, agent_default: str, setting_default: str) -> str:
+    """Pick the Claude model for one run.
+
+    Priority (first non-empty wins): ``ctx.extra['model']`` →
+    ``agent_default`` (the subclass's ``model`` attr) → ``setting_default``
+    (``LLM_MODEL`` env var) → ``""``.
+
+    An explicit ``""`` from the UI is treated as *unset*, so picking
+    "Varsayılan" in the dropdown cleanly falls through to the agent /
+    deployment default without the user losing the subclass pin. Any
+    non-string value from the context is ignored defensively — the
+    context comes from a JSON blob on the wire and we don't want a
+    malformed payload to crash the run before the first LLM turn.
+    """
+    override = ctx.extra.get("model") if ctx.extra else None
+    if isinstance(override, str) and override.strip():
+        return override.strip()
+    return agent_default or setting_default or ""
+
+
 class LlmAgent(Agent):
     """Base class for LLM-backed agents.
 
@@ -173,7 +193,14 @@ class LlmAgent(Agent):
         settings = get_settings()
         max_iter = self.max_iterations or settings.llm_max_iterations
         bridge   = settings.llm_bridge_url.rstrip("/")
-        model    = self.model or settings.llm_model
+        # Model resolution is *most specific wins*:
+        #   1. per-run override from the UI (``context.model``),
+        #   2. agent class default (``self.model`` — subclass pin),
+        #   3. deploy-wide default (``settings.llm_model`` env var),
+        #   4. empty string → let the bridge pick.
+        # Pulled out as a helper so a ctx override of "" (explicit
+        # blank) doesn't silently win over a populated settings value.
+        model   = _resolve_model(ctx, self.model, settings.llm_model)
         timeout  = settings.llm_timeout_seconds
 
         # ── Plan step ────────────────────────────────────────

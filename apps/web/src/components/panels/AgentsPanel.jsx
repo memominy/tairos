@@ -81,6 +81,11 @@ export default function AgentsPanel() {
    * olarak terminal state'e kadar takip ediyoruz. */
   const [prompt, setPrompt]         = useState('')
   const [runId,  setRunId]          = useState(null)
+  // Model override, per-run. Empty string = fall through to the agent's
+  // pinned model / deploy default. Only surfaced for LLM agents; it's a
+  // no-op on deterministic ones (they don't call the bridge) so we
+  // just hide the control rather than disabling it.
+  const [modelOverride, setModelOverride] = useState('')
   const startMutation               = useStartAgentRun()
 
   const runQ  = useAgentRun(runId, { enabled: Boolean(runId), poll: true })
@@ -95,6 +100,12 @@ export default function AgentsPanel() {
     // store tümüyle sızarsa prompt bağlamı kirlenir ve LLM dağılır.
     const context = {}
     if (focusCountry) context.focus_country = focusCountry
+    // Only ship ``model`` when the operator picked something concrete;
+    // blank = "Varsayılan" and backend ``_resolve_model`` expects a
+    // missing key (or empty string, which it also tolerates) to mean
+    // "fall through to agent/deploy default". Sending it only when
+    // non-empty keeps the context blob legible in the run-history view.
+    if (activeIsLlm && modelOverride) context.model = modelOverride
 
     try {
       const created = await startMutation.mutateAsync({
@@ -176,6 +187,20 @@ export default function AgentsPanel() {
                   className="mt-1 w-full bg-ops-900/70 border border-ops-700 rounded px-2 py-1.5 text-[12px] text-ops-100 font-mono placeholder:text-ops-600 focus:outline-none focus:border-accent/60"
                 />
               </label>
+
+              {/* Model seçici — yalnızca LLM ajanlarında. Deterministik
+                  ajanlarda köprüye hiç çıkılmadığı için kontrol gizli
+                  (disabled değil) kalıyor ki UI kirli görünmesin.
+                  Seçim, ``context.model`` olarak ajana geçiyor;
+                  backend ``_resolve_model`` önceliği:
+                    ctx.model → agent.model → settings.llm_model. */}
+              {activeIsLlm && (
+                <ModelSelect
+                  value={modelOverride}
+                  onChange={setModelOverride}
+                  disabled={startMutation.isPending}
+                />
+              )}
 
               <div className="flex items-center gap-2">
                 <button
@@ -427,6 +452,25 @@ const RUN_STATUS = {
   error:   { icon: AlertCircle,  tone: 'text-red-400',     label: 'hata',        spin: false },
 }
 
+// Per-run model override. The Claude Code CLI (reached via
+// ``scripts/assistant-server.mjs``) accepts the short aliases "haiku" /
+// "sonnet" / "opus" and resolves them to the current generation at call
+// time. Operators pick here when they want to trade latency vs depth
+// per task:
+//   * Haiku  → tarama, sınıflandırma, kısa özet (saniyede tamamlanır).
+//   * Sonnet → çoğu analiz işi için dengeli seçim (varsayılan istikrar).
+//   * Opus   → planlama, çok adımlı muhakeme, zor istihbarat briefi.
+// Empty value = "Varsayılan": let the agent / bridge / env decide.
+// Keeping the list hardcoded rather than fetching from /v1/agents means
+// the dropdown still works when the bridge is offline (the operator can
+// pick an intent ahead of time and bring it up).
+const MODEL_OPTIONS = [
+  { value: '',       label: 'Varsayılan', hint: 'Ajan/bridge seçer'    },
+  { value: 'haiku',  label: 'Haiku',      hint: 'Hızlı / ucuz'         },
+  { value: 'sonnet', label: 'Sonnet',     hint: 'Dengeli'              },
+  { value: 'opus',   label: 'Opus',       hint: 'Derin analiz'         },
+]
+
 function RunHeader({ run }) {
   const state = RUN_STATUS[run.status] ?? {
     icon: Loader2, tone: 'text-ops-400', label: run.status, spin: false,
@@ -512,6 +556,10 @@ function StepRow({ step, startedAt }) {
 function StepBody({ step }) {
   const { kind, payload = {} } = step
 
+  if (kind === 'plan') {
+    return <PlanBody input={payload} />
+  }
+
   if (kind === 'tool_result' && payload.output) {
     if (payload.tool === 'web_fetch') {
       return <WebFetchResultBody input={payload.output} />
@@ -524,6 +572,59 @@ function StepBody({ step }) {
   // Fallback: pretty-print JSON. Still the safest default — new tools
   // get a readable dump on day one, typed renderers come later.
   return <JsonBlock value={payload} />
+}
+
+/* Plan adımının tipli görünümü. Payload: ``{summary, operator, prompt,
+ * model, max_iter, tool_names}``. Summary zaten başlıkta görünüyor;
+ * body operatörün "bu run hangi model + hangi tool seti + hangi
+ * bağlamla başladı?" sorusuna tek bakışta cevap versin. Prompt boşsa
+ * satırı tamamen gizliyoruz — gereksiz "(boş)" rozetleri panel
+ * okunabilirliğini bozuyor. */
+function PlanBody({ input }) {
+  const {
+    operator, prompt, model, max_iter,
+    tool_names = [],
+  } = input || {}
+
+  const metaRow = [
+    model    && { label: 'model',    value: model },
+    operator && { label: 'operatör', value: operator },
+    typeof max_iter === 'number' && { label: 'tur üst sınırı', value: max_iter },
+  ].filter(Boolean)
+
+  return (
+    <div className="px-2 pb-2 space-y-1.5">
+      {metaRow.length > 0 && (
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] font-mono">
+          {metaRow.map((m) => (
+            <span key={m.label} className="text-ops-400">
+              <span className="text-ops-600">{m.label}: </span>
+              <span className="text-ops-200">{m.value}</span>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {tool_names.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          {tool_names.map((name) => (
+            <span
+              key={name}
+              className="text-[10px] font-mono text-ops-300 bg-ops-800/60 border border-ops-700 rounded px-1.5 py-0.5"
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {prompt && (
+        <div className="text-[11px] text-ops-300 leading-snug whitespace-pre-wrap break-words rounded border border-ops-700/70 bg-ops-900/40 p-1.5">
+          {prompt}
+        </div>
+      )}
+    </div>
+  )
 }
 
 function WebFetchResultBody({ input }) {
@@ -806,12 +907,16 @@ function RunHistoryRow({ run, active, onSelect }) {
   // ``result`` şemayı bilmiyoruz (ajan değişken); summary yoksa
   // rozetle yetin, kullanıcı açıp detayı timeline'da görsün.
   const summary = run.result?.summary || run.error || null
+  // Run bu modelle başlatıldıysa rozet göster. ``context.model`` yalnız
+  // operatör varsayılanı dışına çıkınca yazılır — varsayılan run'lar
+  // temiz kalsın, istisna olanlar gözle yakalansın.
+  const ctxModel = typeof run.context?.model === 'string' ? run.context.model : null
 
   return (
     <li>
       <button
         onClick={onSelect}
-        title={`${run.agent} · ${run.id}`}
+        title={`${run.agent} · ${run.id}${ctxModel ? ` · model=${ctxModel}` : ''}`}
         className={`w-full flex items-center gap-2 px-2 py-1.5 rounded border text-left transition-colors ${
           active
             ? 'border-accent/50 bg-accent/10'
@@ -831,6 +936,11 @@ function RunHistoryRow({ run, active, onSelect }) {
             >
               {run.agent}
             </span>
+            {ctxModel && (
+              <span className="text-[9px] font-mono text-violet-300 bg-violet-500/10 border border-violet-500/30 rounded px-1 py-0.5 leading-none">
+                {ctxModel}
+              </span>
+            )}
             <span className="text-[10px] text-ops-600">·</span>
             <span className={`text-[10px] font-mono ${state.tone}`}>
               {state.label}
@@ -944,5 +1054,38 @@ function BridgeHealthDot({ health, loading }) {
         köprü
       </span>
     </div>
+  )
+}
+
+/* Model seçici — Claude Max köprüsüne geçecek ``--model`` değerini
+ * operatör run-başına seçebilsin. Liste hardcoded (MODEL_OPTIONS): fazla
+ * seçenek = analiz felci; haiku/sonnet/opus üçü + Varsayılan yeterli.
+ * "Hint" yazısı seçili modelin altında gri not olarak görünür — operatör
+ * hangi model için neyin uygun olduğunu her seferinde hatırlamak zorunda
+ * kalmasın. Panel dar olduğu için horizontal pills yerine select input
+ * seçtik: mobil/ince panelde düzgün sığar. */
+function ModelSelect({ value, onChange, disabled }) {
+  const current = MODEL_OPTIONS.find((m) => m.value === value) ?? MODEL_OPTIONS[0]
+  return (
+    <label className="block">
+      <span className="text-[10px] font-mono uppercase tracking-wider text-ops-500">
+        Model
+      </span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
+        className="mt-1 w-full bg-ops-900/70 border border-ops-700 rounded px-2 py-1.5 text-[12px] text-ops-100 font-mono focus:outline-none focus:border-accent/60 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {MODEL_OPTIONS.map((m) => (
+          <option key={m.value || 'default'} value={m.value}>
+            {m.label}
+          </option>
+        ))}
+      </select>
+      <span className="block mt-0.5 text-[10px] text-ops-500 font-mono">
+        {current.hint}
+      </span>
+    </label>
   )
 }
