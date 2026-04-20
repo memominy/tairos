@@ -495,12 +495,148 @@ function StepRow({ step, startedAt }) {
           {open ? <ChevronDown size={11} /> : <ChevronRight size={11} />}
         </span>
       </button>
-      {open && (
-        <pre className="px-2 pb-2 text-[10px] font-mono text-ops-400 overflow-x-auto whitespace-pre-wrap break-words">
-          {JSON.stringify(step.payload, null, 2)}
-        </pre>
-      )}
+      {open && <StepBody step={step} />}
     </li>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ * StepBody — expanded body for a single step
+ *
+ * Switches on (kind, tool) to render tool-specific payloads readably
+ * — e.g. web_fetch's long ``text`` becomes a collapsible preview, and
+ * rss_fetch's ``items`` list shows as titled rows with their links.
+ * Anything without a typed renderer falls through to a pretty-JSON
+ * block so we never hide data from the operator.
+ * ═══════════════════════════════════════════════════════════════════ */
+function StepBody({ step }) {
+  const { kind, payload = {} } = step
+
+  if (kind === 'tool_result' && payload.output) {
+    if (payload.tool === 'web_fetch') {
+      return <WebFetchResultBody input={payload.output} />
+    }
+    if (payload.tool === 'rss_fetch') {
+      return <RssFetchResultBody input={payload.output} />
+    }
+  }
+
+  // Fallback: pretty-print JSON. Still the safest default — new tools
+  // get a readable dump on day one, typed renderers come later.
+  return <JsonBlock value={payload} />
+}
+
+function WebFetchResultBody({ input }) {
+  const { status, content_type, url, text = '', truncated } = input || {}
+  const [showAll, setShowAll] = useState(false)
+  // Ön izleme: ilk 500 karakter yeterince bağlam veriyor ama timeline'ı
+  // kirletmiyor. Tam metni görmek isteyen operatör "tümünü göster"
+  // diyebiliyor — %99'unda gerek yok, timeline hızlı okunsun.
+  const PREVIEW_MAX = 500
+  const long        = text.length > PREVIEW_MAX
+  const shown       = showAll || !long ? text : text.slice(0, PREVIEW_MAX)
+
+  return (
+    <div className="px-2 pb-2 space-y-1.5">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] font-mono">
+        {typeof status === 'number' && (
+          <span className={status >= 400 ? 'text-red-400' : 'text-emerald-400'}>
+            HTTP {status}
+          </span>
+        )}
+        {content_type && (
+          <span className="text-ops-400">{content_type.split(';')[0]}</span>
+        )}
+        {truncated && (
+          <span className="text-amber-400">kesildi</span>
+        )}
+      </div>
+      {url && (
+        <div className="text-[10px] font-mono text-ops-500 break-all" title={url}>
+          <span className="text-ops-600">url: </span>
+          <span className="text-ops-300">{url}</span>
+        </div>
+      )}
+      {text ? (
+        <div>
+          <pre className="text-[10px] font-mono text-ops-300 whitespace-pre-wrap break-words leading-snug max-h-80 overflow-y-auto rounded border border-ops-700/70 bg-ops-900/40 p-1.5">
+            {shown}
+            {long && !showAll && <span className="text-ops-500">…</span>}
+          </pre>
+          {long && (
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="mt-1 text-[10px] font-mono uppercase tracking-wider text-accent hover:text-accent/80"
+            >
+              {showAll
+                ? `▲ önizlemeye dön (${PREVIEW_MAX} karakter)`
+                : `▼ tümünü göster (${text.length} karakter)`}
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="text-[10px] font-mono text-ops-500 italic">
+          (boş gövde)
+        </div>
+      )}
+    </div>
+  )
+}
+
+function RssFetchResultBody({ input }) {
+  const { title, url, items = [] } = input || {}
+  return (
+    <div className="px-2 pb-2 space-y-1">
+      <div className="flex items-center gap-2 flex-wrap text-[10px] font-mono">
+        <span className="text-ops-300">{title || '(başlıksız)'}</span>
+        <span className="text-ops-600">·</span>
+        <span className="text-ops-500">{items.length} öğe</span>
+      </div>
+      {url && (
+        <div className="text-[10px] font-mono text-ops-500 break-all">
+          <span className="text-ops-600">feed: </span>
+          <span className="text-ops-400">{url}</span>
+        </div>
+      )}
+      {items.length > 0 ? (
+        <ol className="mt-1 space-y-1 list-decimal list-inside marker:text-ops-500">
+          {items.map((it, i) => (
+            <li key={i} className="text-[11px] text-ops-200 leading-snug">
+              <div className="font-medium">{it.title || '(başlıksız)'}</div>
+              {it.published && (
+                <div className="text-[10px] font-mono text-ops-500">
+                  {it.published}
+                </div>
+              )}
+              {it.link && (
+                <div className="text-[10px] font-mono text-ops-500 break-all">
+                  {it.link}
+                </div>
+              )}
+              {it.summary && (
+                <div className="text-[10px] text-ops-400 leading-snug mt-0.5">
+                  {it.summary.length > 240
+                    ? it.summary.slice(0, 240) + '…'
+                    : it.summary}
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <div className="text-[10px] font-mono text-ops-500 italic">
+          (feed boş)
+        </div>
+      )}
+    </div>
+  )
+}
+
+function JsonBlock({ value }) {
+  return (
+    <pre className="px-2 pb-2 text-[10px] font-mono text-ops-400 overflow-x-auto whitespace-pre-wrap break-words">
+      {JSON.stringify(value, null, 2)}
+    </pre>
   )
 }
 
@@ -523,15 +659,23 @@ function formatElapsed(stepAt, runStartedAt) {
 
 function headlineFor(step) {
   const p = step.payload || {}
-  if (step.kind === 'plan')        return p.summary || 'plan'
-  if (step.kind === 'tool_call')   return `${p.tool || 'tool'} çağrıldı`
+  if (step.kind === 'plan')      return p.summary || 'plan'
+  if (step.kind === 'tool_call') return `${p.tool || 'tool'} çağrıldı`
   if (step.kind === 'tool_result') {
     const out = p.output || {}
-    if (typeof out.total === 'number') return `${p.tool} → total=${out.total}`
-    if (Array.isArray(out.nodes))      return `${p.tool} → ${out.nodes.length} düğüm`
+    // Tool-aware compact headlines: tek satırlık özete en bilgi-yoğun
+    // alanı sıkıştırıyoruz. Error varsa onu öne al — operatör run'a
+    // bakar bakmaz nerede patladığını görsün.
+    if (p.error)                            return `${p.tool} → hata`
+    if (typeof out.total === 'number')      return `${p.tool} → total=${out.total}`
+    if (Array.isArray(out.nodes))           return `${p.tool} → ${out.nodes.length} düğüm`
+    if (Array.isArray(out.items))           return `${p.tool} → ${out.items.length} haber`
+    if (typeof out.status === 'number' && typeof out.content_type === 'string') {
+      return `${p.tool} → ${out.status} ${out.content_type.split(';')[0]}`
+    }
     return `${p.tool || 'tool'} sonucu`
   }
-  if (step.kind === 'final')       return p.summary || 'final özet'
+  if (step.kind === 'final')     return p.summary || 'final özet'
   return step.kind
 }
 
