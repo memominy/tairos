@@ -68,7 +68,9 @@ def seed(reg: Registry | None = None) -> Registry:
     # the registry module, but only by name.
     from .examples.inventory_analyst     import InventoryAnalyst
     from .examples.llm_inventory_analyst import LlmInventoryAnalyst
+    from .examples.web_analyst           import WebAnalyst
     from .tools.inventory                import CountNodesTool, ListNodesTool
+    from .tools.web                      import WebFetchTool
 
     # Re-seeding a populated registry is a no-op; makes fixture setup
     # in tests easier.
@@ -76,9 +78,13 @@ def seed(reg: Registry | None = None) -> Registry:
         reg.register_tool(ListNodesTool())
     if "count_nodes" not in reg._tools:
         reg.register_tool(CountNodesTool())
+    if "web_fetch" not in reg._tools:
+        reg.register_tool(WebFetchTool())
     if reg.get_agent(InventoryAnalyst.name) is None:
         reg.register_agent(InventoryAnalyst)
     if reg.get_agent(LlmInventoryAnalyst.name) is None:
         reg.register_agent(LlmInventoryAnalyst)
+    if reg.get_agent(WebAnalyst.name) is None:
+        reg.register_agent(WebAnalyst)
 
     return reg

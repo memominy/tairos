@@ -539,6 +539,10 @@ function ResultBlock({ result }) {
   if (!result || typeof result !== 'object') {
     return <pre className="text-[11px] font-mono text-ops-200">{String(result)}</pre>
   }
+  // Her alan opsiyonel — ajanlar tek bir "summary + keyfi ekstra"
+  // şablonunu paylaşıyor. Yeni bir alan türü çıktığında buraya ek
+  // bir koşul ekleyip panel'ı yeniden derliyoruz; başka yerde
+  // şema bilgisi tutmak istemiyoruz.
   return (
     <div className="space-y-1">
       {result.summary && (
@@ -557,6 +561,25 @@ function ResultBlock({ result }) {
               .filter(Boolean)
               .join(', ')}
           </span>
+        </div>
+      )}
+      {/* Bullets: web_analyst + ileride gelen herhangi bir LLM ajanın
+          "operasyonel çıkarımlar" listesi. Tek satırlık •ler değil
+          de 2-5 maddelik kısa öğeler düşünülmüş — fazlasını kesmek
+          yerine tümünü gösteriyoruz: ajan zaten prompt'ta 5 ile
+          sınırlı, kesme mantığı UI'da gürültü. */}
+      {Array.isArray(result.bullets) && result.bullets.length > 0 && (
+        <ul className="mt-1 space-y-0.5 list-disc list-inside">
+          {result.bullets.map((b, i) => (
+            <li key={i} className="text-[11px] text-ops-200 leading-snug marker:text-accent/60">
+              {typeof b === 'string' ? b : JSON.stringify(b)}
+            </li>
+          ))}
+        </ul>
+      )}
+      {result.source && typeof result.source === 'string' && (
+        <div className="text-[10px] font-mono text-ops-500 truncate" title={result.source}>
+          kaynak: <span className="text-ops-400">{result.source}</span>
         </div>
       )}
     </div>
