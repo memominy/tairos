@@ -58,14 +58,26 @@ pip install -e .[dev]
 # copy env defaults (optional — empty .env is equivalent)
 copy .env.example .env
 
-# create the database (alembic takes over once we ship a migration)
-python -c "from tairos_api.db import create_db_and_tables; create_db_and_tables()"
+# apply migrations (creates the node table)
+alembic upgrade head
+
+# seed inventory from the frontend JSON (one-shot, idempotent)
+python -m scripts.seed_nodes_from_frontend
 
 # start the dev server with auto-reload
 uvicorn tairos_api.main:app --reload --port 8000
 ```
 
 Then open http://127.0.0.1:8000/docs for the Swagger UI.
+
+From the repo root the same flow is available as npm scripts:
+
+```bash
+npm run api:migrate          # alembic upgrade head
+npm run api:seed:inventory   # seed from apps/web/src/data/tairos-nodes.json
+npm run api:dev              # uvicorn with --reload
+npm run api:test             # pytest
+```
 
 ## Tests
 

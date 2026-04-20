@@ -21,15 +21,19 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=@tairos/web",
-    "build": "npm run build --workspace=@tairos/web",
-    "preview": "npm run preview --workspace=@tairos/web",
-    "start": "npm run start --workspace=@tairos/web",
-    "assistant": "node scripts/assistant-server.mjs",
-    "seed:global-sites": "node scripts/seed-global-sites.mjs",
-    "seed:conflict-assets": "node scripts/seed-conflict-assets.mjs",
-    "seed:forces": "node scripts/seed-forces.mjs",
-    "verify:global-sites": "node -e \"import('node:fs').then(m=>{const d=JSON.parse(m.readFileSync('apps/web/src/data/globalSites.json','utf8'));const by=k=>d.reduce((a,s)=>(a[s[k]]=(a[s[k]]||0)+1,a),{});console.log('total',d.length);console.log('operator',by('operator'));console.log('region',by('region'));console.log('type',by('type'));const ids=new Set(d.map(s=>s.id));console.log('unique_ids',ids.size);})\""
+    "dev":                   "npm run dev --workspace=@tairos/web",
+    "build":                 "npm run build --workspace=@tairos/web",
+    "preview":               "npm run preview --workspace=@tairos/web",
+    "start":                 "npm run start --workspace=@tairos/web",
+    "assistant":             "node scripts/assistant-server.mjs",
+    "api:dev":               "cd apps/api && uvicorn tairos_api.main:app --reload --port 8000",
+    "api:test":              "cd apps/api && pytest",
+    "api:migrate":           "cd apps/api && alembic upgrade head",
+    "api:seed:inventory":    "cd apps/api && python -m scripts.seed_nodes_from_frontend",
+    "seed:global-sites":     "node scripts/seed-global-sites.mjs",
+    "seed:conflict-assets":  "node scripts/seed-conflict-assets.mjs",
+    "seed:forces":           "node scripts/seed-forces.mjs",
+    "verify:global-sites":   "node -e \"import('node:fs').then(m=>{const d=JSON.parse(m.readFileSync('apps/web/src/data/globalSites.json','utf8'));const by=k=>d.reduce((a,s)=>(a[s[k]]=(a[s[k]]||0)+1,a),{});console.log('total',d.length);console.log('operator',by('operator'));console.log('region',by('region'));console.log('type',by('type'));const ids=new Set(d.map(s=>s.id));console.log('unique_ids',ids.size);})\""
   },
   "devDependencies": {
     "pdf-parse": "^2.4.5"
