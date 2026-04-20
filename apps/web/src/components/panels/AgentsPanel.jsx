@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import {
   Bot, ChevronRight, Play, Wrench, AlertCircle, CheckCircle2,
   Loader2, Terminal, ChevronDown, Sparkles, Cpu, ZapOff, History,
-  Ban, OctagonX,
+  Ban, OctagonX, RotateCcw,
 } from 'lucide-react'
 import useStore from '../../store/useStore'
 import { Section } from './_shared'
@@ -98,6 +98,40 @@ export default function AgentsPanel() {
   const onCancel = () => {
     if (!runId || !run || !RUN_IN_PROGRESS.has(run.status)) return
     cancelMutation.mutate(runId)
+  }
+
+  /**
+   * Tekrar çalıştır — aynı ajan, prompt ve context ile yeni bir run aç.
+   *
+   * Kullanım senaryoları:
+   *   - Operatör yanlış prompt'la çalıştırdığını anlar → iptal eder,
+   *     prompt'u düzenler → Tekrar düğmesi yerine doğrudan Başlat'ı
+   *     kullanır. Tekrar düğmesi zaten "aynısını tekrarla" demek.
+   *   - Geçmişten eski bir run'ı yeniden gözlemlemek istiyor — tıkla,
+   *     Tekrar'a bas, yeni run aynı konfigle başlar, karşılaştırılabilir.
+   *   - Köprü bir süre kapalıydı, şimdi açık → tamamlanmadan hata alan
+   *     run'u yeniden denemek.
+   *
+   * Yan etki bilerek minimum: prompt textarea / model dropdown'ı güncel
+   * operatör seçimleri için serbest bırakıyoruz; Tekrar sadece API'ye
+   * yeni bir run göndermek için eski değerleri kullanır.
+   */
+  const onRetry = async (sourceRun) => {
+    if (!sourceRun || !operator) return
+    const ctx = sourceRun.context && typeof sourceRun.context === 'object'
+      ? { ...sourceRun.context }
+      : {}
+    try {
+      const created = await startMutation.mutateAsync({
+        name:     sourceRun.agent,
+        operator,
+        prompt:   sourceRun.prompt || '',
+        context:  ctx,
+      })
+      setRunId(created.id)
+    } catch (err) {
+      console.warn('[AgentsPanel] retry failed:', err?.detail || err?.message)
+    }
   }
 
   const onRun = async () => {
@@ -291,6 +325,8 @@ export default function AgentsPanel() {
               onCancel={onCancel}
               cancelPending={cancelMutation.isPending}
               cancelError={cancelMutation.error}
+              onRetry={() => onRetry(run)}
+              retryPending={startMutation.isPending}
             />
           </Section>
         )}
@@ -402,7 +438,11 @@ function AgentCard({ agent, active, onSelect }) {
 /* ═══════════════════════════════════════════════════════════════════
  * RunTimeline — step zaman çizelgesi
  * ═══════════════════════════════════════════════════════════════════ */
-function RunTimeline({ run, steps, loading, onCancel, cancelPending, cancelError }) {
+function RunTimeline({
+  run, steps, loading,
+  onCancel, cancelPending, cancelError,
+  onRetry,  retryPending,
+}) {
   if (loading) {
     return (
       <div className="px-3 py-2">
@@ -419,30 +459,53 @@ function RunTimeline({ run, steps, loading, onCancel, cancelPending, cancelError
   }
 
   const canCancel = RUN_IN_PROGRESS.has(run.status) && typeof onCancel === 'function'
+  // Retry only for terminal runs — a run that's still in progress
+  // will flip terminal soon enough; doubling the concurrent runs
+  // rarely is what the operator actually wants. Gate on the status
+  // set + onRetry presence so the parent can opt out in contexts
+  // where retry doesn't make sense.
+  const canRetry  = !canCancel && typeof onRetry === 'function'
 
   return (
     <div className="px-3 space-y-1.5">
-      {/* Run özeti + iptal butonu aynı satırda — operatör uzun bir run
-          başlattıysa header'dan direkt durdurabilsin. Terminal run'larda
-          buton gizli (disabled değil) — basınca hiçbir şey olmayan buton
-          görünümü konsolu kirletiyor. */}
+      {/* Run özeti + işlem butonları aynı satırda — operatör uzun bir
+          run başlattıysa header'dan direkt durdurabilsin; bitmiş bir
+          run için "Tekrar" aynı konfigle yeni run açar. Terminal /
+          in-progress ayrımına göre yalnızca biri görünür. */}
       <div className="flex items-center justify-between gap-2">
         <RunHeader run={run} />
-        {canCancel && (
-          <button
-            onClick={onCancel}
-            disabled={cancelPending}
-            title="Çalışmayı iptal et"
-            className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {cancelPending ? (
-              <Loader2 size={10} className="animate-spin" />
-            ) : (
-              <Ban size={10} />
-            )}
-            Durdur
-          </button>
-        )}
+        <div className="flex items-center gap-1">
+          {canCancel && (
+            <button
+              onClick={onCancel}
+              disabled={cancelPending}
+              title="Çalışmayı iptal et"
+              className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {cancelPending ? (
+                <Loader2 size={10} className="animate-spin" />
+              ) : (
+                <Ban size={10} />
+              )}
+              Durdur
+            </button>
+          )}
+          {canRetry && (
+            <button
+              onClick={onRetry}
+              disabled={retryPending}
+              title="Aynı konfigle tekrar çalıştır"
+              className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border border-accent/40 bg-accent/10 text-accent hover:bg-accent/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              {retryPending ? (
+                <Loader2 size={10} className="animate-spin" />
+              ) : (
+                <RotateCcw size={10} />
+              )}
+              Tekrar
+            </button>
+          )}
+        </div>
       </div>
 
       {cancelError && (
