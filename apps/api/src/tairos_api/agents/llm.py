@@ -156,6 +156,10 @@ class LlmAgent(Agent):
     """
 
     # Inherited from Agent: name, description, tools.
+    # Override kind so the UI can show an "LLM" badge + gate on
+    # bridge health. Subclasses don't need to touch this.
+    kind: str = "llm"
+
     # Set by subclasses:
     system_prompt: str = ""
     model:         str = ""   # empty = let bridge pick default

@@ -7,9 +7,14 @@ Covers:
   * the persisted AgentRun ends with status=done and the final
     summary as its result
   * MCP tools/list + tools/call round-trip a real tool
+  * bridge health proxy — happy path and the common failure modes
+    (bridge down, timeout, non-JSON body, bridge reports ok=False)
 """
 from __future__ import annotations
 
+from typing import Any
+
+import httpx
 import pytest
 from httpx import AsyncClient
 
@@ -33,8 +38,16 @@ async def _create_tr_node(client: AsyncClient, *, name: str) -> None:
 async def test_list_agents_includes_inventory_analyst(client: AsyncClient) -> None:
     res = await client.get("/v1/agents")
     assert res.status_code == 200
-    names = [a["name"] for a in res.json()["agents"]]
+    agents = res.json()["agents"]
+    names = [a["name"] for a in agents]
     assert "inventory_analyst" in names
+
+    # Each descriptor must carry ``kind`` — the frontend gates the
+    # LLM badge + bridge-health warning on it.
+    deterministic = next(a for a in agents if a["name"] == "inventory_analyst")
+    assert deterministic["kind"] == "deterministic"
+    llm_variant = next(a for a in agents if a["name"] == "llm_inventory_analyst")
+    assert llm_variant["kind"] == "llm"
 
 
 async def test_run_inventory_analyst_on_empty_db(client: AsyncClient) -> None:
@@ -120,3 +133,119 @@ async def test_mcp_unknown_tool_returns_error(client: AsyncClient) -> None:
     })
     body = res.json()
     assert body["error"]["code"] == 1001  # ERR_TOOL_MISSING
+
+
+# ── Bridge health proxy ──────────────────────────────────────
+# We fake ``httpx.AsyncClient.get`` at module scope so tests don't
+# depend on the Node bridge actually running. Each test installs
+# whichever fake it needs.
+def _install_fake_httpx_get(monkeypatch: pytest.MonkeyPatch, handler) -> None:
+    async def fake_get(self, url, **_kw):  # noqa: ARG001
+        return await handler(url)
+
+    monkeypatch.setattr(httpx.AsyncClient, "get", fake_get)
+
+
+def _make_response(status: int, body: Any) -> httpx.Response:
+    # httpx.Response constructor needs a Request for .url to work;
+    # we don't rely on it but pass one to keep httpx happy.
+    req = httpx.Request("GET", "http://test/health")
+    return httpx.Response(status_code=status, json=body, request=req)
+
+
+async def test_bridge_health_ok_when_bridge_is_up(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    async def handler(url: str):
+        assert url.endswith("/health")
+        return _make_response(200, {
+            "ok":      True,
+            "version": "1.2.3 (Claude Code)",
+            "cmd":     "C:\\fake\\claude.exe",
+        })
+
+    _install_fake_httpx_get(monkeypatch, handler)
+
+    res = await client.get("/v1/agents/bridge/health")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["ok"]      is True
+    assert body["version"] == "1.2.3 (Claude Code)"
+    assert body["cmd"]     == "C:\\fake\\claude.exe"
+    assert body["error"]   is None
+    assert body["bridge_url"].startswith("http")
+
+
+async def test_bridge_health_forwards_bridge_side_failure(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """Bridge itself is up but ``claude`` CLI is missing → bridge
+    returns ``{ok: false, error: ...}`` with HTTP 503. We forward the
+    error verbatim instead of masking it as a generic 'up'."""
+    async def handler(_url: str):
+        return _make_response(503, {"ok": False, "error": "claude-cli-missing"})
+
+    _install_fake_httpx_get(monkeypatch, handler)
+
+    res = await client.get("/v1/agents/bridge/health")
+    assert res.status_code == 200   # the API always returns 200
+    body = res.json()
+    assert body["ok"]    is False
+    assert body["error"] == "claude-cli-missing"
+
+
+async def test_bridge_health_connect_error(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """Bridge not running at all → ConnectError. The endpoint must
+    still respond 200 with ``ok: false`` so the UI can render."""
+    async def handler(_url: str):
+        raise httpx.ConnectError("Connection refused")
+
+    _install_fake_httpx_get(monkeypatch, handler)
+
+    res = await client.get("/v1/agents/bridge/health")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["ok"]    is False
+    assert "Connection refused" in (body["error"] or "")
+
+
+async def test_bridge_health_timeout(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """Bridge hangs → TimeoutException. Surface a clean ``timeout``
+    string — operators want to know it's slow, not dead."""
+    async def handler(_url: str):
+        raise httpx.ReadTimeout("boom")
+
+    _install_fake_httpx_get(monkeypatch, handler)
+
+    res = await client.get("/v1/agents/bridge/health")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["ok"]    is False
+    assert body["error"] == "timeout"
+
+
+async def test_bridge_health_handles_non_json_body(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """A misconfigured reverse proxy returning HTML shouldn't crash
+    the endpoint with a JSONDecodeError."""
+    req = httpx.Request("GET", "http://test/health")
+
+    async def handler(_url: str):
+        return httpx.Response(
+            status_code=502,
+            content=b"<html>nginx bad gateway</html>",
+            request=req,
+        )
+
+    _install_fake_httpx_get(monkeypatch, handler)
+
+    res = await client.get("/v1/agents/bridge/health")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["ok"] is False
+    assert "non-JSON" in (body["error"] or "")

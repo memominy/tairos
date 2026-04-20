@@ -59,11 +59,19 @@ class Agent(abc.ABC):
       * ``name``         — stable identifier, shown in /v1/agents
       * ``description``  — human-readable summary
       * ``tools``        — list of Tool *instances* the agent may call
+      * ``kind``         — ``"deterministic"`` (default) or ``"llm"``;
+        surfaced in ``describe()`` so the UI can render different
+        affordances (e.g. a rozette, a bridge-health warning) per
+        class without introspecting the Python inheritance tree.
     """
 
     name:        str
     description: str
     tools:       list[Tool] = []
+    # ``"deterministic"`` | ``"llm"``. LlmAgent overrides to ``"llm"``;
+    # future kinds (scheduled, remote, rag) can slot in as strings
+    # without a migration.
+    kind:        str = "deterministic"
 
     @abc.abstractmethod
     async def arun(self, ctx: AgentContext) -> AsyncIterator[Step]:
@@ -80,5 +88,6 @@ class Agent(abc.ABC):
         return {
             "name":        cls.name,
             "description": cls.description,
+            "kind":        cls.kind,
             "tools":       [t.__class__.describe() for t in cls.tools],
         }

@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import {
   Bot, ChevronRight, Play, Wrench, AlertCircle, CheckCircle2,
-  Loader2, Terminal, ChevronDown,
+  Loader2, Terminal, ChevronDown, Sparkles, Cpu, ZapOff,
 } from 'lucide-react'
 import useStore from '../../store/useStore'
 import { Section } from './_shared'
 import {
   useAgentList,
   useAgentRun,
+  useBridgeHealth,
   useStartAgentRun,
 } from '../../hooks/api/useAgents'
 
@@ -34,6 +35,8 @@ export default function AgentsPanel() {
 
   const agentsQ  = useAgentList()
   const agents   = agentsQ.data?.agents ?? []
+  const bridgeQ  = useBridgeHealth()
+  const bridge   = bridgeQ.data ?? null
 
   // İlk agent otomatik seçili; list değişince (ya da boşalınca) yeniden
   // başlatılsın diye useMemo + key fallback.
@@ -46,6 +49,13 @@ export default function AgentsPanel() {
   }, [selectedName, agents])
 
   const activeAgent = agents.find((a) => a.name === activeName) ?? null
+  const activeIsLlm = activeAgent?.kind === 'llm'
+
+  // When the selected agent needs the bridge and the bridge is down,
+  // gate the run button so the operator sees a clear warning instead
+  // of a cryptic "LLM köprüsüne erişilemedi" in the final step.
+  const llmBridgeDown =
+    activeIsLlm && bridgeQ.isFetched && bridge && bridge.ok === false
 
   /* ── Run state ───────────────────────────────────────────
    * Run başlatıldığında dönen row'un id'sini saklıyoruz; timeline
@@ -92,6 +102,11 @@ export default function AgentsPanel() {
             {agents.length} ajan · operatör {operator}
           </div>
         </div>
+
+        {/* Claude Max köprüsü sağlık göstergesi — LLM ajanları için
+            zorunlu bağımlılık. Kırmızı → köprü kapalı, sarı → veri
+            yok / ilk probu bekliyoruz, yeşil → tamam. */}
+        <BridgeHealthDot health={bridge} loading={bridgeQ.isLoading} />
       </div>
 
       <div className="flex-1 overflow-y-auto">
@@ -141,7 +156,7 @@ export default function AgentsPanel() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={onRun}
-                  disabled={startMutation.isPending || !operator}
+                  disabled={startMutation.isPending || !operator || llmBridgeDown}
                   className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider px-2.5 py-1.5 rounded border border-accent/40 bg-accent/10 text-accent hover:bg-accent/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {startMutation.isPending ? (
@@ -163,9 +178,42 @@ export default function AgentsPanel() {
                 )}
               </div>
 
+              {/* LLM ajan + köprü kapalı → run'a gitmeden net uyarı
+                  ver. Aksi halde operatör butonu tıklar, 5-10 saniye
+                  bekler, sonra "LLM köprüsüne erişilemedi" final'i
+                  gelir — anlamsız bir gecikme. */}
+              {llmBridgeDown && (
+                <div className="rounded border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5">
+                  <div className="flex items-start gap-1.5">
+                    <ZapOff size={12} className="text-amber-400 mt-0.5 shrink-0" />
+                    <div className="text-[11px] text-amber-200 leading-snug font-mono">
+                      <div className="font-semibold">Claude Max köprüsü kapalı</div>
+                      <div className="text-amber-300/80 mt-0.5">
+                        Bu ajan LLM tabanlı. Çalıştırmadan önce
+                        <code className="mx-1 px-1 bg-ops-900/60 rounded">
+                          npm&nbsp;run&nbsp;assistant
+                        </code>
+                        ile yerel köprüyü başlat.
+                      </div>
+                      {bridge?.error && (
+                        <div className="text-amber-400/70 mt-0.5 text-[10px]">
+                          detay: {bridge.error}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div className="text-[10px] text-ops-500 font-mono leading-snug">
                 Çalışma {operator} operatörü altında kaydedilir. Ajan
                 tool'ları operatör scope'una otomatik bağlıdır.
+                {activeIsLlm && (
+                  <>
+                    {' '}LLM ajanları <code className="text-accent">localhost:8787</code>
+                    köprüsünü kullanır.
+                  </>
+                )}
               </div>
             </div>
           </Section>
@@ -206,10 +254,11 @@ function AgentCard({ agent, active, onSelect }) {
           }`}
         />
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <span className={`text-[12px] font-semibold ${active ? 'text-accent' : 'text-ops-100'}`}>
               {agent.name}
             </span>
+            <KindBadge kind={agent.kind} />
             <span className="text-[10px] font-mono text-ops-500">
               · {toolCount} araç
             </span>
@@ -428,6 +477,61 @@ function StatusLine({ icon: Icon, label, spin = false, tone }) {
     <div className={`flex items-center gap-1.5 px-2 py-1 text-[11px] font-mono ${color}`}>
       <Icon size={12} className={spin ? 'animate-spin' : ''} />
       <span>{label}</span>
+    </div>
+  )
+}
+
+/* Kartta her ajanın cinsi görünsün: "LLM" (mor) veya "DET" (füme).
+ * Mor rengi Anthropic brand sinyali olarak seçtik — aynı anda
+ * "burada LLM var" sinyali veriyor, kullanıcının görsel haritası oluşuyor. */
+function KindBadge({ kind }) {
+  const isLlm = kind === 'llm'
+  const Icon  = isLlm ? Sparkles : Cpu
+  const label = isLlm ? 'LLM' : 'DET'
+  const cls   = isLlm
+    ? 'text-violet-300 bg-violet-500/15 border-violet-500/40'
+    : 'text-ops-300 bg-ops-700/50 border-ops-600'
+  return (
+    <span
+      title={isLlm ? 'LLM tabanlı (Claude Max köprüsü)' : 'Deterministik — kod tabanlı'}
+      className={`inline-flex items-center gap-0.5 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border ${cls}`}
+    >
+      <Icon size={9} />
+      {label}
+    </span>
+  )
+}
+
+/* Header'da tek bir nokta: yeşil = köprü hazır, kırmızı = kapalı,
+ * sarı = probe henüz dönmedi veya ok bilgisi gelmedi. Tooltip'te
+ * daha fazla detay (version, cmd path, hata). */
+function BridgeHealthDot({ health, loading }) {
+  const status = loading
+    ? 'loading'
+    : !health
+      ? 'unknown'
+      : health.ok ? 'ok' : 'down'
+
+  const tone = {
+    ok:      { cls: 'bg-emerald-400 shadow-[0_0_6px_rgba(16,185,129,0.7)]', label: 'Köprü hazır' },
+    down:    { cls: 'bg-red-500    shadow-[0_0_6px_rgba(239,68,68,0.7)]',   label: 'Köprü kapalı' },
+    loading: { cls: 'bg-amber-400 animate-pulse',                           label: 'Köprü kontrol ediliyor' },
+    unknown: { cls: 'bg-ops-500',                                           label: 'Köprü durumu bilinmiyor' },
+  }[status]
+
+  const title = [
+    tone.label,
+    health?.version && `v: ${health.version}`,
+    health?.bridge_url,
+    health?.error && `hata: ${health.error}`,
+  ].filter(Boolean).join(' · ')
+
+  return (
+    <div className="flex items-center gap-1.5 shrink-0" title={title}>
+      <span className={`w-1.5 h-1.5 rounded-full ${tone.cls}`} />
+      <span className="text-[10px] font-mono uppercase tracking-wider text-ops-500">
+        köprü
+      </span>
     </div>
   )
 }

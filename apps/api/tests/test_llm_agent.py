@@ -274,10 +274,12 @@ def test_format_tools_block_handles_empty_toolset() -> None:
 
 
 def test_llm_inventory_analyst_describe_shape() -> None:
-    """Registered agent must advertise tools in the UI descriptor —
-    otherwise the AgentsPanel can't render the tool list."""
+    """Registered agent must advertise tools + kind in the UI
+    descriptor — the frontend needs both to render the card + badge
+    correctly."""
     desc = LlmInventoryAnalyst.describe()
     assert desc["name"] == "llm_inventory_analyst"
+    assert desc["kind"] == "llm"
     tool_names = {t["name"] for t in desc["tools"]}
     assert tool_names == {"count_nodes", "list_nodes"}
 

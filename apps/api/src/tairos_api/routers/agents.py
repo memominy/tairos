@@ -1,6 +1,7 @@
 """Agents HTTP surface.
 
   GET  /v1/agents                        — list registered agents
+  GET  /v1/agents/bridge/health          — probe the Claude Max bridge
   POST /v1/agents/{name}/runs            — start a run, return AgentRun
   GET  /v1/agents/runs/{run_id}          — fetch run + step timeline
 
@@ -15,12 +16,14 @@ from __future__ import annotations
 
 from typing import Any
 
+import httpx
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlmodel import Session, select
 
 from ..agents.registry import registry
 from ..agents.runtime import execute_run
+from ..config import get_settings
 from ..db import get_session
 from ..models import AgentRun, AgentStep
 
@@ -44,6 +47,66 @@ def list_agents():
     return {
         "agents": [cls.describe() for cls in registry.list_agents()],
     }
+
+
+# ── Bridge health ────────────────────────────────────────────
+class BridgeHealth(BaseModel):
+    """Shape returned from ``GET /v1/agents/bridge/health``.
+
+    ``ok`` is the only field the frontend must check; everything else
+    is diagnostic. ``bridge_url`` is echoed so operators can confirm
+    the API is hitting the URL they expect (useful when env vars
+    drift across environments).
+    """
+
+    ok:         bool
+    bridge_url: str
+    version:    str | None = None
+    cmd:        str | None = None
+    error:      str | None = None
+
+
+@router.get("/bridge/health", response_model=BridgeHealth)
+async def bridge_health() -> BridgeHealth:
+    """Probe ``scripts/assistant-server.mjs`` at its ``/health``
+    endpoint so the UI can tell the operator whether LLM-backed
+    agents will work before they hit *Başlat*.
+
+    We keep the timeout short (3s) because the ping should be cheap;
+    a longer wait just means a colder UX while the panel hangs on a
+    dead bridge.
+    """
+    settings = get_settings()
+    url = settings.llm_bridge_url.rstrip("/") + "/health"
+    try:
+        async with httpx.AsyncClient(timeout=3.0) as http:
+            res = await http.get(url)
+    except httpx.TimeoutException:
+        return BridgeHealth(ok=False, bridge_url=settings.llm_bridge_url, error="timeout")
+    except httpx.HTTPError as exc:
+        # ConnectError, ReadError, anything in the httpx family.
+        # str(exc) can be empty on some variants, fall back to the
+        # class name so the UI has something to show.
+        msg = str(exc) or type(exc).__name__
+        return BridgeHealth(ok=False, bridge_url=settings.llm_bridge_url, error=msg)
+
+    try:
+        data = res.json()
+    except ValueError:
+        return BridgeHealth(
+            ok=False, bridge_url=settings.llm_bridge_url,
+            error=f"bridge returned non-JSON (HTTP {res.status_code})",
+        )
+
+    # The bridge reports ok=False itself when the claude CLI is
+    # missing — forward that verbatim instead of faking an OK.
+    return BridgeHealth(
+        ok         = bool(data.get("ok")),
+        bridge_url = settings.llm_bridge_url,
+        version    = data.get("version"),
+        cmd        = data.get("cmd"),
+        error      = data.get("error"),
+    )
 
 
 # ── Start a run ──────────────────────────────────────────────

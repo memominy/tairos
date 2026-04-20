@@ -28,6 +28,7 @@ export const agentKeys = {
   list:           ['agents', 'list'],
   runsAll:        ['agents', 'runs'],
   run:            (id) => ['agents', 'runs', id],
+  bridgeHealth:   ['agents', 'bridge', 'health'],
 }
 
 /**
@@ -65,6 +66,36 @@ export function useAgentRun(runId, { enabled = true, poll = false } = {}) {
     },
   })
 }
+
+/**
+ * Poll the Claude Max bridge health (``scripts/assistant-server.mjs``).
+ *
+ * The backend proxies the bridge's ``/health`` and returns a uniform
+ * shape: ``{ ok, bridge_url, version?, cmd?, error? }``. We re-check
+ * every 30s by default — cheap enough that the operator sees a red
+ * dot turn green within half a minute of starting the bridge, but not
+ * so fast that an offline bridge hammers the API.
+ *
+ * The panel gates two UX bits on this:
+ *   - header status dot (always visible)
+ *   - pre-flight warning on the Çalıştır section when an LLM agent
+ *     is selected and ``ok === false``
+ */
+export function useBridgeHealth({ enabled = true, pollMs = 30_000 } = {}) {
+  return useQuery({
+    queryKey: agentKeys.bridgeHealth,
+    queryFn:  ({ signal }) => apiGet('/v1/agents/bridge/health', { signal }),
+    enabled,
+    // Short staleTime so mutations / manual refetch bust the cache;
+    // refetchInterval pushes a fresh probe on the poll schedule.
+    staleTime:       10_000,
+    refetchInterval: pollMs,
+    // Don't thrash during the first reload if the API is slow —
+    // a stale health card is fine until the next tick.
+    refetchOnWindowFocus: false,
+  })
+}
+
 
 /**
  * Start an agent run. Returns the terminal ``AgentRun`` row on success
