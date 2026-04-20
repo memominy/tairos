@@ -3,23 +3,23 @@
   GET  /v1/agents                        — list registered agents
   GET  /v1/agents/bridge/health          — probe the Claude Max bridge
   POST /v1/agents/{name}/runs            — start a run, return AgentRun
+  GET  /v1/agents/runs                   — list recent runs (history)
   GET  /v1/agents/runs/{run_id}          — fetch run + step timeline
 
-``POST`` runs the agent synchronously and returns the terminal
-``AgentRun`` row. For deterministic example agents this is
-indistinguishable from a regular CRUD endpoint — sub-millisecond
-latency, done inline. When LLM-backed agents land, this endpoint
-will flip to an async task + return ``pending`` immediately, and the
-GET endpoint becomes the polling target.
+``POST`` dispatches on the registered agent's ``kind``: deterministic
+agents run inline (sub-millisecond); LLM (and any future long-running
+kind) return a ``pending`` row immediately and the client polls the
+``GET`` endpoint for the timeline until status hits ``done``/``error``.
+See ``agents/runtime.py`` for the mechanics.
 """
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Literal
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
-from sqlmodel import Session, select
+from sqlmodel import Session, col, func, select
 
 from ..agents.registry import registry
 from ..agents.runtime import execute_run
@@ -39,6 +39,18 @@ class RunRequest(BaseModel):
 class RunWithSteps(BaseModel):
     run:   AgentRun
     steps: list[AgentStep]
+
+
+class RunsListResponse(BaseModel):
+    """``GET /v1/agents/runs`` response.
+
+    ``total`` is the unfiltered-by-pagination count so the UI can
+    render "23 of 142" or hide pagination when it's unnecessary.
+    The ``runs`` list is already trimmed to ``limit``.
+    """
+
+    runs:  list[AgentRun]
+    total: int
 
 
 # ── List agents ──────────────────────────────────────────────
@@ -121,6 +133,44 @@ async def start_run(name: str, body: RunRequest) -> AgentRun:
         )
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
+
+
+# ── List runs (history) ──────────────────────────────────────
+@router.get("/runs", response_model=RunsListResponse)
+def list_runs(
+    operator: str | None = Query(default=None, min_length=2, max_length=4),
+    agent:    str | None = Query(default=None, max_length=64),
+    status:   Literal["pending", "running", "done", "error"] | None = None,
+    limit:    int = Query(default=25, ge=1, le=200),
+    offset:   int = Query(default=0, ge=0),
+    session:  Session = Depends(get_session),
+) -> RunsListResponse:
+    """Recent runs, newest first.
+
+    Filters combine with AND. Returning ``total`` separately lets the
+    UI show "25 / 142" without re-running the query for each page.
+    Ordering is stable on ``(created_at desc, id desc)`` — the ``id``
+    tiebreaker matters on SQLite where two rows can share a microsecond
+    timestamp during a burst.
+    """
+    stmt = select(AgentRun)
+    count_stmt = select(func.count()).select_from(AgentRun)
+    if operator is not None:
+        stmt = stmt.where(AgentRun.operator == operator)
+        count_stmt = count_stmt.where(AgentRun.operator == operator)
+    if agent is not None:
+        stmt = stmt.where(AgentRun.agent == agent)
+        count_stmt = count_stmt.where(AgentRun.agent == agent)
+    if status is not None:
+        stmt = stmt.where(AgentRun.status == status)
+        count_stmt = count_stmt.where(AgentRun.status == status)
+
+    stmt = stmt.order_by(col(AgentRun.created_at).desc(), col(AgentRun.id).desc())
+    stmt = stmt.offset(offset).limit(limit)
+
+    runs  = session.exec(stmt).all()
+    total = session.exec(count_stmt).one()
+    return RunsListResponse(runs=list(runs), total=int(total))
 
 
 # ── Fetch a run ──────────────────────────────────────────────

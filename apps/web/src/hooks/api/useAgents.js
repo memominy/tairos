@@ -22,11 +22,18 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { apiGet, apiPost } from '../../lib/apiClient'
 
-/** Query-key factory — keep invalidations centralised. */
+/** Query-key factory — keep invalidations centralised.
+ *
+ * ``runsList`` is keyed on the filter object so distinct operator /
+ * agent / status combinations cache independently; invalidating
+ * ``runsAll`` blows away every variant (which is what we want
+ * whenever a new run is started or a polled run transitions).
+ */
 export const agentKeys = {
   all:            ['agents'],
   list:           ['agents', 'list'],
   runsAll:        ['agents', 'runs'],
+  runsList:       (filters) => ['agents', 'runs', 'list', filters],
   run:            (id) => ['agents', 'runs', id],
   bridgeHealth:   ['agents', 'bridge', 'health'],
 }
@@ -48,10 +55,12 @@ export function useAgentList({ enabled = true } = {}) {
 /**
  * Fetch one run + its step timeline.
  *
- * ``refetchInterval`` is wired so that once async runs land, the caller
- * can pass ``{ poll: true }`` and the hook will tail the run until a
- * terminal status. Today the server returns ``done``/``error`` inline
- * so polling is a no-op; tomorrow it's free.
+ * Pass ``{ poll: true }`` to tail the run until a terminal status;
+ * the async dispatch path (LLM agents) returns a pending row from
+ * ``POST`` and only flips to done/error after the background task
+ * finishes. The callback returns ``false`` when a terminal state is
+ * seen so we stop polling cleanly instead of hammering a finished
+ * row forever.
  */
 export function useAgentRun(runId, { enabled = true, poll = false } = {}) {
   return useQuery({
@@ -63,6 +72,48 @@ export function useAgentRun(runId, { enabled = true, poll = false } = {}) {
       const status = query.state.data?.run?.status
       if (status === 'done' || status === 'error') return false
       return 1500
+    },
+  })
+}
+
+
+/**
+ * Paginated list of runs — "Çalışma Geçmişi" panel feeds from this.
+ *
+ * Filters mirror the backend query params (``operator``, ``agent``,
+ * ``status``, ``limit``, ``offset``). Everything is optional; the
+ * server defaults to newest 25 regardless of operator/agent when
+ * nothing is passed.
+ *
+ * ``poll`` repeats the query on a short interval whenever there's at
+ * least one non-terminal row visible — catches the "user started an
+ * async LLM run, scrolled elsewhere, came back" case where the row
+ * transitions without any mutation firing.
+ */
+export function useAgentRuns(
+  { operator, agent, status, limit = 25, offset = 0, enabled = true, poll = false } = {},
+) {
+  const filters = { operator, agent, status, limit, offset }
+
+  // Build query string skipping unset filters — keeps the URL tidy so
+  // backend logs are readable and cache keys don't drift on undefineds.
+  const qs = new URLSearchParams()
+  if (operator) qs.set('operator', operator)
+  if (agent)    qs.set('agent',    agent)
+  if (status)   qs.set('status',   status)
+  qs.set('limit',  String(limit))
+  qs.set('offset', String(offset))
+
+  return useQuery({
+    queryKey: agentKeys.runsList(filters),
+    queryFn:  ({ signal }) => apiGet(`/v1/agents/runs?${qs.toString()}`, { signal }),
+    enabled,
+    staleTime: 5_000,
+    refetchInterval: (query) => {
+      if (!poll) return false
+      const runs = query.state.data?.runs || []
+      const hasOngoing = runs.some((r) => r.status === 'pending' || r.status === 'running')
+      return hasOngoing ? 2000 : false
     },
   })
 }

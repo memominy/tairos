@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import {
   Bot, ChevronRight, Play, Wrench, AlertCircle, CheckCircle2,
-  Loader2, Terminal, ChevronDown, Sparkles, Cpu, ZapOff,
+  Loader2, Terminal, ChevronDown, Sparkles, Cpu, ZapOff, History,
 } from 'lucide-react'
 import useStore from '../../store/useStore'
 import { Section } from './_shared'
 import {
   useAgentList,
   useAgentRun,
+  useAgentRuns,
   useBridgeHealth,
   useStartAgentRun,
 } from '../../hooks/api/useAgents'
@@ -38,6 +39,20 @@ export default function AgentsPanel() {
   const agents   = agentsQ.data?.agents ?? []
   const bridgeQ  = useBridgeHealth()
   const bridge   = bridgeQ.data ?? null
+
+  // Operatöre ait son 20 çalışma. ``poll: true`` ile arkada biten LLM
+  // run'larını — kullanıcı başka panele geçip dönse bile — otomatik
+  // yakalıyoruz; terminal state'e düşünce hook içinden polling kendi
+  // duruyor. Filtre operatör bazlı: TR, US'in kayıtlarını görsel
+  // olarak karıştırmasın.
+  const runsQ       = useAgentRuns({
+    operator,
+    limit:   20,
+    enabled: Boolean(operator),
+    poll:    true,
+  })
+  const recentRuns  = runsQ.data?.runs  ?? []
+  const recentTotal = runsQ.data?.total ?? 0
 
   // İlk agent otomatik seçili; list değişince (ya da boşalınca) yeniden
   // başlatılsın diye useMemo + key fallback.
@@ -239,6 +254,32 @@ export default function AgentsPanel() {
             <RunTimeline run={run} steps={steps} loading={runQ.isLoading} />
           </Section>
         )}
+
+        {/* ── Çalışma Geçmişi ───────────────────────────────
+            Operatöre ait son 20 çalışma. Tek tık, üstteki "Son
+            Çalışma" bölümüne yüklenir — operatör eski bir run'ın
+            timeline'ını incelemek istediğinde yeniden çalıştırmak
+            zorunda kalmaz. Varsayılan kapalı: ilk açılışta dikkat
+            dağıtmasın, gerektiğinde açılsın. Rozet: "görünen / toplam"
+            → sayı 20'yi geçince operatör daha fazlasının bulunduğunu
+            görsün (şimdilik scroll yok, ileride eklenecek). */}
+        <Section
+          icon={History}
+          title="Çalışma Geçmişi"
+          badge={
+            recentTotal > recentRuns.length
+              ? `${recentRuns.length} / ${recentTotal}`
+              : (recentTotal || null)
+          }
+        >
+          <RunHistoryList
+            runs={recentRuns}
+            loading={runsQ.isLoading}
+            error={runsQ.error}
+            activeId={runId}
+            onSelect={setRunId}
+          />
+        </Section>
       </div>
     </div>
   )
@@ -520,6 +561,139 @@ function ResultBlock({ result }) {
       )}
     </div>
   )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+ * RunHistoryList — operatörün son run'ları
+ *
+ * Her satır: durum ikonu + ajan adı + rozet + kısa özet + göreceli zaman.
+ * Satıra tıklayınca üst bileşen ``runId``'yi değiştirir → "Son Çalışma"
+ * bölümü o run'ın timeline'ını yükler. Aktif satır accent çerçeveyle
+ * vurgulanır ki operatör iki bölümün hangi run için konuştuğunu görsün.
+ * ═══════════════════════════════════════════════════════════════════ */
+function RunHistoryList({ runs, loading, error, activeId, onSelect }) {
+  if (loading && runs.length === 0) {
+    return (
+      <div className="px-3 py-2">
+        <StatusLine icon={Loader2} spin label="Geçmiş yükleniyor..." />
+      </div>
+    )
+  }
+  if (error) {
+    return (
+      <div className="px-3 py-2">
+        <StatusLine
+          icon={AlertCircle}
+          tone="error"
+          label={`Geçmiş alınamadı — ${error?.detail || 'bilinmeyen hata'}`}
+        />
+      </div>
+    )
+  }
+  if (runs.length === 0) {
+    return (
+      <div className="px-3 py-2 text-[11px] text-ops-500 font-mono">
+        Bu operatör için kayıt yok. İlk çalışmayı başlat.
+      </div>
+    )
+  }
+  return (
+    <ul className="px-2 space-y-1">
+      {runs.map((r) => (
+        <RunHistoryRow
+          key={r.id}
+          run={r}
+          active={r.id === activeId}
+          onSelect={() => onSelect(r.id)}
+        />
+      ))}
+    </ul>
+  )
+}
+
+function RunHistoryRow({ run, active, onSelect }) {
+  const state = RUN_STATUS[run.status] ?? {
+    icon: Loader2, tone: 'text-ops-400', label: run.status, spin: false,
+  }
+  const Icon    = state.icon
+  const when    = formatRelativeShort(run.created_at)
+  // Tek satırlık özet: başarılı run'larda sonuç.summary, hatada error.
+  // ``result`` şemayı bilmiyoruz (ajan değişken); summary yoksa
+  // rozetle yetin, kullanıcı açıp detayı timeline'da görsün.
+  const summary = run.result?.summary || run.error || null
+
+  return (
+    <li>
+      <button
+        onClick={onSelect}
+        title={`${run.agent} · ${run.id}`}
+        className={`w-full flex items-center gap-2 px-2 py-1.5 rounded border text-left transition-colors ${
+          active
+            ? 'border-accent/50 bg-accent/10'
+            : 'border-ops-700/70 bg-ops-900/30 hover:border-ops-600 hover:bg-ops-900/60'
+        }`}
+      >
+        <Icon
+          size={11}
+          className={`shrink-0 ${state.tone} ${state.spin ? 'animate-spin' : ''}`}
+        />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span
+              className={`text-[11px] font-mono truncate ${
+                active ? 'text-accent' : 'text-ops-200'
+              }`}
+            >
+              {run.agent}
+            </span>
+            <span className="text-[10px] text-ops-600">·</span>
+            <span className={`text-[10px] font-mono ${state.tone}`}>
+              {state.label}
+            </span>
+          </div>
+          {summary && (
+            <div className="text-[10px] text-ops-500 truncate leading-snug mt-0.5">
+              {summary}
+            </div>
+          )}
+        </div>
+        {when && (
+          <span
+            className="text-[10px] font-mono text-ops-500 shrink-0 tabular-nums"
+            title={run.created_at}
+          >
+            {when}
+          </span>
+        )}
+      </button>
+    </li>
+  )
+}
+
+/** Kısa göreceli zaman (history rozetleri için):
+ *   <1dk    → "şimdi"
+ *   <1sa    → "5dk"
+ *   <24sa   → "2sa"
+ *   <7g     → "3g"
+ *   ≥7g     → "15.04 13:42"
+ * Tam ISO string tooltip'te ``title`` olarak gözükür — kesin saat
+ * lazımsa hover yeterli, satır dar kalır. */
+function formatRelativeShort(iso) {
+  if (!iso) return null
+  const t = new Date(iso).getTime()
+  if (!Number.isFinite(t)) return null
+  const ms = Date.now() - t
+  if (ms < 0)               return new Date(iso).toLocaleTimeString()
+  if (ms < 60_000)          return 'şimdi'
+  if (ms < 3_600_000)       return `${Math.floor(ms / 60_000)}dk`
+  if (ms < 86_400_000)      return `${Math.floor(ms / 3_600_000)}sa`
+  if (ms < 7 * 86_400_000)  return `${Math.floor(ms / 86_400_000)}g`
+  const d  = new Date(iso)
+  const dd = String(d.getDate()).padStart(2, '0')
+  const mm = String(d.getMonth() + 1).padStart(2, '0')
+  const hh = String(d.getHours()).padStart(2, '0')
+  const mi = String(d.getMinutes()).padStart(2, '0')
+  return `${dd}.${mm} ${hh}:${mi}`
 }
 
 /* ── Küçük yardımcı ───────────────────────────────────── */

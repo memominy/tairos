@@ -95,6 +95,96 @@ async def test_run_unknown_agent_returns_404(client: AsyncClient) -> None:
     assert res.status_code == 404
 
 
+# ── Runs list (history) ──────────────────────────────────────
+async def test_list_runs_returns_recent_first(client: AsyncClient) -> None:
+    """Runs come back newest-first so the UI's history panel doesn't
+    have to sort client-side."""
+    # Kick off three deterministic runs; each persists a row with
+    # monotonically increasing created_at.
+    for _ in range(3):
+        res = await client.post(
+            "/v1/agents/inventory_analyst/runs",
+            json={"operator": "TR"},
+        )
+        assert res.status_code == 200
+
+    res = await client.get("/v1/agents/runs")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["total"] == 3
+    assert len(body["runs"]) == 3
+
+    # Newest first by created_at.
+    stamps = [r["created_at"] for r in body["runs"]]
+    assert stamps == sorted(stamps, reverse=True)
+
+
+async def test_list_runs_filters_by_operator(client: AsyncClient) -> None:
+    """Two operators should never see each other's runs unless they
+    explicitly ask for the whole list (no operator filter)."""
+    for op in ("TR", "US", "US"):
+        res = await client.post(
+            "/v1/agents/inventory_analyst/runs",
+            json={"operator": op},
+        )
+        assert res.status_code == 200
+
+    tr = (await client.get("/v1/agents/runs", params={"operator": "TR"})).json()
+    us = (await client.get("/v1/agents/runs", params={"operator": "US"})).json()
+    assert tr["total"] == 1
+    assert us["total"] == 2
+    assert all(r["operator"] == "TR" for r in tr["runs"])
+    assert all(r["operator"] == "US" for r in us["runs"])
+
+
+async def test_list_runs_filters_by_agent_and_status(client: AsyncClient) -> None:
+    """Combining filters narrows: agent + status together."""
+    for _ in range(2):
+        await client.post("/v1/agents/inventory_analyst/runs", json={"operator": "TR"})
+    # One guaranteed failure by POSTing an unknown agent → 404, doesn't
+    # create a row. So we stay at 2 done runs for inventory_analyst.
+
+    res = await client.get(
+        "/v1/agents/runs",
+        params={"agent": "inventory_analyst", "status": "done"},
+    )
+    body = res.json()
+    assert body["total"] == 2
+    assert all(r["agent"] == "inventory_analyst" for r in body["runs"])
+    assert all(r["status"] == "done"               for r in body["runs"])
+
+
+async def test_list_runs_pagination(client: AsyncClient) -> None:
+    """``limit`` trims the returned list but ``total`` still counts
+    everything that matched the filters."""
+    for _ in range(5):
+        await client.post("/v1/agents/inventory_analyst/runs", json={"operator": "TR"})
+
+    page = (
+        await client.get("/v1/agents/runs", params={"limit": 2, "offset": 0})
+    ).json()
+    assert page["total"] == 5
+    assert len(page["runs"]) == 2
+
+    page2 = (
+        await client.get("/v1/agents/runs", params={"limit": 2, "offset": 2})
+    ).json()
+    assert page2["total"] == 5
+    assert len(page2["runs"]) == 2
+    # No overlap between pages.
+    ids_page  = {r["id"] for r in page["runs"]}
+    ids_page2 = {r["id"] for r in page2["runs"]}
+    assert ids_page.isdisjoint(ids_page2)
+
+
+async def test_list_runs_empty_db_returns_zero(client: AsyncClient) -> None:
+    res = await client.get("/v1/agents/runs")
+    assert res.status_code == 200
+    body = res.json()
+    assert body["total"] == 0
+    assert body["runs"] == []
+
+
 # ── MCP ──────────────────────────────────────────────────────
 async def test_mcp_tools_list(client: AsyncClient) -> None:
     res = await client.post("/v1/mcp", json={
