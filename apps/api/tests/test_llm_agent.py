@@ -382,6 +382,46 @@ async def test_llm_agent_tool_input_validation_error_recovers(
     _ = json.dumps(error_step["payload"])  # must be serialisable
 
 
+async def test_llm_agent_forwards_ui_context_into_initial_prompt(
+    monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
+) -> None:
+    """Context the UI ships in ``POST /runs`` (focus_country, etc.)
+    must reach the LLM as part of the first user turn, so an agent
+    can e.g. bias its answer toward a specific country.
+
+    We capture the ``messages`` arg passed to ``_call_llm`` and
+    verify the serialised context appears there.
+    """
+    captured_messages: list[dict[str, str]] = []
+
+    async def capture(self, http, bridge, system, messages, model):  # noqa: ARG001
+        # First call: record what the LLM saw. Return a final immediately.
+        captured_messages.extend(messages)
+        return '<final>{"summary":"ok", "total":0}</final>'
+
+    monkeypatch.setattr(LlmInventoryAnalyst, "_call_llm", capture)
+
+    res = await client.post(
+        "/v1/agents/llm_inventory_analyst/runs",
+        json={
+            "operator": "TR",
+            "prompt":   "Ülkenin sistem durumunu özetle",
+            "context":  {"focus_country": "TR", "urgency": "high"},
+        },
+    )
+    assert res.status_code == 200
+    initial = res.json()
+    body = await _wait_for_terminal(client, initial["id"])
+    assert body["run"]["status"] == "done"
+
+    # First message is the user turn; it must carry the context block.
+    first_user = captured_messages[0]
+    assert first_user["role"] == "user"
+    assert "focus_country"    in first_user["content"]
+    assert "TR"               in first_user["content"]
+    assert "urgency"          in first_user["content"]
+
+
 async def test_llm_agent_returns_pending_row_for_fast_polling(
     monkeypatch: pytest.MonkeyPatch, client: AsyncClient,
 ) -> None:

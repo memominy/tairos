@@ -60,20 +60,29 @@ Tairos Sentinel is a web-based command surface that collapses four operating mod
 - Streetview panel for ground-truth checks.
 - Export-ready map canvas for screenshots/reports.
 
+### Agent console & LLM bridge
+- **Registry-driven agent framework** on the FastAPI backend — register deterministic or LLM-driven agents that each advertise their tool set; every run is persisted to SQLite as a timeline of `plan` / `tool_call` / `tool_result` / `final` steps the UI can replay.
+- **Claude Max bridge** (`scripts/assistant-server.mjs`) exposes the Claude Code CLI over local HTTP so the backend can drive Claude without a paid Anthropic API key — the subscription covers LLM cost.
+- **Reference agents** — `inventory_analyst` (deterministic walk of the Node table) and `llm_inventory_analyst` (same tools, LLM-driven via the bridge). Both surface in the Ajan Konsolu panel with a live run timeline, bridge health dot, and LLM/DET badge.
+- **Async dispatch** — LLM runs return a `pending` row instantly and a background task drives them to completion; the frontend polls until `done`/`error`, so a 20-second Claude conversation never blocks the POST.
+- **UI context passed through** — the panel forwards the operator's current focus country (and future selections) as `context` so the LLM can tailor its answer to what's on the operator's screen.
+
 ---
 
 ## Tech stack
 
-| Layer             | Choice                                                |
-|-------------------|-------------------------------------------------------|
-| UI framework      | React 18 + Vite                                       |
-| State             | Zustand (with `localStorage` persistence)             |
-| Map engine        | Leaflet + react-leaflet                               |
-| Geospatial ops    | Turf.js (polygon area, point-in-polygon, union, etc.) |
-| Styling           | Tailwind CSS                                          |
-| Weather tiles     | RainViewer public API                                 |
-| External features | OpenStreetMap (Overpass API), Esri reference tiles    |
-| Icons             | lucide-react                                          |
+| Layer             | Choice                                                            |
+|-------------------|-------------------------------------------------------------------|
+| UI framework      | React 18 + Vite                                                   |
+| State             | Zustand (with `localStorage` persistence) + TanStack Query v5     |
+| Map engine        | Leaflet + react-leaflet                                           |
+| Geospatial ops    | Turf.js (polygon area, point-in-polygon, union, etc.)             |
+| Styling           | Tailwind CSS                                                      |
+| Weather tiles     | RainViewer public API                                             |
+| External features | OpenStreetMap (Overpass API), Esri reference tiles                |
+| Icons             | lucide-react                                                      |
+| Backend           | FastAPI + SQLModel + SQLite + Alembic (Python ≥3.11, managed via `uv` / `pip`) |
+| LLM bridge        | Node subprocess wrapping the Claude Code CLI (`claude`)           |
 
 ---
 
@@ -107,55 +116,95 @@ npm run preview
 
 ---
 
+## Running the full stack
+
+The agent console assumes three processes are up. Start them in separate terminals:
+
+| Role                | Command                | Default port | Purpose                                                    |
+|---------------------|------------------------|--------------|------------------------------------------------------------|
+| Web (Vite)          | `npm run dev`          | 5173         | Operator UI — map + panels + agent console.               |
+| API (FastAPI)       | `npm run api:dev`      | 8000         | CRUD, agent registry, run orchestration, bridge proxy.     |
+| LLM bridge (Node)   | `npm run assistant`    | 8787         | Wraps the Claude Code CLI so the API can drive Claude Max. |
+
+### Backend setup (one-time)
+
+The FastAPI project lives under `apps/api/` and uses a standard `pyproject.toml`. Any Python ≥ 3.11 with `pip` (or `uv`) works:
+
+```bash
+cd apps/api
+python -m venv .venv && source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
+pip install -e ".[dev]"
+alembic upgrade head                                  # creates apps/api/.data/tairos.db
+```
+
+After that, `npm run api:dev` (from the repo root) starts the server on `http://localhost:8000` with hot reload.
+
+### LLM bridge setup
+
+The bridge shells out to the `claude` CLI under the hood, so the Claude Code CLI must be on `PATH` and signed in with a Claude Max / Pro subscription. Verify with `claude --version`. Then from the repo root:
+
+```bash
+npm run assistant      # starts the bridge on http://localhost:8787
+```
+
+The Agent Console header shows a coloured dot per bridge status — green when ready, red with an error tooltip when down, amber while the first health probe is in flight. `GET /v1/agents/bridge/health` surfaces the same info for programmatic checks.
+
+### Running tests
+
+```bash
+npm run api:test        # full pytest suite (deterministic + LLM agents, bridge health, MCP, nodes)
+```
+
+LLM tests monkeypatch `LlmAgent._call_llm` with scripted replies — the bridge doesn't need to be running to exercise the full loop.
+
+---
+
 ## Project structure
 
+The repo is an npm monorepo; the frontend and backend live side-by-side and are developed together.
+
 ```
-src/
-├── App.jsx                  # Top-level composition (state → views)
-├── main.jsx                 # Entry point
-├── index.css                # Global Tailwind + Leaflet overrides
+tairos/
+├── apps/
+│   ├── web/                           # Vite + React operator UI
+│   │   └── src/
+│   │       ├── App.jsx                # Top-level composition
+│   │       ├── components/
+│   │       │   ├── MapView.jsx        # Leaflet container + layers
+│   │       │   ├── Sidebar.jsx        # Left control panel
+│   │       │   ├── panels/            # Right-hand panels (Agents, Detail, …)
+│   │       │   ├── overlays/          # Live Overpass overlay fetchers
+│   │       │   └── …                  # (TopBar, WeatherLayer, ConflictLayer, …)
+│   │       ├── hooks/
+│   │       │   ├── api/               # TanStack Query wrappers (useAgents, …)
+│   │       │   ├── useCoverage.js
+│   │       │   └── useUrlState.js
+│   │       ├── store/useStore.js      # Zustand store (single source of truth)
+│   │       ├── config/                # Categories, drones, operators, …
+│   │       ├── utils/                 # Coverage, placement, weather, sounds, …
+│   │       └── data/                  # Seed datasets (facilities, conflicts, nodes)
+│   │
+│   └── api/                           # FastAPI backend
+│       ├── src/tairos_api/
+│       │   ├── routers/               # HTTP surface: /v1/nodes, /v1/agents, /v1/mcp
+│       │   ├── agents/
+│       │   │   ├── base.py            # Agent / Step / AgentContext
+│       │   │   ├── llm.py             # LlmAgent — Claude Max bridge loop
+│       │   │   ├── runtime.py         # Sync/async dispatcher + step persistence
+│       │   │   ├── registry.py        # Agent + Tool registry
+│       │   │   ├── tools/             # Tool implementations
+│       │   │   └── examples/          # inventory_analyst, llm_inventory_analyst
+│       │   ├── models/                # SQLModel tables (Node, AgentRun, AgentStep)
+│       │   ├── config.py              # Settings (bridge URL, timeouts, …)
+│       │   └── main.py                # App factory + lifespan seed
+│       ├── alembic/                   # DB migrations
+│       └── tests/                     # pytest suite (agents, llm, nodes, bridge)
 │
-├── components/              # All UI
-│   ├── MapView.jsx          # Leaflet container + every map-side layer
-│   ├── Sidebar.jsx          # Left control panel (sections, drones, etc.)
-│   ├── TopBar.jsx           # Search, tile switcher, export
-│   ├── StatCards.jsx        # Coverage / facility / node metrics
-│   ├── DetailPanel.jsx      # Right-hand facility/node detail
-│   ├── AreaInfoPanel.jsx    # Right-drag selection info + group edit
-│   ├── PlacementPanel.jsx   # Strategic placement configurator
-│   ├── WeatherLayer.jsx     # RainViewer cloud + rain tiles
-│   ├── ConflictLayer.jsx    # Conflict bubbles, frontlines, zones
-│   ├── ConflictDetailPanel.jsx # Per-conflict briefing + Tairos fit
-│   ├── ConflictSection.jsx  # Sidebar intel tab content
-│   ├── FacilityProducts.jsx # Per-site product deployments
-│   └── overlays/            # Live Overpass overlay fetchers
-│
-├── store/useStore.js        # Zustand store (single source of truth)
-│
-├── config/
-│   ├── categories.js        # Facility category taxonomy
-│   └── drones.js            # Tairos product catalogue
-│
-├── utils/
-│   ├── coverage.js          # Polygon merge / clip utilities
-│   ├── placement.js         # Hex-packing + greedy min-cover solver
-│   ├── weather.js           # RainViewer frame fetcher
-│   ├── sounds.js            # Tactical Web Audio sound engine
-│   ├── overpass.js          # OSM Overpass query helpers
-│   ├── overlays.js          # Overlay definitions
-│   ├── tiles.js             # Basemap tile providers
-│   ├── towers.js            # Cell-tower Overpass query
-│   ├── thinning.js          # Same-location dedup
-│   └── facilityProducts.js  # Deployment model + status enum
-│
-├── hooks/
-│   ├── useCoverage.js       # Memoised coverage polygon computation
-│   └── useUrlState.js       # URL ⇄ store sync
-│
-└── data/
-    ├── facilities.json      # Seed facility list
-    ├── conflicts.json       # Seed conflict intel dataset
-    └── tairos-nodes.json    # Seed Tairos node list
+├── packages/                          # Shared packages (future)
+├── scripts/
+│   ├── assistant-server.mjs           # Claude Max bridge — wraps the `claude` CLI
+│   └── seed-*.mjs                     # Data seeding helpers
+└── package.json                       # npm workspaces root
 ```
 
 ---

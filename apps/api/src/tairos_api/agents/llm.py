@@ -325,15 +325,27 @@ class LlmAgent(Agent):
     def _initial_user_message(self, ctx: AgentContext) -> str:
         """First user turn seeded into the conversation.
 
-        Default: the operator's prompt verbatim, prefixed with a bit
-        of context. Subclasses can override for fancier scaffolding
-        (e.g. inject focus-country data as JSON).
+        Default: operator + prompt + (if present) a JSON blob of the
+        UI-provided context (``ctx.extra``). The UI ships things like
+        ``focus_country``, and in future ``selected_group`` /
+        ``active_filters`` / etc. here — the LLM sees them verbatim
+        and decides whether to act on them.
+
+        Subclasses can override for fancier scaffolding (e.g. pull a
+        specific field out of ``ctx.extra`` and render it as prose).
         """
-        base = (
-            f"Operatör: {ctx.operator}\n"
-            f"İstek: {ctx.prompt or '(görev tanımı içindeki varsayılanı uygula)'}"
-        )
-        return base
+        lines = [
+            f"Operatör: {ctx.operator}",
+            f"İstek: {ctx.prompt or '(görev tanımı içindeki varsayılanı uygula)'}",
+        ]
+        if ctx.extra:
+            # JSON — structure preserved so the LLM can reference
+            # individual fields (``bağlamdaki focus_country``) without
+            # us having to maintain a hand-rolled template per key.
+            lines.append(
+                f"Bağlam: {json.dumps(ctx.extra, ensure_ascii=False, default=str)}"
+            )
+        return "\n".join(lines)
 
     # ── Bridge wire ──────────────────────────────────────────
     async def _call_llm(

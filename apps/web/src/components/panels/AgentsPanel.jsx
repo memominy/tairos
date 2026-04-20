@@ -31,7 +31,8 @@ import {
  * filtreleme) aynı component'ı büyütür.
  */
 export default function AgentsPanel() {
-  const operator = useStore((s) => s.operator)
+  const operator     = useStore((s) => s.operator)
+  const focusCountry = useStore((s) => s.focusCountry)
 
   const agentsQ  = useAgentList()
   const agents   = agentsQ.data?.agents ?? []
@@ -73,12 +74,19 @@ export default function AgentsPanel() {
 
   const onRun = async () => {
     if (!activeName || !operator) return
+    // Operatörün anlık durumundan "gözlem" verisini context'e enjekte et —
+    // ajan (özellikle LLM tabanlıları) kullanıcının şu an haritada neye
+    // odaklandığını bilsin. Sadece doğrudan ilgili alanları geçiyoruz;
+    // store tümüyle sızarsa prompt bağlamı kirlenir ve LLM dağılır.
+    const context = {}
+    if (focusCountry) context.focus_country = focusCountry
+
     try {
       const created = await startMutation.mutateAsync({
         name:     activeName,
         operator,
         prompt:   prompt.trim(),
-        context:  {},
+        context,
       })
       // Mutation onSuccess cache'i seedledi; useAgentRun orada
       // devralıp polling'e başlıyor. Manuel refetch gerekmez.
@@ -334,7 +342,10 @@ function RunTimeline({ run, steps, loading }) {
       {/* Run özeti */}
       <RunHeader run={run} />
 
-      {/* Step'ler */}
+      {/* Step'ler — her satıra run başlangıcından bu yana geçen süreyi
+          bastırıyoruz ki "hangi step ne kadar sürdü?" tek bakışta okunsun.
+          Kritik LLM debug aracı: tool call 5s → tool result 5.3s → final
+          8.7s gibi bir dizi hangi turda ne kadar beklendiğini gösterir. */}
       {steps.length === 0 ? (
         <div className="text-[11px] text-ops-500 font-mono italic">
           Step kaydı yok.
@@ -342,7 +353,7 @@ function RunTimeline({ run, steps, loading }) {
       ) : (
         <ol className="space-y-1">
           {steps.map((step) => (
-            <StepRow key={step.id} step={step} />
+            <StepRow key={step.id} step={step} startedAt={run.started_at} />
           ))}
         </ol>
       )}
@@ -403,10 +414,16 @@ const STEP_TONE = {
   final:        { color: '#D85A30', label: 'Final' },
 }
 
-function StepRow({ step }) {
+function StepRow({ step, startedAt }) {
   const [open, setOpen] = useState(false)
   const tone = STEP_TONE[step.kind] || { color: '#6A7F9F', label: step.kind }
   const headline = headlineFor(step)
+  // Göreceli geçen süre (run başlangıcından itibaren saniye). Mutlak
+  // timestamp'ten daha okunaklı: "hangi step ne kadar sürdü?" sorusuna
+  // tek bakışta yanıt veriyor. startedAt yoksa (ör. ajan henüz
+  // persist_run sonrası ama _update_run(running) öncesinde step yazmadıysa)
+  // fallback olarak ISO HH:MM:SS gösteriyoruz.
+  const elapsed = formatElapsed(step.created_at, startedAt)
   return (
     <li className="rounded border border-ops-700/70 bg-ops-900/30">
       <button
@@ -422,6 +439,14 @@ function StepRow({ step }) {
         <span className="flex-1 min-w-0 text-[11px] text-ops-200 truncate">
           {headline}
         </span>
+        {elapsed && (
+          <span
+            className="text-[10px] font-mono text-ops-500 shrink-0 tabular-nums"
+            title={step.created_at}
+          >
+            {elapsed}
+          </span>
+        )}
         <span className="text-[10px] font-mono text-ops-500 shrink-0">
           #{step.index}
         </span>
@@ -436,6 +461,23 @@ function StepRow({ step }) {
       )}
     </li>
   )
+}
+
+/** Göreceli süre formatı:
+ *   <1s      → "240ms"
+ *   <60s     → "2.34s"
+ *   ≥60s     → "1m 12s"
+ * Başlangıç yoksa null — UI rozet göstermesin.
+ */
+function formatElapsed(stepAt, runStartedAt) {
+  if (!stepAt || !runStartedAt) return null
+  const dt = new Date(stepAt).getTime() - new Date(runStartedAt).getTime()
+  if (!Number.isFinite(dt) || dt < 0) return null
+  if (dt < 1000)  return `${dt}ms`
+  if (dt < 60000) return `${(dt / 1000).toFixed(2)}s`
+  const m = Math.floor(dt / 60000)
+  const s = Math.floor((dt % 60000) / 1000)
+  return `${m}m ${s}s`
 }
 
 function headlineFor(step) {
