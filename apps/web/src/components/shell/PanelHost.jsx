@@ -38,6 +38,7 @@ const CountryBriefPanel         = lazy(() => import('../panels/CountryBriefPanel
 const CountryInventoryPanel     = lazy(() => import('../panels/CountryInventoryPanel'))
 const CountryCriticalSitesPanel = lazy(() => import('../panels/CountryCriticalSitesPanel'))
 const CountryRivalsPanel        = lazy(() => import('../panels/CountryRivalsPanel'))
+const AgentsPanel               = lazy(() => import('../panels/AgentsPanel'))
 // NOT: AssistantPanel artık panel olarak değil, AssistantBubble floating
 // widget içinde mount ediliyor (bkz. src/components/AssistantBubble.jsx
 // + App.jsx). Sidebar'a geri koymak istersek burada lazy + map'e ekle.
@@ -48,6 +49,7 @@ const PANEL_COMPONENTS = {
   platform:          SystemsPanel,
   field:             FieldPanel,
   intel:             WorldPanel,
+  agents:            AgentsPanel,
   'country-brief':    CountryBriefPanel,
   'country-inventory': CountryInventoryPanel,
   'country-critical':  CountryCriticalSitesPanel,
