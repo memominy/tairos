@@ -27,17 +27,15 @@ README so the risk is documented rather than hidden.
 """
 from __future__ import annotations
 
-import ipaddress
 import re
-import socket
 from html import unescape
 from typing import Any
-from urllib.parse import urlparse
 
 import httpx
 from pydantic import BaseModel, Field, HttpUrl
 
 from ..tool import Tool, ToolContext
+from ._net import guard_url
 
 # ── HTML → text helpers ──────────────────────────────────────
 # We intentionally keep this *very* rough. BeautifulSoup would do a
@@ -49,7 +47,7 @@ _TAG_RE        = re.compile(r"<[^>]+>")
 _WHITESPACE_RE = re.compile(r"\s+")
 
 
-def _html_to_text(html: str) -> str:
+def html_to_text(html: str) -> str:
     """Crude HTML→plain-text:
     1. drop ``<script>`` / ``<style>`` blocks (noise),
     2. strip every remaining tag (keep inner text),
@@ -65,37 +63,9 @@ def _html_to_text(html: str) -> str:
     return _WHITESPACE_RE.sub(" ", html).strip()
 
 
-# ── SSRF guard ──────────────────────────────────────────────
-# Private/loopback/link-local/multicast/reserved — none of these are
-# valid destinations for a public-web fetch tool. We check the full
-# address-info set (IPv4 + IPv6) so a host that happens to resolve to
-# ::1 through an AAAA record is still refused.
-def _guard_url(url: str) -> None:
-    parsed = urlparse(url)
-    if parsed.scheme not in {"http", "https"}:
-        raise ValueError(f"refused scheme: {parsed.scheme!r}")
-    host = parsed.hostname
-    if not host:
-        raise ValueError("URL has no host")
-    try:
-        infos = socket.getaddrinfo(host, None)
-    except socket.gaierror as exc:
-        raise ValueError(f"cannot resolve host {host!r}: {exc}") from exc
-    for info in infos:
-        ip_str = info[4][0]
-        try:
-            ip = ipaddress.ip_address(ip_str)
-        except ValueError:
-            continue
-        if (
-            ip.is_private
-            or ip.is_loopback
-            or ip.is_link_local
-            or ip.is_multicast
-            or ip.is_reserved
-            or ip.is_unspecified
-        ):
-            raise ValueError(f"refused private/loopback address: {ip_str}")
+# SSRF defence: ``guard_url`` is imported from ``_net`` so the same
+# policy covers every web-facing tool in this package. See that module
+# for the rules + the documented DNS-rebinding gap.
 
 
 # ─────────────────────────────────────────────────────────────
@@ -138,7 +108,7 @@ class WebFetchTool(Tool):
 
     async def run(self, payload: WebFetchInput, ctx: ToolContext) -> dict[str, Any]:
         url = str(payload.url)
-        _guard_url(url)
+        guard_url(url)
 
         async with httpx.AsyncClient(
             timeout=self.timeout_seconds,
@@ -150,7 +120,7 @@ class WebFetchTool(Tool):
         ct   = res.headers.get("content-type", "") or ""
         body = res.text
         if "html" in ct.lower():
-            body = _html_to_text(body)
+            body = html_to_text(body)
 
         truncated = len(body) > payload.max_chars
         if truncated:

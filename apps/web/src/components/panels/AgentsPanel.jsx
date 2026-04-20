@@ -563,6 +563,24 @@ function ResultBlock({ result }) {
           </span>
         </div>
       )}
+      {/* Headlines: news_scanner'ın başlık listesi. Semantik olarak
+          bullets'tan farklı — bunlar ham başlıklar, yorum değil. Bu
+          yüzden görsel ton daha sessiz (gri, numaralı), bullets ise
+          accent marker'lı (operatörün dikkatini çeksin). */}
+      {Array.isArray(result.headlines) && result.headlines.length > 0 && (
+        <div className="mt-1">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-ops-500 mb-0.5">
+            Başlıklar
+          </div>
+          <ol className="space-y-0.5 list-decimal list-inside marker:text-ops-500">
+            {result.headlines.map((h, i) => (
+              <li key={i} className="text-[11px] text-ops-300 leading-snug">
+                {typeof h === 'string' ? h : JSON.stringify(h)}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
       {/* Bullets: web_analyst + ileride gelen herhangi bir LLM ajanın
           "operasyonel çıkarımlar" listesi. Tek satırlık •ler değil
           de 2-5 maddelik kısa öğeler düşünülmüş — fazlasını kesmek

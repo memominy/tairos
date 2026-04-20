@@ -2,8 +2,8 @@
 
 We test at three levels:
 
-  * ``_html_to_text`` — pure function, deterministic.
-  * ``_guard_url``    — SSRF gate. We fake ``socket.getaddrinfo`` so
+  * ``html_to_text`` — pure function, deterministic.
+  * ``guard_url``    — SSRF gate. We fake ``socket.getaddrinfo`` so
                         the tests don't depend on DNS state.
   * ``WebFetchTool.run`` — the top-level call, with a fake httpx client
                             installed. Verifies truncation, HTML/text
@@ -23,39 +23,39 @@ from tairos_api.agents.tool import ToolContext
 from tairos_api.agents.tools.web import (
     WebFetchInput,
     WebFetchTool,
-    _guard_url,
-    _html_to_text,
+    guard_url,
+    html_to_text,
 )
 
 
-# ── _html_to_text ─────────────────────────────────────────────
-def test_html_to_text_strips_tags_and_unescapes() -> None:
+# ── html_to_text ─────────────────────────────────────────────
+def testhtml_to_text_strips_tags_and_unescapes() -> None:
     html = "<p>Hello &amp; <b>world</b></p>"
-    assert _html_to_text(html) == "Hello & world"
+    assert html_to_text(html) == "Hello & world"
 
 
-def test_html_to_text_drops_script_and_style_blocks() -> None:
+def testhtml_to_text_drops_script_and_style_blocks() -> None:
     html = (
         "<html><head><style>body{color:red}</style></head>"
         "<body>Before<script>alert('boom')</script>After</body></html>"
     )
-    out = _html_to_text(html)
+    out = html_to_text(html)
     assert "alert" not in out
     assert "color:red" not in out
     assert "Before" in out and "After" in out
 
 
-def test_html_to_text_collapses_whitespace() -> None:
+def testhtml_to_text_collapses_whitespace() -> None:
     html = "<p>one\n\n\ntwo\t\tthree</p>"
-    assert _html_to_text(html) == "one two three"
+    assert html_to_text(html) == "one two three"
 
 
-# ── _guard_url ────────────────────────────────────────────────
+# ── guard_url ────────────────────────────────────────────────
 def _fake_getaddrinfo(mapping: dict[str, list[str]]):
     """Return a ``getaddrinfo``-shaped function backed by a host→IPs map.
 
     Real getaddrinfo tuples are 5-element: (family, type, proto, canon,
-    sockaddr). _guard_url only uses ``info[4][0]``, so we pack minimal
+    sockaddr). guard_url only uses ``info[4][0]``, so we pack minimal
     tuples but keep the shape so the code-under-test is exercised on
     realistic input.
     """
@@ -67,47 +67,47 @@ def _fake_getaddrinfo(mapping: dict[str, list[str]]):
     return _f
 
 
-def test_guard_url_refuses_non_http_scheme() -> None:
+def testguard_url_refuses_non_http_scheme() -> None:
     with pytest.raises(ValueError, match="refused scheme"):
-        _guard_url("file:///etc/passwd")
+        guard_url("file:///etc/passwd")
 
 
-def test_guard_url_refuses_loopback(monkeypatch: pytest.MonkeyPatch) -> None:
+def testguard_url_refuses_loopback(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(socket, "getaddrinfo", _fake_getaddrinfo({
         "localhost": ["127.0.0.1"],
     }))
     with pytest.raises(ValueError, match="private/loopback"):
-        _guard_url("http://localhost:8001/")
+        guard_url("http://localhost:8001/")
 
 
-def test_guard_url_refuses_private_range(monkeypatch: pytest.MonkeyPatch) -> None:
+def testguard_url_refuses_private_range(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(socket, "getaddrinfo", _fake_getaddrinfo({
         "intranet.local": ["10.0.0.5"],
     }))
     with pytest.raises(ValueError, match="private/loopback"):
-        _guard_url("http://intranet.local/path")
+        guard_url("http://intranet.local/path")
 
 
-def test_guard_url_refuses_ipv6_loopback(monkeypatch: pytest.MonkeyPatch) -> None:
+def testguard_url_refuses_ipv6_loopback(monkeypatch: pytest.MonkeyPatch) -> None:
     def _fake(host, port, *_, **__):  # noqa: ARG001
         return [(socket.AF_INET6, socket.SOCK_STREAM, 0, "", ("::1", 0, 0, 0))]
     monkeypatch.setattr(socket, "getaddrinfo", _fake)
     with pytest.raises(ValueError, match="private/loopback"):
-        _guard_url("http://v6only/")
+        guard_url("http://v6only/")
 
 
-def test_guard_url_rejects_unresolvable(monkeypatch: pytest.MonkeyPatch) -> None:
+def testguard_url_rejects_unresolvable(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(socket, "getaddrinfo", _fake_getaddrinfo({}))
     with pytest.raises(ValueError, match="cannot resolve"):
-        _guard_url("http://no-such-host.example/")
+        guard_url("http://no-such-host.example/")
 
 
-def test_guard_url_accepts_public_ip(monkeypatch: pytest.MonkeyPatch) -> None:
+def testguard_url_accepts_public_ip(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(socket, "getaddrinfo", _fake_getaddrinfo({
         "example.com": ["1.1.1.1"],
     }))
     # Must not raise.
-    _guard_url("https://example.com/path?x=1")
+    guard_url("https://example.com/path?x=1")
 
 
 # ── WebFetchTool.run ─────────────────────────────────────────
